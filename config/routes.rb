@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  get 'users/show'
   devise_for :users
+
   get "up" => "rails/health#show", :as => :rails_health_check
 
   resources :dashboard, only: [:index]
@@ -11,4 +13,6 @@ Rails.application.routes.draw do
   resources :conversations do
     resources :messages
   end
+
+  resources :users, only: [:show]
 end

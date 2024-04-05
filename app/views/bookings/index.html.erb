@@ -13,9 +13,10 @@
       <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
         <td class="py-4 px-6"><%= booking.post.title %></td>
         <td class="py-4 px-6"><%= booking.status %></td>
-        <td class="py-4 px-6"> <%= link_to 'Show', booking, class: 'text-blue-600 hover:text-blue-900 dark:hover:text-blue-500', data: { turbo_frame: "_top" } %></td>
+        <td class="py-4 px-6"><%= link_to 'Show', booking, class: 'text-blue-600 hover:text-blue-900 dark:hover:text-blue-500' %></td>
         <td class="py-4 px-6"><%= link_to 'Edit', edit_booking_path(booking), class: 'text-blue-600 hover:text-blue-900 dark:hover:text-blue-500' %></td>
-        <td class="py-4 px-6"><%= link_to 'Destroy', booking, method: :delete, data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: 'text-red-600 hover:text-red-900 dark:hover:text-red-500' %>
+        <td class="py-4 px-6"><%= link_to 'Destroy', booking, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-red-600 hover:text-red-900 dark:hover:text-red-500' %>
+
 </td>
       </tr>
     <% end %>
