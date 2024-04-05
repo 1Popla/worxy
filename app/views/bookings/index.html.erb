@@ -1,0 +1,25 @@
+<h1 class="text-2xl font-bold text-gray-800 mb-8">Bookings</h1>
+
+<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <tr>
+      <th scope="col" class="py-3 px-6">Usługa</th>
+      <th scope="col" class="py-3 px-6">Status</th>
+      <th scope="col" class="py-3 px-6" colspan="3" style="text-align:center;">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bookings.each do |booking| %>
+      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+        <td class="py-4 px-6"><%= booking.post.title %></td>
+        <td class="py-4 px-6"><%= booking.status %></td>
+        <td class="py-4 px-6"> <%= link_to 'Show', booking, class: 'text-blue-600 hover:text-blue-900 dark:hover:text-blue-500', data: { turbo_frame: "_top" } %></td>
+        <td class="py-4 px-6"><%= link_to 'Edit', edit_booking_path(booking), class: 'text-blue-600 hover:text-blue-900 dark:hover:text-blue-500' %></td>
+        <td class="py-4 px-6"><%= link_to 'Destroy', booking, method: :delete, data: { turbo_confirm: 'Are you sure?', turbo_method: :delete }, class: 'text-red-600 hover:text-red-900 dark:hover:text-red-500' %>
+</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Booking', new_booking_path, class: 'mt-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500' %>

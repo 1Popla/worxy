@@ -1,0 +1,12 @@
+<p>
+  <strong>Usługa:</strong>
+  <%= @booking.post.title %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @booking.status %>
+</p>
+
+<%= link_to 'Edit', edit_booking_path(@booking) %> |
+<%= link_to 'Back', bookings_path %>
