@@ -1,0 +1,21 @@
+{:uriI"”file://app/javascript/landing_page_image.js.erb?type=application/javascript+ruby&id=90d76fdf7aad8f021424842dccf425fea7acd20870cd2d6b8c729946a353bb27:ET:load_pathI"app/javascript;T:filenameI"-app/javascript/landing_page_image.js.erb;T:	nameI"landing_page_image;T:logical_pathI"landing_page_image.js.erb;T:content_typeI" application/javascript+ruby;T:sourceI"¨document.addEventListener('DOMContentLoaded', (event) => {
+    const imageUrl1 = "<%= asset_path('front-view-male-builder-uniform-with-tool-box-blue-wall.jpg') %>";
+    const imageUrl2 = "<%= asset_path('coveralls-digitally-generated-car-cardboard-box-pointing.jpg') %>";
+    
+    var masthead = document.querySelector('header.masthead');
+    masthead.style.backgroundImage = `url('${imageUrl1}')`;
+    
+    var currentImage = imageUrl1;
+    setInterval(function() {
+        if(masthead) {
+            currentImage = (currentImage === imageUrl1) ? imageUrl2 : imageUrl1;
+            masthead.style.backgroundImage = `url('${currentImage}')`;
+        
+        }
+    }, 10000);
+});
+;T:metadata{
+:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"Vprocessors:type=application/javascript+ruby&file_type=application/javascript+ruby;TTI";file-digest://app/javascript/landing_page_image.js.erb;TTF:charsetI"
+utf-8;F:digest"%ÿy>rêuù	y…¨°åÜ„D†åcc!KÑ:lengthi¨:environment_versionI"1.0;T:dependencies_digest"%…¾à«K’ÏLåc§nªOàEJWdl>ò,d™-ß_5:idI"E90d76fdf7aad8f021424842dccf425fea7acd20870cd2d6b8c729946a353bb27;F

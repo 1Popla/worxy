@@ -1,0 +1,9 @@
+= link_to post_path(post)
+  .max-w-sm.rounded.overflow-hidden.shadow-lg
+    - if post.images.attached?
+      = image_tag post.images.first.variant(resize_to_fill: [150, nil]), class: "w-full"
+    .px-6.py-4
+      .font-bold.text-xl.mb-2
+        = post.title
+      p.text-gray-700.text-base
+        = post.description

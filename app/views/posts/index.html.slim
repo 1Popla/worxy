@@ -1,0 +1,5 @@
+- if @posts.present?
+  .w-full.flex.flex-wrap
+    - @posts.each do |post|
+      .mb-2.w-1/2
+        = render partial: 'posts/post_card', locals: { post: post }

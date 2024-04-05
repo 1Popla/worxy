@@ -1,0 +1,26 @@
+.flex.flex-wrap.-mx-4
+  - if flash[:alert]
+    .w-full.px-4.mb-4
+      .alert.alert-warning role="alert"
+        = flash[:alert]
+
+  .w-full.md:w-1/3.px-4
+    h2.text-2xl.font-bold.mb-4
+      | Moje Konwersacje
+    - @active_conversations_with_recipients.each do |item|
+      = link_to item[:recipient].email, conversation_messages_path(item[:conversation]), class: "text-blue-500 hover:text-blue-700 block mb-2"
+
+  .w-full.md:w-2/3.px-4
+    .messages.space-y-2.mb-4 style="max-height: 500px; overflow-y: auto;"
+      - @messages.each do |message|
+        - message_class = message.user_id == current_user.id ? "bg-blue-100 float-right clear-both" : "bg-gray-100 float-left clear-both"
+        p.rounded-lg.p-2[class=message_class]
+          = message.body
+    .clearfix
+    = paginate @messages
+
+    = form_for [@conversation, @new_message], html: { class: "space-y-4 mt-4" } do |f|
+      #message_form_errors
+      .mb-4
+        = f.text_area :body, class: "w-full rounded border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50", rows: 4
+      = f.submit "Wyślij", class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"

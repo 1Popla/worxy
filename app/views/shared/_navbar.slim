@@ -1,0 +1,11 @@
+- if current_user
+  nav.p-4.md:py-8.xl:px-0.md:container.md:mx-w-6xl.md:mx-auto
+    .lg:flex.lg:justify-between.lg:items-center
+      = render 'shared/main_panel'
+      = render 'shared/links'
+- else
+  nav#navbar.bg-transparent.p-4.fixed.w-full.z-10.top-0.transition-colors
+    .container.mx-auto
+      .flex.items-center.justify-between
+        a.text-color-change.text-white.text-lg.font-semibold[href="/"] Better-Fixly
+        = link_to 'Login', new_user_session_path, class: 'font-semibold'
