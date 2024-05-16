@@ -1,0 +1,14 @@
+<% if @posts.present? %>
+  <div class="w-full flex flex-wrap">
+    <% @posts.each do |post| %>
+      <div class="mb-2 w-1/2">
+        <%= render partial: 'posts/post_card', locals: { post: post } %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="w-full text-center">
+    <p>No posts available. Why not create one?</p>
+    <%= link_to 'Add New Post', new_post_path, class: 'btn btn-primary' %>
+  </div>
+<% end %>
