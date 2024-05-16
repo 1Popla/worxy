@@ -1,15 +1,43 @@
-<% post = @post %>
-
-<div class="max-w-sm rounded overflow-hidden shadow-lg">
-  <% if post.images.attached? %>
-    <%= image_tag post.images.first.variant(resize_to_fill: [300, nil]), class: "w-full" %>
-  <% end %>
-  <div class="px-6 py-4">
-    <div class="font-bold text-xl mb-2">
-      <%= post.title %>
+<div class="container mx-auto px-4 py-8">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Post Content -->
+    <div class="lg:col-span-2 bg-white shadow-lg rounded-lg p-6">
+      <% if @post.images.attached? %>
+        <div class="mb-4">
+          <%= image_tag @post.images.first.variant(resize_to_fill: [600, 400]), class: "w-full h-64 object-cover rounded-lg" %>
+        </div>
+      <% end %>
+      <h1 class="text-3xl font-bold mb-4"><%= @post.title %></h1>
+      <p class="text-gray-700 text-base mb-4"><%= @post.description %></p>
+      <div class="text-sm text-gray-500">
+        <p>Created at: <%= @post.created_at.strftime("%B %e, %Y %H:%M") %></p>
+        <p>Last updated: <%= @post.updated_at.strftime("%B %e, %Y %H:%M") %></p>
+      </div>
     </div>
-    <p class="text-gray-700 text-base">
-      <%= post.description %>
-    </p>
+
+    <!-- Google Map -->
+    <div class="lg:col-span-1">
+      <div id="map" class="w-full h-64 lg:h-full rounded-lg border"></div>
+    </div>
   </div>
 </div>
+
+<script>
+  function initMap() {
+    var postLocation = { lat: <%= @post.latitude %>, lng: <%= @post.longitude %> };
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: postLocation,
+      zoom: 10
+    });
+
+    var marker = new google.maps.Marker({
+      position: postLocation,
+      map: map
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    initMap();
+  });
+</script>
+
