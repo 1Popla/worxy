@@ -3,8 +3,8 @@
 <script>
   function initMap() {
     var mapOptions = {
-      zoom: 8,
-      center: {lat: 51.9194, lng: 19.1451}
+      zoom: 12,
+      center: { lat: 51.9194, lng: 19.1451 }
     };
 
     var map = new google.maps.Map(document.getElementById('map'), mapOptions);
@@ -30,39 +30,43 @@
     var markers = [];
 
     <% @posts.each do |post| %>
-      var marker = new google.maps.Marker({
-        position: { lat: <%= post.latitude %>, lng: <%= post.longitude %> },
-        map: map,
-        title: "<%= post.title %>"
-      });
+      (function() {
+        var marker = new google.maps.Marker({
+          position: { lat: <%= post.latitude %>, lng: <%= post.longitude %> },
+          map: map,
+          title: "<%= post.title %>"
+        });
 
-      var infowindow = new google.maps.InfoWindow({
-        content: `<h3><%= post.title %></h3><p><%= post.description %></p>`
-      });
+        var infowindow = new google.maps.InfoWindow({
+          content: `<h3><%= post.title %></h3><p><%= post.description %></p>`
+        });
 
-      marker.addListener('click', function() {
-        infowindow.open(map, marker);
-      });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
 
-      markers.push(marker);
+        markers.push(marker);
+      })();
     <% end %>
 
     <% @bookings.each do |booking| %>
-      var bookingMarker = new google.maps.Marker({
-        position: { lat: <%= booking.post.latitude %>, lng: <%= booking.post.longitude %> },
-        map: map,
-        title: "Booking for <%= booking.post.title %> (Start: <%= booking.start_date.strftime('%Y-%m-%d %H:%M') %>)"
-      });
+      (function() {
+        var bookingMarker = new google.maps.Marker({
+          position: { lat: <%= booking.post.latitude %>, lng: <%= booking.post.longitude %> },
+          map: map,
+          title: "Booking for <%= booking.post.title %> (Start: <%= booking.start_date.strftime('%Y-%m-%d %H:%M') %>)"
+        });
 
-      var bookingInfowindow = new google.maps.InfoWindow({
-        content: `<h3>Booking for <%= booking.post.title %></h3><p>Booked by: <%= booking.user.email %></p><p>Start: <%= booking.start_date.strftime('%Y-%m-%d %H:%M') %></p><p>End: <%= booking.end_date.strftime('%Y-%m-%d %H:%M') %></p>`
-      });
+        var bookingInfowindow = new google.maps.InfoWindow({
+          content: `<h3>Booking for <%= booking.post.title %></h3><p>Booked by: <%= booking.user.email %></p><p>Start: <%= booking.start_date.strftime('%Y-%m-%d %H:%M') %></p><p>End: <%= booking.end_date.strftime('%Y-%m-%d %H:%M') %></p>`
+        });
 
-      bookingMarker.addListener('click', function() {
-        bookingInfowindow.open(map, bookingMarker);
-      });
+        bookingMarker.addListener('click', function() {
+          bookingInfowindow.open(map, bookingMarker);
+        });
 
-      markers.push(bookingMarker);
+        markers.push(bookingMarker);
+      })();
     <% end %>
   }
 

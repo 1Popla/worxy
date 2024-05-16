@@ -1,7 +1,8 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
-  before_action :check_user, only: [:show, :edit, :update, :destroy]
+  before_action :check_user, only: [:edit, :update, :destroy]
+  before_action :check_user_view, only: [:show]
 
   def index
     customer_or_visible_booking_ids = current_user.bookings.select(:id)
@@ -57,6 +58,12 @@ class BookingsController < ApplicationController
   def check_user
     unless current_user.id == @booking.user_id || current_user.id == @booking.post.user_id
       redirect_to root_path, alert: "You are not authorized to access this booking."
+    end
+  end
+
+  def check_user_view
+    unless current_user.id == @booking.user_id || current_user.id == @booking.post.user_id || current_user.id == @booking.visible_to_user_id
+      redirect_to root_path, alert: "You are not authorized to view this booking."
     end
   end
 end

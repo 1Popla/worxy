@@ -1,12 +1,42 @@
-<p>
-  <strong>Usługa:</strong>
-  <%= @booking.post.title %>
-</p>
+<div class="container mx-auto px-4 py-8">
+  <div class="bg-white shadow-lg rounded-lg p-6">
+    <!-- Booking Details -->
+    <h1 class="text-3xl font-semibold mb-6">Booking Details</h1>
+    <div class="mb-4">
+      <p class="text-lg font-medium"><strong>Service:</strong> <%= @booking.post.title %></p>
+      <p class="text-lg font-medium"><strong>Status:</strong> <%= @booking.status %></p>
+      <p class="text-lg font-medium"><strong>Start Date:</strong> <%= @booking.start_date.strftime("%B %e, %Y %H:%M") %></p>
+      <p class="text-lg font-medium"><strong>End Date:</strong> <%= @booking.end_date.strftime("%B %e, %Y %H:%M") %></p>
+    </div>
 
-<p>
-  <strong>Status:</strong>
-  <%= @booking.status %>
-</p>
+    <!-- Related Post Details -->
+    <h2 class="text-2xl font-semibold mb-4">Related Post</h2>
+    <div class="mb-4">
+      <% if @booking.post.images.attached? %>
+        <%= image_tag @booking.post.images.first.variant(resize_to_fill: [600, 400]), class: "w-full h-48 object-cover rounded-lg mb-4" %>
+      <% end %>
+      <p class="text-lg font-medium"><strong>Title:</strong> <%= @booking.post.title %></p>
+      <p class="text-lg font-medium"><strong>Description:</strong> <%= @booking.post.description %></p>
+      <p class="text-lg font-medium"><strong>Price:</strong> <%= number_to_currency(@booking.post.price) %></p>
+      <p class="text-lg font-medium"><strong>Service Category:</strong> <%= @booking.post.service_category %></p>
+      <p class="text-lg font-medium"><strong>Availability:</strong> <%= @booking.post.availability %></p>
+      <p class="text-lg font-medium"><strong>Contact Information:</strong> <%= @booking.post.contact_information %></p>
+    </div>
 
-<%= link_to 'Edit', edit_booking_path(@booking) %> |
-<%= link_to 'Back', bookings_path %>
+    <!-- Related Users -->
+    <h2 class="text-2xl font-semibold mb-4">Related Users</h2>
+    <div class="mb-4">
+      <p class="text-lg font-medium"><strong>Booked By:</strong> <%= @booking.user.email %></p>
+      <% if @booking.visible_to_user %>
+        <p class="text-lg font-medium"><strong>Visible To:</strong> <%= @booking.visible_to_user.email %></p>
+      <% end %>
+      <p class="text-lg font-medium"><strong>Post Created By:</strong> <%= @booking.post.user.email %></p>
+    </div>
+
+    <!-- Action Links -->
+    <div class="mt-6">
+      <%= link_to 'Edit Booking', edit_booking_path(@booking), class: 'inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+      <%= link_to 'Back to Bookings', bookings_path, class: 'inline-block bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded ml-2' %>
+    </div>
+  </div>
+</div>
