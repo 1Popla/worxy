@@ -7,6 +7,11 @@ class MessagesController < ApplicationController
     set_active_conversations_with_recipients
     @messages = @conversation.messages.page(params[:page]).per(20)
     @new_message = @conversation.messages.new
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create

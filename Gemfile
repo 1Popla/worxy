@@ -17,6 +17,10 @@ gem "slim-rails"
 gem "image_processing"
 gem "kaminari"
 gem 'geocoder'
+gem 'jquery-rails'
+gem 'turbolinks', '~> 5'
+gem 'rails-ujs'
+
 gem 'dotenv', groups: [:development, :test]
 
 group :development, :test do
