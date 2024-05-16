@@ -16,6 +16,7 @@ gem "tailwindcss-rails"
 gem "slim-rails"
 gem "image_processing"
 gem "kaminari"
+gem 'dotenv', groups: [:development, :test]
 
 group :development, :test do
   gem "debug", platforms: %i[mri windows]
