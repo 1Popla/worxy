@@ -16,6 +16,7 @@ gem "tailwindcss-rails"
 gem "slim-rails"
 gem "image_processing"
 gem "kaminari"
+gem 'geocoder'
 gem 'dotenv', groups: [:development, :test]
 
 group :development, :test do

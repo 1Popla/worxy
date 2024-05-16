@@ -1,6 +1,5 @@
 <div class="container mx-auto px-4 py-8">
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-    <!-- Post Content -->
     <div class="lg:col-span-2 bg-white shadow-lg rounded-lg p-6">
       <% if @post.images.attached? %>
         <div class="mb-4">
@@ -9,13 +8,36 @@
       <% end %>
       <h1 class="text-3xl font-bold mb-4"><%= @post.title %></h1>
       <p class="text-gray-700 text-base mb-4"><%= @post.description %></p>
+
+      <div class="mb-4">
+        <p class="font-semibold text-gray-700">Price:</p>
+        <p class="text-gray-700 text-base"><%= number_to_currency(@post.price) %></p>
+      </div>
+      <div class="mb-4">
+        <p class="font-semibold text-gray-700">Service Category:</p>
+        <p class="text-gray-700 text-base"><%= @post.service_category %></p>
+      </div>
+      <div class="mb-4">
+        <p class="font-semibold text-gray-700">Availability:</p>
+        <p class="text-gray-700 text-base"><%= @post.availability %></p>
+      </div>
+      <div class="mb-4">
+        <p class="font-semibold text-gray-700">Contact Information:</p>
+        <p class="text-gray-700 text-base"><%= @post.contact_information %></p>
+      </div>
+      <div class="mb-4">
+        <p class="font-semibold text-gray-700">Address:</p>
+        <p class="text-gray-700 text-base">
+          <%= @post.street %>, <%= @post.city %>, <%= @post.state %>, <%= @post.country %>
+        </p>
+      </div>
+
       <div class="text-sm text-gray-500">
         <p>Created at: <%= @post.created_at.strftime("%B %e, %Y %H:%M") %></p>
         <p>Last updated: <%= @post.updated_at.strftime("%B %e, %Y %H:%M") %></p>
       </div>
     </div>
 
-    <!-- Google Map -->
     <div class="lg:col-span-1">
       <div id="map" class="w-full h-64 lg:h-full rounded-lg border"></div>
     </div>
@@ -40,4 +62,3 @@
     initMap();
   });
 </script>
-

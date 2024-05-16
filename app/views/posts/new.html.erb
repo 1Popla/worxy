@@ -6,11 +6,43 @@
     </div>
     <div class="mb-6">
       <%= f.label :description, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-      <%= f.text_area :description, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', rows: 3 %>
+      <%= f.text_area :description, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', rows: 5 %>
     </div>
     <div class="mb-6">
       <%= f.label :images, class: 'block text-gray-700 text-sm font-bold mb-2' %>
       <%= f.file_field :images, multiple: true, class: 'block w-full text-sm text-gray-700 border rounded cursor-pointer focus:outline-none focus:border-purple-500' %>
+    </div>
+    <div class="mb-6">
+      <%= f.label :price, class: 'block text-gray-700 text-sm font-bold mb-2' %>
+      <%= f.number_field :price, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', step: 0.01 %>
+    </div>
+    <div class="mb-6">
+      <%= f.label :service_category, class: 'block text-gray-700 text-sm font-bold mb-2' %>
+      <%= f.text_field :service_category, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+    </div>
+    <div class="mb-6">
+      <%= f.label :availability, class: 'block text-gray-700 text-sm font-bold mb-2' %>
+      <%= f.text_field :availability, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+    </div>
+    <div class="mb-6">
+      <%= f.label :contact_information, class: 'block text-gray-700 text-sm font-bold mb-2' %>
+      <%= f.text_field :contact_information, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+    </div>
+    <div class="mb-6">
+      <%= f.label :street, class: 'block text-gray-700 text-sm font-bold mb-2' %>
+      <%= f.text_field :street, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+    </div>
+    <div class="mb-6">
+      <%= f.label :city, class: 'block text-gray-700 text-sm font-bold mb-2' %>
+      <%= f.text_field :city, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+    </div>
+    <div class="mb-6">
+      <%= f.label :state, class: 'block text-gray-700 text-sm font-bold mb-2' %>
+      <%= f.text_field :state, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+    </div>
+    <div class="mb-6">
+      <%= f.label :country, class: 'block text-gray-700 text-sm font-bold mb-2' %>
+      <%= f.text_field :country, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
     </div>
     <div class="grid grid-cols-2 gap-4 mb-6">
       <div>
@@ -54,7 +86,6 @@
       }
     });
 
-    // Try HTML5 geolocation to center the map on user's location
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         function(position) {
@@ -70,7 +101,6 @@
         }
       );
     } else {
-      // Browser doesn't support Geolocation
       handleLocationError(false, map.getCenter());
     }
   }

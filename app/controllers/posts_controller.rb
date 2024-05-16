@@ -3,6 +3,10 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @posts }
+    end
   end
 
   def show
@@ -30,7 +34,7 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to @post
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -41,6 +45,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :description, :status, :latitude, :longitude, images: [])
+    params.require(:post).permit(:title, :description, :price, :service_category, :availability, :contact_information, :status, :latitude, :longitude, images: [])
   end
 end
