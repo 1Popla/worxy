@@ -15,7 +15,6 @@
     <%= form.collection_select :post_id, Post.all, :id, :title, {include_blank: 'Please select a post'}, {class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"} %>
   </div>
 
-
   <div class="mb-4">
     <%= form.label :status, class: "block text-gray-700 text-sm font-bold mb-2" %>
     <%= form.select :status, Booking.statuses.keys.map { |status| [status.titleize, status] }, {}, {class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"} %>
@@ -24,6 +23,16 @@
   <div class="mb-6">
     <%= form.label :visible_to_user_id, 'Klient', class: "block text-gray-700 text-sm font-bold mb-2" %>
     <%= form.collection_select :visible_to_user_id, User.all, :id, :email, {include_blank: 'None (Default)'}, {class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"} %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :start_date, 'Start Date', class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.datetime_select :start_date, class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :end_date, 'End Date', class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.datetime_select :end_date, class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
   </div>
 
   <div class="flex items-center justify-between">

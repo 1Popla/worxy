@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_conversation
+  before_action :set_message, only: [:show]
 
   def index
     set_active_conversations_with_recipients
@@ -22,6 +23,8 @@ class MessagesController < ApplicationController
     end
   end
 
+  def show
+  end
 
   private
 
@@ -42,5 +45,12 @@ class MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(:body)
+  end
+
+  def set_message
+    @message = @conversation.messages.find_by(id: params[:id])
+    unless @message
+      redirect_to conversation_messages_path(@conversation), alert: 'Message not found'
+    end
   end
 end

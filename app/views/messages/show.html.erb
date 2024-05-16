@@ -1,0 +1,28 @@
+<div class="bg-gray-100 overflow-x-hidden">
+  <nav class="bg-white px-6 py-4 shadow">
+    <div class="flex flex-col container mx-auto md:flex-row md:items-center md:justify-between">
+      <div class="flex justify-between items-center">
+        <div>
+          <a href="/dashboard" class="text-gray-800 text-xl font-bold md:text-2xl">Worxy</a>
+        </div>
+      </div>
+      <div class="md:flex flex-col md:flex-row md:-mx-4 hidden">
+        <%= render '/shared/dashboard/links' %>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mx-auto p-4">
+    <div class="w-full md:w-2/3 mx-auto px-4">
+      <h2 class="text-2xl font-bold mb-4">Message Details</h2>
+      <div class="bg-white shadow rounded-lg p-4">
+        <p class="text-gray-600"><%= @message.body %></p>
+        <p class="text-gray-500 text-sm mt-2"><%= @message.created_at.strftime("%b %d, %Y %H:%M") %></p>
+        <p class="text-gray-500 text-sm mt-2">From: <%= @message.user.email %></p>
+      </div>
+      <div class="mt-4">
+        <%= link_to 'Back to Conversation', conversation_messages_path(@conversation), class: 'text-blue-600 hover:text-blue-900' %>
+      </div>
+    </div>
+  </div>
+</div>
