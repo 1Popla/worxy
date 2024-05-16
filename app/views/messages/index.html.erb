@@ -19,7 +19,7 @@
       <% @messages.each do |message| %>
         <% message_class = message.user_id == current_user.id ? "bg-blue-100 float-right clear-both" : "bg-gray-100 float-left clear-both" %>
         <p class="rounded-lg p-2 <%= message_class %>">
-          <%= message.body %>
+          <%= link_to message.body, conversation_message_path(@conversation, message), class: "text-blue-600 hover:text-blue-900" %>
         </p>
       <% end %>
     </div>
