@@ -4,3 +4,4 @@ import "controllers"
 
 import "./message-scroll.js"
 
+require("@rails/ujs").start()

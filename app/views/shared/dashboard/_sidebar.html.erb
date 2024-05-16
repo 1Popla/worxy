@@ -1,0 +1,30 @@
+<div class="w-64 bg-white shadow-lg">
+  <nav class="h-full px-4 py-6">
+    <div class="mb-8">
+      <a href="/dashboard" class="text-gray-800 text-2xl font-bold">Worxy</a>
+    </div>
+    <ul class="space-y-2">
+      <li>
+        <%= link_to 'Nowe ogłoszenie', new_post_path, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' %>
+      </li>
+      <li>
+        <%= link_to 'Ogłoszenia', posts_path, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' %>
+      </li>
+      <li>
+        <%= link_to 'Wiadomości', conversations_path, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' %>
+      </li>
+      <li>
+        <%= link_to 'Booking', bookings_path, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' %>
+      </li>
+      <li>
+        <%= link_to 'Mapa Bookingów', dashboard_map_path, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' %>
+      </li>
+      <li>
+        <%= link_to 'Profil Użytkownika', user_path(current_user), class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' %>
+      </li>
+      <li>
+        <%= link_to 'Wyloguj', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' }, class: 'block p-2 rounded hover:bg-gray-200 text-red-600' %>
+      </li>
+    </ul>
+  </nav>
+</div>
