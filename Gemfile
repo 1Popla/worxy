@@ -18,8 +18,8 @@ gem "image_processing"
 gem "kaminari"
 gem "geocoder"
 gem "jquery-rails"
-gem "turbolinks", "~> 5"
 gem "rails-ujs"
+gem 'turbo-rails'
 
 gem "dotenv", groups: [:development, :test]
 
@@ -33,3 +33,6 @@ end
 group :development do
   gem "web-console"
 end
+
+# Use Redis for Action Cable
+gem "redis", "~> 4.0"
