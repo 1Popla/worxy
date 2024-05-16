@@ -1,0 +1,9 @@
+<div id="message_form_errors">
+  <% if message.errors.any? %>
+    <div class="alert alert-danger">
+      <% message.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
