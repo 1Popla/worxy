@@ -5,7 +5,7 @@ class Post < ApplicationRecord
 
   validates :title, :description, :price, :service_category, presence: true
 
-  enum status: { draft: 0, pending: 1, active: 2, archived: 3 }
+  enum status: {draft: 0, pending: 1, active: 2, archived: 3}
 
   scope :active, -> { where(status: :active) }
 
@@ -13,7 +13,7 @@ class Post < ApplicationRecord
   after_validation :geocode, if: :address_changed?
 
   def address
-    [street, city, state, country].compact.join(', ')
+    [street, city, state, country].compact.join(", ")
   end
 
   def address_changed?

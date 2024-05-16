@@ -55,7 +55,7 @@ class MessagesController < ApplicationController
   def set_message
     @message = @conversation.messages.find_by(id: params[:id])
     unless @message
-      redirect_to conversation_messages_path(@conversation), alert: 'Message not found'
+      redirect_to conversation_messages_path(@conversation), alert: "Message not found"
     end
   end
 end

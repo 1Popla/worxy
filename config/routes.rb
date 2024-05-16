@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'users/show'
+  get "users/show"
   devise_for :users
 
   get "up" => "rails/health#show", :as => :rails_health_check
@@ -15,5 +15,5 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show]
-  get 'dashboard/map', to: 'dashboard#map'
+  get "dashboard/map", to: "dashboard#map"
 end
