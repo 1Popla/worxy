@@ -3,3 +3,5 @@
 <%= link_to 'Wiadomości', conversations_path, class: 'p-2 rounded hover:bg-gray-200' %>
 <%= link_to 'Booking', bookings_path, class: 'p-2 rounded hover:bg-gray-200' %>
 <%= link_to 'Mapa Bookingów', dashboard_map_path, class: 'p-2 rounded hover:bg-gray-200' %>
+<%= link_to 'Profil Użytkownika', user_path(current_user), class: 'p-2 rounded hover:bg-gray-200' %>
+<%= link_to 'Wyloguj', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' }, class: 'p-2 rounded hover:bg-gray-200' %>
