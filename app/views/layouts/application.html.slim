@@ -12,5 +12,5 @@ html
     = javascript_importmap_tags
   body
     main
-      = render 'shared/navbar'
+      = render 'shared/navbar' unless root_path
       = yield

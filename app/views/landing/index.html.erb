@@ -76,26 +76,26 @@
                             <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
                         </div>
 
-                        <div class="contact-place">
-                            <div class="cp-01 phone">
-                                <div class="cp-inner">
-                                    <div class="icon flaticon-phone41"></div>
-                                    <div class="phone-text">
-                                        <span class="text">Call Us Now</span>
-                                        <span class="numbers">+880 123 456 789</span>
-                                    </div>
-                                </div>
+                     <div class="contact-place" id="contact-container" style="cursor: pointer;">
+                        <div class="cp-01 phone">
+                            <div class="cp-inner">
+                            <div class="icon flaticon-phone41"></div>
+                            <div class="phone-text">
+                                <span class="text">Kliknij!</span>
+                                <span class="numbers">aby się zalogować</span>
                             </div>
+                            </div>
+                        </div>
 
-                            <div class="cp-01 mail">
-                                <div class="cp-inner">
-                                    <div class="icon flaticon-email19"></div>
-                                    <div class="phone-text">
-                                        <span class="text">Contact with E-mail</span>
-                                        <a href="#" class="numbers">info@yourmail.com</a>
-                                    </div>
-                                </div>    
+                        <div class="cp-01 mail">
+                            <div class="cp-inner">
+                            <div class="icon flaticon-email19"></div>
+                            <div class="phone-text">
+                                <span class="text">Contact with E-mail</span>
+                                <a href="mailto:info@yourmail.com" class="numbers">info@yourmail.com</a>
                             </div>
+                            </div>    
+                        </div>
                         </div>
 
                         <div class="top-social-media">
@@ -910,3 +910,13 @@
         <script type='text/javascript' src='js/functions.js'></script>
     </body>
 </html>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var contactContainer = document.getElementById("contact-container");
+  if (contactContainer) {
+    contactContainer.addEventListener("click", function(e) {
+      window.location.href = "/users/sign_in";
+    });
+  }
+});
+</script>
