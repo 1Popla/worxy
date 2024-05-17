@@ -23,7 +23,7 @@
         <%= link_to 'Profil Użytkownika', user_path(current_user), class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' %>
       </li>
       <li>
-        <%= link_to 'Wyloguj', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' }, class: 'block p-2 rounded hover:bg-gray-200 text-red-600' %>
+       <%= link_to 'Wyloguj', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?', turbo: false }, class: 'block p-2 rounded hover:bg-gray-200 text-red-600' %>
       </li>
     </ul>
   </nav>
