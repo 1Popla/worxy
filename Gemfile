@@ -21,7 +21,6 @@ gem "jquery-rails"
 gem "turbo-rails"
 gem "rails-ujs"
 
-
 gem "dotenv", groups: [:development, :test]
 
 group :development, :test do
