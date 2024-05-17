@@ -2,7 +2,17 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @categories = Category.all
     @posts = Post.all
+
+    if params[:category].present?
+      @posts = @posts.where(category_id: params[:category])
+    end
+
+    if params[:search].present?
+      @posts = @posts.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+    end
+
     respond_to do |format|
       format.html
       format.json { render json: @posts }

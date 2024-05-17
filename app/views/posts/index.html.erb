@@ -1,15 +1,21 @@
 <div class="flex h-screen bg-gray-100 overflow-hidden">
-  <!-- Sidebar -->
   <%= render 'shared/dashboard/sidebar' %>
 
-  <!-- Main Content -->
   <div class="flex-1 overflow-auto">
     <div class="container mx-auto px-4 py-8">
-      <!-- Search Bar -->
-      <div class="mb-6">
-        <input type="text" placeholder="Search posts..." class="w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
+      <div class="mb-6 flex space-x-4">
+        <%= form_with url: posts_path, method: :get, local: true, class: "flex space-x-4 w-full" do |f| %>
+          <div class="w-full">
+            <%= f.text_field :search, value: params[:search], placeholder: "Szukaj...", class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+          </div>
+          <div class="w-1/4">
+            <%= f.collection_select :category, @categories, :id, :name, { prompt: "Wszystkie kategorie" }, class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+          </div>
+          <div>
+            <%= f.submit 'Zastosuj', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+          </div>
+        <% end %>
       </div>
-      <!-- Posts -->
       <% if @posts.present? %>
         <div class="flex flex-col space-y-4">
           <% @posts.order(created_at: :desc).each do |post| %>

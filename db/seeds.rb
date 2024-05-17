@@ -13,14 +13,23 @@ require "factory_bot"
 FactoryBot.create(:user)
 
 Category.create([
-  { name: 'Plumbing' },
-  { name: 'Electrical' },
-  { name: 'Carpentry' },
-  { name: 'Cleaning' },
-  { name: 'Gardening' },
-  { name: 'Painting' },
-  { name: 'Moving' },
-  { name: 'Pest Control' },
-  { name: 'Roofing' },
-  { name: 'Handyman' }
+  { name: 'Hydraulika' },
+  { name: 'Elektryka' },
+  { name: 'Stolarka' },
+  { name: 'Sprzątanie' },
+  { name: 'Ogrodnictwo' },
+  { name: 'Malowanie' },
+  { name: 'Przeprowadzki' },
+  { name: 'Zwalczanie Szkodników' },
+  { name: 'Dekarstwo' },
+  { name: 'Złota Rączka' },
+  { name: 'Klimatyzacja i Ogrzewanie' },
+  { name: 'Podłogi' },
+  { name: 'Murarstwo' },
+  { name: 'Ślusarstwo' },
+  { name: 'Naprawa AGD' },
+  { name: 'Mycie Okien' },
+  { name: 'Utrzymanie Basenów' },
+  { name: 'Bezpieczeństwo Domowe' },
+  { name: 'Wsparcie IT' }
 ])

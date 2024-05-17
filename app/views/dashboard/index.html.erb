@@ -7,7 +7,7 @@
     <div class="container mx-auto p-4">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="bg-white shadow rounded-lg p-4">
-          <h2 class="text-lg font-bold text-gray-800 mb-4">Last Messages</h2>
+          <h2 class="text-lg font-bold text-gray-800 mb-4">Ostatnia wiadomość:</h2>
           <% if @last_messages.present? %>
             <% @last_messages.each do |message| %>
               <div class="mb-2">
@@ -18,12 +18,12 @@
               </div>
             <% end %>
           <% else %>
-            <p class="text-gray-500">No messages available.</p>
+            <p class="text-gray-500">Brak wiadomości.</p>
           <% end %>
         </div>
 
         <div class="bg-white shadow rounded-lg p-4">
-          <h2 class="text-lg font-bold text-gray-800 mb-4">Visible Bookings</h2>
+          <h2 class="text-lg font-bold text-gray-800 mb-4">Twoje zlecenia</h2>
           <% if @visible_bookings.present? %>
             <% @visible_bookings.each do |booking| %>
               <div class="mb-2">
@@ -34,14 +34,14 @@
               </div>
             <% end %>
           <% else %>
-            <p class="text-gray-500">No bookings available.</p>
+            <p class="text-gray-500">Brak zleceń.</p>
           <% end %>
         </div>
       </div>
 
       <div class="mt-4 grid grid-cols-1">
         <div class="bg-white shadow rounded-lg p-4">
-          <h2 class="text-lg font-bold text-gray-800 mb-4">Last Post</h2>
+          <h2 class="text-lg font-bold text-gray-800 mb-4">Najnowszy post</h2>
           <% if @last_post.present? %>
             <div class="mb-2">
               <p class="text-gray-600 font-bold">
@@ -51,7 +51,7 @@
               <p class="text-gray-500 text-sm"><%= @last_post.created_at.strftime("%b %d, %Y %H:%M") %></p>
             </div>
           <% else %>
-            <p class="text-gray-500">No posts available.</p>
+            <p class="text-gray-500">Brak postów.</p>
           <% end %>
         </div>
       </div>
