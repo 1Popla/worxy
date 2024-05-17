@@ -2,12 +2,18 @@
 
 <script>
   function initMap() {
+    var mapElement = document.getElementById('map');
+    if (!mapElement) {
+      console.error("Map element not found!");
+      return;
+    }
+
     var mapOptions = {
       zoom: 12,
       center: { lat: 51.9194, lng: 19.1451 }
     };
 
-    var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    var map = new google.maps.Map(mapElement, mapOptions);
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -80,7 +86,13 @@
     infoWindow.open(map);
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    initMap();
-  });
+  function initializeMapIfNeeded() {
+    if (document.getElementById('map')) {
+      initMap();
+    }
+  }
+
+  document.addEventListener('turbo:load', initializeMapIfNeeded);
+
+  document.addEventListener('DOMContentLoaded', initializeMapIfNeeded);
 </script>
