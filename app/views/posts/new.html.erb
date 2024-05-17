@@ -62,7 +62,13 @@
 </div>
 <script>
   function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
+    var mapElement = document.getElementById('map');
+    if (!mapElement) {
+      console.error("Map element not found!");
+      return;
+    }
+
+    var map = new google.maps.Map(mapElement, {
       center: {lat: -34.397, lng: 150.644},
       zoom: 15
     });
@@ -169,6 +175,14 @@
   }
 
   document.addEventListener('turbo:load', function() {
-    initMap();
+    if (document.getElementById('map')) {
+      initMap();
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('map')) {
+      initMap();
+    }
   });
 </script>
