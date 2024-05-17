@@ -15,6 +15,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @categories = Category.all
   end
 
   def create
@@ -24,6 +25,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to @post, status: :see_other
     else
+      @categories = Category.all
       render :new, status: :unprocessable_entity
     end
   end
@@ -34,17 +36,19 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to @post
     else
+      @categories = Category.all
       render :edit, status: :unprocessable_entity
     end
   end
 
   def edit
     @post = Post.find(params[:id])
+    @categories = Category.all
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:title, :description, :price, :service_category, :availability, :contact_information, :status, :latitude, :longitude, :street, :city, :state, :country, images: [])
+    params.require(:post).permit(:title, :description, :price, :availability, :contact_information, :status, :latitude, :longitude, :street, :city, :state, :country, :category_id, images: [])
   end
 end

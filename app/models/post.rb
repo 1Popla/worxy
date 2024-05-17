@@ -1,9 +1,10 @@
 class Post < ApplicationRecord
   belongs_to :user
+  belongs_to :category
   has_many :bookings, dependent: :destroy
   has_many_attached :images
 
-  validates :title, :description, :price, :service_category, presence: true
+  validates :title, :description, :price, :category_id, presence: true
 
   enum status: {draft: 0, pending: 1, active: 2, archived: 3}
 

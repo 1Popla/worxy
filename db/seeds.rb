@@ -11,3 +11,16 @@
 require "factory_bot"
 
 FactoryBot.create(:user)
+
+Category.create([
+  { name: 'Plumbing' },
+  { name: 'Electrical' },
+  { name: 'Carpentry' },
+  { name: 'Cleaning' },
+  { name: 'Gardening' },
+  { name: 'Painting' },
+  { name: 'Moving' },
+  { name: 'Pest Control' },
+  { name: 'Roofing' },
+  { name: 'Handyman' }
+])
