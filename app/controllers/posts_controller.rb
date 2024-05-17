@@ -2,7 +2,17 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @categories = Category.all
     @posts = Post.all
+
+    if params[:category].present?
+      @posts = @posts.where(category_id: params[:category])
+    end
+
+    if params[:search].present?
+      @posts = @posts.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+    end
+
     respond_to do |format|
       format.html
       format.json { render json: @posts }
@@ -15,6 +25,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @categories = Category.all
   end
 
   def create
@@ -24,6 +35,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to @post, status: :see_other
     else
+      @categories = Category.all
       render :new, status: :unprocessable_entity
     end
   end
@@ -34,17 +46,19 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to @post
     else
+      @categories = Category.all
       render :edit, status: :unprocessable_entity
     end
   end
 
   def edit
     @post = Post.find(params[:id])
+    @categories = Category.all
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:title, :description, :price, :service_category, :availability, :contact_information, :status, :latitude, :longitude, :street, :city, :state, :country, images: [])
+    params.require(:post).permit(:title, :description, :price, :availability, :contact_information, :status, :latitude, :longitude, :street, :city, :state, :country, :category_id, images: [])
   end
 end

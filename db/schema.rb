@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_16_122653) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_17_094455) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +55,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_122653) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "conversations", force: :cascade do |t|
     t.integer "sender_id"
     t.integer "recipient_id"
@@ -82,13 +88,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_122653) do
     t.float "latitude"
     t.float "longitude"
     t.decimal "price"
-    t.string "service_category"
     t.string "availability"
     t.string "contact_information"
     t.string "street"
     t.string "city"
     t.string "state"
     t.string "country"
+    t.integer "category_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
