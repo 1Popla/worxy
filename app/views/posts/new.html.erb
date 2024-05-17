@@ -18,7 +18,7 @@
     </div>
     <div class="mb-6">
       <%= f.label :category_id, "Category", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-      <%= f.collection_select :category_id, @categories, :id, :name, { prompt: "Select a category" }, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+      <%= f.collection_select :category_id, @categories, :id, :name, { prompt: "Wybierz kategorię." }, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
     </div>
     <div class="mb-6">
       <%= f.label :availability, class: 'block text-gray-700 text-sm font-bold mb-2' %>
@@ -30,7 +30,7 @@
     </div>
     <div class="mb-6">
       <%= f.label :street, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-      <%= f.text_field :street, id: 'street', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+      <%= f.text_field :street, id: 'street', placeholder: 'Użyj mapy aby uzupełnić adres.', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
     </div>
     <div class="mb-6">
       <%= f.label :city, class: 'block text-gray-700 text-sm font-bold mb-2' %>
