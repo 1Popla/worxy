@@ -1,65 +1,75 @@
-<div class="w-full max-w-lg mx-auto my-10 bg-white p-8 border border-gray-300 rounded-lg shadow-lg">
-  <%= form_with model: @post, id: dom_id(@post), local: true do |f| %>
-    <div class="mb-6">
-      <%= f.label :title, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-      <%= f.text_field :title, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+<div class="flex h-screen bg-gray-100 overflow-hidden">
+  <%= render 'shared/dashboard/sidebar' %>
+
+  <div class="flex-1 overflow-auto">
+    <div class="container mx-auto px-4 py-8">
+      <%= form_with model: @post, id: dom_id(@post), local: true do |f| %>
+        <div class="grid grid-cols-1 gap-6 mb-6">
+          <div>
+            <%= f.label :title, "Tytuł", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+            <%= f.text_field :title, placeholder: 'Tytuł', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          </div>
+          <div>
+            <%= f.label :images, "Zdjęcia", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+            <%= f.file_field :images, multiple: true, class: 'block w-full text-sm text-gray-700 border rounded cursor-pointer focus:outline-none focus:border-purple-500', id: 'images' %>
+            <div id="selected-images" class="mt-4"></div>
+          </div>
+          <div>
+            <%= f.label :description, "Opis", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+            <%= f.text_area :description, placeholder: 'Opis', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', rows: 10 %>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-6 mb-6">
+          <div>
+            <%= f.label :price, "Cena", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+            <%= f.number_field :price, placeholder: 'Cena', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', step: 0.01 %>
+          </div>
+          <div>
+            <%= f.label :category_id, "Kategoria", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+            <%= f.collection_select :category_id, @categories, :id, :name, { prompt: "Wybierz kategorię." }, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          </div>
+          <div>
+            <%= f.label :availability, "Dostępność", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+            <%= f.text_field :availability, placeholder: 'Dostępność', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          </div>
+          <div>
+            <%= f.label :contact_information, "Informacje kontaktowe", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+            <%= f.text_field :contact_information, placeholder: 'Informacje kontaktowe', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          </div>
+          <div>
+            <%= f.label :street, "Ulica", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+            <%= f.text_field :street, id: 'street', placeholder: 'Ulica', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          </div>
+          <div>
+            <%= f.label :city, "Miasto", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+            <%= f.text_field :city, id: 'city', placeholder: 'Miasto', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          </div>
+          <div>
+            <%= f.label :state, "Województwo", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+            <%= f.text_field :state, id: 'state', placeholder: 'Województwo', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          </div>
+          <div>
+            <%= f.label :country, "Kraj", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+            <%= f.text_field :country, id: 'country', placeholder: 'Kraj', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          </div>
+        </div>
+        
+        <div class="hidden">
+          <%= f.text_field :latitude, id: 'latitude', class: 'hidden' %>
+          <%= f.text_field :longitude, id: 'longitude', class: 'hidden' %>
+        </div>
+        
+        <div class="mb-6">
+          <div id="map" class="w-full h-64 border rounded-lg"></div>
+        </div>
+        
+        <%= f.submit 'Zatwierdź', class: 'w-full bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+      <% end %>
     </div>
-    <div class="mb-6">
-      <%= f.label :description, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-      <%= f.text_area :description, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', rows: 5 %>
-    </div>
-    <div class="mb-6">
-      <%= f.label :images, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-      <%= f.file_field :images, multiple: true, class: 'block w-full text-sm text-gray-700 border rounded cursor-pointer focus:outline-none focus:border-purple-500' %>
-    </div>
-    <div class="mb-6">
-      <%= f.label :price, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-      <%= f.number_field :price, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', step: 0.01 %>
-    </div>
-    <div class="mb-6">
-      <%= f.label :category_id, "Category", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-      <%= f.collection_select :category_id, @categories, :id, :name, { prompt: "Wybierz kategorię." }, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-    </div>
-    <div class="mb-6">
-      <%= f.label :availability, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-      <%= f.text_field :availability, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-    </div>
-    <div class="mb-6">
-      <%= f.label :contact_information, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-      <%= f.text_field :contact_information, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-    </div>
-    <div class="mb-6">
-      <%= f.label :street, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-      <%= f.text_field :street, id: 'street', placeholder: 'Użyj mapy aby uzupełnić adres.', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-    </div>
-    <div class="mb-6">
-      <%= f.label :city, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-      <%= f.text_field :city, id: 'city', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-    </div>
-    <div class="mb-6">
-      <%= f.label :state, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-      <%= f.text_field :state, id: 'state', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-    </div>
-    <div class="mb-6">
-      <%= f.label :country, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-      <%= f.text_field :country, id: 'country', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-    </div>
-    <div class="grid grid-cols-2 gap-4 mb-6">
-      <div>
-        <%= f.label :latitude, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-        <%= f.text_field :latitude, id: 'latitude', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', readonly: true %>
-      </div>
-      <div>
-        <%= f.label :longitude, class: 'block text-gray-700 text-sm font-bold mb-2' %>
-        <%= f.text_field :longitude, id: 'longitude', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', readonly: true %>
-      </div>
-    </div>
-    <div class="mb-6">
-      <div id="map" style="height: 300px;" class="w-full h-64 border rounded-lg"></div>
-    </div>
-    <%= f.submit 'Submit', class: 'w-full bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
-  <% end %>
+  </div>
 </div>
+
 <script>
   function initMap() {
     var mapElement = document.getElementById('map');
@@ -184,5 +194,20 @@
     if (document.getElementById('map')) {
       initMap();
     }
+  });
+
+  document.getElementById('images').addEventListener('change', function(event) {
+    const selectedImagesContainer = document.getElementById('selected-images');
+    selectedImagesContainer.innerHTML = '';
+    Array.from(event.target.files).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.classList.add('w-32', 'h-32', 'object-cover', 'mr-2', 'mb-2');
+        selectedImagesContainer.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
   });
 </script>

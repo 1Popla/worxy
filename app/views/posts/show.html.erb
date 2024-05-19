@@ -1,52 +1,58 @@
-<div class="container mx-auto px-4 py-8">
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-    <div class="lg:col-span-2 bg-white shadow-lg rounded-lg p-6">
-      <% if @post.images.attached? %>
-        <div class="mb-4">
-          <div id="main-image-container" class="mb-4 cursor-pointer">
-            <%= image_tag @post.images.first.variant(resize_to_fill: [600, 400]), id: "main-image", class: "object-cover w-full h-full rounded-lg", data: { full_url: url_for(@post.images.first.variant(resize_to_fill: [600, 400])) } %>
+<div class="flex h-screen bg-gray-100 overflow-hidden">
+  <%= render 'shared/dashboard/sidebar' %>
+
+  <div class="flex-1 overflow-auto">
+    <div class="container mx-auto px-4 py-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 bg-white shadow-lg rounded-lg p-6">
+          <% if @post.images.attached? %>
+            <div class="mb-4 border border-gray-200 rounded-lg p-4">
+              <div id="main-image-container" class="mb-4 cursor-pointer">
+                <%= image_tag @post.images.first.variant(resize_to_fill: [600, 400]), id: "main-image", class: "object-cover w-full h-full rounded-lg", data: { full_url: url_for(@post.images.first.variant(resize_to_fill: [600, 400])) } %>
+              </div>
+              <div id="thumbnails" class="flex space-x-2">
+                <% @post.images.each_with_index do |image, index| %>
+                  <%= image_tag image.variant(resize_to_fill: [100, 100]), class: "thumbnail cursor-pointer w-24 h-24 object-cover rounded-lg border border-gray-300", data: { index: index, full_url: url_for(image.variant(resize_to_fill: [600, 400])) } %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+          <h1 class="text-3xl font-bold mb-4"><%= @post.title %></h1>
+          <div>
+            <p class="font-semibold text-gray-700">Opis:</p>
+            <p class="text-gray-700 text-base mb-4"><%= @post.description %></p>
           </div>
-          <div id="thumbnails" class="flex space-x-2">
-            <% @post.images.each_with_index do |image, index| %>
-              <%= image_tag image.variant(resize_to_fill: [100, 100]), class: "thumbnail cursor-pointer w-24 h-24 object-cover rounded-lg", data: { index: index, full_url: url_for(image.variant(resize_to_fill: [600, 400])) } %>
-            <% end %>
+          <div class="mb-4">
+            <p class="font-semibold text-gray-700">Cena:</p>
+            <p class="text-gray-700 text-base"><%= number_to_currency(@post.price) %></p>
+          </div>
+          <div class="mb-4">
+            <p class="font-semibold text-gray-700">Kategoria:</p>
+            <p class="text-gray-700 text-base"><%= @post.category.name %></p>
+          </div>
+          <div class="mb-4">
+            <p class="font-semibold text-gray-700">Priorytet:</p>
+            <p class="text-gray-700 text-base"><%= @post.availability %></p>
+          </div>
+          <div class="mb-4">
+            <p class="font-semibold text-gray-700">Kontakt:</p>
+            <p class="text-gray-700 text-base"><%= @post.contact_information %></p>
+          </div>
+          <div class="mb-4">
+            <p class="font-semibold text-gray-700">Adres:</p>
+            <p class="text-gray-700 text-base">
+              <%= @post.street %>, <%= @post.city %>, <%= @post.state %>, <%= @post.country %>
+            </p>
+          </div>
+          <div class="text-sm text-gray-500">
+            <p>Utworzono: <%= @post.created_at.strftime("%B %e, %Y %H:%M") %></p>
+            <p>Ostatnia aktualizacja: <%= @post.updated_at.strftime("%B %e, %Y %H:%M") %></p>
           </div>
         </div>
-      <% end %>
-      <h1 class="text-3xl font-bold mb-4"><%= @post.title %></h1>
-      <div>
-        <p class="font-semibold text-gray-700">Opis:</p>
-        <p class="text-gray-700 text-base mb-4"><%= @post.description %></p>
+        <div class="lg:col-span-1">
+          <div id="map" class="w-full h-64 lg:h-full rounded-lg border"></div>
+        </div>
       </div>
-      <div class="mb-4">
-        <p class="font-semibold text-gray-700">Cena:</p>
-        <p class="text-gray-700 text-base"><%= number_to_currency(@post.price) %></p>
-      </div>
-      <div class="mb-4">
-        <p class="font-semibold text-gray-700">Kategoria:</p>
-        <p class="text-gray-700 text-base"><%= @post.category.name %></p>
-      </div>
-      <div class="mb-4">
-        <p class="font-semibold text-gray-700">Priorytet:</p>
-        <p class="text-gray-700 text-base"><%= @post.availability %></p>
-      </div>
-      <div class="mb-4">
-        <p class="font-semibold text-gray-700">Kontakt:</p>
-        <p class="text-gray-700 text-base"><%= @post.contact_information %></p>
-      </div>
-      <div class="mb-4">
-        <p class="font-semibold text-gray-700">Adres:</p>
-        <p class="text-gray-700 text-base">
-          <%= @post.street %>, <%= @post.city %>, <%= @post.state %>, <%= @post.country %>
-        </p>
-      </div>
-      <div class="text-sm text-gray-500">
-        <p>Created at: <%= @post.created_at.strftime("%B %e, %Y %H:%M") %></p>
-        <p>Last updated: <%= @post.updated_at.strftime("%B %e, %Y %H:%M") %></p>
-      </div>
-    </div>
-    <div class="lg:col-span-1">
-      <div id="map" class="w-full h-64 lg:h-full rounded-lg border"></div>
     </div>
   </div>
 </div>
