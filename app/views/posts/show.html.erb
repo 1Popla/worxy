@@ -70,16 +70,19 @@
 <script>
 document.addEventListener("turbo:load", function() {
   function initMap() {
-    var postLocation = { lat: <%= @post.latitude %>, lng: <%= @post.longitude %> };
-    var map = new google.maps.Map(document.getElementById('map'), {
-      center: postLocation,
-      zoom: 10
-    });
+    var mapElement = document.getElementById('map');
+    if (mapElement) {
+      var postLocation = { lat: <%= @post.latitude %>, lng: <%= @post.longitude %> };
+      var map = new google.maps.Map(mapElement, {
+        center: postLocation,
+        zoom: 10
+      });
 
-    var marker = new google.maps.Marker({
-      position: postLocation,
-      map: map
-    });
+      new google.maps.Marker({
+        position: postLocation,
+        map: map
+      });
+    }
   }
 
   function switchImage(event) {
@@ -113,32 +116,42 @@ document.addEventListener("turbo:load", function() {
     `).join('');
   }
 
-  mainImageContainer.addEventListener('click', function() {
-    currentIndex = images.indexOf(mainImageContainer.querySelector('img').dataset.fullUrl);
-    updateLightboxImage(currentIndex);
-    lightbox.classList.remove('hidden');
-  });
-
-  lightboxThumbnails.addEventListener('click', function(event) {
-    if (event.target.tagName === 'IMG') {
-      currentIndex = parseInt(event.target.dataset.index);
+  if (mainImageContainer) {
+    mainImageContainer.addEventListener('click', function() {
+      currentIndex = images.indexOf(mainImageContainer.querySelector('img').dataset.fullUrl);
       updateLightboxImage(currentIndex);
-    }
-  });
+      lightbox.classList.remove('hidden');
+    });
+  }
 
-  prevImage.addEventListener('click', function() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    updateLightboxImage(currentIndex);
-  });
+  if (lightboxThumbnails) {
+    lightboxThumbnails.addEventListener('click', function(event) {
+      if (event.target.tagName === 'IMG') {
+        currentIndex = parseInt(event.target.dataset.index);
+        updateLightboxImage(currentIndex);
+      }
+    });
+  }
 
-  nextImage.addEventListener('click', function() {
-    currentIndex = (currentIndex + 1) % images.length;
-    updateLightboxImage(currentIndex);
-  });
+  if (prevImage) {
+    prevImage.addEventListener('click', function() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateLightboxImage(currentIndex);
+    });
+  }
 
-  closeLightbox.addEventListener('click', function() {
-    lightbox.classList.add('hidden');
-  });
+  if (nextImage) {
+    nextImage.addEventListener('click', function() {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateLightboxImage(currentIndex);
+    });
+  }
+
+  if (closeLightbox) {
+    closeLightbox.addEventListener('click', function() {
+      lightbox.classList.add('hidden');
+    });
+  }
 
   initMap();
 });

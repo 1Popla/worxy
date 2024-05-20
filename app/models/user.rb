@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable
 
   has_many :conversations, foreign_key: :sender_id, dependent: :destroy
   has_many :messages, dependent: :destroy
@@ -8,5 +8,7 @@ class User < ApplicationRecord
   has_many :bookings, dependent: :destroy
   has_many :booked_services, through: :posts, source: :bookings
 
-  enum role: %w[worker customer]
+  enum role: { worker: 0, customer: 1 }
+
+  validates :role, presence: true
 end

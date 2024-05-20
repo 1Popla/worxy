@@ -11,24 +11,42 @@
           <div class="w-1/4">
             <%= f.collection_select :category, @categories, :id, :name, { prompt: "Wszystkie kategorie" }, class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
           </div>
+          <%= f.hidden_field :tab, value: params[:tab] %>
           <div>
             <%= f.submit 'Zastosuj', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
           </div>
         <% end %>
       </div>
-      <% if @posts.present? %>
-        <div class="flex flex-col space-y-4">
-          <% @posts.order(created_at: :desc).each do |post| %>
-            <div class="w-full">
-              <%= render partial: 'posts/post_card', locals: { post: post } %>
-            </div>
-          <% end %>
-        </div>
+
+      <div class="mb-6 flex space-x-4">
+        <%= link_to 'Zlecenia klientów', posts_path(tab: 'customer'), class: "p-4 rounded #{params[:tab] == 'worker' ? 'bg-gray-200' : 'bg-blue-500 text-white'}" %>
+        <%= link_to 'Ogłoszenia wykonawców', posts_path(tab: 'worker'), class: "p-4 rounded #{params[:tab] == 'worker' ? 'bg-blue-500 text-white' : 'bg-gray-200'}" %>
+      </div>
+
+      <% if params[:tab] == 'worker' %>
+        <% if @worker_posts.present? %>
+          <%= render 'posts/worker_posts' %>
+          <div class="mt-6">
+            <%= paginate @worker_posts %>
+          </div>
+        <% else %>
+          <div class="w-full text-center">
+            <p>No posts available. Why not create one?</p>
+            <%= link_to 'Add New Post', new_post_path(role: 'worker'), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+          </div>
+        <% end %>
       <% else %>
-        <div class="w-full text-center">
-          <p>No posts available. Why not create one?</p>
-          <%= link_to 'Add New Post', new_post_path, class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
-        </div>
+        <% if @customer_posts.present? %>
+          <%= render 'posts/customer_posts' %>
+          <div class="mt-6">
+            <%= paginate @customer_posts %>
+          </div>
+        <% else %>
+          <div class="w-full text-center">
+            <p>No posts available. Why not create one?</p>
+            <%= link_to 'Add New Post', new_post_path(role: 'customer'), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>

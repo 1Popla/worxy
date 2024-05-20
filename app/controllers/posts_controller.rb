@@ -4,18 +4,31 @@ class PostsController < ApplicationController
   def index
     @categories = Category.all
     @posts = Post.all
+    @customer_posts = Post.joins(:user).where(users: { role: 'customer' }).page(params[:page]).per(10)
+    @worker_posts = Post.joins(:user).where(users: { role: 'worker' }).page(params[:page]).per(10)
 
     if params[:category].present?
-      @posts = @posts.where(category_id: params[:category])
+      @customer_posts = @customer_posts.where(category_id: params[:category])
+      @worker_posts = @worker_posts.where(category_id: params[:category])
     end
 
     if params[:search].present?
-      @posts = @posts.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+      @customer_posts = @customer_posts.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+      @worker_posts = @worker_posts.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
     end
 
     respond_to do |format|
       format.html
-      format.json { render json: @posts }
+      format.json { render json: params[:tab] == 'worker' ? @worker_posts : @customer_posts }
+    end
+  end
+
+  def user_posts
+    @user_posts = current_user.posts.page(params[:page]).per(10)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @user_posts }
     end
   end
 

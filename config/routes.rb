@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", :as => :rails_health_check
 
   resources :dashboard, only: [:index]
-  resources :posts
+  resources :posts do
+    collection do
+      get 'user_posts'
+    end
+  end
   resources :bookings
 
   root to: "landing#index"
