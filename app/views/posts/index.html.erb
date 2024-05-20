@@ -26,6 +26,9 @@
       <% if params[:tab] == 'worker' %>
         <% if @worker_posts.present? %>
           <%= render 'posts/worker_posts' %>
+          <div class="mt-6">
+            <%= paginate @worker_posts %>
+          </div>
         <% else %>
           <div class="w-full text-center">
             <p>No posts available. Why not create one?</p>
@@ -35,6 +38,9 @@
       <% else %>
         <% if @customer_posts.present? %>
           <%= render 'posts/customer_posts' %>
+          <div class="mt-6">
+            <%= paginate @customer_posts %>
+          </div>
         <% else %>
           <div class="w-full text-center">
             <p>No posts available. Why not create one?</p>

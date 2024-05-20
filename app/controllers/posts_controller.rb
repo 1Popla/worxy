@@ -4,8 +4,8 @@ class PostsController < ApplicationController
   def index
     @categories = Category.all
     @posts = Post.all
-    @customer_posts = Post.joins(:user).where(users: { role: 'customer' })
-    @worker_posts = Post.joins(:user).where(users: { role: 'worker' })
+    @customer_posts = Post.joins(:user).where(users: { role: 'customer' }).page(params[:page]).per(10)
+    @worker_posts = Post.joins(:user).where(users: { role: 'worker' }).page(params[:page]).per(10)
 
     if params[:category].present?
       @customer_posts = @customer_posts.where(category_id: params[:category])
@@ -20,6 +20,15 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: params[:tab] == 'worker' ? @worker_posts : @customer_posts }
+    end
+  end
+
+  def user_posts
+    @user_posts = current_user.posts.page(params[:page]).per(10)
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @user_posts }
     end
   end
 
@@ -58,15 +67,6 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     @categories = Category.all
-  end
-
-  def user_posts
-    @user_posts = current_user.posts
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @user_posts }
-    end
   end
 
   private
