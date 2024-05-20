@@ -19,8 +19,8 @@
       </div>
 
       <div class="mb-6 flex space-x-4">
-        <%= link_to 'Customer Posts', posts_path(tab: 'customer'), class: "p-4 rounded #{params[:tab] == 'worker' ? 'bg-gray-200' : 'bg-blue-500 text-white'}" %>
-        <%= link_to 'Worker Posts', posts_path(tab: 'worker'), class: "p-4 rounded #{params[:tab] == 'worker' ? 'bg-blue-500 text-white' : 'bg-gray-200'}" %>
+        <%= link_to 'Zlecenia klientów', posts_path(tab: 'customer'), class: "p-4 rounded #{params[:tab] == 'worker' ? 'bg-gray-200' : 'bg-blue-500 text-white'}" %>
+        <%= link_to 'Ogłoszenia wykonawców', posts_path(tab: 'worker'), class: "p-4 rounded #{params[:tab] == 'worker' ? 'bg-blue-500 text-white' : 'bg-gray-200'}" %>
       </div>
 
       <% if params[:tab] == 'worker' %>

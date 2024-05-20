@@ -60,6 +60,15 @@ class PostsController < ApplicationController
     @categories = Category.all
   end
 
+  def user_posts
+    @user_posts = current_user.posts
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @user_posts }
+    end
+  end
+
   private
 
   def post_params
