@@ -16,14 +16,18 @@
           </div>
         <% end %>
       </div>
+
+      <div class="mb-6 flex space-x-4">
+        <%= link_to 'Customer Posts', posts_path(tab: 'customer'), class: "p-4 rounded #{params[:tab] == 'worker' ? 'bg-gray-200' : 'bg-blue-500 text-white'}" %>
+        <%= link_to 'Worker Posts', posts_path(tab: 'worker'), class: "p-4 rounded #{params[:tab] == 'worker' ? 'bg-blue-500 text-white' : 'bg-gray-200'}" %>
+      </div>
+
       <% if @posts.present? %>
-        <div class="flex flex-col space-y-4">
-          <% @posts.order(created_at: :desc).each do |post| %>
-            <div class="w-full">
-              <%= render partial: 'posts/post_card', locals: { post: post } %>
-            </div>
-          <% end %>
-        </div>
+        <% if params[:tab] == 'worker' %>
+          <%= render 'posts/worker_posts' %>
+        <% else %>
+          <%= render 'posts/customer_posts' %>
+        <% end %>
       <% else %>
         <div class="w-full text-center">
           <p>No posts available. Why not create one?</p>

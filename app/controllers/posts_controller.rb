@@ -4,13 +4,19 @@ class PostsController < ApplicationController
   def index
     @categories = Category.all
     @posts = Post.all
+    @customer_posts = Post.joins(:user).where(users: { role: 'customer' })
+    @worker_posts = Post.joins(:user).where(users: { role: 'worker' })
 
     if params[:category].present?
       @posts = @posts.where(category_id: params[:category])
+      @customer_posts = @customer_posts.where(category_id: params[:category])
+      @worker_posts = @worker_posts.where(category_id: params[:category])
     end
 
     if params[:search].present?
       @posts = @posts.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+      @customer_posts = @customer_posts.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+      @worker_posts = @worker_posts.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
     end
 
     respond_to do |format|
