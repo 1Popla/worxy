@@ -2,4 +2,6 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-import "./message-scroll.js"
+import "./message-scroll.js";
+import './posts_new';
+import './posts_show';
