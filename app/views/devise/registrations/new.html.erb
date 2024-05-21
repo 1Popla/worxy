@@ -1,5 +1,5 @@
 <div class="flex justify-center items-center min-h-screen bg-gray-100">
-  <div class="w-full max-w-lg"> <!-- Updated to max-w-lg for wider container -->
+  <div class="w-full max-w-lg">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: true }, html: { class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4' }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
       <div class="mb-4">
@@ -36,26 +36,3 @@
     <%= render "devise/shared/links" %>
   </div>
 </div>
-
-<script>
-document.addEventListener('turbo:load', () => {
-  const countryCodeSelect = document.querySelector('select[data-action="change->country-code#updatePhoneNumber"]');
-  const phoneNumberField = document.querySelector('input[data-target="country-code.phoneNumber"]');
-
-  if (countryCodeSelect && phoneNumberField) {
-    const defaultCountryCode = '+48';
-    phoneNumberField.placeholder = defaultCountryCode;
-    phoneNumberField.value = defaultCountryCode;
-
-    countryCodeSelect.addEventListener('change', (event) => {
-      const selectedCountryCode = event.target.value;
-      phoneNumberField.placeholder = selectedCountryCode;
-      const currentPhoneNumber = phoneNumberField.value;
-
-      const phoneWithoutCode = currentPhoneNumber.replace(/^\+\d+\s*/, '');
-
-      phoneNumberField.value = `${selectedCountryCode} ${phoneWithoutCode}`;
-    });
-  }
-});
-</script>

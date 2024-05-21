@@ -25,19 +25,8 @@
     <div class="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
       <h2 class="text-2xl font-bold mb-4">Mapa twoich zleceń:</h2>
       <div class="bg-gray-100 rounded-lg overflow-hidden border border-gray-300 p-4">
-        <%= render 'shared/map' %>
+        <div id="detailedMap" data-posts="<%= @posts.to_json(only: [:id, :latitude, :longitude, :title, :description]) %>" data-bookings="<%= @bookings.to_json(include: { post: { only: [:title, :latitude, :longitude] }, user: { only: [:email] } }, only: [:start_date, :end_date]) %>" style="height: 500px;"></div>
       </div>
     </div>
   </div>
 </div>
-
-<script>
-  document.addEventListener('turbo:load', function () {
-    var navToggle = document.getElementById('nav-toggle');
-    var navMenu = document.getElementById('nav-menu');
-    
-    navToggle.addEventListener('click', function () {
-      navMenu.classList.toggle('hidden');
-    });
-  });
-</script>
