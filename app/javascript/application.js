@@ -6,3 +6,4 @@ import "./message-scroll.js";
 import './posts_new_map';
 import './posts_show_map';
 import './detailed_map';
+import './phone_selector_form';
