@@ -11,4 +11,6 @@ class User < ApplicationRecord
   enum role: { worker: 0, customer: 1 }
 
   validates :role, presence: true
+  validates :phone_number, presence: true, length: { minimum: 9 }
+  validates :country_code, presence: true
 end

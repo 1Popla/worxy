@@ -1,6 +1,6 @@
 <div class="flex justify-center items-center min-h-screen bg-gray-100">
-  <div class="w-full max-w-xs">
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4' }) do |f| %>
+  <div class="w-full max-w-lg"> <!-- Updated to max-w-lg for wider container -->
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: true }, html: { class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4' }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
       <div class="mb-4">
         <h2 class="text-2xl font-bold text-center text-gray-800">Rejestracja</h2>
@@ -21,11 +21,41 @@
         <%= f.label :role, "Rola", class: 'block text-gray-700 text-sm font-bold mb-2' %>
         <%= f.select :role, [['Klient', 'customer'], ['Wykonawca', 'worker']], {}, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
       </div>
+      <div class="mb-4">
+        <%= f.label :phone_number, "Numer telefonu", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+        <div class="flex">
+          <%= f.select :country_code, options_from_collection_for_select(CountryCode.all, 'code', 'display_name', selected: '+48'), {}, class: 'shadow appearance-none border rounded-l w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', data: { action: "change->country-code#updatePhoneNumber" } %>
+          <%= f.text_field :phone_number, class: 'shadow appearance-none border rounded-r w-2/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', data: { target: "country-code.phoneNumber" }, placeholder: '+48' %>
+        </div>
+      </div>
       <div class="flex items-center justify-between">
-        <%= f.submit 'Zarejestruj się', class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+        <%= f.submit 'Zarejestruj się', data: { turbo: true }, class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
       </div>
     <% end %>
-    <p class="text-center text-gray-500 text-xs mt-4">©2020 Acme Corp. Wszelkie prawa zastrzeżone.</p>
+    <p class="text-center text-gray-500 text-xs mt-4">©2024 Worxy. Wszelkie prawa zastrzeżone.</p>
     <%= render "devise/shared/links" %>
   </div>
 </div>
+
+<script>
+document.addEventListener('turbo:load', () => {
+  const countryCodeSelect = document.querySelector('select[data-action="change->country-code#updatePhoneNumber"]');
+  const phoneNumberField = document.querySelector('input[data-target="country-code.phoneNumber"]');
+
+  if (countryCodeSelect && phoneNumberField) {
+    const defaultCountryCode = '+48';
+    phoneNumberField.placeholder = defaultCountryCode;
+    phoneNumberField.value = defaultCountryCode;
+
+    countryCodeSelect.addEventListener('change', (event) => {
+      const selectedCountryCode = event.target.value;
+      phoneNumberField.placeholder = selectedCountryCode;
+      const currentPhoneNumber = phoneNumberField.value;
+
+      const phoneWithoutCode = currentPhoneNumber.replace(/^\+\d+\s*/, '');
+
+      phoneNumberField.value = `${selectedCountryCode} ${phoneWithoutCode}`;
+    });
+  }
+});
+</script>

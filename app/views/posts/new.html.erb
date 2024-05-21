@@ -64,7 +64,7 @@
           <div id="map" class="w-full h-64 border rounded-lg"></div>
         </div>
         
-        <%= f.submit 'Zatwierdź', class: 'w-full bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+        <%= f.submit 'Zatwierdź', class: 'w-full bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline', data: { turbo: false } %>
       <% end %>
     </div>
   </div>
