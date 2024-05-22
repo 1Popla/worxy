@@ -49,7 +49,13 @@
             <% @notifications.each do |notification| %>
               <div class="mb-2">
                 <p class="text-gray-600">
-                  <%= link_to "Notification from #{notification.actor.email} regarding #{notification.notifiable.title}", notification_path(notification), class: 'text-blue-600 hover:text-blue-900' %>
+                  <% if notification.action == 'sent you a request for' %>
+                    <%= link_to "#{notification.actor.first_name} wysłał Ci ofertę", notification_path(notification), class: 'text-blue-600 hover:text-blue-900' %>
+                  <% elsif notification.action == 'request accepted' %>
+                    <%= link_to "#{notification.actor.first_name} zaakceptowal twoją ofertę", notification_path(notification), class: 'text-blue-600 hover:text-blue-900' %>
+                  <% elsif notification.action == 'request rejected' %>
+                    <%= link_to "#{notification.actor.first_name} odrzucił twoją ofertę", notification_path(notification), class: 'text-blue-600 hover:text-blue-900' %>
+                  <% end %>
                 </p>
               </div>
             <% end %>

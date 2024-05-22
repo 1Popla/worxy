@@ -22,6 +22,12 @@ class NotificationsController < ApplicationController
 
     if booking.persisted?
       @notification.update(read_at: Time.zone.now)
+      Notification.create(
+        recipient: @notification.actor,
+        actor: current_user,
+        action: "request accepted",
+        notifiable: post
+      )
       redirect_to bookings_path, notice: 'Request accepted and booking created.'
     else
       redirect_to notifications_path, alert: 'Failed to create booking.'
@@ -30,6 +36,12 @@ class NotificationsController < ApplicationController
 
   def reject_request
     @notification.update(read_at: Time.zone.now)
+    Notification.create(
+      recipient: @notification.actor,
+      actor: current_user,
+      action: "request rejected",
+      notifiable: @notification.notifiable
+    )
     redirect_to notifications_path, notice: 'Request rejected.'
   end
 
