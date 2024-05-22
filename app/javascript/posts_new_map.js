@@ -1,5 +1,3 @@
-// posts_new.js
-
 function initNewPostMap() {
   var mapElement = document.getElementById('map');
   if (!mapElement) {
