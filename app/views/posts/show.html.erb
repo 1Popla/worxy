@@ -48,6 +48,9 @@
             <p>Utworzono: <%= @post.created_at.strftime("%B %e, %Y %H:%M") %></p>
             <p>Ostatnia aktualizacja: <%= @post.updated_at.strftime("%B %e, %Y %H:%M") %></p>
           </div>
+          <% if current_user.worker? %>
+            <%= button_to 'Send Request', send_request_post_path(@post), method: :post, class: "btn btn-primary" %>
+          <% end %>
         </div>
         <div class="lg:col-span-1">
           <div id="showMap" data-lat="<%= @post.latitude %>" data-lng="<%= @post.longitude %>" class="w-full h-64 lg:h-full rounded-lg border"></div>

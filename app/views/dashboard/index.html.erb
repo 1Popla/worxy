@@ -6,6 +6,7 @@
   <div class="flex-1 overflow-auto">
     <div class="container mx-auto p-4">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Last Messages Section -->
         <div class="bg-white shadow rounded-lg p-4">
           <h2 class="text-lg font-bold text-gray-800 mb-4">Ostatnia wiadomość:</h2>
           <% if @last_messages.present? %>
@@ -22,6 +23,7 @@
           <% end %>
         </div>
 
+        <!-- Bookings Section -->
         <div class="bg-white shadow rounded-lg p-4">
           <h2 class="text-lg font-bold text-gray-800 mb-4">Twoje zlecenia:</h2>
           <% if @visible_bookings.present? %>
@@ -39,6 +41,26 @@
         </div>
       </div>
 
+      <!-- Notifications Section -->
+      <div class="mt-4 grid grid-cols-1">
+        <div class="bg-white shadow rounded-lg p-4">
+          <h2 class="text-lg font-bold text-gray-800 mb-4">Powiadomienia:</h2>
+          <% if @notifications.present? %>
+            <% @notifications.each do |notification| %>
+              <div class="mb-2">
+                <p class="text-gray-600">
+                  <%= link_to "Notification from #{notification.actor.email} regarding #{notification.notifiable.title}", notification_path(notification), class: 'text-blue-600 hover:text-blue-900' %>
+                </p>
+              </div>
+            <% end %>
+            <%= link_to "View All Notifications", notifications_path, class: 'text-blue-600 hover:text-blue-900' %>
+          <% else %>
+            <p class="text-gray-500">Brak powiadomień.</p>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Latest Post Section -->
       <div class="mt-4 grid grid-cols-1">
         <div class="bg-white shadow rounded-lg p-4">
           <h2 class="text-lg font-bold text-gray-800 mb-4">Najnowszy post</h2>

@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :set_post, only: [:show, :edit, :update, :send_request]
+  before_action :authenticate_user!, only: [:send_request]
 
   def index
     @categories = Category.all
@@ -69,7 +70,25 @@ class PostsController < ApplicationController
     @categories = Category.all
   end
 
+  def send_request
+    if current_user.worker?
+      Notification.create(
+        recipient: @post.user,
+        actor: current_user,
+        action: 'sent you a request for',
+        notifiable: @post
+      )
+      redirect_to @post, notice: 'Request sent to customer successfully.'
+    else
+      redirect_to @post, alert: 'You are not authorized to send requests.'
+    end
+  end
+
   private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
   def post_params
     params.require(:post).permit(:title, :description, :price, :availability, :contact_information, :status, :latitude, :longitude, :street, :city, :state, :country, :category_id, images: [])
