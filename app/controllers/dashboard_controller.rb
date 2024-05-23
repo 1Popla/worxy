@@ -14,6 +14,7 @@ class DashboardController < ApplicationController
       .order(start_date: :desc)
       .limit(5)
     @last_post = current_user.posts.order(created_at: :desc).first
+    @notifications = current_user.received_notifications.where(read_at: nil).order(created_at: :desc)
   end
 
   def map
