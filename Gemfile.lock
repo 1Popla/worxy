@@ -274,6 +274,8 @@ GEM
     ruby-progressbar (1.13.0)
     ruby-vips (2.2.1)
       ffi (~> 1.12)
+    simple_calendar (3.0.4)
+      rails (>= 6.1)
     slim (5.2.1)
       temple (~> 0.10.0)
       tilt (>= 2.1.0)
@@ -358,6 +360,7 @@ DEPENDENCIES
   rails (~> 7.1.1)
   rails-ujs
   rspec-rails (~> 3.8)
+  simple_calendar
   slim-rails
   sprockets-rails
   standardrb

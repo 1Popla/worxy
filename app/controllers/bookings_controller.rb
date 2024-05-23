@@ -3,8 +3,17 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
   before_action :check_user, only: [:edit, :update, :destroy]
   before_action :check_user_view, only: [:show]
+  helper CalendarHelper
 
   def index
+    customer_or_visible_booking_ids = current_user.bookings.select(:id)
+    visible_booking_ids = Booking.where(visible_to_user_id: current_user.id).select(:id)
+    worker_booking_ids = Booking.joins(:post).where(posts: {user_id: current_user.id}).select(:id)
+
+    @bookings = Booking.where(id: customer_or_visible_booking_ids + worker_booking_ids + visible_booking_ids).distinct
+  end
+
+  def calendar
     customer_or_visible_booking_ids = current_user.bookings.select(:id)
     visible_booking_ids = Booking.where(visible_to_user_id: current_user.id).select(:id)
     worker_booking_ids = Booking.joins(:post).where(posts: {user_id: current_user.id}).select(:id)
