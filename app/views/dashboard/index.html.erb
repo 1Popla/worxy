@@ -47,7 +47,7 @@
           <h2 class="text-lg font-bold text-gray-800 mb-4">Powiadomienia:</h2>
           <% if @notifications.present? %>
             <% @notifications.each do |notification| %>
-              <div class="mb-2">
+              <div id="notification_<%= notification.id %>" class="mb-2 flex justify-between items-center">
                 <p class="text-gray-600">
                   <% if notification.action == 'sent you a request for' %>
                     <%= link_to "#{notification.actor.first_name} wysłał Ci ofertę", notification_path(notification), class: 'text-blue-600 hover:text-blue-900' %>
@@ -57,6 +57,7 @@
                     <%= link_to "#{notification.actor.first_name} odrzucił twoją ofertę", notification_path(notification), class: 'text-blue-600 hover:text-blue-900' %>
                   <% end %>
                 </p>
+                <%= button_to "X", notification_path(notification), method: :delete, data: { turbo_stream: true, confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-900" %>
               </div>
             <% end %>
             <%= link_to "View All Notifications", notifications_path, class: 'text-blue-600 hover:text-blue-900' %>

@@ -1,6 +1,6 @@
 class NotificationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_notification, only: [:show, :accept_request, :reject_request]
+  before_action :set_notification, only: [:show, :accept_request, :reject_request, :destroy]
 
   def index
     @notifications = current_user.received_notifications.where(read_at: nil).order(created_at: :desc)
@@ -43,6 +43,14 @@ class NotificationsController < ApplicationController
       notifiable: @notification.notifiable
     )
     redirect_to notifications_path, notice: 'Request rejected.'
+  end
+
+  def destroy
+    @notification.destroy
+    respond_to do |format|
+      format.html { redirect_to notifications_path, notice: 'Notification was successfully destroyed.' }
+      format.turbo_stream
+    end
   end
 
   private

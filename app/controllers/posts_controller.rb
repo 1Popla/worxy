@@ -76,7 +76,8 @@ class PostsController < ApplicationController
         recipient: @post.user,
         actor: current_user,
         action: 'sent you a request for',
-        notifiable: @post
+        notifiable: @post,
+        message: params[:message]
       )
       redirect_to @post, notice: 'Request sent to customer successfully.'
     else
@@ -91,6 +92,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :description, :price, :availability, :contact_information, :status, :latitude, :longitude, :street, :city, :state, :country, :category_id, images: [])
+    params.require(:post).permit(:title, :description, :price, :availability, :contact_information, :status, :latitude, :message, :longitude, :street, :city, :state, :country, :category_id, images: [])
   end
 end

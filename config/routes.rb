@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
   resources :bookings
 
-  resources :notifications, only: [:index, :show] do
+  resources :notifications, only: [:index, :show, :destroy] do
     member do
       post :accept_request
       delete :reject_request
