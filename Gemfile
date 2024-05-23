@@ -20,7 +20,7 @@ gem "geocoder"
 gem "jquery-rails"
 gem "turbo-rails"
 gem "rails-ujs"
-gem 'simple_calendar'
+gem "simple_calendar"
 
 gem "dotenv", groups: [:development, :test]
 

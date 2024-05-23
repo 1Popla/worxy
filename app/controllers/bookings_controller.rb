@@ -32,7 +32,7 @@ class BookingsController < ApplicationController
     @booking = current_user.bookings.build(booking_params)
     if @booking.save
       respond_to do |format|
-        format.html { redirect_to @booking, notice: 'Booking was successfully created.' }
+        format.html { redirect_to @booking, notice: "Booking was successfully created." }
         format.turbo_stream
       end
     else
@@ -46,7 +46,7 @@ class BookingsController < ApplicationController
   def update
     if @booking.update(booking_params)
       respond_to do |format|
-        format.html { redirect_to @booking, notice: 'Booking was successfully updated.' }
+        format.html { redirect_to @booking, notice: "Booking was successfully updated." }
         format.turbo_stream
       end
     else
@@ -57,7 +57,7 @@ class BookingsController < ApplicationController
   def destroy
     @booking.destroy
     respond_to do |format|
-      format.html { redirect_to bookings_url, notice: 'Booking was successfully destroyed.' }
+      format.html { redirect_to bookings_url, notice: "Booking was successfully destroyed." }
       format.turbo_stream
     end
   end
@@ -74,13 +74,13 @@ class BookingsController < ApplicationController
 
   def check_user
     unless current_user.id == @booking.user_id || current_user.id == @booking.post.user_id
-      redirect_to root_path, alert: 'You are not authorized to access this booking.'
+      redirect_to root_path, alert: "You are not authorized to access this booking."
     end
   end
 
   def check_user_view
     unless current_user.id == @booking.user_id || current_user.id == @booking.post.user_id || current_user.id == @booking.visible_to_user_id
-      redirect_to root_path, alert: 'You are not authorized to view this booking.'
+      redirect_to root_path, alert: "You are not authorized to view this booking."
     end
   end
 end
