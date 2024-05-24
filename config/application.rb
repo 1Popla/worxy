@@ -26,5 +26,10 @@ module BetterFixly
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.x.app_data = {
+      skills: ["Hydraulika", "Elektryka", "Stolarka", "Sprzątanie", "Ogrodnictwo", "Malowanie", "Przeprowadzki", "Zwalczanie Szkodników", "Dekarstwo", "Złota Rączka", "Klimatyzacja i Ogrzewanie", "Podłogi", "Murarstwo", "Ślusarstwo", "Naprawa AGD", "Mycie Okien", "Utrzymanie Basenów", "Bezpieczeństwo Domowe", "Wsparcie IT"],
+      locations: ["Warszawa", "Kraków", "Łódź", "Wrocław", "Poznań", "Gdańsk", "Szczecin", "Bydgoszcz", "Lublin", "Katowice", "Cała Polska"],
+      experience_levels: ["0-1 lat", "1-3 lat", "3-5 lat", "5-7 lat", "7-10 lat", "10+ lat"]
+    }
   end
 end
