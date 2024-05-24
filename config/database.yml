@@ -79,6 +79,4 @@ test:
 #
 production:
   <<: *default
-  database: better_fixly_production
-  username: better_fixly
-  password: <%= ENV["BETTER_FIXLY_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
