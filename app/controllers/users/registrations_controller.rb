@@ -7,4 +7,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:sign_up, keys: [:phone_number, :role, :country_code, :first_name, :last_name])
     devise_parameter_sanitizer.permit(:account_update, keys: [:phone_number, :role, :country_code, :first_name, :last_name])
   end
+
+  def after_sign_up_path_for(resource)
+    new_user_steps_path(resource)
+  end
 end

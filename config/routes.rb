@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   get "users/show"
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
-  get "up" => "rails/health#show", :as => :rails_health_check
+  get "up" => "rails/health#show", as: :rails_health_check
 
   resources :dashboard, only: [:index]
   resources :posts do
@@ -34,4 +34,6 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show]
   get "dashboard/map", to: "dashboard#map"
+
+  resource :user_steps, only: [:new, :create, :edit, :update]
 end
