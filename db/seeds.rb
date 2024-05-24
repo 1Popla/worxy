@@ -1,7 +1,3 @@
-require "factory_bot"
-
-FactoryBot.create(:user)
-
 Category.create([
   {name: "Hydraulika"},
   {name: "Elektryka"},
