@@ -1,0 +1,10 @@
+<div class="h-32 w-32 p-2 border border-gray-200 <%= 'bg-gray-200' if date == Date.today %> flex flex-col justify-start">
+  <span class="text-sm font-bold"><%= date.day %></span>
+  <div class="flex-grow overflow-y-auto">
+    <% bookings.each do |booking| %>
+      <div class="mt-1 text-xs rounded <%= booking_color_class(booking) %> p-1 truncate cursor-pointer" data-booking-id="<%= booking.id %>">
+        <%= booking.post.title %> (<%= booking.status %>)
+      </div>
+    <% end %>
+  </div>
+</div>

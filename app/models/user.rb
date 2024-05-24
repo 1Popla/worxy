@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+    :recoverable, :rememberable, :validatable
 
   has_many :conversations, foreign_key: :sender_id, dependent: :destroy
   has_many :messages, dependent: :destroy
@@ -8,14 +8,14 @@ class User < ApplicationRecord
   has_many :bookings, dependent: :destroy
   has_many :booked_services, through: :posts, source: :bookings
 
-  enum role: { worker: 0, customer: 1 }
+  enum role: {worker: 0, customer: 1}
 
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :role, presence: true
-  validates :phone_number, presence: true, length: { minimum: 9 }
+  validates :phone_number, presence: true, length: {minimum: 9}
   validates :country_code, presence: true
 
-  has_many :sent_notifications, class_name: 'Notification', foreign_key: :actor_id, dependent: :destroy
-  has_many :received_notifications, class_name: 'Notification', foreign_key: :recipient_id, dependent: :destroy
+  has_many :sent_notifications, class_name: "Notification", foreign_key: :actor_id, dependent: :destroy
+  has_many :received_notifications, class_name: "Notification", foreign_key: :recipient_id, dependent: :destroy
 end

@@ -7,13 +7,17 @@ Rails.application.routes.draw do
   resources :dashboard, only: [:index]
   resources :posts do
     member do
-      post 'send_request'
+      post "send_request"
     end
     collection do
-      get 'user_posts'
+      get "user_posts"
     end
   end
-  resources :bookings
+  resources :bookings do
+    collection do
+      get "calendar"
+    end
+  end
 
   resources :notifications, only: [:index, :show, :destroy] do
     member do

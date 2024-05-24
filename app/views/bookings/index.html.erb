@@ -3,9 +3,11 @@
 
   <div class="flex-1 overflow-auto">
     <div class="container mx-auto px-4 py-8">
-      <h1 class="text-2xl font-bold text-gray-800 mb-8">Bookings</h1>
+      <h1 class="text-2xl font-bold text-gray-800 mb-8">Rezerwacje</h1>
 
-      <div class="overflow-x-auto">
+      <%= link_to 'Zobacz Kalendarz', calendar_bookings_path, class: 'mt-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500' %>
+
+      <div class="overflow-x-auto mt-4">
         <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
           <thead class="bg-gray-50">
             <tr>
@@ -20,13 +22,13 @@
                 <td class="py-4 px-6 whitespace-nowrap"><%= booking.post.title %></td>
                 <td class="py-4 px-6 whitespace-nowrap"><%= booking.status %></td>
                 <td class="py-4 px-6 whitespace-nowrap text-center">
-                  <%= link_to 'Show', booking, class: 'text-blue-600 hover:text-blue-900' %>
+                  <%= link_to 'Pokaż', booking, class: 'text-blue-600 hover:text-blue-900' %>
                 </td>
                 <td class="py-4 px-6 whitespace-nowrap text-center">
-                  <%= link_to 'Edit', edit_booking_path(booking), class: 'text-blue-600 hover:text-blue-900' %>
+                  <%= link_to 'Edytuj', edit_booking_path(booking), class: 'text-blue-600 hover:text-blue-900' %>
                 </td>
                 <td class="py-4 px-6 whitespace-nowrap text-center">
-                  <%= link_to 'Destroy', booking, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'text-red-600 hover:text-red-900' %>
+                  <%= link_to 'Usuń', booking, data: { turbo_method: :delete, turbo_confirm: "Czy jesteś pewien?" }, class: 'text-red-600 hover:text-red-900' %>
                 </td>
               </tr>
             <% end %>
@@ -34,7 +36,7 @@
         </table>
       </div>
 
-      <%= link_to 'New Booking', new_booking_path, class: 'mt-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500' %>
+      <%= link_to 'Nowa Rezerwacja', new_booking_path, class: 'mt-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500' %>
 
       <%= turbo_stream_from 'bookings' %>
     </div>

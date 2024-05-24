@@ -28,9 +28,9 @@ class NotificationsController < ApplicationController
         action: "request accepted",
         notifiable: post
       )
-      redirect_to bookings_path, notice: 'Request accepted and booking created.'
+      redirect_to bookings_path, notice: "Request accepted and booking created."
     else
-      redirect_to notifications_path, alert: 'Failed to create booking.'
+      redirect_to notifications_path, alert: "Failed to create booking."
     end
   end
 
@@ -42,13 +42,13 @@ class NotificationsController < ApplicationController
       action: "request rejected",
       notifiable: @notification.notifiable
     )
-    redirect_to notifications_path, notice: 'Request rejected.'
+    redirect_to notifications_path, notice: "Request rejected."
   end
 
   def destroy
     @notification.destroy
     respond_to do |format|
-      format.html { redirect_to notifications_path, notice: 'Notification was successfully destroyed.' }
+      format.html { redirect_to notifications_path, notice: "Notification was successfully destroyed." }
       format.turbo_stream
     end
   end

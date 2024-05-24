@@ -35,21 +35,21 @@ Category.create([
 ])
 
 country_codes = [
-  { name: 'Poland', code: '+48', flag: '🇵🇱' },
-  { name: 'Germany', code: '+49', flag: '🇩🇪' },
-  { name: 'France', code: '+33', flag: '🇫🇷' },
-  { name: 'Spain', code: '+34', flag: '🇪🇸' },
-  { name: 'Italy', code: '+39', flag: '🇮🇹' },
-  { name: 'United Kingdom', code: '+44', flag: '🇬🇧' },
-  { name: 'Netherlands', code: '+31', flag: '🇳🇱' },
-  { name: 'Belgium', code: '+32', flag: '🇧🇪' },
-  { name: 'Austria', code: '+43', flag: '🇦🇹' },
-  { name: 'Sweden', code: '+46', flag: '🇸🇪' },
-  { name: 'Denmark', code: '+45', flag: '🇩🇰' },
-  { name: 'Finland', code: '+358', flag: '🇫🇮' },
-  { name: 'Norway', code: '+47', flag: '🇳🇴' },
-  { name: 'Switzerland', code: '+41', flag: '🇨🇭' },
-  { name: 'Ireland', code: '+353', flag: '🇮🇪' }
+  {name: "Poland", code: "+48", flag: "🇵🇱"},
+  {name: "Germany", code: "+49", flag: "🇩🇪"},
+  {name: "France", code: "+33", flag: "🇫🇷"},
+  {name: "Spain", code: "+34", flag: "🇪🇸"},
+  {name: "Italy", code: "+39", flag: "🇮🇹"},
+  {name: "United Kingdom", code: "+44", flag: "🇬🇧"},
+  {name: "Netherlands", code: "+31", flag: "🇳🇱"},
+  {name: "Belgium", code: "+32", flag: "🇧🇪"},
+  {name: "Austria", code: "+43", flag: "🇦🇹"},
+  {name: "Sweden", code: "+46", flag: "🇸🇪"},
+  {name: "Denmark", code: "+45", flag: "🇩🇰"},
+  {name: "Finland", code: "+358", flag: "🇫🇮"},
+  {name: "Norway", code: "+47", flag: "🇳🇴"},
+  {name: "Switzerland", code: "+41", flag: "🇨🇭"},
+  {name: "Ireland", code: "+353", flag: "🇮🇪"}
 ]
 
 country_codes.each do |country|

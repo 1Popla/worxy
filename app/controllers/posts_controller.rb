@@ -5,8 +5,8 @@ class PostsController < ApplicationController
   def index
     @categories = Category.all
     @posts = Post.all
-    @customer_posts = Post.joins(:user).where(users: { role: 'customer' }).page(params[:page]).per(10)
-    @worker_posts = Post.joins(:user).where(users: { role: 'worker' }).page(params[:page]).per(10)
+    @customer_posts = Post.joins(:user).where(users: {role: "customer"}).page(params[:page]).per(10)
+    @worker_posts = Post.joins(:user).where(users: {role: "worker"}).page(params[:page]).per(10)
 
     if params[:category].present?
       @customer_posts = @customer_posts.where(category_id: params[:category])
@@ -20,7 +20,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: params[:tab] == 'worker' ? @worker_posts : @customer_posts }
+      format.json { render json: (params[:tab] == "worker") ? @worker_posts : @customer_posts }
     end
   end
 
@@ -75,13 +75,13 @@ class PostsController < ApplicationController
       Notification.create(
         recipient: @post.user,
         actor: current_user,
-        action: 'sent you a request for',
+        action: "sent you a request for",
         notifiable: @post,
         message: params[:message]
       )
-      redirect_to @post, notice: 'Request sent to customer successfully.'
+      redirect_to @post, notice: "Request sent to customer successfully."
     else
-      redirect_to @post, alert: 'You are not authorized to send requests.'
+      redirect_to @post, alert: "You are not authorized to send requests."
     end
   end
 
