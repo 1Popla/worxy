@@ -8,3 +8,4 @@ import './posts_show_map';
 import './detailed_map';
 import './phone_selector_form';
 import './request_modal';
+import './booking_modal';

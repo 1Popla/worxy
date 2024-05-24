@@ -22,7 +22,12 @@ class BookingsController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.json { render json: @booking.to_json(include: { post: {}, user: {} }) }
+    end
   end
+  
 
   def new
     @booking = Booking.new
