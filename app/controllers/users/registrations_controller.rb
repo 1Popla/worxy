@@ -1,6 +1,14 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def new
+    super do
+      @skills = Rails.configuration.x.app_data[:skills]
+      @locations = Rails.configuration.x.app_data[:locations]
+      @experience_levels = Rails.configuration.x.app_data[:experience_levels]
+    end
+  end
+
   protected
 
   def configure_permitted_parameters
