@@ -13,25 +13,27 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="bg-white shadow rounded-lg p-4 relative">
           <h2 class="text-lg font-bold text-gray-800 mb-4">Dane użytkownika</h2>
-          <div id="user-average-rating" data-average-rating="<%= @user.average_rating %>" class="absolute top-4 right-4 text-center">
-            <p class="text-gray-700 font-semibold">Ocena użytkownika:</p>
-            <div class="flex items-center justify-center mt-1">
-              <% average = @user.average_rating %>
-              <% full_stars = average.floor %>
-              <% half_star = (average - full_stars) >= 0.5 %>
-              <% (1..full_stars).each do %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400 fill-current" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.518 4.674a1 1 0 00.95.69h4.932c.969 0 1.371 1.24.588 1.81l-3.993 2.905a1 1 0 00-.364 1.118l1.518 4.674c.3.921-.755 1.688-1.54 1.118l-3.993-2.905a1 1 0 00-1.176 0l-3.993 2.905c-.784.57-1.839-.197-1.54-1.118l1.518-4.674a1 1 0 00-.364-1.118L2.89 10.1c-.783-.57-.38-1.81.588-1.81h4.932a1 1 0 00.95-.69L9.049 2.927z" />
-                </svg>
-              <% end %>
-              <% if half_star %>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400 fill-current" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.518 4.674a1 1 0 00.95.69h4.932c.969 0 1.371 1.24.588 1.81l-3.993 2.905a1 1 0 00-.364 1.118l1.518 4.674c.3.921-.755 1.688-1.54 1.118l-3.993-2.905a1 1 0 00-1.176 0l-3.993 2.905c-.784.57-1.839-.197-1.54-1.118l1.518-4.674a1 1 0 00-.364-1.118L2.89 10.1c-.783-.57-.38-1.81.588-1.81h4.932a1 1 0 00.95-.69L9.049 2.927z" />
-                </svg>
-              <% end %>
-              <p class="ml-2 text-gray-600"><%= average %> / 5</p>
+          <% if @user.average_rating %>
+            <div id="user-average-rating" data-average-rating="<%= @user.average_rating %>" class="absolute top-4 right-4 text-center">
+              <p class="text-gray-700 font-semibold">Ocena użytkownika:</p>
+              <div class="flex items-center justify-center mt-1">
+                <% average = @user.average_rating %>
+                <% full_stars = average.floor %>
+                <% half_star = (average - full_stars) >= 0.5 %>
+                <% (1..full_stars).each do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400 fill-current" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.518 4.674a1 1 0 00.95.69h4.932c.969 0 1.371 1.24.588 1.81l-3.993 2.905a1 1 0 00-.364 1.118l1.518 4.674c.3.921-.755 1.688-1.54 1.118l-3.993-2.905a1 1 0 00-1.176 0l-3.993 2.905c-.784.57-1.839-.197-1.54-1.118l1.518-4.674a1 1 0 00-.364-1.118L2.89 10.1c-.783-.57-.38-1.81.588-1.81h4.932a1 1 0 00.95-.69L9.049 2.927z" />
+                  </svg>
+                <% end %>
+                <% if half_star %>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400 fill-current" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.518 4.674a1 1 0 00.95.69h4.932c.969 0 1.371 1.24.588 1.81l-3.993 2.905a1 1 0 00-.364 1.118l1.518 4.674c.3.921-.755 1.688-1.54 1.118l-3.993-2.905a1 1 0 00-1.176 0l-3.993 2.905c-.784.57-1.839-.197-1.54-1.118l1.518-4.674a1 1 0 00-.364-1.118L2.89 10.1c-.783-.57-.38-1.81.588-1.81h4.932a1 1 0 00.95-.69L9.049 2.927z" />
+                  </svg>
+                <% end %>
+                <p class="ml-2 text-gray-600"><%= average %> / 5</p>
+              </div>
             </div>
-          </div>
+          <% end %>
           <div class="mb-4">
             <p class="font-semibold text-gray-700">Imię: <%= @user.first_name %></p>
           </div>
