@@ -32,7 +32,10 @@ Rails.application.routes.draw do
     resources :messages
   end
 
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    resources :opinions, only: [:new, :create]
+  end
+
   get "dashboard/map", to: "dashboard#map"
 
   resource :user_steps, only: [:new, :create, :edit, :update]

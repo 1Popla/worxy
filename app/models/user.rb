@@ -18,4 +18,13 @@ class User < ApplicationRecord
 
   has_many :sent_notifications, class_name: "Notification", foreign_key: :actor_id, dependent: :destroy
   has_many :received_notifications, class_name: "Notification", foreign_key: :recipient_id, dependent: :destroy
+
+  has_many :given_opinions, class_name: "Opinion", foreign_key: :rater_id, dependent: :destroy
+  has_many :received_opinions, class_name: "Opinion", foreign_key: :ratee_id, dependent: :destroy
+
+  def average_rating
+    return 0 if received_opinions.empty?
+    avg = received_opinions.average(:stars).round(2)
+    avg % 1 == 0 ? avg.to_i : avg
+  end
 end

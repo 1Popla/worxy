@@ -9,3 +9,5 @@ import './detailed_map';
 import './phone_selector_form';
 import './request_modal';
 import './booking_modal';
+import './opinions_rating';
+import './low_rating_modal';
