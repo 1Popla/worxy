@@ -3,17 +3,37 @@
 
   <div class="flex-1 overflow-auto">
     <div class="container mx-auto p-4">
-      <div class="flex justify-between items-center">
-        <h1 class="text-xl font-bold text-gray-800">Profile</h1>
+      <div class="flex justify-between items-center mb-4">
+        <h1 class="text-xl font-bold text-gray-800">Profil</h1>
         <% if @user == current_user %>
           <%= link_to 'Edytuj profil', edit_user_registration_path, class: 'text-blue-600 hover:text-blue-800 font-semibold' %>
         <% end %>
       </div>
+
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="bg-white shadow rounded-lg p-4">
+        <div class="bg-white shadow rounded-lg p-4 relative">
           <h2 class="text-lg font-bold text-gray-800 mb-4">Dane użytkownika</h2>
+          <div id="user-average-rating" data-average-rating="<%= @user.average_rating %>" class="absolute top-4 right-4 text-center">
+            <p class="text-gray-700 font-semibold">Ocena użytkownika:</p>
+            <div class="flex items-center justify-center mt-1">
+              <% average = @user.average_rating %>
+              <% full_stars = average.floor %>
+              <% half_star = (average - full_stars) >= 0.5 %>
+              <% (1..full_stars).each do %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400 fill-current" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.518 4.674a1 1 0 00.95.69h4.932c.969 0 1.371 1.24.588 1.81l-3.993 2.905a1 1 0 00-.364 1.118l1.518 4.674c.3.921-.755 1.688-1.54 1.118l-3.993-2.905a1 1 0 00-1.176 0l-3.993 2.905c-.784.57-1.839-.197-1.54-1.118l1.518-4.674a1 1 0 00-.364-1.118L2.89 10.1c-.783-.57-.38-1.81.588-1.81h4.932a1 1 0 00.95-.69L9.049 2.927z" />
+                </svg>
+              <% end %>
+              <% if half_star %>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-400 fill-current" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.518 4.674a1 1 0 00.95.69h4.932c.969 0 1.371 1.24.588 1.81l-3.993 2.905a1 1 0 00-.364 1.118l1.518 4.674c.3.921-.755 1.688-1.54 1.118l-3.993-2.905a1 1 0 00-1.176 0l-3.993 2.905c-.784.57-1.839-.197-1.54-1.118l1.518-4.674a1 1 0 00-.364-1.118L2.89 10.1c-.783-.57-.38-1.81.588-1.81h4.932a1 1 0 00.95-.69L9.049 2.927z" />
+                </svg>
+              <% end %>
+              <p class="ml-2 text-gray-600"><%= average %> / 5</p>
+            </div>
+          </div>
           <div class="mb-4">
-            <p class="font-semibold text-gray-700">Imie: <%= @user.first_name %></p>
+            <p class="font-semibold text-gray-700">Imię: <%= @user.first_name %></p>
           </div>
           <div class="mb-4">
             <p class="font-semibold text-gray-700">Email: <%= @user.email %></p>
@@ -25,19 +45,19 @@
             <p class="font-semibold text-gray-700">Specjalizacja: <%= @user.skills %></p>
           </div>
           <div class="mb-4">
-            <p class="font-semibold text-gray-700">Obszar pracy: <%= @user.location %></p>
+            <p class="font-semibold text-gray-700">Lokalizacja: <%= @user.location %></p>
           </div>
           <div class="mb-4">
-            <p class="font-semibold text-gray-700">Doswiadczenie: <%= @user.experience %></p>
+            <p class="font-semibold text-gray-700">Doświadczenie: <%= @user.experience %></p>
           </div>
           <div class="mb-4">
             <p class="font-semibold text-gray-700">Rola: <%= @user.role.capitalize %></p>
           </div>
           <div class="mb-4">
-            <p class="font-semibold text-gray-700">Account Created: <%= @user.created_at.strftime("%B %e, %Y") %></p>
+            <p class="font-semibold text-gray-700">Konto utworzone: <%= @user.created_at.strftime("%B %e, %Y") %></p>
           </div>
           <div class="mb-4">
-            <p class="font-semibold text-gray-700">Last Updated: <%= @user.updated_at.strftime("%B %e, %Y") %></p>
+            <p class="font-semibold text-gray-700">Ostatnia aktualizacja: <%= @user.updated_at.strftime("%B %e, %Y") %></p>
           </div>
         </div>
 
@@ -49,9 +69,74 @@
 
       <div class="mt-4 grid grid-cols-1">
         <div class="bg-white shadow rounded-lg p-4">
-          <h2 class="text-lg font-bold text-gray-800 mb-4">Komentarze/portfolio</h2>
-          <p class="text-gray-500">Display user-related activities or statistics here.</p>
+          <h2 class="text-lg font-bold text-gray-800 mb-4">Opinie</h2>
+          <% if current_user && @user.received_opinions.exists?(rater: current_user) %>
+            <div>
+              <h3 class="text-lg font-bold text-gray-800 mb-4">Twoja opinia:</h3>
+              <div class="mt-4 p-4 border rounded bg-gray-50">
+                <% opinion = @user.received_opinions.find_by(rater: current_user) %>
+                <p class="font-semibold"><%= opinion.rater.first_name %> <%= opinion.rater.last_name %></p>
+                <div class="flex">
+                  <% (1..5).each do |star| %>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 <%= opinion.stars >= star ? 'text-yellow-400' : 'text-gray-300' %> fill-current" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.518 4.674a1 1 0 00.95.69h4.932c.969 0 1.371 1.24.588 1.81l-3.993 2.905a1 1 0 00-.364 1.118l1.518 4.674c.3.921-.755 1.688-1.54 1.118l-3.993-2.905a1 1 0 00-1.176 0l-3.993 2.905c-.784.57-1.839-.197-1.54-1.118l1.518-4.674a1 1 0 00-.364-1.118L2.89 10.1c-.783-.57-.38-1.81.588-1.81h4.932a1 1 0 00.95-.69L9.049 2.927z" />
+                    </svg>
+                  <% end %>
+                </div>
+                <p class="text-gray-600"><%= opinion.comment %></p>
+              </div>
+            </div>
+          <% else %>
+            <%= link_to 'Dodaj opinię', new_user_opinion_path(@user), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' if @user != current_user %>
+          <% end %>
+          <h3 class="text-lg font-bold text-gray-800 mt-4">Pozostałe opinie:</h3>
+          <% if @user.received_opinions.any? %>
+            <% @user.received_opinions.each do |opinion| %>
+              <div class="mt-4 p-4 border rounded">
+                <p class="font-semibold"><%= opinion.rater.first_name %> <%= opinion.rater.last_name %></p>
+                <div class="flex">
+                  <% (1..5).each do |star| %>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 <%= opinion.stars >= star ? 'text-yellow-400' : 'text-gray-300' %> fill-current" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.518 4.674a1 1 0 00.95.69h4.932c.969 0 1.371 1.24.588 1.81l-3.993 2.905a1 1 0 00-.364 1.118l1.518 4.674c.3.921-.755 1.688-1.54 1.118l-3.993-2.905a1 1 0 00-1.176 0l-3.993 2.905c-.784.57-1.839-.197-1.54-1.118l1.518-4.674a1 1 0 00-.364-1.118L2.89 10.1c-.783-.57-.38-1.81.588-1.81h4.932a1 1 0 00.95-.69L9.049 2.927z" />
+                    </svg>
+                  <% end %>
+                </div>
+                <p class="text-gray-600"><%= opinion.comment %></p>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="text-gray-500 mt-2">Brak opinii.</p>
+          <% end %>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="low-rating-modal" class="fixed z-10 inset-0 overflow-y-auto hidden">
+  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+      <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+    </div>
+    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">​</span>
+    <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+      <div>
+        <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+          <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </div>
+        <div class="mt-3 text-center sm:mt-5">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">Uwaga!</h3>
+          <div class="mt-2">
+            <p class="text-sm text-gray-500">Ten użytkownik ma słabe opinie, uważaj</p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-5 sm:mt-6">
+        <button type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:text-sm" id="close-modal-button">
+          Zamknij
+        </button>
       </div>
     </div>
   </div>
