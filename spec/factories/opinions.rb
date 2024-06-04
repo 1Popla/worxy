@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :opinion do
-    rater_id { 1 }
-    ratee_id { 1 }
-    stars { 1 }
-    comment { "MyText" }
+    association :rater, factory: :user
+    association :ratee, factory: :user
+    stars { rand(1..5) }
+    comment { "Great work!" }
   end
 end

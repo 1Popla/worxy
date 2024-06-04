@@ -27,8 +27,13 @@ gem "dotenv", groups: [:development, :test]
 group :development, :test do
   gem "debug", platforms: %i[mri windows]
   gem "factory_bot_rails"
-  gem "rspec-rails", "~> 3.8"
+  gem "rspec-rails"
   gem "standardrb"
+  gem 'database_cleaner-active_record'
+end
+
+group :test do
+  gem 'faker'
 end
 
 group :development do
