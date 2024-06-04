@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :message do
-    conversation_id { 1 }
-    user_id { 1 }
+    association :conversation
+    association :user
     body { "MyText" }
   end
 end

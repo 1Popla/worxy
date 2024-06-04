@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :notification do
-    recipient { nil }
-    actor { nil }
+    association :recipient, factory: :user
+    association :actor, factory: :user
     action { "MyString" }
-    notifiable { nil }
+    association :notifiable, factory: :opinion
   end
 end
