@@ -7,13 +7,13 @@
         <div class="lg:col-span-2 bg-white shadow-lg rounded-lg p-6">
           <% if @post.images.attached? %>
             <div class="mb-4 border border-gray-200 rounded-lg p-4">
-              <div id="main-image-container" class="mb-4 cursor-pointer w-full h-96 overflow-hidden">
-                <%= image_tag @post.images.first.variant(resize_to_fill: [200, 400]).processed, id: "main-image", class: "object-cover w-full h-full", data: { full_url: url_for(@post.images.first.variant(resize_to_fill: [600, 400])) } %>
+              <div id="main-image-container" class="mb-4 cursor-pointer w-full h-96 flex items-center justify-center">
+                <%= image_tag @post.images.first.variant(resize_to_fill: [600, 400]).processed, id: "main-image", class: "object-contain max-w-full max-h-full", data: { full_url: url_for(@post.images.first) } %>
               </div>
               <div id="thumbnails" class="flex space-x-2">
                 <% @post.images.each_with_index do |image, index| %>
-                  <div class="w-24 h-24 overflow-hidden">
-                    <%= image_tag image.variant(resize_to_fill: [100, 100]).processed, class: "thumbnail cursor-pointer object-cover w-full h-full rounded-lg border border-gray-300", data: { index: index, full_url: url_for(image.variant(resize_to_fill: [600, 400])) } %>
+                  <div class="w-24 h-24 overflow-hidden flex items-center justify-center border border-gray-300 rounded-lg">
+                    <%= image_tag image.variant(resize_to_fill: [100, 100]).processed, class: "thumbnail cursor-pointer object-contain max-w-full max-h-full", data: { index: index, full_url: url_for(image) } %>
                   </div>
                 <% end %>
               </div>
@@ -66,7 +66,7 @@
   <div class="relative w-full h-full max-w-screen-lg max-h-screen flex items-center justify-center">
     <button id="close-lightbox" class="absolute top-4 right-4 text-white text-2xl">×</button>
     <button id="prev-image" class="absolute left-4 text-white text-2xl px-2 bg-black bg-opacity-50 rounded-full">‹</button>
-    <img id="lightbox-image" class="object-contain transform scale-150 max-w-full max-h-full" src="" alt="Image" />
+    <img id="lightbox-image" class="object-contain max-w-full max-h-[calc(100vh-15rem)]" src="" alt="Image" />
     <button id="next-image" class="absolute right-4 text-white text-2xl px-2 bg-black bg-opacity-50 rounded-full">›</button>
   </div>
   <div id="lightbox-thumbnails" class="flex justify-center space-x-2 p-4 mt-2"></div>

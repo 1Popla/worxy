@@ -42,7 +42,7 @@ document.addEventListener('turbo:load', function () {
   function updateLightboxImage(index) {
     lightboxImage.src = images[index];
     lightboxThumbnails.innerHTML = images.map((src, i) => `
-      <img src="${src.replace('600x400', '100x100')}" class="cursor-pointer w-16 h-16 object-cover ${i === index ? 'border-2 border-blue-500' : ''}" data-index="${i}">
+      <img src="${src}" class="cursor-pointer w-16 h-16 object-contain ${i === index ? 'border-2 border-blue-500' : ''}" data-index="${i}">
     `).join('');
   }
 
