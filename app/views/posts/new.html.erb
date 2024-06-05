@@ -3,7 +3,7 @@
 
   <div class="flex-1 overflow-auto">
     <div class="container mx-auto px-4 py-8">
-      <%= form_with model: @post, id: dom_id(@post), local: true do |f| %>
+      <%= form_with model: @post, id: dom_id(@post), local: true, html: { multipart: true } do |f| %>
         <div class="grid grid-cols-1 gap-6 mb-6">
           <div>
             <%= f.label :title, "Tytuł", class: 'block text-gray-700 text-sm font-bold mb-2' %>
@@ -11,8 +11,17 @@
           </div>
           <div>
             <%= f.label :images, "Zdjęcia", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-            <%= f.file_field :images, multiple: true, class: 'block w-full text-sm text-gray-700 border rounded cursor-pointer focus:outline-none focus:border-purple-500', id: 'images' %>
-            <div id="selected-images" class="mt-4"></div>
+            <div id="image-upload-gallery" class="flex flex-wrap gap-4">
+              <% 6.times do |i| %>
+                <div class="relative border-dashed border-2 border-gray-400 rounded-lg w-32 h-32 flex items-center justify-center overflow-hidden" id="upload-container-<%= i %>">
+                  <input type="file" name="post[images][]" id="upload-input-<%= i %>" class="hidden" accept="image/*" multiple>
+                  <div class="text-center cursor-pointer" onclick="document.getElementById('upload-input-<%= i %>').click()">
+                    <span id="plus-sign-<%= i %>" class="text-4xl text-gray-400">+</span>
+                    <img id="uploaded-image-<%= i %>" class="absolute top-0 left-0 w-full h-full object-cover hidden">
+                  </div>
+                </div>
+              <% end %>
+            </div>
           </div>
           <div>
             <%= f.label :description, "Opis", class: 'block text-gray-700 text-sm font-bold mb-2' %>
@@ -61,7 +70,7 @@
         </div>
         
         <div class="mb-6">
-            <div id="map" data-lat="<%= @post.latitude %>" data-lng="<%= @post.longitude %>" class="w-full h-64 border rounded-lg"></div>
+          <div id="map" data-lat="<%= @post.latitude %>" data-lng="<%= @post.longitude %>" class="w-full h-64 border rounded-lg"></div>
         </div>
         
         <%= f.submit 'Zatwierdź', class: 'w-full bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline', data: { turbo: false } %>
