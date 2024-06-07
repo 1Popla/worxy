@@ -85,6 +85,28 @@ class PostsController < ApplicationController
     end
   end
 
+  def generate_description
+    user_data = params.require(:user).permit(:first_name, :last_name, :skills, :experience, :description, :phone_number, :email).to_h
+
+    prompt = <<~PROMPT
+      Generate a professional and structured description for a post based on the following user details. Highlight the user's individual strengths, expertise, and personality.
+
+      User details:
+      - Name: #{user_data[:first_name]} #{user_data[:last_name]}
+      - Skills: #{user_data[:skills]}
+      - Experience: #{user_data[:experience]}
+      - Personal Description: #{user_data[:description]}
+      - Phone: #{user_data[:phone_number]}
+      - Email: #{user_data[:email]}
+
+      Please create a unique and engaging description.
+    PROMPT
+
+    gpt_response = HuggingFaceService.new.generate_text(prompt)
+    
+    render json: { description: gpt_response }
+  end
+
   private
 
   def set_post

@@ -11,7 +11,7 @@ class OpinionsController < ApplicationController
     @opinion.ratee_id = @user.id
 
     if @opinion.save
-      redirect_to @user, notice: 'Opinia została pomyślnie dodana.'
+      redirect_to @user, notice: "Opinia została pomyślnie dodana."
     else
       flash.now[:alert] = @opinion.errors.full_messages.to_sentence
       render :new

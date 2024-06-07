@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     end
     collection do
       get "user_posts"
+      post "generate_description"
     end
   end
   resources :bookings do

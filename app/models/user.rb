@@ -25,6 +25,6 @@ class User < ApplicationRecord
   def average_rating
     return nil if received_opinions.empty?
     avg = received_opinions.average(:stars).round(2)
-    avg % 1 == 0 ? avg.to_i : avg
+    (avg % 1 == 0) ? avg.to_i : avg
   end
 end
