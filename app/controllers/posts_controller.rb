@@ -2,6 +2,8 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :send_request]
   before_action :authenticate_user!, only: [:send_request]
 
+  require 'httparty'
+
   def index
     @categories = Category.all
     @posts = Post.all
@@ -102,18 +104,69 @@ class PostsController < ApplicationController
       Please create a unique and engaging description.
     PROMPT
 
-    gpt_response = HuggingFaceService.new.generate_text(prompt)
+    gpt_response = generate_text_with_llama(prompt)
     
     render json: { description: gpt_response }
   end
 
   private
 
-  def set_post
-    @post = Post.find(params[:id])
+  def generate_text_with_llama(prompt, max_tokens = 300)
+    headers = {
+      'Authorization' => "Bearer #{ENV['LLAMA_API_KEY']}",
+      'Content-Type' => 'application/json'
+    }
+    
+    body = {
+      model: 'llama-2.7B',
+      messages: [
+        { role: 'system', content: 'You are a helpful assistant.' },
+        { role: 'user', content: prompt }
+      ],
+      max_tokens: max_tokens,
+      temperature: 0.7
+    }.to_json
+
+    retries = 0
+    max_retries = 5
+    delay = 1
+
+    begin
+      response = HTTParty.post('https://api.llama.ai/v1/completions', headers: headers, body: body)
+      Rails.logger.info("Response: #{response.body}")
+
+      if response.success?
+        response_body = JSON.parse(response.body)
+        if response_body['choices'] && response_body['choices'][0] && response_body['choices'][0]['message'] && response_body['choices'][0]['message']['content']
+          return clean_generated_text(response_body['choices'][0]['message']['content'])
+        else
+          return "Error: Unexpected response format"
+        end
+      elsif response.code == 429
+        raise "Rate limit reached"
+      elsif response.code == 403 && response.parsed_response['error']['code'] == 'insufficient_quota'
+        return "Error: You have exceeded your API quota. Please check your plan and billing details."
+      else
+        return "Error: #{response.code} #{response.message}"
+      end
+    rescue => e
+      if retries < max_retries && e.message == "Rate limit reached"
+        retries += 1
+        sleep(delay)
+        delay *= 2
+        retry
+      else
+        Rails.logger.error("LLAMAService error: #{e.message}")
+        return "Error generating description"
+      end
+    end
+  end
+
+  def clean_generated_text(text)
+    text.strip
   end
 
   def post_params
-    params.require(:post).permit(:title, :description, :price, :availability, :contact_information, :status, :latitude, :message, :longitude, :street, :city, :state, :country, :category_id, images: [])
+    params.require(:post).permit(:title, :description, :price, :category_id, :availability, :contact_information, :street, :city, :state, :country, :latitude, :longitude, images: [])
   end
 end
