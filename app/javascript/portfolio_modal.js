@@ -1,7 +1,7 @@
 document.addEventListener('turbo:load', () => {
   const openPortfolioButton = document.getElementById('open-portfolio');
-  const closePortfolioButton = document.getElementById('close-portfolio');
-  const portfolioModal = document.getElementById('portfolio-modal');
+  const closePortfolioButton = document.getElementById('user-show-close-portfolio');
+  const portfolioModal = document.getElementById('user-show-portfolio-modal');
 
   if (openPortfolioButton && closePortfolioButton && portfolioModal) {
     openPortfolioButton.addEventListener('click', () => {
@@ -34,5 +34,57 @@ document.addEventListener('turbo:load', () => {
         }
       });
     }
+  });
+});
+
+document.addEventListener('turbo:load', () => {
+  const thumbnails = document.querySelectorAll('.user-show-thumbnail');
+  const lightbox = document.getElementById('user-show-lightbox');
+  const lightboxImage = document.getElementById('user-show-lightbox-image');
+  const lightboxThumbnails = document.getElementById('user-show-lightbox-thumbnails');
+  const closeLightbox = document.getElementById('user-show-close-lightbox');
+  const prevImage = document.getElementById('user-show-prev-image');
+  const nextImage = document.getElementById('user-show-next-image');
+  
+  if (!thumbnails || !lightbox || !lightboxImage || !lightboxThumbnails || !closeLightbox || !prevImage || !nextImage) return;
+  
+  const images = Array.from(thumbnails).map(thumbnail => thumbnail.dataset.fullUrl);
+
+  let currentIndex = 0;
+
+  function updateLightboxImage(index) {
+    lightboxImage.src = images[index];
+    lightboxThumbnails.innerHTML = images.map((src, i) => `
+      <img src="${src}" class="cursor-pointer w-16 h-16 object-contain ${i === index ? 'border-2 border-blue-500' : ''}" data-index="${i}">
+    `).join('');
+  }
+
+  thumbnails.forEach((thumbnail, index) => {
+    thumbnail.addEventListener('click', () => {
+      currentIndex = index;
+      updateLightboxImage(currentIndex);
+      lightbox.classList.remove('hidden');
+    });
+  });
+
+  lightboxThumbnails.addEventListener('click', event => {
+    if (event.target.tagName === 'IMG') {
+      currentIndex = parseInt(event.target.dataset.index);
+      updateLightboxImage(currentIndex);
+    }
+  });
+
+  prevImage.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateLightboxImage(currentIndex);
+  });
+
+  nextImage.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateLightboxImage(currentIndex);
+  });
+
+  closeLightbox.addEventListener('click', () => {
+    lightbox.classList.add('hidden');
   });
 });
