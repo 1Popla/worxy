@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get "users/show"
-  devise_for :users, controllers: {registrations: "users/registrations"}
+  devise_for :users, controllers: { registrations: "users/registrations" }
 
   get "up" => "rails/health#show", :as => :rails_health_check
 
@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show] do
     resources :opinions, only: [:new, :create]
+    resources :portfolio_images, only: [:new, :create, :destroy]
   end
 
   get "dashboard/map", to: "dashboard#map"
