@@ -1,4 +1,4 @@
-<div class="flex h-screen bg-gray-100 overflow-hidden">
+<div class="flex h-screen bg-gray-100 overflow-hidden" data-controller="posts" data-posts-user-id="<%= current_user.id %>">
   <%= render 'shared/dashboard/sidebar' %>
 
   <div class="flex-1 overflow-auto">
@@ -25,9 +25,9 @@
           </div>
           <div>
             <%= f.label :description, "Opis", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-            <%= f.text_area :description, placeholder: 'Opis', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', rows: 20 %>
+            <%= f.text_area :description, placeholder: 'Opis', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', rows: 20, data: { target: "posts.description" } %>
             <button type="button" id="generate-description" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Generuj opis przy użyciu AI</button>
-            <p id="generating-message" class="mt-2 text-blue-500 hidden">Generowanie opisu...</p>
+            <p id="generating-message" class="mt-2 text-blue-500 hidden" data-target="posts.generatingMessage">Generowanie opisu...</p>
           </div>
         </div>
 
@@ -80,27 +80,3 @@
     </div>
   </div>
 </div>
-
-<script>
-document.getElementById('generate-description').addEventListener('click', function() {
-  document.getElementById('generating-message').classList.remove('hidden');
-  
-  fetch('/posts/generate_description', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRF-Token': '<%= form_authenticity_token %>'
-    },
-    body: JSON.stringify({ user_id: <%= current_user.id %> })
-  })
-  .then(response => response.json())
-  .then(data => {
-    document.querySelector('textarea[name="post[description]"]').value = data.description;
-    document.getElementById('generating-message').classList.add('hidden');
-  })
-  .catch(error => {
-    console.error('Error generating description:', error);
-    document.getElementById('generating-message').textContent = 'Błąd podczas generowania opisu. Proszę spróbować ponownie.';
-  });
-});
-</script>
