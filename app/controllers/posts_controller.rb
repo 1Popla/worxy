@@ -17,8 +17,8 @@ class PostsController < ApplicationController
     end
 
     if params[:search].present?
-      @customer_posts = @customer_posts.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
-      @worker_posts = @worker_posts.where("title ILIKE ? OR description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+      @customer_posts = @customer_posts.where("posts.title ILIKE ? OR posts.description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+      @worker_posts = @worker_posts.where("posts.title ILIKE ? OR posts.description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
     end
 
     respond_to do |format|
