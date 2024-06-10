@@ -55,7 +55,20 @@
           <% end %>
         </div>
         <div class="lg:col-span-1">
-          <div id="showMap" data-lat="<%= @post.latitude %>" data-lng="<%= @post.longitude %>" class="w-full h-64 lg:h-full rounded-lg border"></div>
+          <div class="bg-white shadow-lg rounded-lg p-6 mb-6">
+            <h2 class="text-lg font-bold text-gray-800 mb-4">Informacje twórcy zlecenia</h2>
+            <p class="font-semibold text-gray-700">Imię: <%= @post.user.first_name %></p>
+            <% if user_signed_in? %>
+              <p class="font-semibold text-gray-700">Numer telefonu: <%= @post.user.phone_number %></p>
+            <% else %>
+              <p class="font-semibold text-gray-700">Numer telefonu: <%= link_to 'Zaloguj się, aby zobaczyć', new_user_session_path, class: 'text-blue-500' %></p>
+            <% end %>
+            <%= link_to 'Zobacz profil', user_path(@post.user), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 inline-block' %>
+          </div>
+          <div class="bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-lg font-bold text-gray-800 mb-4">Lokalizacja zlecenia</h2>
+            <div id="showMap" data-lat="<%= @post.latitude %>" data-lng="<%= @post.longitude %>" class="w-full h-64 lg:h-64 rounded-lg border"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -74,7 +87,7 @@
 
 <div id="request-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
   <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-    <h2 class="text-lg font-bold mb-4">Send Request</h2>
+    <h2 class="text-lg font-bold mb-4">Wyślij ofertę</h2>
     <%= form_with(url: send_request_post_path(@post), method: :post, local: true, html: { id: "send-request-form" }) do |f| %>
       <div class="mb-4">
         <%= f.label :message, "Message", class: "block text-gray-700 font-bold mb-2" %>
@@ -82,7 +95,7 @@
       </div>
       <div class="flex justify-end">
         <button type="button" id="cancel-modal" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Cancel</button>
-        <%= f.submit "Send Request", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+        <%= f.submit "Wyślij ofertę", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
       </div>
     <% end %>
   </div>
