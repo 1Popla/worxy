@@ -1,0 +1,30 @@
+<div class="flex h-screen bg-gray-100 overflow-hidden">
+  <%= render 'shared/dashboard/sidebar' %>
+
+  <div class="flex-1 overflow-auto">
+    <div class="container mx-auto px-4 py-8">
+      <h2 class="text-2xl font-bold text-center mb-6">Dodaj zdjęcia</h2>
+      <%= form_with(model: @user, url: user_portfolio_images_path(@user), method: :post, local: true, multipart: true) do |form| %>
+        <div class="grid grid-cols-1 gap-6 mb-6">
+          <div>
+            <%= form.label :portfolio_images, "Galeria:", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+            <div id="image-upload-gallery" class="flex flex-wrap gap-4 justify-center">
+              <% 6.times do |i| %>
+                <div class="relative border-dashed border-2 border-gray-400 rounded-lg w-32 h-32 flex items-center justify-center overflow-hidden" id="upload-container-<%= i %>">
+                  <input type="file" name="user[portfolio_images][]" id="upload-input-<%= i %>" class="hidden" accept="image/*" multiple>
+                  <div class="text-center cursor-pointer" onclick="document.getElementById('upload-input-<%= i %>').click()">
+                    <span id="plus-sign-<%= i %>" class="text-4xl text-gray-400">+</span>
+                    <img id="uploaded-image-<%= i %>" class="absolute top-0 left-0 w-full h-full object-cover hidden">
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="flex justify-center">
+            <%= form.submit "Zapisz", class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
