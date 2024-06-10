@@ -87,4 +87,32 @@ document.addEventListener('turbo:load', () => {
   closeLightbox.addEventListener('click', () => {
     lightbox.classList.add('hidden');
   });
+  
+  document.addEventListener('turbo:load', () => {
+    const deleteButtons = document.querySelectorAll('.delete-image-button');
+  
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+  
+        if (confirm('Are you sure you want to delete this image?')) {
+          const imageId = event.target.closest('form').action.split('/').pop();
+          fetch(event.target.closest('form').action, {
+            method: 'DELETE',
+            headers: {
+              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content,
+              'Accept': 'text/vnd.turbo-stream.html'
+            }
+          })
+          .then(response => {
+            if (response.ok) {
+              document.getElementById(`image-container-${imageId}`).remove();
+            } else {
+              alert('Failed to delete the image.');
+            }
+          });
+        }
+      });
+    });
+  });  
 });

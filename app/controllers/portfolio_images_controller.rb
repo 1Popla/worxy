@@ -14,6 +14,16 @@ class PortfolioImagesController < ApplicationController
     end
   end
 
+  def destroy
+    @image = @user.portfolio_images.find(params[:id])
+    @image.purge
+
+    respond_to do |format|
+      format.html { redirect_to user_path(@user), notice: 'Image was successfully deleted.' }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove("image-container-#{@image.id}") }
+    end
+  end
+
   private
 
   def set_user
