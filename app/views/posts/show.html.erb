@@ -50,7 +50,7 @@
             <p>Utworzono: <%= @post.created_at.strftime("%B %e, %Y %H:%M") %></p>
             <p>Ostatnia aktualizacja: <%= @post.updated_at.strftime("%B %e, %Y %H:%M") %></p>
           </div>
-          <% if current_user.worker? && current_user != @post.user %>
+          <% if current_user && current_user != @post.user %>
             <button id="open-modal" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Wyślij ofertę</button>
           <% end %>
         </div>

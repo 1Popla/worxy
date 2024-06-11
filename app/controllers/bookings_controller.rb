@@ -3,6 +3,7 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
   before_action :check_user, only: [:edit, :update, :destroy]
   before_action :check_user_view, only: [:show]
+  before_action :set_selectable_users_and_posts, only: [:new, :edit, :create, :update]
   helper CalendarHelper
 
   def index
@@ -92,5 +93,21 @@ class BookingsController < ApplicationController
     unless current_user.id == @booking.user_id || current_user.id == @booking.post.user_id || current_user.id == @booking.visible_to_user_id
       redirect_to root_path, alert: "You are not authorized to view this booking."
     end
+  end
+
+  def set_selectable_users_and_posts
+    sent_notifications = Notification.where(actor_id: current_user.id, action: "sent you a request for")
+    received_notifications = Notification.where(recipient_id: current_user.id, action: "sent you a request for")
+
+    sent_user_ids = sent_notifications.pluck(:recipient_id)
+    received_user_ids = received_notifications.pluck(:actor_id)
+    user_ids = sent_user_ids + received_user_ids
+
+    sent_post_ids = sent_notifications.pluck(:notifiable_id)
+    received_post_ids = received_notifications.pluck(:notifiable_id)
+    post_ids = sent_post_ids + received_post_ids
+
+    @selectable_users = User.where(id: user_ids).distinct
+    @selectable_posts = Post.where(id: post_ids).distinct
   end
 end

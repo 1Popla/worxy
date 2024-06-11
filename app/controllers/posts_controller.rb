@@ -74,7 +74,7 @@ class PostsController < ApplicationController
   end
 
   def send_request
-    if current_user.worker?
+    if current_user.worker? || current_user.customer?
       Notification.create(
         recipient: @post.user,
         actor: current_user,

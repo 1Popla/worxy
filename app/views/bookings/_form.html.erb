@@ -12,7 +12,7 @@
 
   <div class="mb-4">
     <%= form.label :post_id, 'Post Title', class: "block text-gray-700 text-sm font-bold mb-2" %>
-    <%= form.collection_select :post_id, Post.all, :id, :title, {include_blank: 'Please select a post'}, {class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"} %>
+    <%= form.collection_select :post_id, @selectable_posts, :id, :title, {include_blank: 'Please select a post'}, {class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"} %>
   </div>
 
   <div class="mb-4">
@@ -22,7 +22,7 @@
 
   <div class="mb-6">
     <%= form.label :visible_to_user_id, 'Klient', class: "block text-gray-700 text-sm font-bold mb-2" %>
-    <%= form.collection_select :visible_to_user_id, User.all, :id, :email, {include_blank: 'None (Default)'}, {class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"} %>
+    <%= form.collection_select :visible_to_user_id, @selectable_users, :id, :email, {include_blank: 'None (Default)'}, {class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"} %>
   </div>
 
   <div class="mb-4">
