@@ -34,13 +34,16 @@ class BookingsController < ApplicationController
 
   def create
     @booking = current_user.bookings.build(booking_params)
-      if @booking.save
+    if @booking.save
       respond_to do |format|
         format.html { redirect_to @booking, notice: "Booking was successfully created." }
-        format.turbo_stream
+        format.turbo_stream { redirect_to @booking }
       end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('booking_form', partial: 'form', locals: { booking: @booking }) }
+      end
     end
   end
 
