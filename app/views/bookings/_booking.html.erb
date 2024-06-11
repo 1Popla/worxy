@@ -1,0 +1,43 @@
+<div id="booking_form">
+  <%= form_with(model: booking, local: false, class: "bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4") do |form| %>
+    <% if booking.errors.any? %>
+      <div id="error_explanation" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong class="font-bold"><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</strong>
+        <ul class="list-disc pl-5 mt-3">
+        <% booking.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-4">
+      <%= form.label :post_id, 'Post Title', class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.collection_select :post_id, Post.all, :id, :title, {include_blank: 'Please select a post'}, {class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"} %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :status, class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.select :status, Booking.statuses.keys.map { |status| [status.titleize, status] }, {}, {class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"} %>
+    </div>
+
+    <div class="mb-6">
+      <%= form.label :visible_to_user_id, 'Klient', class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.collection_select :visible_to_user_id, User.all, :id, :email, {include_blank: 'None (Default)'}, {class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"} %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :start_date, 'Start Date', class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.datetime_select :start_date, class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :end_date, 'End Date', class: "block text-gray-700 text-sm font-bold mb-2" %>
+      <%= form.datetime_select :end_date, class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" %>
+    </div>
+
+    <div class="flex items-center justify-between">
+      <%= form.submit 'Zapisz', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+    </div>
+  <% end %>
+</div>

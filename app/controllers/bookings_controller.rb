@@ -48,15 +48,18 @@ class BookingsController < ApplicationController
   end
 
   def update
-      if @booking.update(booking_params)
+    if @booking.update(booking_params)
       respond_to do |format|
         format.html { redirect_to @booking, notice: "Booking was successfully updated." }
-        format.turbo_stream
+        format.turbo_stream { redirect_to @booking }
       end
     else
-      render :edit
+      respond_to do |format|
+        format.html { render :edit }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('booking_form', partial: 'form', locals: { booking: @booking }) }
+      end
     end
-  end 
+  end
 
   def destroy
     @booking.destroy
