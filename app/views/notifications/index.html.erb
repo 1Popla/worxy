@@ -12,7 +12,7 @@
                 <% if notification.action == 'sent you a request for' %>
                   <%= link_to "#{notification.actor.first_name} wysłał Ci ofertę", notification_path(notification), class: 'text-blue-600 hover:text-blue-900' %>
                 <% elsif notification.action == 'request accepted' %>
-                  <%= link_to "#{notification.actor.first_name} zaakceptowal twoją ofertę", notification_path(notification), class: 'text-blue-600 hover:text-blue-900' %>
+                  <%= link_to "#{notification.actor.first_name} zaakceptował twoją ofertę", notification_path(notification), class: 'text-blue-600 hover:text-blue-900' %>
                 <% elsif notification.action == 'request rejected' %>
                   <%= link_to "#{notification.actor.first_name} odrzucił twoją ofertę", notification_path(notification), class: 'text-blue-600 hover:text-blue-900' %>
                 <% end %>

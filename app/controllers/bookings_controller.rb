@@ -37,10 +37,13 @@ class BookingsController < ApplicationController
     if @booking.save
       respond_to do |format|
         format.html { redirect_to @booking, notice: "Booking was successfully created." }
-        format.turbo_stream
+        format.turbo_stream { redirect_to @booking }
       end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('booking_form', partial: 'form', locals: { booking: @booking }) }
+      end
     end
   end
 
@@ -51,10 +54,13 @@ class BookingsController < ApplicationController
     if @booking.update(booking_params)
       respond_to do |format|
         format.html { redirect_to @booking, notice: "Booking was successfully updated." }
-        format.turbo_stream
+        format.turbo_stream { redirect_to @booking }
       end
     else
-      render :edit
+      respond_to do |format|
+        format.html { render :edit }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('booking_form', partial: 'form', locals: { booking: @booking }) }
+      end
     end
   end
 
@@ -73,7 +79,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:post_id, :status, :visible_to_user_id, :start_date, :end_date)
+    params.require(:booking).permit(:post_id, :status, :visible_to_user_id, :start_date, :end_date, :post_price)
   end
 
   def check_user

@@ -80,11 +80,13 @@ class PostsController < ApplicationController
         actor: current_user,
         action: "sent you a request for",
         notifiable: @post,
-        message: params[:message]
+        message: params[:message],
+        price_offer: params[:price_offer],
+        start_date_offer: params[:start_date_offer]
       )
-      redirect_to @post, notice: "Request sent to customer successfully."
+      redirect_to @post, notice: "Propozycja wysłana do klienta pomyślnie."
     else
-      redirect_to @post, alert: "You are not authorized to send requests."
+      redirect_to @post, alert: "Nie masz uprawnień do wysyłania propozycji."
     end
   end
 
