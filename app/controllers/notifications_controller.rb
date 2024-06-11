@@ -16,8 +16,9 @@ class NotificationsController < ApplicationController
       user: @notification.actor,
       post: post,
       status: :pending,
-      start_date: Time.now,
-      end_date: Time.now + 1.week
+      start_date: @notification.start_date_offer || Time.now,
+      end_date: (@notification.start_date_offer || Time.now) + 1.week,
+      offered_price: @notification.price_offer
     )
 
     if booking.persisted?
@@ -26,7 +27,9 @@ class NotificationsController < ApplicationController
         recipient: @notification.actor,
         actor: current_user,
         action: "request accepted",
-        notifiable: post
+        notifiable: post,
+        price_offer: @notification.price_offer,
+        start_date_offer: @notification.start_date_offer
       )
       redirect_to bookings_path, notice: "Request accepted and booking created."
     else
@@ -40,7 +43,9 @@ class NotificationsController < ApplicationController
       recipient: @notification.actor,
       actor: current_user,
       action: "request rejected",
-      notifiable: @notification.notifiable
+      notifiable: @notification.notifiable,
+      price_offer: @notification.price_offer,
+      start_date_offer: @notification.start_date_offer
     )
     redirect_to notifications_path, notice: "Request rejected."
   end

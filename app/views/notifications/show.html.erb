@@ -3,31 +3,35 @@
 
   <div class="flex-1 overflow-auto">
     <div class="container mx-auto px-4 py-8">
-      <div class="bg-white shadow rounded-lg p-6">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4">Szczegóły Powiadomienia</h2>
-        <div class="mb-4">
-          <p class="text-gray-600"><strong>Od:</strong> <%= link_to @notification.actor.email, user_path(@notification.actor), class: 'text-blue-600 hover:text-blue-900', data: { turbo_frame: "_top" } %></p>
-          <p class="text-gray-600"><strong>Dotyczy:</strong> <%= link_to @notification.notifiable.title, post_path(@notification.notifiable), class: 'text-blue-600 hover:text-blue-900', data: { turbo_frame: "_top" } %></p>
-          <p class="text-gray-600"><strong>Wysłano o:</strong> <%= @notification.created_at.strftime("%b %d, %Y %H:%M") %></p>
+      <div class="bg-white shadow rounded-lg p-6 space-y-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-8">Szczegóły Powiadomienia</h2>
+        <div class="flex flex-wrap lg:flex-nowrap space-y-4 lg:space-y-0">
+          <div class="w-full lg:w-1/3 lg:order-1 lg:pr-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Szczegóły Pracownika</h3>
+            <p class="text-gray-600 mb-2"><strong>Imię i nazwisko:</strong> <%= @notification.actor.first_name %> <%= @notification.actor.last_name %></p>
+            <p class="text-gray-600 mb-2"><strong>Email:</strong> <%= @notification.actor.email %></p>
+            <p class="text-gray-600"><strong>Profil:</strong> <%= link_to "Zobacz Profil", user_path(@notification.actor), class: 'text-blue-600 hover:text-blue-900', data: { turbo_frame: "_top" } %></p>
+          </div>
+          <div class="w-full lg:w-2/3 lg:order-2 lg:pl-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Szczegóły Ogłoszenia</h3>
+            <p class="text-gray-600 mb-2"><strong>Tytuł:</strong> <%= @notification.notifiable.title %></p>
+            <p class="text-gray-600 mb-2"><strong>Opis:</strong> <%= @notification.notifiable.description %></p>
+            <p class="text-gray-600"><strong>Cena:</strong> <%= number_to_currency(@notification.notifiable.price) %></p>
+          </div>
         </div>
-        <div class="mb-4">
-          <h3 class="text-xl font-bold text-gray-800 mb-2">Wiadomość</h3>
-          <p class="text-gray-600"><%= @notification.message %></p>
-        </div>
-        <div class="mb-4">
-          <h3 class="text-xl font-bold text-gray-800 mb-2">Szczegóły Ogłoszenia</h3>
-          <p class="text-gray-600"><strong>Tytuł:</strong> <%= @notification.notifiable.title %></p>
-          <p class="text-gray-600"><strong>Opis:</strong> <%= @notification.notifiable.description %></p>
-          <p class="text-gray-600"><strong>Cena:</strong> <%= number_to_currency(@notification.notifiable.price) %></p>
-        </div>
-        <div class="mb-4">
-          <h3 class="text-xl font-bold text-gray-800 mb-2">Szczegóły Pracownika</h3>
-          <p class="text-gray-600"><strong>Imię i nazwisko:</strong> <%= @notification.actor.first_name %> <%= @notification.actor.last_name %></p>
-          <p class="text-gray-600"><strong>Email:</strong> <%= @notification.actor.email %></p>
-          <p class="text-gray-600"><strong>Profil:</strong> <%= link_to "Zobacz Profil", user_path(@notification.actor), class: 'text-blue-600 hover:text-blue-900', data: { turbo_frame: "_top" } %></p>
+        <div class="flex flex-wrap lg:flex-nowrap space-y-4 lg:space-y-0">
+          <div class="w-full lg:w-2/3 pr-8">
+            <div class="mb-8">
+              <h3 class="text-xl font-bold text-gray-800 mb-4">Szczegóły Oferty</h3>
+              <p class="text-gray-600 mb-2"><strong>Proponowana cena:</strong> <%= number_to_currency(@notification.price_offer) %></p>
+              <p class="text-gray-600 mb-2"><strong>Proponowana data rozpoczęcia:</strong> <%= @notification.start_date_offer.present? ? @notification.start_date_offer.strftime("%b %d, %Y") : "Brak danych" %></p>
+              <h3 class="text-xl font-bold text-gray-800 mb-4 mt-8">Wiadomość</h3>
+              <p class="text-gray-600"><%= @notification.message %></p>
+            </div>
+          </div>
         </div>
         <% if @notification.action == 'sent you a request for' %>
-          <div class="flex space-x-2">
+          <div class="flex space-x-4">
             <%= button_to 'Akceptuj Ofertę', accept_request_notification_path(@notification), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded', data: { turbo_frame: "_top" } %>
             <%= button_to 'Odrzuć Ofertę', reject_request_notification_path(@notification), method: :delete, data: { confirm: 'Jesteś pewien?', turbo_frame: "_top" }, class: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' %>
           </div>

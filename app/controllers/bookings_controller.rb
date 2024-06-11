@@ -34,7 +34,7 @@ class BookingsController < ApplicationController
 
   def create
     @booking = current_user.bookings.build(booking_params)
-    if @booking.save
+      if @booking.save
       respond_to do |format|
         format.html { redirect_to @booking, notice: "Booking was successfully created." }
         format.turbo_stream
@@ -48,7 +48,7 @@ class BookingsController < ApplicationController
   end
 
   def update
-    if @booking.update(booking_params)
+      if @booking.update(booking_params)
       respond_to do |format|
         format.html { redirect_to @booking, notice: "Booking was successfully updated." }
         format.turbo_stream
@@ -56,7 +56,7 @@ class BookingsController < ApplicationController
     else
       render :edit
     end
-  end
+  end 
 
   def destroy
     @booking.destroy
@@ -73,7 +73,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:post_id, :status, :visible_to_user_id, :start_date, :end_date)
+    params.require(:booking).permit(:post_id, :status, :visible_to_user_id, :start_date, :end_date, :post_price)
   end
 
   def check_user
