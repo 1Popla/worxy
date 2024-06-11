@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   belongs_to :category
   has_many :bookings, dependent: :destroy
   has_many_attached :images
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :title, :description, :price, :category_id, presence: true
 
