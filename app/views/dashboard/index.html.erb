@@ -12,7 +12,7 @@
                 <p class="text-gray-600">
                   <%= link_to message.body.truncate(50), conversation_message_path(message.conversation, message), class: 'text-blue-600 hover:text-blue-900' %>
                 </p>
-                <p class="text-gray-500 text-sm"><%= message.created_at.strftime("%b %d, %Y %H:%M") %></p>
+                <p class="text-gray-500 text-sm"><%= I18n.l(message.created_at, format: :long) %></p>
               </div>
             <% end %>
           <% else %>
@@ -28,7 +28,7 @@
                 <p class="text-gray-600">
                   <%= link_to booking.post.title, booking_path(booking), class: 'text-blue-600 hover:text-blue-900' %> - <%= booking.status %>
                 </p>
-                <p class="text-gray-500 text-sm"><%= booking.start_date.strftime("%b %d, %Y %H:%M") %> to <%= booking.end_date.strftime("%b %d, %Y %H:%M") %></p>
+                <p class="text-gray-500 text-sm"><%= I18n.l(booking.start_date, format: :long) %> - <%= I18n.l(booking.end_date, format: :long) %></p>
               </div>
             <% end %>
           <% else %>
@@ -71,7 +71,7 @@
                 <%= link_to @last_post.title, post_path(@last_post), class: 'text-blue-600 hover:text-blue-900' %>
               </p>
               <p class="text-gray-500"><%= @last_post.description %></p>
-              <p class="text-gray-500 text-sm"><%= @last_post.created_at.strftime("%b %d, %Y %H:%M") %></p>
+              <p class="text-gray-500 text-sm"><%= I18n.l(@last_post.created_at, format: :long) %></p>
             </div>
           <% else %>
             <p class="text-gray-500">Brak postów.</p>

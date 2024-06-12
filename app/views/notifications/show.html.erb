@@ -24,7 +24,7 @@
             <div class="mb-8">
               <h3 class="text-xl font-bold text-gray-800 mb-4">Szczegóły Oferty</h3>
               <p class="text-gray-600 mb-2"><strong>Proponowana cena:</strong> <%= number_to_currency(@notification.price_offer) %></p>
-              <p class="text-gray-600 mb-2"><strong>Proponowana data rozpoczęcia:</strong> <%= @notification.start_date_offer.present? ? @notification.start_date_offer.strftime("%b %d, %Y") : "Brak danych" %></p>
+              <p class="text-gray-600 mb-2"><strong>Proponowana data rozpoczęcia:</strong> <%= @notification.start_date_offer.present? ? I18n.l(@notification.start_date_offer, format: :long) : "Brak danych" %></p>
               <h3 class="text-xl font-bold text-gray-800 mb-4 mt-8">Wiadomość</h3>
               <p class="text-gray-600"><%= @notification.message %></p>
             </div>
