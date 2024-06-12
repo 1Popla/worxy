@@ -13,10 +13,19 @@
       <% if @messages.any? %>
         <div class="messages space-y-2 mb-4 flex-grow overflow-y-auto" style="max-height: calc(100vh - 200px);">
           <% @messages.each do |message| %>
-            <% message_class = message.user_id == current_user.id ? "bg-blue-100 self-end" : "bg-gray-100 self-start" %>
-            <p class="rounded-lg p-2 <%= message_class %>">
-              <%= link_to message.body, conversation_message_path(@conversation, message), class: "text-blue-600 hover:text-blue-900" %>
-            </p>
+            <% if message.user_id == current_user.id %>
+              <div class="flex justify-end">
+                <p class="bg-blue-500 text-white rounded-lg p-2 max-w-xs break-words border border-blue-300 border-opacity-50">
+                  <%= message.body %>
+                </p>
+              </div>
+            <% else %>
+              <div class="flex justify-start">
+                <p class="bg-gray-300 rounded-lg p-2 max-w-xs break-words">
+                  <%= message.body %>
+                </p>
+              </div>
+            <% end %>
           <% end %>
         </div>
       <% else %>
