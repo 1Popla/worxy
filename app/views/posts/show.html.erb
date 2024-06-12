@@ -64,6 +64,9 @@
               <p class="font-semibold text-gray-700">Numer telefonu: <%= link_to 'Zaloguj się, aby zobaczyć', new_user_session_path, class: 'text-blue-500' %></p>
             <% end %>
             <%= link_to 'Zobacz profil', user_path(@post.user), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 inline-block' %>
+            <% if user_signed_in? && current_user != @post.user %>
+              <%= button_to 'Wyślij wiadomość', conversations_path(conversation: { recipient_id: @post.user.id }), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4 inline-block' %>
+            <% end %>
           </div>
           <div class="bg-white shadow-lg rounded-lg p-6">
             <h2 class="text-lg font-bold text-gray-800 mb-4">Lokalizacja zlecenia</h2>
