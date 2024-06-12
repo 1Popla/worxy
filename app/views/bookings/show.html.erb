@@ -19,11 +19,11 @@
                 </tr>
                 <tr class="border-b">
                   <td class="font-medium py-2">Data rozpoczęcia:</td>
-                  <td class="py-2"><%= @booking.start_date.strftime("%B %e, %Y %H:%M") %></td>
+                  <td class="py-2"><%= I18n.l(@booking.start_date, format: :long) %></td>
                 </tr>
                 <tr class="border-b">
                   <td class="font-medium py-2">Data zakończenia:</td>
-                  <td class="py-2"><%= @booking.end_date.strftime("%B %e, %Y %H:%M") %></td>
+                  <td class="py-2"><%= I18n.l(@booking.end_date, format: :long) %></td>
                 </tr>
                 <tr class="border-b">
                   <td class="font-medium py-2">Proponowana cena:</td>

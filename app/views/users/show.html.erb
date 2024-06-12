@@ -63,10 +63,10 @@
             <p class="font-semibold text-gray-700">Rola: <%= @user.role.capitalize %></p>
           </div>
           <div class="mb-4">
-            <p class="font-semibold text-gray-700">Konto utworzone: <%= @user.created_at.strftime("%B %e, %Y") %></p>
+            <p class="font-semibold text-gray-700">Konto utworzone: <%= I18n.l(@user.created_at, format: :long) %></p>
           </div>
           <div class="mb-4">
-            <p class="font-semibold text-gray-700">Ostatnia aktualizacja: <%= @user.updated_at.strftime("%B %e, %Y") %></p>
+            <p class="font-semibold text-gray-700">Ostatnia aktualizacja: <%= I18n.l(@user.updated_at, format: :long) %></p>
           </div>
         </div>
 

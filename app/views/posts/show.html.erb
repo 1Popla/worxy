@@ -47,8 +47,8 @@
             </p>
           </div>
           <div class="text-sm text-gray-500">
-            <p>Utworzono: <%= @post.created_at.strftime("%B %e, %Y %H:%M") %></p>
-            <p>Ostatnia aktualizacja: <%= @post.updated_at.strftime("%B %e, %Y %H:%M") %></p>
+            <p>Utworzono: <%= I18n.l(@post.created_at, format: :long) %></p>
+            <p>Ostatnia aktualizacja: <%= I18n.l(@post.updated_at, format: :long) %></p>
           </div>
           <% if current_user && current_user != @post.user %>
             <button id="open-modal" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Wyślij ofertę</button>

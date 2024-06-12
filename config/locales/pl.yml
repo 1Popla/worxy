@@ -1,0 +1,179 @@
+pl:
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%B %d, %Y"
+    day_names: 
+      - Niedziela
+      - Poniedziałek
+      - Wtorek
+      - Środa
+      - Czwartek
+      - Piątek
+      - Sobota
+    abbr_day_names: 
+      - Nie
+      - Pon
+      - Wt
+      - Śr
+      - Czw
+      - Pt
+      - Sob
+    month_names: 
+      - ~
+      - Styczeń
+      - Luty
+      - Marzec
+      - Kwiecień
+      - Maj
+      - Czerwiec
+      - Lipiec
+      - Sierpień
+      - Wrzesień
+      - Październik
+      - Listopad
+      - Grudzień
+    abbr_month_names: 
+      - ~
+      - Sty
+      - Lut
+      - Mar
+      - Kwi
+      - Maj
+      - Cze
+      - Lip
+      - Sie
+      - Wrz
+      - Paź
+      - Lis
+      - Gru
+    order: 
+      - :year
+      - :month
+      - :day
+
+  time:
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      short: "%d %b %H:%M"
+      long: "%B %d, %Y %H:%M"
+    am: 'am'
+    pm: 'pm'
+
+  activerecord:
+    attributes:
+      user:
+        current_password: "Aktualne hasło"
+        email: "E-mail"
+        password: "Hasło"
+        password_confirmation: "Potwierdzenie hasła"
+
+    errors:
+      models:
+        user:
+          attributes:
+            current_password:
+              blank: "nie może być puste"
+          messages:
+            blank: "nie może być puste"
+            taken: "jest już zajęte"
+
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      inclusion: "nie jest w liście"
+      exclusion: "jest zarezerwowane"
+      invalid: "jest nieprawidłowe"
+      confirmation: "nie zgadza się z potwierdzeniem"
+      accepted: "musi być zaakceptowane"
+      empty: "nie może być puste"
+      blank: "nie może być puste"
+      present: "musi być puste"
+      too_long: "jest za długie (maksymalnie %{count} znaków)"
+      too_short: "jest za krótkie (minimum %{count} znaków)"
+      wrong_length: "ma nieprawidłową długość (powinno mieć %{count} znaków)"
+      not_a_number: "nie jest liczbą"
+      not_an_integer: "musi być liczbą całkowitą"
+      greater_than: "musi być większe niż %{count}"
+      greater_than_or_equal_to: "musi być większe lub równe %{count}"
+      equal_to: "musi być równe %{count}"
+      less_than: "musi być mniejsze niż %{count}"
+      less_than_or_equal_to: "musi być mniejsze lub równe %{count}"
+      other_than: "musi być inne niż %{count}"
+      odd: "musi być nieparzyste"
+      even: "musi być parzyste"
+      taken: "jest już zajęte"
+      record_invalid: "Walidacja zakończyła się niepowodzeniem: %{errors}"
+      content_type_invalid: "ma nieprawidłowy typ pliku"
+      size_less_than: "musi być mniejszy niż %{size}"
+    template:
+      header:
+        one: "Nie udało się zapisać %{model} z powodu błędu"
+        other: "Nie udało się zapisać %{model} z powodu %{count} błędów"
+      body:
+        one: "Nastąpił 1 błąd:"
+        other: "Nastąpiło %{count} błędów:"
+
+  devise:
+    confirmations:
+      confirmed: "Twój adres e-mail został pomyślnie potwierdzony."
+      send_instructions: "W ciągu kilku minut otrzymasz e-mail z instrukcjami, jak potwierdzić swój adres e-mail."
+      send_paranoid_instructions: "Jeśli Twój adres e-mail istnieje w naszej bazie danych, w ciągu kilku minut otrzymasz e-mail z instrukcjami, jak potwierdzić swój adres e-mail."
+    failure:
+      already_authenticated: "Jesteś już zalogowany."
+      inactive: "Twoje konto nie zostało jeszcze aktywowane."
+      invalid: "Nieprawidłowy %{authentication_keys} lub hasło."
+      locked: "Twoje konto zostało zablokowane."
+      last_attempt: "Masz jeszcze jedną próbę przed zablokowaniem konta."
+      not_found_in_database: "Nieprawidłowy %{authentication_keys} lub hasło."
+      timeout: "Twoja sesja wygasła. Zaloguj się ponownie, aby kontynuować."
+      unauthenticated: "Musisz się zalogować lub zarejestrować, aby kontynuować."
+      unconfirmed: "Musisz potwierdzić swój adres e-mail, aby kontynuować."
+    mailer:
+      confirmation_instructions:
+        subject: "Instrukcje potwierdzenia"
+      reset_password_instructions:
+        subject: "Instrukcje resetowania hasła"
+      unlock_instructions:
+        subject: "Instrukcje odblokowania"
+      email_changed:
+        subject: "Zmieniono adres e-mail"
+      password_change:
+        subject: "Zmieniono hasło"
+    omniauth_callbacks:
+      failure: "Nie udało się zalogować z %{kind} z powodu \"%{reason}\"."
+      success: "Pomyślnie zalogowano z konta %{kind}."
+    passwords:
+      no_token: "Nie możesz uzyskać dostępu do tej strony bez wcześniejszego kliknięcia linku do resetowania hasła w e-mailu. Upewnij się, że użyłeś pełnego adresu URL dostarczonego w e-mailu."
+      send_instructions: "W ciągu kilku minut otrzymasz e-mail z instrukcjami, jak zresetować swoje hasło."
+      send_paranoid_instructions: "Jeśli Twój adres e-mail istnieje w naszej bazie danych, w ciągu kilku minut otrzymasz link do odzyskiwania hasła na adres e-mail."
+      updated: "Twoje hasło zostało pomyślnie zmienione. Jesteś teraz zalogowany."
+      updated_not_active: "Twoje hasło zostało pomyślnie zmienione."
+    registrations:
+      destroyed: "Do widzenia! Twoje konto zostało pomyślnie usunięte. Mamy nadzieję, że wkrótce znów się zobaczymy."
+      signed_up: "Witamy! Zarejestrowano pomyślnie."
+      signed_up_but_inactive: "Zarejestrowano pomyślnie. Jednak nie możemy Cię zalogować, ponieważ Twoje konto nie jest jeszcze aktywowane."
+      signed_up_but_locked: "Zarejestrowano pomyślnie. Jednak nie możemy Cię zalogować, ponieważ Twoje konto jest zablokowane."
+      signed_up_but_unconfirmed: "Wysłano wiadomość z linkiem do potwierdzenia na Twój adres e-mail. Proszę kliknij link, aby aktywować konto."
+      update_needs_confirmation: "Zaktualizowałeś swoje konto pomyślnie, ale musimy zweryfikować Twój nowy adres e-mail. Sprawdź swoją pocztę i kliknij link potwierdzający."
+      updated: "Twoje konto zostało pomyślnie zaktualizowane."
+      updated_but_not_signed_in: "Twoje konto zostało pomyślnie zaktualizowane, ale ponieważ zmieniłeś hasło, musisz się ponownie zalogować."
+    sessions:
+      signed_in: "Pomyślnie zalogowano."
+      signed_out: "Pomyślnie wylogowano."
+      already_signed_out: "Pomyślnie wylogowano."
+    unlocks:
+      send_instructions: "W ciągu kilku minut otrzymasz e-mail z instrukcjami, jak odblokować swoje konto."
+      send_paranoid_instructions: "Jeśli Twoje konto istnieje, w ciągu kilku minut otrzymasz e-mail z instrukcjami, jak je odblokować."
+      unlocked: "Twoje konto zostało pomyślnie odblokowane. Zaloguj się, aby kontynuować."
+  errors:
+    messages:
+      already_confirmed: "został już potwierdzony, spróbuj się zalogować"
+      confirmation_period_expired: "musi być potwierdzony w ciągu %{period}, proszę poprosić o nowy"
+      expired: "wygasł, proszę poprosić o nowy"
+      not_found: "nie znaleziono"
+      not_locked: "nie był zablokowany"
+      not_saved:
+        one: "1 błąd uniemożliwił zapisanie tego %{resource}:"
+        other: "%{count} błędów uniemożliwiło zapisanie tego %{resource}:"
