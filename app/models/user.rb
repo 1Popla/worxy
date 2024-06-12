@@ -29,4 +29,8 @@ class User < ApplicationRecord
     avg = received_opinions.average(:stars).round(2)
     avg % 1 == 0 ? avg.to_i : avg
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
