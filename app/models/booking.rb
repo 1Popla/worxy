@@ -9,6 +9,11 @@ class Booking < ApplicationRecord
   validate :end_date_after_start_date
   validates :offered_price, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :start_date_offer, presence: true, allow_nil: true
+  has_many :notifications, as: :notifiable
+
+  def pending_negotiation?
+    notifications.where(action: 'sent you a negotiation request', read_at: nil).exists?
+  end
 
   private
 

@@ -89,8 +89,38 @@
         <div class="mt-8 flex space-x-4">
           <%= link_to 'Edytuj zlecenie', edit_booking_path(@booking), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
           <%= link_to 'Wróć', dashboard_index_path, class: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded' %>
+
+          <% if @booking.status == 'completed' %>
+            <p class="text-orange-500 text-sm mt-2">Zlecenie zostało pomyślnie ukończone.</p>
+          <% else %>
+            <% if @booking.pending_negotiation? %>
+              <%= button_to 'Zakończ zlecenie z proponowaną ceną', complete_with_offered_price_booking_path(@booking), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed', disabled: true %>
+              <button id="negotiate-modal-open-btn" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed" disabled>Negocjuj proponowaną cenę</button>
+              <p class="text-red-500 text-sm mt-2">Przed zaakceptowaniem użytkownik musi potwierdzić cenę</p>
+            <% else %>
+              <%= button_to 'Zakończ zlecenie z proponowaną ceną', complete_with_offered_price_booking_path(@booking), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded' %>
+              <button id="negotiate-modal-open-btn" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Negocjuj proponowaną cenę</button>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div id="negotiate-modal" class="fixed inset-0 hidden items-center justify-center z-50">
+  <div class="bg-black bg-opacity-50 absolute inset-0"></div>
+  <div class="bg-white rounded-lg shadow-lg p-6 z-50 w-full max-w-lg mx-auto">
+    <h2 class="text-2xl font-semibold mb-4">Negocjuj proponowaną cenę</h2>
+    <%= form_with url: negotiate_price_booking_path(@booking), method: :post, local: true do |form| %>
+      <div class="mb-4">
+        <%= form.label :new_price_offer, "Nowa cena", class: "block text-sm font-medium text-gray-700" %>
+        <%= form.number_field :new_price_offer, placeholder: "Nowa cena", class: "form-input mt-1 block w-full" %>
+      </div>
+      <div class="flex justify-end space-x-4">
+        <button type="button" id="negotiate-modal-close-btn" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Anuluj</button>
+        <%= form.submit 'Wyślij', class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+      </div>
+    <% end %>
   </div>
 </div>

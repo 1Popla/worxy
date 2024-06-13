@@ -10,16 +10,27 @@ class NotificationsController < ApplicationController
   end
 
   def accept_request
-    post = @notification.notifiable
+    @notification = Notification.find(params[:id])
+    notifiable = @notification.notifiable
 
-    booking = Booking.create(
-      user: @notification.actor,
-      post: post,
-      status: :pending,
-      start_date: @notification.start_date_offer || Time.now,
-      end_date: (@notification.start_date_offer || Time.now) + 1.week,
-      offered_price: @notification.price_offer
-    )
+    if notifiable.is_a?(Post)
+      post = notifiable
+      booking = Booking.create(
+        user: @notification.actor,
+        post: post,
+        status: :pending,
+        start_date: @notification.start_date_offer || Time.now,
+        end_date: (@notification.start_date_offer || Time.now) + 1.week,
+        offered_price: @notification.price_offer
+      )
+    elsif notifiable.is_a?(Booking)
+      booking = notifiable
+      booking.update(
+        offered_price: @notification.price_offer,
+        start_date: @notification.start_date_offer || booking.start_date,
+        end_date: (@notification.start_date_offer || booking.start_date) + 1.week
+      )
+    end
 
     if booking.persisted?
       @notification.update(read_at: Time.zone.now)
@@ -27,7 +38,7 @@ class NotificationsController < ApplicationController
         recipient: @notification.actor,
         actor: current_user,
         action: "request accepted",
-        notifiable: post,
+        notifiable: notifiable,
         price_offer: @notification.price_offer,
         start_date_offer: @notification.start_date_offer
       )

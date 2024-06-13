@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_booking, only: [:show, :edit, :update, :destroy, :complete_with_offered_price, :negotiate_price]
   before_action :check_user, only: [:edit, :update, :destroy]
   before_action :check_user_view, only: [:show]
   before_action :set_selectable_users_and_posts, only: [:new, :edit, :create, :update]
@@ -73,6 +73,27 @@ class BookingsController < ApplicationController
     end
   end
 
+  def complete_with_offered_price
+    @booking.update(status: 'completed', offered_price: @booking.offered_price)
+    redirect_to @booking, notice: "Booking completed with the offered price."
+  end
+
+  def negotiate_price
+    recipient = current_user == @booking.user ? @booking.post.user : @booking.user
+
+    Notification.create(
+      recipient: recipient,
+      actor: current_user,
+      action: "sent you a negotiation request",
+      notifiable: @booking,
+      message: params[:message],
+      price_offer: params[:new_price_offer],
+      start_date_offer: @booking.start_date
+    )
+    
+    redirect_to @booking, notice: "Negotiation request sent successfully."
+  end
+
   private
 
   def set_booking
@@ -80,7 +101,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:post_id, :status, :visible_to_user_id, :start_date, :end_date, :post_price)
+    params.require(:booking).permit(:post_id, :status, :visible_to_user_id, :start_date, :end_date, :offered_price)
   end
 
   def check_user
