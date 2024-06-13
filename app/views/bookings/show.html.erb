@@ -90,13 +90,17 @@
           <%= link_to 'Edytuj zlecenie', edit_booking_path(@booking), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
           <%= link_to 'Wróć', dashboard_index_path, class: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded' %>
 
-          <% if @booking.pending_negotiation? %>
-            <%= button_to 'Zakończ zlecenie z proponowaną ceną', complete_with_offered_price_booking_path(@booking), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed', disabled: true %>
-            <button id="negotiate-modal-open-btn" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed" disabled>Negocjuj proponowaną cenę</button>
-            <p class="text-red-500 text-sm mt-2">Przed zaakceptowaniem użytkownik musi potwierdzić cenę</p>
+          <% if @booking.status == 'completed' %>
+            <p class="text-orange-500 text-sm mt-2">Zlecenie zostało pomyślnie ukończone.</p>
           <% else %>
-            <%= button_to 'Zakończ zlecenie z proponowaną ceną', complete_with_offered_price_booking_path(@booking), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded' %>
-            <button id="negotiate-modal-open-btn" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Negocjuj proponowaną cenę</button>
+            <% if @booking.pending_negotiation? %>
+              <%= button_to 'Zakończ zlecenie z proponowaną ceną', complete_with_offered_price_booking_path(@booking), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed', disabled: true %>
+              <button id="negotiate-modal-open-btn" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed" disabled>Negocjuj proponowaną cenę</button>
+              <p class="text-red-500 text-sm mt-2">Przed zaakceptowaniem użytkownik musi potwierdzić cenę</p>
+            <% else %>
+              <%= button_to 'Zakończ zlecenie z proponowaną ceną', complete_with_offered_price_booking_path(@booking), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded' %>
+              <button id="negotiate-modal-open-btn" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Negocjuj proponowaną cenę</button>
+            <% end %>
           <% end %>
         </div>
       </div>
