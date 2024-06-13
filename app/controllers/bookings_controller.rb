@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_booking, only: [:show, :edit, :update, :destroy]
+  before_action :set_booking, only: [:show, :edit, :update, :destroy, :complete_with_offered_price, :negotiate_price]
   before_action :check_user, only: [:edit, :update, :destroy]
   before_action :check_user_view, only: [:show]
   before_action :set_selectable_users_and_posts, only: [:new, :edit, :create, :update]
@@ -71,6 +71,26 @@ class BookingsController < ApplicationController
       format.html { redirect_to bookings_url, notice: "Booking was successfully destroyed." }
       format.turbo_stream
     end
+  end
+
+  def complete_with_offered_price
+    @booking.update(status: 'completed', offered_price: @booking.offered_price)
+    redirect_to @booking, notice: "Booking completed with the offered price."
+  end
+
+  def negotiate_price
+    @booking = Booking.find(params[:id])
+    Notification.create(
+      recipient: @booking.user,
+      actor: current_user,
+      action: "sent you a negotiation request",
+      notifiable: @booking,
+      message: params[:message],
+      price_offer: params[:new_price_offer],
+      start_date_offer: @booking.start_date
+    )
+    
+    redirect_to @booking, notice: "Negotiation request sent successfully."
   end
 
   private

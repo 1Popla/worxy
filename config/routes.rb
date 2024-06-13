@@ -14,9 +14,14 @@ Rails.application.routes.draw do
       post :generate_description
     end
   end
+
   resources :bookings do
     collection do
       get "calendar"
+    end
+    member do
+      post :complete_with_offered_price
+      post :negotiate_price
     end
   end
 
