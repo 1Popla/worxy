@@ -79,9 +79,10 @@ class BookingsController < ApplicationController
   end
 
   def negotiate_price
-    @booking = Booking.find(params[:id])
+    recipient = current_user == @booking.user ? @booking.post.user : @booking.user
+
     Notification.create(
-      recipient: @booking.user,
+      recipient: recipient,
       actor: current_user,
       action: "sent you a negotiation request",
       notifiable: @booking,
@@ -100,7 +101,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:post_id, :status, :visible_to_user_id, :start_date, :end_date, :post_price)
+    params.require(:booking).permit(:post_id, :status, :visible_to_user_id, :start_date, :end_date, :offered_price)
   end
 
   def check_user
