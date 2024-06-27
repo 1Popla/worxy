@@ -21,6 +21,9 @@ gem "jquery-rails"
 gem "turbo-rails"
 gem "rails-ujs"
 gem "simple_calendar"
+gem 'aws-sdk-s3'
+gem 'activestorage', require: false
+
 
 gem "dotenv", groups: [:development, :test]
 
