@@ -68,124 +68,64 @@
 
         
         <!-- Header -->
-        <header id="header">
-            <div class="header-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="logo">
-                            <a href="index.html"><img src="images/worxy-logo-cropped.png" alt="Logo" style="width: 75%;"></a>
-                        </div>
-                     <div class="contact-place" id="contact-container" style="cursor: pointer;">
+ <nav class="bg-white shadow-md fixed w-full top-0 md:hidden z-50">
+        <div class="container mx-auto flex items-center justify-between p-4">
+            <!-- Mobile Logo -->
+            <div class="logo">
+                <a href="#"><img src="images/worxy-logo-cropped.png" alt="Logo" class="w-20"></a>
+            </div>
+            <!-- Mobile Login -->
+            <div class="contact-place flex items-center cursor-pointer border border-yellow-300 rounded-lg p-2 bg-yellow-300 text-black font-bold" id="contact-container" onclick="window.location.href='login.html'">
+                <i class="fas fa-user-circle mr-2 text-black"></i>
+                <div>
+                    <span class="text-black">Zaloguj się</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<header id="header" class="pt-16 md:pt-0">
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="logo">
+                        <a href="#"><img src="images/worxy-logo-cropped.png" alt="Logo" style="width: 75%;"></a>
+                    </div>
+                    <div class="contact-place" id="contact-container" style="cursor: pointer;">
                         <div class="cp-01 phone">
                             <div class="cp-inner">
-                            <div class="icon flaticon-phone41"></div>
-                            <div class="phone-text">
-                                <span class="text">Kliknij!</span>
-                                <span class="numbers">aby się zalogować</span>
-                            </div>
+                                <div class="icon"><i class="fas fa-user fa-3x"></i></div>
+                                <div class="phone-text">
+                                    <span class="text">Kliknij!</span>
+                                    <span class="numbers">aby się zalogować</span>
+                                </div>
                             </div>
                         </div>
 
                         <div class="cp-01 mail">
                             <div class="cp-inner">
-                            <div class="icon flaticon-email19"></div>
-                            <div class="phone-text">
-                                <span class="text">Contact with E-mail</span>
-                                <a href="mailto:info@yourmail.com" class="numbers">info@yourmail.com</a>
-                            </div>
+                                <div class="icon flaticon-email19"></div>
+                                <div class="phone-text">
+                                    <span class="text">Contact with E-mail</span>
+                                    <a href="mailto:info@yourmail.com" class="numbers">info@yourmail.com</a>
+                                </div>
                             </div>    
                         </div>
-                        </div>
+                    </div>
 
-                        <div class="top-social-media">
-                            <ul class="social-media">
-                                <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#" class="vimeo"><i class="fa fa-vimeo"></i></a></li>
-                            </ul>
-                        </div>
+                    <div class="top-social-media">
+                        <ul class="social-media">
+                            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#" class="vimeo"><i class="fa fa-vimeo"></i></a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
+        </div>
+    </header>
 
-            <div class="header-bottom">
-                <div class="primary-menu">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                <div class="menu navbar-expand-lg">
-                                    <div class="menu-inner">
-                                        <div class="navbar-header justify-content-between">
-                                            <a href="index.html" class="menu-logo"><img src="images/worxy-logo-cropped.png" alt="Logo" style="width: 50%;"></a>
-                                            <div class="bar-part">
-                                                <div class="search-icon d-lg-none">
-                                                    <i class="fa fa-search"></i>
-                                                </div>
-                                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
-                                                    <i class="fa fa-bars"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="collapse navbar-collapse justify-content-center" id="bs-example-navbar-collapse-1">
-                                            <ul class="navbar-menu">
-                                                <li class="active-menu">
-                                                    <a href="#"><span>Home</span></a>
-                                                    <ul class="sub-menu">
-                                                        <li><a href="index.html">Home page One</a></li>
-                                                        <li class="current-page"><a href="home2.html">Home Page Two</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="about.html"><span>About Us</span></a></li>
-                                                <li>
-                                                    <a href="#"><span>Pages</span></a>
-                                                    <ul class="sub-menu">
-                                                        <li><a href="service.html">Service</a></li>
-                                                        <li><a href="service-detail.html">Service Detail</a></li>
-                                                        <li><a href="team.html">Team Member</a></li>
-                                                        <li><a href="error-page.html">404 Page</a></li>
-                                                    </ul> 
-                                                </li>
-                                                <li>
-                                                    <a href="#"><span>Portfolio</span></a>
-                                                    <ul class="sub-menu">
-                                                        <li><a href="portfolio-style1.html">Portfolio Style One</a></li>
-                                                        
-                                                        <li><a href="portfolio-style2.html">Portfolio Style Two</a></li>
-                                                        <li><a href="portfolio-massonry.html">Portfolio Massonry</a></li>
-                                                        <li><a href="project-single.html">Portfolio Single</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><span>Blog</span></a>
-                                                    <ul class="sub-menu">
-                                                        <li><a href="single.html">Blog Single</a></li>
-                                                        <li><a href="blog-page.html">Blog Page</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a href="online-store.html"><span>Shop</span></a>
-                                                    <ul class="sub-menu">
-                                                        <li><a href="online-store.html">Shop</a></li>
-                                                        <li><a href="product-detail.html">Product Details</a></li>
-                                                        <li><a href="product-cart.html">Product Cart</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="contact.html"><span>Contact</span></a></li>
-                                            </ul>
-                                            <div class="search-icon d-none d-lg-block">
-                                                <i class="fa fa-search"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
         <!-- Header -->
 
 
@@ -263,8 +203,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="section-title">
-                            <h2 class="title"><span>Our Best Service</span></h2>
-                            <p class="title-desc">Our Service is so much helpful for your business</p>
+                            <h2 class="title"><span>Nasze usługi</span></h2>
+                            <p class="title-desc">Usługi w Worxy są tworzone z myślą o naszych użytkownikach.</p>
                         </div>
                         <div class="best-service">
                             <div class="best-service-container">
@@ -272,72 +212,72 @@
                                     <div class="swiper-slide">
                                         <div class="div post-item">
                                             <div class="post-thumb">
-                                                <a href="single.html"><img src="images/home2/news/01.jpg" alt="Thumb"></a>
+                                                <a href="#"><img src="images/home2/news/ai-posts.jpg" alt="Thumb"></a>
                                             </div>
                                             <div class="content">
-                                                <h3 class="title"><a href="#">Bathroom Plumbing</a></h3>
-                                                <div class="excerpt">Intrinsic impact quality with cross media service. Compelling provide for very low tailers via maintainable.</div>
-                                                <a href="single.html" class="custom-btn">Learn More</a>
+                                                <h3 class="title"><a href="#">Sztuczna inteligencja</a></h3>
+                                                <div class="excerpt">Sztuczna inteligencja w aplikacji Worxy usprawni prowadzenie Twojego biznesu i pozwoli zaoszczędzic mnóstwo czasu. AI w aplikacji Worxy pozwoli Ci tworzyć profensjonalne ogłoszenia w kilka sekund.</div>
+                                                <a href="#" class="custom-btn">Zobacz więcej</a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="swiper-slide">
                                         <div class="div post-item">
                                             <div class="post-thumb">
-                                                <a href="single.html"><img src="images/home2/news/02.jpg" alt="Thumb"></a>
+                                                <a href="#"><img src="images/home2/news/home-service-money.jpg" alt="Thumb"></a>
                                             </div>
                                             <div class="content">
-                                                <h3 class="title"><a href="#">Tankless Water Heaters</a></h3>
-                                                <div class="excerpt">Intrinsic impact quality with cross media service. Compelling provide for very low tailers via maintainable.</div>
-                                                <a href="single.html" class="custom-btn">Learn More</a>
+                                                <h3 class="title"><a href="#">Darmowe członkostwo</a></h3>
+                                                <div class="excerpt">Nasi użytkownicy mogą korzystać z funkcjonalności Worxy zupełnie ZA DARMO, dzięki czemu mogą przeznaczyć środki na rozwój ich biznesów.</div>
+                                                <a href="#" class="custom-btn">Zobacz więcej</a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="swiper-slide">
                                         <div class="div post-item">
                                             <div class="post-thumb">
-                                                <a href="single.html"><img src="images/home2/news/03.jpg" alt="Thumb"></a>
+                                                <a href="#"><img src="images/home2/news/close-up-men-handshake.jpg" alt="Thumb"></a>
                                             </div>
                                             <div class="content">
-                                                <h3 class="title"><a href="#">Solve Repair Water Line</a></h3>
-                                                <div class="excerpt">Intrinsic impact quality with cross media service. Compelling provide for very low tailers via maintainable.</div>
-                                                <a href="single.html" class="custom-btn">Learn More</a>
+                                                <h3 class="title"><a href="#">Twój głos się liczy!</a></h3>
+                                                <div class="excerpt">Głos naszych użytkowników jest na pierwszym miejscu. Dzięki systemowi opinii, będziemy mogli wysłuchać waszych uwag aby usprawnić Worxy według potrzeb użytkowników.</div>
+                                                <a href="#" class="custom-btn">Zobacz więcej</a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="swiper-slide">
                                         <div class="div post-item">
                                             <div class="post-thumb">
-                                                <a href="single.html"><img src="images/home2/news/01.jpg" alt="Thumb"></a>
+                                                <a href="#"><img src="images/home2/news/01.jpg" alt="Thumb"></a>
                                             </div>
                                              <div class="content">
                                                 <h3 class="title"><a href="#">Solve Repair Water Line</a></h3>
                                                 <div class="excerpt">Intrinsic impact quality with cross media service. Compelling provide for very low tailers via maintainable.</div>
-                                                <a href="single.html" class="custom-btn">Learn More</a>
+                                                <a href="#" class="custom-btn">Zobacz więcej</a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="swiper-slide">
                                         <div class="div post-item">
                                             <div class="post-thumb">
-                                                <a href="single.html"><img src="images/home2/news/02.jpg" alt="Thumb"></a>
+                                                <a href="#"><img src="images/home2/news/02.jpg" alt="Thumb"></a>
                                             </div>
                                              <div class="content">
                                                 <h3 class="title"><a href="#">Solve Repair Water Line</a></h3>
                                                 <div class="excerpt">Intrinsic impact quality with cross media service. Compelling provide for very low tailers via maintainable.</div>
-                                                <a href="single.html" class="custom-btn">Learn More</a>
+                                                <a href="#" class="custom-btn">Zobacz więcej</a>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="swiper-slide">
                                         <div class="div post-item">
                                             <div class="post-thumb">
-                                                <a href="single.html"><img src="images/home2/news/03.jpg" alt="Thumb"></a>
+                                                <a href="#"><img src="images/home2/news/03.jpg" alt="Thumb"></a>
                                             </div>
                                              <div class="content">
                                                 <h3 class="title"><a href="#">Solve Repair Water Line</a></h3>
                                                 <div class="excerpt">Intrinsic impact quality with cross media service. Compelling provide for very low tailers via maintainable.</div>
-                                                <a href="single.html" class="custom-btn">Learn More</a>
+                                                <a href="#" class="custom-btn">Zobacz więcej</a>
                                             </div>
                                         </div>
                                     </div>
@@ -451,30 +391,30 @@
                         <div class="row">
                             <div class="our-client-say">
                                 <div class="section-title">
-                                    <h2 class="title"><span>What Our Client Say</span></h2>
-                                    <p class="title-desc">Our Service is so much helpful for your business</p>
+                                    <h2 class="title"><span>Co o nas mówią?</span></h2>
+                                    <p class="title-desc">Nasze usługi pomogą Ci znaleźć klientów!</p>
                                 </div>
                                 <div class="flexslider">
                                     <ul class="slides">
-                                        <li data-thumb="images/home1/thumb/testimonial-thumb1.jpg">
+                                        <li data-thumb="images/home1/thumb/piotr-janowski.jpg">
                                             <div class="testimonial-content">
-                                                <p class="description">Distinctively brand an expanded array of leadership without next-generation catalyst for change. Enthusiastically to generates user-centric imperatives via holistic intellectual capital. Unique and fabricate emerging action item.</p>
-                                                <h3 class="client-name">Jafor Ali</h3>
-                                                <strong class="designation">Customer</strong>
+                                                <p class="description">Jako wykonawca, serwis Worxy jest dla mnie absolutnym strzałem w dziesiątkę. Platforma jest darmowa, co pozwala mi na swobodne szukanie klientów bez żadnych kosztów, co w innych serwisach bywa problematyczne.</p>
+                                                <h3 class="client-name">Piotr Janowski</h3>
+                                                <strong class="designation">Użytkownik Worxy</strong>
                                             </div>
                                         </li>
-                                        <li data-thumb="images/home1/thumb/testimonial-thumb2.jpg">
+                                        <li data-thumb="images/home1/thumb/dawid-szymaniuk.jpg">
                                             <div class="testimonial-content">
-                                                <p class="description">Distinctively brand an expanded array of leadership without next-generation catalyst for change. Enthusiastically to generates user-centric imperatives via holistic intellectual capital. Unique and fabricate emerging action item.</p>
-                                                <h3 class="client-name">Jafor Ali</h3>
-                                                <strong class="designation">Customer</strong>
+                                                <p class="description">Aplikacja Worxy stawia użytkownika na pierwszym miejscu, zawsze słuchając jego potrzeb i opinii. Klient jest dla nich najważniejszy, co sprawia, że korzystanie z serwisu jest przyjemne i efektywne. Polecam!</p>
+                                                <h3 class="client-name">Dawid Szymaniuk</h3>
+                                                <strong class="designation">Użytkownik Worxy</strong>
                                             </div>
                                         </li>
-                                        <li data-thumb="images/home1/thumb/testimonial-thumb3.jpg">
+                                        <li data-thumb="images/home1/thumb/anna-kaminska.jpg">
                                             <div class="testimonial-content">
-                                                <p class="description">Distinctively brand an expanded array of leadership without next-generation catalyst for change. Enthusiastically to generates user-centric imperatives via holistic intellectual capital. Unique and fabricate emerging action item.</p>
-                                                <h3 class="client-name">Jafor Ali</h3>
-                                                <strong class="designation">Customer</strong>
+                                                <p class="description">Polecam Worxy! Aplikacja posiada system opinii, który ostrzega użytkowników przed potencjalnymi oszustami. Dostępne są zarówno negatywne, jak i pozytywne opinie, co pozwala na świadome wybory zleceniodawców.</p>
+                                                <h3 class="client-name">Anna Kamińska</h3>
+                                                <strong class="designation">Użytkownik Worxy</strong>
                                             </div>
                                         </li>
                                     </ul>
@@ -492,20 +432,20 @@
                         <div class="cd-container">
                             <div class="cd-container-inner">
                                 <div class="cd-item">
-                                    <span class="number-outer"><span class="number">128</span></span>
-                                    <span class="count-name">Successfull Projects</span>
+                                    <span class="number-outer"><span class="number">128</span>+</span>
+                                    <span class="count-name">Fachowców</span>
                                 </div>
                                 <div class="cd-item">
-                                    <span class="number-outer"><span class="number">150</span></span>
-                                    <span class="count-name">Clients</span>
+                                    <span class="number-outer"><span class="number">150</span>+</span>
+                                    <span class="count-name">Użytkowników dziennie</span>
                                 </div>
                                 <div class="cd-item">
                                     <span class="number-outer"><span class="number">100</span>+</span>
-                                    <span class="count-name">Example Projects</span>
+                                    <span class="count-name">Zleceń</span>
                                 </div>
                                 <div class="cd-item">
                                     <span class="number-outer"><span class="number">75</span>+</span>
-                                    <span class="count-name">Services</span>
+                                    <span class="count-name">Kategorii</span>
                                 </div>
                             </div>
                         </div>
@@ -518,60 +458,60 @@
                 <div class="container">
                     <div class="row">
                         <div class="section-title">
-                            <h2 class="title"><span>Pricing Table</span></h2>
-                            <p class="title-desc">Out Service is so much helpful for your business</p>
+                            <h2 class="title"><span>Cennik</span></h2>
+                            <p class="title-desc">Worxy zadba o rozwój Twojej firmy!</p>
                         </div>
                         <div class="pricing-wrapper">
                             <div class="row justify-content-center g-4">
                                 <div class="col-xl-4 col-md-6 col-12">
                                     <div class="pricing-item">
-                                        <h3 class="pricing-title">Plumber Services</h3>
+                                        <h3 class="pricing-title">Podstawowa</h3>
                                         <div class="price">
-                                            <div class="currency"><span>$99.00</span></div>
-                                            <span class="month">Per Month</span>
+                                            <div class="currency"><span>$FREE</span></div>
+                                            <span class="month">Miesięcznie</span>
                                         </div>
                                         <ul>
-                                            <li>1 Website</li>
-                                            <li>Unlimited Bandwidth</li>
-                                            <li>100 GB Disk Space</li>
-                                            <li>10 My SQL Database</li>
-                                            <li>100 E-mail Address</li>
+                                            <li>Tworzenie ogłoszeń</li>
+                                            <li>Mapa zleceń</li>
+                                            <li>System opinii</li>
+                                            <li>Kalendarz zleceń</li>
+                                            <li>Negocjacje cen</li>
                                         </ul>
-                                        <a href="#" class="custom-btn">Join Now</a>
+                                        <a href="#" class="custom-btn">Dołącz</a>
                                     </div>
                                 </div>
                                 <div class="col-xl-4 col-md-6 col-12">
                                     <div class="pricing-item table-border">
-                                        <h3 class="pricing-title">Drainage Services</h3>
+                                        <h3 class="pricing-title">Grupowa</h3>
                                         <div class="price">
-                                            <div class="currency"><span>$99.00</span></div>
-                                            <span class="month">Per Month</span>
+                                            <div class="currency"><span>$FREE</span></div>
+                                            <span class="month">Miesięcznie</span>
                                         </div>
                                         <ul>
-                                            <li>1 Website</li>
-                                            <li>Unlimited Bandwidth</li>
-                                            <li>100 GB Disk Space</li>
-                                            <li>10 My SQL Database</li>
-                                            <li>100 E-mail Address</li>
+                                            <li>Funkcje Sztucznej inteligencji</li>
+                                            <li>Prywatne wiadomości</li>
+                                            <li>Raporty zarobkowe</li>
+                                            <li>Wsparcie techniczne</li>
+                                            <li>System powiadomień</li>
                                         </ul>
-                                        <a href="#" class="custom-btn">Join Now</a>
+                                        <a href="#" class="custom-btn">Dołącz</a>
                                     </div>
                                 </div>
                                 <div class="col-xl-4 col-md-6 col-12">
                                     <div class="pricing-item">
-                                        <h3 class="pricing-title">Heating Services</h3>
+                                        <h3 class="pricing-title">Zaawansowana</h3>
                                         <div class="price">
-                                            <div class="currency"><span>$99.00</span></div>
-                                            <span class="month">Per Month</span>
+                                            <div class="currency"><span>$FREE</span></div>
+                                            <span class="month">Miesięcznie</span>
                                         </div>
                                         <ul>
-                                            <li>1 Website</li>
-                                            <li>Unlimited Bandwidth</li>
-                                            <li>100 GB Disk Space</li>
-                                            <li>10 My SQL Database</li>
-                                            <li>100 E-mail Address</li>
+                                            <li>Raporty zarobkowe</li>
+                                            <li>Mapa zleceń</li>
+                                            <li>System opinii</li>
+                                            <li>Kalendarz zleceń</li>
+                                            <li>Negocjacje cen</li>
                                         </ul>
-                                        <a href="#" class="custom-btn">Join Now</a>
+                                        <a href="#" class="custom-btn">Dołącz</a>
                                     </div>
                                 </div>
                             </div>
@@ -580,30 +520,29 @@
                 </div>
             </div>
 
-            
             <div class="recent-news">
                 <div class="overlay">
                     <div class="container">
                         <div class="row">
                             <div class="section-title">
-                                <h2 class="title"><span>Recent News</span></h2>
-                                <p class="title-desc">Out Service is so much helpful for your business</p>
+                                <h2 class="title"><span>Najnowsze Informacje</span></h2>
+                                <p class="title-desc">Bądź na bieżąco z nowościami Worxy</p>
                             </div>
                             <div class="news-area">
                                 <div class="row justify-content-center g-4">
                                     <div class="col-xl-4 col-sm-6 col-12">
                                         <div class="post-item">
                                             <div class="post-thumb">
-                                                <a href="single.html"><img src="images/home2/news//01.jpg" alt="news thumb"></a>
+                                                <a href="#"><img src="images/home2/news/ai-posts.jpg" alt="news thumb"></a>
                                                 <div class="content">
-                                                    <h2 class="title"><a href="single.html">Seamlessly Inhance</a></h2>
+                                                    <h2 class="title"><a href="#">Nowe Usługi Dostępne</a></h2>
                                                     <div class="meta">
-                                                        <span class="calendar"><i class="fa fa-calendar"></i> Jan 02, 2022</span>
+                                                        <span class="calendar"><i class="fa fa-calendar"></i> 02 Sty, 2022</span>
                                                         <span>|</span>
-                                                        <a href="single.html"><i class="fa fa-comment-o"></i> 08 Comments</a>
+                                                        <a href="#"><i class="fa fa-comment-o"></i> 00 Komentarzy</a>
                                                     </div>
-                                                    <div class="excerpt">Collaboratively conceptualize high-quality alignments ubiquitous. Synergistically pandemic ideas</div>
-                                                    <a href="single.html" class="custom-btn">Load More</a>
+                                                    <div class="excerpt">Worxy rozszerza ofertę o nowe usługi, zapewniając jeszcze większy komfort i wygodę w zamawianiu usług domowych.</div>
+                                                    <a href="#" class="custom-btn">Załaduj więcej</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -611,16 +550,16 @@
                                     <div class="col-xl-4 col-sm-6 col-12">
                                         <div class="post-item">
                                             <div class="post-thumb">
-                                                <a href="single.html"><img src="images/home2/news//02.jpg" alt="news thumb"></a>
+                                                <a href="#"><img src="images/home2/news/home-service-money.jpg" alt="news thumb"></a>
                                                 <div class="content">
-                                                    <h2 class="title"><a href="single.html">Seamlessly Inhance</a></h2>
+                                                    <h2 class="title"><a href="#">Oszczędzaj z Worxy</a></h2>
                                                     <div class="meta">
-                                                        <span class="calendar"><i class="fa fa-calendar"></i> Jan 02, 2022</span>
+                                                        <span class="calendar"><i class="fa fa-calendar"></i> 02 Sty, 2022</span>
                                                         <span>|</span>
-                                                        <a href="single.html"><i class="fa fa-comment-o"></i> 08 Comments</a>
+                                                        <a href="#"><i class="fa fa-comment-o"></i> 00 Komentarzy</a>
                                                     </div>
-                                                    <div class="excerpt">Collaboratively conceptualize high-quality alignments ubiquitous. Synergistically pandemic ideas</div>
-                                                    <a href="single.html" class="custom-btn">Load More</a>
+                                                    <div class="excerpt">Dowiedz się, jak dzięki Worxy możesz zaoszczędzić na usługach domowych, korzystając z naszych specjalnych ofert.</div>
+                                                    <a href="#" class="custom-btn">Załaduj więcej</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -628,16 +567,16 @@
                                     <div class="col-xl-4 col-sm-6 col-12">
                                         <div class="post-item">
                                             <div class="post-thumb">
-                                                <a href="single.html"><img src="images/home2/news//03.jpg" alt="news thumb"></a>
+                                                <a href="#"><img src="images/home2/news/close-up-men-handshake.jpg" alt="news thumb"></a>
                                                 <div class="content">
-                                                    <h2 class="title"><a href="single.html">Seamlessly Inhance</a></h2>
+                                                    <h2 class="title"><a href="#">Zaufani Profesjonaliści</a></h2>
                                                     <div class="meta">
-                                                        <span class="calendar"><i class="fa fa-calendar"></i> Jan 02, 2022</span>
+                                                        <span class="calendar"><i class="fa fa-calendar"></i> 02 Sty, 2022</span>
                                                         <span>|</span>
-                                                        <a href="single.html"><i class="fa fa-comment-o"></i> 08 Comments</a>
+                                                        <a href="#"><i class="fa fa-comment-o"></i> 00 Komentarzy</a>
                                                     </div>
-                                                    <div class="excerpt">Collaboratively conceptualize high-quality alignments ubiquitous. Synergistically pandemic ideas</div>
-                                                    <a href="single.html" class="custom-btn">Load More</a>
+                                                    <div class="excerpt">Worxy współpracuje tylko z zaufanymi i sprawdzonymi profesjonalistami, aby zapewnić najwyższą jakość usług domowych.</div>
+                                                    <a href="#" class="custom-btn">Załaduj więcej</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -649,8 +588,9 @@
                 </div>
             </div>
 
+
             
-            <div id="expert">
+            <div id="expert" class="hidden">
                 <div class="container">
                     <div class="row">
                         <div class="expert-inner">
@@ -711,7 +651,7 @@
         </div>
 
         
-        <div id="client">
+        <div id="client" class="hidden">
             <div class="container">
                 <div class="row">
                     <div class="client-area">
@@ -774,10 +714,10 @@
                         <div class="footer-top-inner">
                             <div class="news-letter">
                                 <div class="news-letter-inner">
-                                    <h3 class="title">Join Our Newsletter</h3>
+                                    <h3 class="title">Dołącz do naszego newslettera</h3>
                                     <form action="#">
-                                        <input type="email" placeholder="Enter Your E-mail Here">
-                                        <button type="submit">Subscribe</button>
+                                        <input type="email" placeholder="Wpisz swój e-mail tutaj">
+                                        <button type="submit">Subskrybuj</button>
                                     </form>
                                 </div>
                             </div>
@@ -791,14 +731,12 @@
                         <div class="col-xl-3 col-sm-6 col-12">
                             <div class="row">
                                 <div class="widget about">
-                                    <h3 class="title">About Us</h3>
-                                    <div class="excerpt">Proactively incentivize superior benefits and resource maximizing supply chains. Efficiently transform interoperable interfaces.</div>
+                                    <h3 class="title">O Worxy</h3>
+                                    <div class="excerpt">Worxy to Twoje kompleksowe rozwiązanie do zamawiania usług domowych. Szybko, wygodnie i bezpiecznie rezerwuj usługi, których potrzebujesz.</div>
                                     <address class="address">
                                         <ul>
-                                            <li><span><i class="fa fa-home"></i></span> New Chokey Road, USA.</li>
-                                            <li><span><i class="fa fa-phone"></i></span> +088 0100 000000.</li>
-                                            <li><span><i class="fa fa-envelope-o"></i></span> <a href="">www.contact@yourmail.com</a></li>
-                                            <li><span><i class="fa fa-globe"></i></span> <a href="">www.yourwebsite.com</a></li>
+                                            <li><span><i class="fa fa-envelope-o"></i></span> <a href="#">kontakt@worxy.com</a></li>
+                                            <li><span><i class="fa fa-globe"></i></span> <a href="#">www.worxy.com</a></li>
                                         </ul>
                                     </address>
                                 </div>
@@ -807,38 +745,38 @@
                         <div class="col-xl-3 col-sm-6 col-12">
                             <div class="row">
                                 <div class="widget w-plr-post">
-                                    <h3 class="title">Popular Post</h3>
+                                    <h3 class="title">Popularne posty</h3>
                                     <ul class="small-post-list">
                                         <li class="post-item">
                                             <div class="post-thumb">
-                                                <a href="single.html"><img src="images/footer/01.jpg" alt="Footer Thumb"></a>
+                                                <a href="#"><img src="images/footer/01.jpg" alt="Footer Thumb"></a>
                                             </div>
                                             <div class="content">
-                                                <h4><a href="single.html">Monotonectally develop seamless e-business.</a></h4>
+                                                <h4><a href="#">Jak znaleźć najlepszego hydraulika w okolicy.</a></h4>
                                                 <div class="meta">
-                                                    <span class="calendar"><i class="fa fa-calendar"></i> Jan 02, 2022</span>
+                                                    <span class="calendar"><i class="fa fa-calendar"></i> 02 stycznia 2022</span>
                                                 </div>
                                             </div>
                                         </li>
                                         <li class="post-item">
                                             <div class="post-thumb">
-                                                <a href="single.html"><img src="images/footer/02.jpg" alt="Footer Thumb"></a>
+                                                <a href="#"><img src="images/footer/02.jpg" alt="Footer Thumb"></a>
                                             </div>
                                             <div class="content">
-                                                <h4><a href="single.html">Monotonectally develop seamless e-business.</a></h4>
+                                                <h4><a href="#">Top 5 porad dotyczących konserwacji domu.</a></h4>
                                                 <div class="meta">
-                                                    <span class="calendar"><i class="fa fa-calendar"></i> Jan 02, 2022</span>
+                                                    <span class="calendar"><i class="fa fa-calendar"></i> 02 stycznia 2022</span>
                                                 </div>
                                             </div>
                                         </li>
                                         <li class="post-item">
                                             <div class="post-thumb">
-                                                <a href="single.html"><img src="images/footer/03.jpg" alt="Footer Thumb"></a>
+                                                <a href="#"><img src="images/footer/03.jpg" alt="Footer Thumb"></a>
                                             </div>
                                             <div class="content">
-                                                <h4><a href="single.html">Monotonectally develop seamless e-business.</a></h4>
+                                                <h4><a href="#">Jak przygotować dom na zimę.</a></h4>
                                                 <div class="meta">
-                                                    <span class="calendar"><i class="fa fa-calendar"></i> Jan 02, 2022</span>
+                                                    <span class="calendar"><i class="fa fa-calendar"></i> 02 stycznia 2022</span>
                                                 </div>
                                             </div>
                                         </li>
@@ -848,15 +786,15 @@
                         </div>
                         <div class="col-xl-3 col-sm-6 col-12">
                             <div class="widget wtps">
-                                <h3 class="title">Top Services</h3>
+                                <h3 class="title">Najlepsze usługi</h3>
                                 <ul class="top-service">
-                                    <li><a href="#"><i class="fa fa-angle-right"></i>Clogged Drains</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i>Camera Inspection</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i>Sewage Backups</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i>Plumbing Repairs</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i>Frozen Pipes</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i>Common Repairs</a></li>
-                                    <li><a href="#"><i class="fa fa-angle-right"></i>Trenchless Pipe</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i>Zatkane odpływy</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i>Inspekcja kamerą</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i>Cofanie ścieków</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i>Naprawy hydrauliczne</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i>Zamarznięte rury</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i>Typowe naprawy</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i>Bezwykopowe rury</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -877,11 +815,11 @@
                     <div class="row">
                         <div class="footer-bottom-area">
                             <div class="footer-bottom-left">
-                                <p>&copy; 2022. All Rights Reserved.</p>
+                                <p>&copy; 2024. Wszelkie prawa zastrzeżone.</p>
                             </div>
                             <div class="footer-bottom-right">
-                                <a href="single.html" class="term-condition"> Terms and Conditions</a>
-                                <a href="#" class="privacy-policy"> Privacy Policy</a>
+                                <a href="#" class="term-condition"> Warunki korzystania</a>
+                                <a href="#" class="privacy-policy"> Polityka prywatności</a>
                                 <ul class="social-media">
                                     <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
                                     <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
@@ -894,6 +832,7 @@
                 </div>
             </div>
         </footer>
+
 
         <div class="scroll-top">
             <div class="scrollToTop">
@@ -911,11 +850,12 @@
 </html>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  var contactContainer = document.getElementById("contact-container");
-  if (contactContainer) {
+  var contactContainers = document.querySelectorAll("#contact-container");
+  contactContainers.forEach(function(contactContainer) {
     contactContainer.addEventListener("click", function(e) {
       window.location.href = "/users/sign_in";
     });
-  }
+  });
 });
+
 </script>
