@@ -1,4 +1,4 @@
-<div class="w-64 bg-white shadow-lg">
+<div class="hidden lg:block w-64 bg-white shadow-lg">
   <nav class="h-full px-4 py-6">
     <div class="mb-8">
       <a href="/dashboard"><img src="/images/worxy-logo-cropped.png" alt="Logo" style="width: 75%;"></a>
@@ -67,3 +67,96 @@
     </ul>
   </nav>
 </div>
+
+<!-- Mobile Navbar -->
+<div class="lg:hidden bg-white shadow-lg fixed top-0 left-0 right-0 z-50 min-w-[300px]">
+  <div class="flex items-center justify-between p-4">
+    <a href="/dashboard"><img src="/images/worxy-logo-cropped.png" alt="Logo" style="width: 50%;"></a>
+    <button id="hamburger" class="text-gray-700 focus:outline-none">
+      <i class="fas fa-bars text-2xl"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Mobile Dropdown Menu -->
+<div id="mobile-menu" class="lg:hidden hidden fixed top-16 left-0 bg-white w-full max-h-0 overflow-hidden rounded-t-lg shadow-lg z-40 transition-all duration-300 ease-in-out">
+  <div class="p-4">
+    <ul class="space-y-2">
+      <li>
+        <%= link_to new_post_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+          <i class="fas fa-plus mr-2 text-gray-700"></i>
+          Nowe ogłoszenie
+        <% end %>
+      </li>
+      <li>
+        <%= link_to posts_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+          <i class="fas fa-list mr-2 text-gray-700"></i>
+          Ogłoszenia
+        <% end %>
+      </li>
+      <li>
+        <%= link_to user_posts_posts_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+          <i class="fas fa-user mr-2 text-gray-700"></i>
+          Moje Ogłoszenia
+        <% end %>
+      </li>
+      <li>
+        <%= link_to conversations_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+          <i class="fas fa-comments mr-2 text-gray-700"></i>
+          Wiadomości
+        <% end %>
+      </li>
+      <li>
+        <%= link_to notifications_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+          <i class="fas fa-bell mr-2 text-gray-700"></i>
+          Moje Powiadomienia
+        <% end %>
+      </li>
+      <li>
+        <%= link_to bookings_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+          <i class="fas fa-briefcase mr-2 text-gray-700"></i>
+          Zlecenia
+        <% end %>
+      </li>
+      <li>
+        <%= link_to calendar_bookings_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+          <i class="fas fa-calendar-alt mr-2 text-gray-700"></i>
+          Zobacz Kalendarz
+        <% end %>
+      </li>
+      <li>
+        <%= link_to dashboard_map_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+          <i class="fas fa-map mr-2 text-gray-700"></i>
+          Mapa Zleceń
+        <% end %>
+      </li>
+      <li>
+        <%= link_to user_path(current_user), data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+          <i class="fas fa-user-circle mr-2 text-gray-700"></i>
+          Profil Użytkownika
+        <% end %>
+      </li>
+      <li>
+        <%= link_to destroy_user_session_path, method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'block p-2 rounded hover:bg-gray-200 text-red-600' do %>
+          <i class="fas fa-sign-out-alt mr-2 text-gray-700"></i>
+          Wyloguj
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', function () {
+    var menu = document.getElementById('mobile-menu');
+    if (menu.classList.contains('hidden')) {
+      menu.classList.remove('hidden');
+      menu.style.maxHeight = menu.scrollHeight + 'px';
+    } else {
+      menu.style.maxHeight = '0';
+      menu.addEventListener('transitionend', function () {
+        menu.classList.add('hidden');
+      }, { once: true });
+    }
+  });
+</script>
