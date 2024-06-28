@@ -1,8 +1,11 @@
 class Post < ApplicationRecord
   belongs_to :user
   belongs_to :category
+  belongs_to :subcategory, class_name: 'Category', optional: true
+
   has_many :bookings, dependent: :destroy
   has_many_attached :images
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :title, :description, :price, :category_id, presence: true
 

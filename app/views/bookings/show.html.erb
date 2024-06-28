@@ -1,77 +1,79 @@
-<div class="flex h-screen bg-gray-100 overflow-hidden">
-  <%= render 'shared/dashboard/sidebar' %>
+<div class="flex-1 overflow-auto">
+  <div class="container mx-auto px-4 py-8">
+    <div class="bg-white shadow-lg rounded-lg p-8 relative">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="col-span-2">
+          <h1 class="text-3xl font-semibold mb-6 border-b pb-4">Szczegóły Rezerwacji</h1>
+          <table class="w-full text-left">
+            <tbody>
+              <tr class="border-b">
+                <td class="font-medium py-2">Nazwa ogłoszenia:</td>
+                <td class="py-2"><%= link_to @booking.post.title, @booking.post, class: "text-blue-500 hover:text-blue-700" %></td>
+              </tr>
+              <tr class="border-b">
+                <td class="font-medium py-2">Status:</td>
+                <td class="py-2"><%= @booking.status %></td>
+              </tr>
+              <tr class="border-b">
+                <td class="font-medium py-2">Data rozpoczęcia:</td>
+                <td class="py-2"><%= I18n.l(@booking.start_date, format: :long) %></td>
+              </tr>
+              <tr class="border-b">
+                <td class="font-medium py-2">Data zakończenia:</td>
+                <td class="py-2"><%= I18n.l(@booking.end_date, format: :long) %></td>
+              </tr>
+              <tr class="border-b">
+                <td class="font-medium py-2">Proponowana cena:</td>
+                <td class="py-2"><%= number_to_currency(@booking.offered_price) %></td>
+              </tr>
+            </tbody>
+          </table>
 
-  <div class="flex-1 overflow-auto">
-    <div class="container mx-auto px-4 py-8">
-      <div class="bg-white shadow-lg rounded-lg p-8 relative">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="col-span-2">
-            <h1 class="text-3xl font-semibold mb-6 border-b pb-4">Szczegóły Rezerwacji</h1>
-            <table class="w-full text-left">
-              <tbody>
-                <tr class="border-b">
-                  <td class="font-medium py-2">Nazwa ogłoszenia:</td>
-                  <td class="py-2"><%= link_to @booking.post.title, @booking.post, class: "text-blue-500 hover:text-blue-700" %></td>
-                </tr>
-                <tr class="border-b">
-                  <td class="font-medium py-2">Status:</td>
-                  <td class="py-2"><%= @booking.status %></td>
-                </tr>
-                <tr class="border-b">
-                  <td class="font-medium py-2">Data rozpoczęcia:</td>
-                  <td class="py-2"><%= @booking.start_date.strftime("%B %e, %Y %H:%M") %></td>
-                </tr>
-                <tr class="border-b">
-                  <td class="font-medium py-2">Data zakończenia:</td>
-                  <td class="py-2"><%= @booking.end_date.strftime("%B %e, %Y %H:%M") %></td>
-                </tr>
-              </tbody>
-            </table>
+          <h2 class="text-2xl font-semibold mt-8 mb-4 border-b pb-2">Dane ogłoszenia:</h2>
+          <table class="w-full text-left">
+            <tbody>
+              <tr class="border-b">
+                <td class="font-medium py-2">Opis:</td>
+                <td class="py-2"><%= @booking.post.description %></td>
+              </tr>
+              <tr class="border-b">
+                <td class="font-medium py-2">Pierwotna cena:</td>
+                <td class="py-2"><%= number_to_currency(@booking.post.price) %></td>
+              </tr>
+              <tr class="border-b">
+                <td class="font-medium py-2">Priorytet:</td>
+                <td class="py-2"><%= @booking.post.availability %></td>
+              </tr>
+              <tr class="border-b">
+                <td class="font-medium py-2">Dane kontaktowe:</td>
+                <td class="py-2"><%= @booking.post.contact_information %></td>
+              </tr>
+            </tbody>
+          </table>
 
-            <h2 class="text-2xl font-semibold mt-8 mb-4 border-b pb-2">Dane ogłoszenia:</h2>
-            <table class="w-full text-left">
-              <tbody>
-                <tr class="border-b">
-                  <td class="font-medium py-2">Opis:</td>
-                  <td class="py-2"><%= @booking.post.description %></td>
-                </tr>
-                <tr class="border-b">
-                  <td class="font-medium py-2">Cena:</td>
-                  <td class="py-2"><%= number_to_currency(@booking.post.price) %></td>
-                </tr>
-                <tr class="border-b">
-                  <td class="font-medium py-2">Priorytet:</td>
-                  <td class="py-2"><%= @booking.post.availability %></td>
-                </tr>
-                <tr class="border-b">
-                  <td class="font-medium py-2">Dane kontaktowe:</td>
-                  <td class="py-2"><%= @booking.post.contact_information %></td>
-                </tr>
-              </tbody>
-            </table>
-
-            <h2 class="text-2xl font-semibold mt-8 mb-4 border-b pb-2">Dane zleceniodawcy:</h2>
-            <table class="w-full text-left">
-              <tbody>
-                <tr class="border-b">
-                  <td class="font-medium py-2">Zabookowane przez:</td>
-                  <td class="py-2"><%= @booking.user.email %></td>
-                </tr>
-                <% if @booking.visible_to_user %>
-                <tr class="border-b">
-                  <td class="font-medium py-2">Widoczne dla:</td>
-                  <td class="py-2"><%= @booking.visible_to_user.email %></td>
-                </tr>
-                <% end %>
-                <tr class="border-b">
-                  <td class="font-medium py-2">Utworzone przez:</td>
-                  <td class="py-2"><%= @booking.post.user.email %></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <% if @booking.post.images.attached? %>
-          <div class="md:absolute md:top-8 md:right-8">
+          <h2 class="text-2xl font-semibold mt-8 mb-4 border-b pb-2">Dane zleceniodawcy:</h2>
+          <table class="w-full text-left">
+            <tbody>
+              <tr class="border-b">
+                <td class="font-medium py-2">Zabookowane przez:</td>
+                <td class="py-2"><%= @booking.user.email %></td>
+              </tr>
+              <% if @booking.visible_to_user %>
+              <tr class="border-b">
+                <td class="font-medium py-2">Widoczne dla:</td>
+                <td class="py-2"><%= @booking.visible_to_user.email %></td>
+              </tr>
+              <% end %>
+              <tr class="border-b">
+                <td class="font-medium py-2">Utworzone przez:</td>
+                <td class="py-2"><%= @booking.post.user.email %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <% if @booking.post.images.attached? %>
+        <div class="md:relative md:top-0 md:right-0 md:col-span-1 flex justify-center">
+          <div>
             <p class="text-center font-medium mb-2">Zdjęcie główne zgłoszenia</p>
             <div class="flex justify-center items-center w-48 h-36">
               <div class="w-full h-full object-cover rounded-lg border border-gray-200 shadow-sm overflow-hidden">
@@ -79,14 +81,54 @@
               </div>
             </div>
           </div>
-          <% end %>
         </div>
+        <% end %>
+      </div>
 
-        <div class="mt-8 flex space-x-4">
-          <%= link_to 'Edytuj zlecenie', edit_booking_path(@booking), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
-          <%= link_to 'Wróć', dashboard_index_path, class: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded' %>
-        </div>
+      <div class="mt-8 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+        <%= link_to 'Edytuj zlecenie', edit_booking_path(@booking), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-center' %>
+        <%= link_to 'Wróć', dashboard_index_path, class: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded text-center' %>
+
+        <% if @booking.status == 'completed' %>
+          <p class="text-orange-500 text-sm mt-2 text-center">Zlecenie zostało pomyślnie ukończone.</p>
+        <% else %>
+          <% if @booking.pending_negotiation? %>
+            <%= button_to 'Zakończ zlecenie z proponowaną ceną', complete_with_offered_price_booking_path(@booking), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed text-center', disabled: true %>
+            <button id="negotiate-modal-open-btn" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed text-center" disabled>Negocjuj proponowaną cenę</button>
+            <p class="text-red-500 text-sm mt-2 text-center">Przed zaakceptowaniem użytkownik musi potwierdzić cenę</p>
+          <% else %>
+            <%= button_to 'Zakończ zlecenie z proponowaną ceną', complete_with_offered_price_booking_path(@booking), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-center' %>
+            <button id="negotiate-modal-open-btn" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-center">Negocjuj proponowaną cenę</button>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<div id="negotiate-modal" class="fixed inset-0 hidden items-center justify-center z-50">
+  <div class="bg-black bg-opacity-50 absolute inset-0"></div>
+  <div class="bg-white rounded-lg shadow-lg p-6 z-50 w-full max-w-lg mx-auto">
+    <h2 class="text-2xl font-semibold mb-4">Negocjuj proponowaną cenę</h2>
+    <%= form_with url: negotiate_price_booking_path(@booking), method: :post, local: true do |form| %>
+      <div class="mb-4">
+        <%= form.label :new_price_offer, "Nowa cena", class: "block text-sm font-medium text-gray-700" %>
+        <%= form.number_field :new_price_offer, placeholder: "Nowa cena", class: "form-input mt-1 block w-full" %>
+      </div>
+      <div class="flex justify-end space-x-4">
+        <button type="button" id="negotiate-modal-close-btn" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Anuluj</button>
+        <%= form.submit 'Wyślij', class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  document.getElementById('negotiate-modal-open-btn').addEventListener('click', function () {
+    document.getElementById('negotiate-modal').classList.remove('hidden');
+  });
+  
+  document.getElementById('negotiate-modal-close-btn').addEventListener('click', function () {
+    document.getElementById('negotiate-modal').classList.add('hidden');
+  });
+</script>

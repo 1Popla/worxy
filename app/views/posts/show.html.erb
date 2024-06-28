@@ -1,18 +1,17 @@
-<div class="flex h-screen bg-gray-100 overflow-hidden">
-  <%= render 'shared/dashboard/sidebar' %>
-
   <div class="flex-1 overflow-auto">
     <div class="container mx-auto px-4 py-8">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-2 bg-white shadow-lg rounded-lg p-6">
           <% if @post.images.attached? %>
             <div class="mb-4 border border-gray-200 rounded-lg p-4">
-              <div id="main-image-container" class="mb-4 cursor-pointer">
-                <%= image_tag @post.images.first.variant(resize_to_fill: [600, 400]), id: "main-image", class: "object-cover w-full h-full rounded-lg", data: { full_url: url_for(@post.images.first.variant(resize_to_fill: [600, 400])) } %>
+              <div id="main-image-container" class="mb-4 cursor-pointer w-full h-96 flex items-center justify-center">
+                <%= image_tag @post.images.first.variant(resize_to_fill: [600, 400]).processed, id: "main-image", class: "object-contain max-w-full max-h-full", data: { full_url: url_for(@post.images.first) } %>
               </div>
               <div id="thumbnails" class="flex space-x-2">
                 <% @post.images.each_with_index do |image, index| %>
-                  <%= image_tag image.variant(resize_to_fill: [100, 100]), class: "thumbnail cursor-pointer w-24 h-24 object-cover rounded-lg border border-gray-300", data: { index: index, full_url: url_for(image.variant(resize_to_fill: [600, 400])) } %>
+                  <div class="w-24 h-24 overflow-hidden flex items-center justify-center border border-gray-300 rounded-lg">
+                    <%= image_tag image.variant(resize_to_fill: [100, 100]).processed, class: "thumbnail cursor-pointer object-contain max-w-full max-h-full", data: { index: index, full_url: url_for(image) } %>
+                  </div>
                 <% end %>
               </div>
             </div>
@@ -45,15 +44,31 @@
             </p>
           </div>
           <div class="text-sm text-gray-500">
-            <p>Utworzono: <%= @post.created_at.strftime("%B %e, %Y %H:%M") %></p>
-            <p>Ostatnia aktualizacja: <%= @post.updated_at.strftime("%B %e, %Y %H:%M") %></p>
+            <p>Utworzono: <%= I18n.l(@post.created_at, format: :long) %></p>
+            <p>Ostatnia aktualizacja: <%= I18n.l(@post.updated_at, format: :long) %></p>
           </div>
-            <% if current_user.worker? %>
-              <button id="open-modal" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Wyślij ofertę</button>
-            <% end %>
+          <% if current_user && current_user != @post.user %>
+            <button id="open-modal" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Wyślij ofertę</button>
+          <% end %>
         </div>
         <div class="lg:col-span-1">
-          <div id="showMap" data-lat="<%= @post.latitude %>" data-lng="<%= @post.longitude %>" class="w-full h-64 lg:h-full rounded-lg border"></div>
+          <div class="bg-white shadow-lg rounded-lg p-6 mb-6">
+            <h2 class="text-lg font-bold text-gray-800 mb-4">Informacje twórcy zlecenia</h2>
+            <p class="font-semibold text-gray-700">Imię: <%= @post.user.first_name %></p>
+            <% if user_signed_in? %>
+              <p class="font-semibold text-gray-700">Numer telefonu: <%= @post.user.phone_number %></p>
+            <% else %>
+              <p class="font-semibold text-gray-700">Numer telefonu: <%= link_to 'Zaloguj się, aby zobaczyć', new_user_session_path, class: 'text-blue-500' %></p>
+            <% end %>
+            <%= link_to 'Zobacz profil', user_path(@post.user), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 inline-block' %>
+            <% if user_signed_in? && current_user != @post.user %>
+              <%= button_to 'Wyślij wiadomość', conversations_path(conversation: { recipient_id: @post.user.id }), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4 inline-block' %>
+            <% end %>
+          </div>
+          <div class="bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-lg font-bold text-gray-800 mb-4">Lokalizacja zlecenia</h2>
+            <div id="showMap" data-lat="<%= @post.latitude %>" data-lng="<%= @post.longitude %>" class="w-full h-64 lg:h-64 rounded-lg border"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -64,7 +79,7 @@
   <div class="relative w-full h-full max-w-screen-lg max-h-screen flex items-center justify-center">
     <button id="close-lightbox" class="absolute top-4 right-4 text-white text-2xl">×</button>
     <button id="prev-image" class="absolute left-4 text-white text-2xl px-2 bg-black bg-opacity-50 rounded-full">‹</button>
-    <img id="lightbox-image" class="object-contain transform scale-150 max-w-full max-h-full" src="" alt="Image" />
+    <img id="lightbox-image" class="object-contain max-w-full max-h-[calc(100vh-15rem)]" src="" alt="Image" />
     <button id="next-image" class="absolute right-4 text-white text-2xl px-2 bg-black bg-opacity-50 rounded-full">›</button>
   </div>
   <div id="lightbox-thumbnails" class="flex justify-center space-x-2 p-4 mt-2"></div>
@@ -72,16 +87,23 @@
 
 <div id="request-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
   <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-    <h2 class="text-lg font-bold mb-4">Send Request</h2>
+    <h2 class="text-lg font-bold mb-4">Wyślij ofertę</h2>
     <%= form_with(url: send_request_post_path(@post), method: :post, local: true, html: { id: "send-request-form" }) do |f| %>
       <div class="mb-4">
-        <%= f.label :message, "Message", class: "block text-gray-700 font-bold mb-2" %>
-        <%= f.text_area :message, rows: 4, class: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+        <%= f.label :message, "Wiadomość", class: "block text-gray-700 font-bold mb-2" %>
+        <%= f.text_area :message, rows: 4, class: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder: "Wpisz swoją wiadomość..." %>
+      </div>
+      <div class="mb-4">
+        <%= f.label :price_offer, "Proponowana cena", class: "block text-gray-700 font-bold mb-2" %>
+        <%= f.text_field :price_offer, class: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder: "Wpisz proponowaną cenę..." %>
+      </div>
+      <div class="mb-4">
+        <%= f.label :start_date_offer, "Proponowana data rozpoczęcia", class: "block text-gray-700 font-bold mb-2" %>
+        <%= f.date_field :start_date_offer, class: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder: "Wybierz datę rozpoczęcia..." %>
       </div>
       <div class="flex justify-end">
-        <button type="button" id="cancel-modal" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Cancel</button>
-        <%= f.submit "Send Request", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+        <button type="button" id="cancel-modal" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">Anuluj</button>
+        <%= f.submit "Wyślij ofertę", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
       </div>
     <% end %>
   </div>
-</div>

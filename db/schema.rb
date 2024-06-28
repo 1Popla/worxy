@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_28_154100) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_28_000915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,6 +51,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_154100) do
     t.integer "visible_to_user_id"
     t.datetime "start_date"
     t.datetime "end_date"
+    t.decimal "offered_price"
+    t.date "start_date_offer"
     t.index ["post_id"], name: "index_bookings_on_post_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
@@ -59,6 +61,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_154100) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "parent_id"
+    t.index ["parent_id"], name: "index_categories_on_parent_id"
   end
 
   create_table "conversations", force: :cascade do |t|
@@ -96,6 +100,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_154100) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "message"
+    t.decimal "price_offer"
+    t.date "start_date_offer"
     t.index ["actor_id"], name: "index_notifications_on_actor_id"
     t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id"
     t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
@@ -129,6 +135,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_154100) do
     t.string "state"
     t.string "country"
     t.integer "category_id"
+    t.integer "subcategory_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

@@ -1,71 +1,82 @@
-<div class="flex h-screen bg-gray-100 overflow-hidden">
-  <%= render 'shared/dashboard/sidebar' %>
+<div class="flex-1 overflow-auto">
+  <div class="container mx-auto px-4 py-8">
+    <%= form_with model: @post, id: dom_id(@post), local: true, html: { multipart: true } do |f| %>
+      <div class="grid grid-cols-1 gap-6 mb-6">
+        <div>
+          <%= f.label :title, "Tytuł", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :title, placeholder: 'Tytuł', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+        </div>
+        <div>
+          <%= f.label :images, "Zdjęcia", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <div id="image-upload-gallery" class="flex flex-wrap gap-4">
+            <% 6.times do |i| %>
+              <div class="relative border-dashed border-2 border-gray-400 rounded-lg w-32 h-32 flex items-center justify-center overflow-hidden" id="upload-container-<%= i %>">
+                <input type="file" name="post[images][]" id="upload-input-<%= i %>" class="hidden" accept="image/*" multiple>
+                <div class="text-center cursor-pointer" onclick="document.getElementById('upload-input-<%= i %>').click()">
+                  <span id="plus-sign-<%= i %>" class="text-4xl text-gray-400">+</span>
+                  <img id="uploaded-image-<%= i %>" class="absolute top-0 left-0 w-full h-full object-cover hidden">
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div>
+          <%= f.label :description, "Opis", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_area :description, placeholder: 'Opis', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', rows: 20, data: { target: "posts.description" } %>
+          <button type="button" id="generate-description" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Generuj opis przy użyciu AI</button>
+          <p id="generating-message" class="mt-2 text-blue-500 hidden" data-target="posts.generatingMessage">Generowanie opisu...</p>
+        </div>
+      </div>
 
-  <div class="flex-1 overflow-auto">
-    <div class="container mx-auto px-4 py-8">
-      <%= form_with model: @post, id: dom_id(@post), local: true do |f| %>
-        <div class="grid grid-cols-1 gap-6 mb-6">
-          <div>
-            <%= f.label :title, "Tytuł", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-            <%= f.text_field :title, placeholder: 'Tytuł', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-          </div>
-          <div>
-            <%= f.label :images, "Zdjęcia", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-            <%= f.file_field :images, multiple: true, class: 'block w-full text-sm text-gray-700 border rounded cursor-pointer focus:outline-none focus:border-purple-500', id: 'images' %>
-            <div id="selected-images" class="mt-4"></div>
-          </div>
-          <div>
-            <%= f.label :description, "Opis", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-            <%= f.text_area :description, placeholder: 'Opis', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', rows: 10 %>
-          </div>
+      <div class="grid grid-cols-2 gap-6 mb-6">
+        <div>
+          <%= f.label :price, "Cena", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.number_field :price, placeholder: 'Cena', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', step: 0.01 %>
         </div>
-        
-        <div class="grid grid-cols-2 gap-6 mb-6">
-          <div>
-            <%= f.label :price, "Cena", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-            <%= f.number_field :price, placeholder: 'Cena', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', step: 0.01 %>
-          </div>
-          <div>
-            <%= f.label :category_id, "Kategoria", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-            <%= f.collection_select :category_id, @categories, :id, :name, { prompt: "Wybierz kategorię." }, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-          </div>
-          <div>
-            <%= f.label :availability, "Dostępność", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-            <%= f.text_field :availability, placeholder: 'Dostępność', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-          </div>
-          <div>
-            <%= f.label :contact_information, "Informacje kontaktowe", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-            <%= f.text_field :contact_information, placeholder: 'Informacje kontaktowe', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-          </div>
-          <div>
-            <%= f.label :street, "Ulica", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-            <%= f.text_field :street, id: 'street', placeholder: 'Ulica', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-          </div>
-          <div>
-            <%= f.label :city, "Miasto", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-            <%= f.text_field :city, id: 'city', placeholder: 'Miasto', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-          </div>
-          <div>
-            <%= f.label :state, "Województwo", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-            <%= f.text_field :state, id: 'state', placeholder: 'Województwo', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-          </div>
-          <div>
-            <%= f.label :country, "Kraj", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-            <%= f.text_field :country, id: 'country', placeholder: 'Kraj', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-          </div>
+        <div>
+          <%= f.label :category_id, "Kategoria", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.collection_select :category_id, @categories, :id, :name, { prompt: "Wybierz kategorię" }, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', id: 'post_category_id' %>
         </div>
-        
-        <div class="hidden">
-          <%= f.text_field :latitude, id: 'latitude', class: 'hidden' %>
-          <%= f.text_field :longitude, id: 'longitude', class: 'hidden' %>
+        <div>
+          <%= f.label :subcategory_id, "Podkategoria", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.collection_select :subcategory_id, [], :id, :name, { prompt: "Wybierz podkategorię" }, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', id: 'post_subcategory_id' %>
         </div>
-        
-        <div class="mb-6">
-            <div id="map" data-lat="<%= @post.latitude %>" data-lng="<%= @post.longitude %>" class="w-full h-64 border rounded-lg"></div>
+        <div>
+          <%= f.label :availability, "Dostępność", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :availability, placeholder: 'Dostępność', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
         </div>
-        
-        <%= f.submit 'Zatwierdź', class: 'w-full bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline', data: { turbo: false } %>
-      <% end %>
-    </div>
+        <div>
+          <%= f.label :contact_information, "Informacje kontaktowe", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :contact_information, placeholder: 'Informacje kontaktowe', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+        </div>
+        <div>
+          <%= f.label :street, "Ulica", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :street, id: 'street', placeholder: 'Ulica', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+        </div>
+        <div>
+          <%= f.label :city, "Miasto", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :city, id: 'city', placeholder: 'Miasto', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+        </div>
+        <div>
+          <%= f.label :state, "Województwo", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :state, id: 'state', placeholder: 'Województwo', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+        </div>
+        <div>
+          <%= f.label :country, "Kraj", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :country, id: 'country', placeholder: 'Kraj', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+        </div>
+      </div>
+
+      <div class="hidden">
+        <%= f.text_field :latitude, id: 'latitude', class: 'hidden' %>
+        <%= f.text_field :longitude, id: 'longitude', class: 'hidden' %>
+      </div>
+
+      <div class="mb-6">
+        <div id="map" data-lat="<%= @post.latitude %>" data-lng="<%= @post.longitude %>" class="w-full h-64 border rounded-lg"></div>
+      </div>
+
+      <%= f.submit 'Zatwierdź', class: 'w-full bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline', data: { turbo: false } %>
+    <% end %>
   </div>
 </div>

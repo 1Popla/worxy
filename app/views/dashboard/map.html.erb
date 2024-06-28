@@ -1,26 +1,3 @@
-<div class="min-h-screen bg-gray-100 overflow-x-hidden">
-  <nav class="bg-white px-6 py-4 shadow">
-    <div class="flex flex-col container mx-auto md:flex-row md:items-center md:justify-between">
-      <div class="flex justify-between items-center">
-        <div>
-          <a href="/dashboard" class="text-gray-800 text-xl font-bold md:text-2xl">Worxy</a>
-        </div>
-        <div class="md:hidden">
-          <button id="nav-toggle" class="text-gray-800 focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div id="nav-menu" class="hidden md:flex flex-col md:flex-row md:-mx-4 absolute right-0 mt-12 bg-white border border-gray-200 rounded-lg shadow-lg z-50 md:relative md:mt-0 md:border-none md:bg-transparent md:shadow-none">
-        <div class="flex flex-col md:flex-row">
-          <%= render '/shared/dashboard/links' %>
-        </div>
-      </div>
-    </div>
-  </nav>
-  
   <div class="container mx-auto px-4 py-8">
     <div class="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
       <h2 class="text-2xl font-bold mb-4">Mapa twoich zleceń:</h2>

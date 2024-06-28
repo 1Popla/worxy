@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get "users/show"
-  devise_for :users, controllers: {registrations: "users/registrations"}
+  devise_for :users, controllers: { registrations: "users/registrations" }
 
   get "up" => "rails/health#show", :as => :rails_health_check
 
@@ -11,11 +11,19 @@ Rails.application.routes.draw do
     end
     collection do
       get "user_posts"
+      post :generate_description
     end
   end
+
+  resources :subcategories, only: [:index]
+
   resources :bookings do
     collection do
       get "calendar"
+    end
+    member do
+      post :complete_with_offered_price
+      post :negotiate_price
     end
   end
 
@@ -34,6 +42,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show] do
     resources :opinions, only: [:new, :create]
+    resources :portfolio_images, only: [:new, :create, :destroy]
   end
 
   get "dashboard/map", to: "dashboard#map"
