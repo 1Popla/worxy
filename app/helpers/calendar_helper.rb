@@ -16,7 +16,7 @@ module CalendarHelper
 
   def day_names_in_polish
     days = %w[Pon Wt Śr Czw Pt Sob Nd]
-    content_tag :div, class: 'grid grid-cols-7 text-center font-bold' do
+    content_tag :div, class: 'grid grid-cols-7 text-center font-bold hidden sm:grid' do
       days.map { |day| concat content_tag(:div, day) }
     end
   end
