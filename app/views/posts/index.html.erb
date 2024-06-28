@@ -3,7 +3,7 @@
     <div class="mb-6 flex space-x-4">
       <%= form_with url: posts_path, method: :get, local: true, class: "flex space-x-4 w-full" do |f| %>
         <div class="w-full">
-          <%= f.text_field :search, value: params[:search], placeholder: "Szukaj...", class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+          <%= f.text_field :search, value: params[:search], placeholder: "Szukaj...", class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500", id: "categorySearch" %>
         </div>
         <div class="w-1/4 relative">
           <div class="relative">

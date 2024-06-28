@@ -6,6 +6,8 @@ document.addEventListener("turbo:load", function() {
 
   // Filter dropdown options based on search input
   function filterDropdown(searchInput, selectElement) {
+    if (!searchInput || !selectElement) return;
+
     searchInput.addEventListener('input', function() {
       const searchValue = searchInput.value.toLowerCase();
       Array.from(selectElement.options).forEach(option => {
@@ -16,14 +18,17 @@ document.addEventListener("turbo:load", function() {
   }
 
   if (categorySelect) {
-    filterDropdown(categorySearch, categorySelect);
-
     categorySelect.addEventListener('change', function() {
       const categoryId = this.value;
 
       if (subcategorySelect) {
         fetch(`/subcategories?category_id=${categoryId}`)
-          .then(response => response.json())
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
           .then(data => {
             subcategorySelect.innerHTML = '<option value="">Podkategorie</option>';
             data.forEach(subcategory => {
@@ -40,7 +45,8 @@ document.addEventListener("turbo:load", function() {
             }
 
             filterDropdown(subcategorySearch, subcategorySelect);
-          });
+          })
+          .catch(error => console.error('Fetch error:', error));
       }
     });
 
@@ -60,7 +66,8 @@ document.addEventListener("turbo:load", function() {
           });
 
           filterDropdown(subcategorySearch, subcategorySelect);
-        });
+        })
+        .catch(error => console.error('Fetch error:', error));
     }
   }
 });
