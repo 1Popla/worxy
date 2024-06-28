@@ -13,3 +13,6 @@ import './opinions_rating';
 import './low_rating_modal';
 import './portfolio_modal';
 import './negotiate_offered_price_modal';
+import './post_index_subcategories';
+import './post_new_subcategories';
+import './categories_search';

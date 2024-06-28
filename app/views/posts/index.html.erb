@@ -5,11 +5,15 @@
         <div class="w-full">
           <%= f.text_field :search, value: params[:search], placeholder: "Szukaj...", class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
         </div>
-        <div class="w-1/4">
-          <%= f.collection_select :category, @categories, :id, :name, { prompt: "Wszystkie kategorie", selected: params[:category] }, class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500", data: { remote: true, url: subcategories_path } %>
+        <div class="w-1/4 relative">
+          <div class="relative">
+            <%= f.select :category, options_from_collection_for_select(@categories, :id, :name, selected: params[:category]), { prompt: "Wszystkie kategorie" }, class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500", id: "categorySelect" %>
+          </div>
         </div>
-        <div class="w-1/4">
-          <%= f.collection_select :subcategory, @subcategories, :id, :name, { prompt: "Podkategorie", selected: params[:subcategory] }, class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+        <div class="w-1/4 relative">
+          <div class="relative">
+            <%= f.select :subcategory, options_from_collection_for_select(@subcategories, :id, :name, selected: params[:subcategory]), { prompt: "Podkategorie" }, class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500", id: "subcategorySelect" %>
+          </div>
         </div>
         <%= f.hidden_field :tab, value: params[:tab] %>
         <div>
@@ -50,51 +54,3 @@
     <% end %>
   </div>
 </div>
-
-<script>
-document.addEventListener("turbo:load", function() {
-  const categorySelect = document.querySelector('select[name="category"]');
-  
-  if (categorySelect) {
-    categorySelect.addEventListener('change', function() {
-      const categoryId = this.value;
-      const subcategorySelect = document.querySelector('select[name="subcategory"]');
-      
-      if (subcategorySelect) {
-        fetch(`/subcategories?category_id=${categoryId}`)
-          .then(response => response.json())
-          .then(data => {
-            subcategorySelect.innerHTML = '<option value="">Podkategorie</option>';
-            data.forEach(subcategory => {
-              const option = document.createElement('option');
-              option.value = subcategory.id;
-              option.textContent = subcategory.name;
-              subcategorySelect.appendChild(option);
-            });
-          });
-      }
-    });
-
-    // Re-populate the subcategories if a category is selected and page reloads
-    const selectedCategoryId = categorySelect.value;
-    if (selectedCategoryId) {
-      const subcategorySelect = document.querySelector('select[name="subcategory"]');
-      if (subcategorySelect) {
-        fetch(`/subcategories?category_id=${selectedCategoryId}`)
-          .then(response => response.json())
-          .then(data => {
-            subcategorySelect.innerHTML = '<option value="">Podkategorie</option>';
-            data.forEach(subcategory => {
-              const option = document.createElement('option');
-              option.value = subcategory.id;
-              option.textContent = subcategory.name;
-              option.selected = subcategory.id == "<%= params[:subcategory] %>";
-              subcategorySelect.appendChild(option);
-            });
-          });
-      }
-    }
-  }
-});
-
-</script>

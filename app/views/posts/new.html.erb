@@ -80,31 +80,3 @@
     <% end %>
   </div>
 </div>
-
-<script>
-document.addEventListener("turbo:load", function() {
-  const categorySelect = document.querySelector('#post_category_id');
-  const subcategorySelect = document.querySelector('#post_subcategory_id');
-  
-  if (categorySelect) {
-    categorySelect.addEventListener('change', function() {
-      const categoryId = this.value;
-      
-      // Ensure subcategorySelect exists before attempting to modify it
-      if (subcategorySelect) {
-        fetch(`/subcategories?category_id=${categoryId}`)
-          .then(response => response.json())
-          .then(data => {
-            subcategorySelect.innerHTML = '<option value="">Wybierz podkategorię</option>';
-            data.forEach(subcategory => {
-              const option = document.createElement('option');
-              option.value = subcategory.id;
-              option.textContent = subcategory.name;
-              subcategorySelect.appendChild(option);
-            });
-          });
-      }
-    });
-  }
-});
-</script>
