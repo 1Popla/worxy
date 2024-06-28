@@ -1,12 +1,11 @@
-  <div class="flex-1 overflow-auto">
-    <div class="flex flex-col h-full">
-      <div class="flex-none bg-gray-100 p-4">
-        <h1 class="text-3xl font-bold text-gray-800 text-center">Kalendarz</h1>
-      </div>
-      <div class="flex-grow flex items-center justify-center bg-white p-4">
-        <div class="w-full max-w-6xl">
-          <%= custom_month_calendar(@bookings) %>
-        </div>
+<div class="flex-1 overflow-auto">
+  <div class="flex flex-col h-full">
+    <div class="flex-none bg-gray-100 p-4">
+      <h1 class="text-3xl font-bold text-gray-800 text-center">Kalendarz</h1>
+    </div>
+    <div class="flex-grow flex items-center justify-center bg-white p-4">
+      <div class="w-full max-w-6xl">
+        <%= custom_month_calendar(@bookings) %>
       </div>
     </div>
   </div>
@@ -18,5 +17,4 @@
     </div>
     <button id="closeModal" class="absolute top-0 right-0 m-4 text-gray-700 hover:text-gray-900">&times;</button>
   </div>
-
-
+</div>
