@@ -1,49 +1,72 @@
-  <div class="flex-1 overflow-auto">
-    <div class="container mx-auto px-4 py-8">
-      <div class="mb-6 flex space-x-4">
-        <%= form_with url: posts_path, method: :get, local: true, class: "flex space-x-4 w-full" do |f| %>
-          <div class="w-full">
-            <%= f.text_field :search, value: params[:search], placeholder: "Szukaj...", class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+<div class="flex-1 overflow-auto">
+  <div class="container mx-auto px-4 py-8">
+    <div class="mb-6 space-y-4">
+      <%= form_with url: posts_path, method: :get, local: true, class: "space-y-4 w-full" do |f| %>
+        <div class="w-full">
+          <%= f.text_field :search, value: params[:search], placeholder: "Szukaj...", class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500", id: "categorySearch" %>
+        </div>
+        <div class="flex space-x-4">
+          <div class="w-1/2">
+            <%= f.select :category, options_from_collection_for_select(@categories, :id, :name, selected: params[:category]), { prompt: "Kategorie" }, class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500", id: "categorySelect" %>
           </div>
-          <div class="w-1/4">
-            <%= f.collection_select :category, @categories, :id, :name, { prompt: "Wszystkie kategorie" }, class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+          <div class="w-1/2">
+            <%= f.select :subcategory, options_from_collection_for_select(@subcategories, :id, :name, selected: params[:subcategory]), { prompt: "Podkategorie" }, class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500", id: "subcategorySelect" %>
           </div>
-          <%= f.hidden_field :tab, value: params[:tab] %>
-          <div>
-            <%= f.submit 'Zastosuj', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="mb-6 flex space-x-4">
-        <%= link_to 'Zlecenia klientów', posts_path(tab: 'customer'), class: "p-4 rounded #{params[:tab] == 'worker' ? 'bg-gray-200' : 'bg-blue-500 text-white'}" %>
-        <%= link_to 'Ogłoszenia wykonawców', posts_path(tab: 'worker'), class: "p-4 rounded #{params[:tab] == 'worker' ? 'bg-blue-500 text-white' : 'bg-gray-200'}" %>
-      </div>
-
-      <% if params[:tab] == 'worker' %>
-        <% if @worker_posts.present? %>
-          <%= render 'posts/worker_posts' %>
-          <div class="mt-6">
-            <%= paginate @worker_posts %>
-          </div>
-        <% else %>
-          <div class="w-full text-center">
-            <p>No posts available. Why not create one?</p>
-            <%= link_to 'Add New Post', new_post_path(role: 'worker'), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
-          </div>
-        <% end %>
-      <% else %>
-        <% if @customer_posts.present? %>
-          <%= render 'posts/customer_posts' %>
-          <div class="mt-6">
-            <%= paginate @customer_posts %>
-          </div>
-        <% else %>
-          <div class="w-full text-center">
-            <p>No posts available. Why not create one?</p>
-            <%= link_to 'Add New Post', new_post_path(role: 'customer'), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
-          </div>
-        <% end %>
+        </div>
+        <%= f.hidden_field :tab, value: params[:tab] %>
+        <div class="flex space-x-4">
+          <%= f.submit 'Zastosuj', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+          <%= link_to 'Wyczyść', posts_path, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
+        </div>
       <% end %>
     </div>
+
+    <div class="mb-6 flex space-x-4">
+      <%= link_to 'Zlecenia klientów', posts_path(tab: 'customer', category: params[:category], subcategory: params[:subcategory], search: params[:search]), class: "p-4 rounded w-full md:w-auto text-center #{params[:tab] == 'worker' ? 'bg-gray-200' : 'bg-blue-500 text-white'}" %>
+      <%= link_to 'Ogłoszenia wykonawców', posts_path(tab: 'worker', category: params[:category], subcategory: params[:subcategory], search: params[:search]), class: "p-4 rounded w-full md:w-auto text-center #{params[:tab] == 'worker' ? 'bg-blue-500 text-white' : 'bg-gray-200'}" %>
+    </div>
+
+    <hr class="my-6 border-gray-300">
+
+    <% if params[:category].present? || params[:subcategory].present? || params[:search].present? %>
+      <div class="mb-4">
+        <p>
+          Wyniki wyszukiwania 
+          <% if params[:search].present? %>
+            dla "<%= params[:search] %>"
+          <% end %>
+          <% if params[:category].present? %>
+            w kategorii <%= Category.find(params[:category]).name %>
+          <% end %>
+          <% if params[:subcategory].present? %>
+            <%= " > " + Category.find(params[:subcategory]).name %>
+          <% end %>
+        </p>
+      </div>
+    <% end %>
+
+    <% if params[:tab] == 'worker' %>
+      <% if @worker_posts.present? %>
+        <%= render 'posts/worker_posts' %>
+        <div class="mt-6">
+          <%= paginate @worker_posts %>
+        </div>
+      <% else %>
+        <div class="w-full text-center">
+          <p>Brak wyników wyszukiwania.</p>
+        </div>
+      <% end %>
+    <% else %>
+      <% if @customer_posts.present? %>
+        <%= render 'posts/customer_posts' %>
+        <div class="mt-6">
+          <%= paginate @customer_posts %>
+        </div>
+      <% else %>
+        <div class="w-full text-center">
+          <p>Brak wyników wyszukiwania.</p>
+        </div>
+      <% end %>
+    <% end %>
   </div>
+</div>

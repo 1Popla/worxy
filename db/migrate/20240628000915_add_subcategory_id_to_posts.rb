@@ -1,0 +1,5 @@
+class AddSubcategoryIdToPosts < ActiveRecord::Migration[7.1]
+  def change
+    add_column :posts, :subcategory_id, :integer
+  end
+end
