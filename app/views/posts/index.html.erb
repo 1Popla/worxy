@@ -1,49 +1,100 @@
-  <div class="flex-1 overflow-auto">
-    <div class="container mx-auto px-4 py-8">
-      <div class="mb-6 flex space-x-4">
-        <%= form_with url: posts_path, method: :get, local: true, class: "flex space-x-4 w-full" do |f| %>
-          <div class="w-full">
-            <%= f.text_field :search, value: params[:search], placeholder: "Szukaj...", class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
-          </div>
-          <div class="w-1/4">
-            <%= f.collection_select :category, @categories, :id, :name, { prompt: "Wszystkie kategorie" }, class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
-          </div>
-          <%= f.hidden_field :tab, value: params[:tab] %>
-          <div>
-            <%= f.submit 'Zastosuj', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="mb-6 flex space-x-4">
-        <%= link_to 'Zlecenia klientów', posts_path(tab: 'customer'), class: "p-4 rounded #{params[:tab] == 'worker' ? 'bg-gray-200' : 'bg-blue-500 text-white'}" %>
-        <%= link_to 'Ogłoszenia wykonawców', posts_path(tab: 'worker'), class: "p-4 rounded #{params[:tab] == 'worker' ? 'bg-blue-500 text-white' : 'bg-gray-200'}" %>
-      </div>
-
-      <% if params[:tab] == 'worker' %>
-        <% if @worker_posts.present? %>
-          <%= render 'posts/worker_posts' %>
-          <div class="mt-6">
-            <%= paginate @worker_posts %>
-          </div>
-        <% else %>
-          <div class="w-full text-center">
-            <p>No posts available. Why not create one?</p>
-            <%= link_to 'Add New Post', new_post_path(role: 'worker'), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
-          </div>
-        <% end %>
-      <% else %>
-        <% if @customer_posts.present? %>
-          <%= render 'posts/customer_posts' %>
-          <div class="mt-6">
-            <%= paginate @customer_posts %>
-          </div>
-        <% else %>
-          <div class="w-full text-center">
-            <p>No posts available. Why not create one?</p>
-            <%= link_to 'Add New Post', new_post_path(role: 'customer'), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
-          </div>
-        <% end %>
+<div class="flex-1 overflow-auto">
+  <div class="container mx-auto px-4 py-8">
+    <div class="mb-6 flex space-x-4">
+      <%= form_with url: posts_path, method: :get, local: true, class: "flex space-x-4 w-full" do |f| %>
+        <div class="w-full">
+          <%= f.text_field :search, value: params[:search], placeholder: "Szukaj...", class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+        </div>
+        <div class="w-1/4">
+          <%= f.collection_select :category, @categories, :id, :name, { prompt: "Wszystkie kategorie", selected: params[:category] }, class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500", data: { remote: true, url: subcategories_path } %>
+        </div>
+        <div class="w-1/4">
+          <%= f.collection_select :subcategory, @subcategories, :id, :name, { prompt: "Podkategorie", selected: params[:subcategory] }, class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" %>
+        </div>
+        <%= f.hidden_field :tab, value: params[:tab] %>
+        <div>
+          <%= f.submit 'Zastosuj', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+        </div>
       <% end %>
     </div>
+
+    <div class="mb-6 flex space-x-4">
+      <%= link_to 'Zlecenia klientów', posts_path(tab: 'customer', category: params[:category], subcategory: params[:subcategory], search: params[:search]), class: "p-4 rounded #{params[:tab] == 'worker' ? 'bg-gray-200' : 'bg-blue-500 text-white'}" %>
+      <%= link_to 'Ogłoszenia wykonawców', posts_path(tab: 'worker', category: params[:category], subcategory: params[:subcategory], search: params[:search]), class: "p-4 rounded #{params[:tab] == 'worker' ? 'bg-blue-500 text-white' : 'bg-gray-200'}" %>
+    </div>
+
+    <% if params[:tab] == 'worker' %>
+      <% if @worker_posts.present? %>
+        <%= render 'posts/worker_posts' %>
+        <div class="mt-6">
+          <%= paginate @worker_posts %>
+        </div>
+      <% else %>
+        <div class="w-full text-center">
+          <p>No posts available. Why not create one?</p>
+          <%= link_to 'Add New Post', new_post_path(role: 'worker'), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+        </div>
+      <% end %>
+    <% else %>
+      <% if @customer_posts.present? %>
+        <%= render 'posts/customer_posts' %>
+        <div class="mt-6">
+          <%= paginate @customer_posts %>
+        </div>
+      <% else %>
+        <div class="w-full text-center">
+          <p>No posts available. Why not create one?</p>
+          <%= link_to 'Add New Post', new_post_path(role: 'customer'), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+        </div>
+      <% end %>
+    <% end %>
   </div>
+</div>
+
+<script>
+document.addEventListener("turbo:load", function() {
+  const categorySelect = document.querySelector('select[name="category"]');
+  
+  if (categorySelect) {
+    categorySelect.addEventListener('change', function() {
+      const categoryId = this.value;
+      const subcategorySelect = document.querySelector('select[name="subcategory"]');
+      
+      if (subcategorySelect) {
+        fetch(`/subcategories?category_id=${categoryId}`)
+          .then(response => response.json())
+          .then(data => {
+            subcategorySelect.innerHTML = '<option value="">Podkategorie</option>';
+            data.forEach(subcategory => {
+              const option = document.createElement('option');
+              option.value = subcategory.id;
+              option.textContent = subcategory.name;
+              subcategorySelect.appendChild(option);
+            });
+          });
+      }
+    });
+
+    // Re-populate the subcategories if a category is selected and page reloads
+    const selectedCategoryId = categorySelect.value;
+    if (selectedCategoryId) {
+      const subcategorySelect = document.querySelector('select[name="subcategory"]');
+      if (subcategorySelect) {
+        fetch(`/subcategories?category_id=${selectedCategoryId}`)
+          .then(response => response.json())
+          .then(data => {
+            subcategorySelect.innerHTML = '<option value="">Podkategorie</option>';
+            data.forEach(subcategory => {
+              const option = document.createElement('option');
+              option.value = subcategory.id;
+              option.textContent = subcategory.name;
+              option.selected = subcategory.id == "<%= params[:subcategory] %>";
+              subcategorySelect.appendChild(option);
+            });
+          });
+      }
+    }
+  }
+});
+
+</script>

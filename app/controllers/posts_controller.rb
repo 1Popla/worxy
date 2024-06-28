@@ -6,7 +6,10 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:send_request]
 
   def index
-    @categories = Category.all
+    @categories = Category.where(parent_id: nil)
+    @subcategories = Category.where(parent_id: params[:category]) if params[:category].present?
+    @subcategories ||= []  # Ensure @subcategories is always defined
+
     @posts = Post.all
     @customer_posts = Post.joins(:user).where(users: { role: "customer" }).page(params[:page]).per(10)
     @worker_posts = Post.joins(:user).where(users: { role: "worker" }).page(params[:page]).per(10)
@@ -14,6 +17,11 @@ class PostsController < ApplicationController
     if params[:category].present?
       @customer_posts = @customer_posts.where(category_id: params[:category])
       @worker_posts = @worker_posts.where(category_id: params[:category])
+    end
+
+    if params[:subcategory].present?
+      @customer_posts = @customer_posts.where(subcategory_id: params[:subcategory])
+      @worker_posts = @worker_posts.where(subcategory_id: params[:subcategory])
     end
 
     if params[:search].present?
@@ -42,7 +50,8 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @categories = Category.all
+    @categories = Category.where(parent_id: nil)
+    @subcategories = []
   end
 
   def create
@@ -52,7 +61,8 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to @post, status: :see_other
     else
-      @categories = Category.all
+      @categories = Category.where(parent_id: nil)
+      @subcategories = Category.where(parent_id: @post.category_id)
       render :new, status: :unprocessable_entity
     end
   end
@@ -63,14 +73,16 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to @post
     else
-      @categories = Category.all
+      @categories = Category.where(parent_id: nil)
+      @subcategories = Category.where(parent_id: @post.category_id)
       render :edit, status: :unprocessable_entity
     end
   end
 
   def edit
     @post = Post.find(params[:id])
-    @categories = Category.all
+    @categories = Category.where(parent_id: nil)
+    @subcategories = Category.where(parent_id: @post.category_id)
   end
 
   def send_request
@@ -162,6 +174,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :description, :price, :availability, :contact_information, :status, :latitude, :message, :longitude, :street, :city, :state, :country, :category_id, images: [])
+    params.require(:post).permit(:title, :description, :price, :availability, :contact_information, :status, :latitude, :message, :longitude, :street, :city, :state, :country, :category_id, :subcategory_id, images: [])
   end
 end

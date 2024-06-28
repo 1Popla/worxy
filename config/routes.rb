@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :subcategories, only: [:index]
+
   resources :bookings do
     collection do
       get "calendar"
