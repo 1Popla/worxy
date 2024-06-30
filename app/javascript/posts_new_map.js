@@ -52,7 +52,17 @@ function initNewPostMap() {
     fillAddressFields(place);
   });
 
+  var mapClickEnabled = false;
+
+  document.getElementById('map-click-checkbox').addEventListener('change', function () {
+    mapClickEnabled = this.checked;
+  });
+
   google.maps.event.addListener(map, 'click', function (event) {
+    if (!mapClickEnabled) {
+      return;
+    }
+
     var lat = event.latLng.lat();
     var lng = event.latLng.lng();
 

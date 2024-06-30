@@ -1,10 +1,21 @@
 <div class="flex-1 overflow-auto">
   <div class="container mx-auto px-4 py-8">
     <%= form_with model: @post, id: dom_id(@post), local: true, html: { multipart: true } do |f| %>
+      <% if @post.errors.any? %>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
+          <strong class="font-bold">Wystąpiły błędy:</strong>
+          <ul class="list-disc list-inside">
+          </ul>
+        </div>
+      <% end %>
+
       <div class="grid grid-cols-1 gap-6 mb-6">
         <div>
           <%= f.label :title, "Tytuł", class: 'block text-gray-700 text-sm font-bold mb-2' %>
           <%= f.text_field :title, placeholder: 'Tytuł', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          <% if @post.errors[:title].any? %>
+            <div class="text-red-600 text-sm mt-1"><%= @post.errors[:title].join(", ") %></div>
+          <% end %>
         </div>
         <div>
           <%= f.label :images, "Zdjęcia", class: 'block text-gray-700 text-sm font-bold mb-2' %>
@@ -23,6 +34,9 @@
         <div>
           <%= f.label :description, "Opis", class: 'block text-gray-700 text-sm font-bold mb-2' %>
           <%= f.text_area :description, placeholder: 'Opis', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', rows: 20, data: { target: "posts.description" } %>
+          <% if @post.errors[:description].any? %>
+            <div class="text-red-600 text-sm mt-1"><%= @post.errors[:description].join(", ") %></div>
+          <% end %>
           <button type="button" id="generate-description" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Generuj opis przy użyciu AI</button>
           <p id="generating-message" class="mt-2 text-blue-500 hidden" data-target="posts.generatingMessage">Generowanie opisu...</p>
         </div>
@@ -32,14 +46,23 @@
         <div>
           <%= f.label :price, "Cena", class: 'block text-gray-700 text-sm font-bold mb-2' %>
           <%= f.number_field :price, placeholder: 'Cena', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', step: 0.01 %>
+          <% if @post.errors[:price].any? %>
+            <div class="text-red-600 text-sm mt-1"><%= @post.errors[:price].join(", ") %></div>
+          <% end %>
         </div>
         <div>
           <%= f.label :category_id, "Kategoria", class: 'block text-gray-700 text-sm font-bold mb-2' %>
           <%= f.collection_select :category_id, @categories, :id, :name, { prompt: "Wybierz kategorię" }, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', id: 'post_category_id' %>
+          <% if @post.errors[:category_id].any? %>
+            <div class="text-red-600 text-sm mt-1"><%= @post.errors[:category_id].join(", ") %></div>
+          <% end %>
         </div>
         <div>
           <%= f.label :subcategory_id, "Podkategoria", class: 'block text-gray-700 text-sm font-bold mb-2' %>
           <%= f.collection_select :subcategory_id, [], :id, :name, { prompt: "Wybierz podkategorię" }, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', id: 'post_subcategory_id' %>
+          <% if @post.errors[:subcategory_id].any? %>
+            <div class="text-red-600 text-sm mt-1"><%= @post.errors[:subcategory_id].join(", ") %></div>
+          <% end %>
         </div>
         <div>
           <%= f.label :availability, "Dostępność", class: 'block text-gray-700 text-sm font-bold mb-2' %>
@@ -73,6 +96,10 @@
       </div>
 
       <div class="mb-6">
+        <div class="flex items-center mb-4">
+          <input id="map-click-checkbox" type="checkbox" class="mr-2 leading-tight">
+          <label for="map-click-checkbox" class="text-gray-700">Zaznacz aby uzupełnić adres klikając na mapę</label>
+        </div>
         <div id="map" data-lat="<%= @post.latitude %>" data-lng="<%= @post.longitude %>" class="w-full h-64 border rounded-lg"></div>
       </div>
 
