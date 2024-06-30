@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get "users/show"
-  devise_for :users, controllers: { registrations: "users/registrations" }
+  devise_for :users, controllers: {registrations: "users/registrations"}
 
   get "up" => "rails/health#show", :as => :rails_health_check
 
@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       post :negotiate_price
     end
   end
+
+  get "notifications/unread_count", to: "notifications#unread_count"
 
   resources :notifications, only: [:index, :show, :destroy] do
     member do

@@ -37,8 +37,8 @@ class ConversationsController < ApplicationController
     user_ids_with_conversations = Conversation.for_belonging_user(current_user.id).pluck(:sender_id, :recipient_id).flatten.uniq - [current_user.id]
 
     booking_user_ids = Booking.where(user_id: current_user.id).pluck(:visible_to_user_id) +
-                       Booking.joins(:post).where(posts: { user_id: current_user.id }).pluck(:user_id) +
-                       Booking.where(visible_to_user_id: current_user.id).pluck(:user_id)
+      Booking.joins(:post).where(posts: {user_id: current_user.id}).pluck(:user_id) +
+      Booking.where(visible_to_user_id: current_user.id).pluck(:user_id)
 
     user_ids_with_bookings = booking_user_ids.flatten.uniq - [current_user.id]
 
