@@ -1,14 +1,14 @@
 document.addEventListener('turbo:load', () => {
   const openPortfolioButton = document.getElementById('open-portfolio');
-  const closePortfolioButton = document.getElementById('user-show-close-portfolio');
+  const closePortfolioButtonBottom = document.getElementById('user-show-close-portfolio-bottom');
   const portfolioModal = document.getElementById('user-show-portfolio-modal');
 
-  if (openPortfolioButton && closePortfolioButton && portfolioModal) {
+  if (openPortfolioButton && closePortfolioButtonBottom && portfolioModal) {
     openPortfolioButton.addEventListener('click', () => {
       portfolioModal.classList.remove('hidden');
     });
 
-    closePortfolioButton.addEventListener('click', () => {
+    closePortfolioButtonBottom.addEventListener('click', () => {
       portfolioModal.classList.add('hidden');
     });
   }
