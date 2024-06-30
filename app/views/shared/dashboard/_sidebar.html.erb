@@ -28,10 +28,11 @@
           Wiadomości
         <% end %>
       </li>
-      <li>
-        <%= link_to notifications_path, data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+      <li class="relative">
+        <%= link_to notifications_path, data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700 notification-bell' do %>
           <i class="fas fa-bell mr-2 text-gray-700"></i>
           Moje Powiadomienia
+          <span id="notification-count" class="absolute top-0 right-0 mt-1 mr-2 h-5 w-5 text-xs text-black bg-yellow-400 rounded-full flex items-center justify-center hidden"></span>
         <% end %>
       </li>
       <li>
@@ -106,10 +107,11 @@
           Wiadomości
         <% end %>
       </li>
-      <li>
-        <%= link_to notifications_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+      <li class="relative">
+        <%= link_to notifications_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700 notification-bell' do %>
           <i class="fas fa-bell mr-2 text-gray-700"></i>
           Moje Powiadomienia
+          <span id="notification-count-mobile" class="absolute top-0 right-0 mt-1 mr-2 h-5 w-5 text-xs text-black bg-yellow-400 rounded-full flex items-center justify-center hidden"></span>
         <% end %>
       </li>
       <li>
@@ -159,4 +161,44 @@
       }, { once: true });
     }
   });
+
+  function updateNotificationBell() {
+    fetch('/notifications/unread_count')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        const count = data.unread_count;
+        const notificationCountElements = document.querySelectorAll('#notification-count, #notification-count-mobile');
+
+        notificationCountElements.forEach(el => {
+          el.textContent = count;
+          if (count > 0) {
+            el.classList.remove('hidden');
+            el.classList.add('block');
+            const bells = document.querySelectorAll('.notification-bell');
+            bells.forEach(bell => {
+              bell.classList.add('animate-bounce');
+            });
+          } else {
+            el.classList.remove('block');
+            el.classList.add('hidden');
+            const bells = document.querySelectorAll('.notification-bell');
+            bells.forEach(bell => {
+              bell.classList.remove('animate-bounce');
+            });
+          }
+        });
+      })
+      .catch(error => {
+        console.error('Fetch error:', error);
+      });
+  }
+
+  document.addEventListener('turbo:load', updateNotificationBell);
+  document.addEventListener('turbo:frame-load', updateNotificationBell);
+  document.addEventListener('turbo:before-render', updateNotificationBell);
 </script>

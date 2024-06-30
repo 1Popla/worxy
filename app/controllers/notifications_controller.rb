@@ -3,10 +3,12 @@ class NotificationsController < ApplicationController
   before_action :set_notification, only: [:show, :accept_request, :reject_request, :destroy]
 
   def index
-    @notifications = current_user.received_notifications.where(read_at: nil).order(created_at: :desc)
+    @notifications = current_user.received_notifications.order(created_at: :desc)
+    @notifications.update_all(read_at: Time.zone.now)
   end
 
   def show
+    @notification.update(read_at: Time.zone.now)
   end
 
   def accept_request
@@ -67,6 +69,11 @@ class NotificationsController < ApplicationController
       format.html { redirect_to notifications_path, notice: "Notification was successfully destroyed." }
       format.turbo_stream
     end
+  end
+
+  def unread_count
+    count = current_user.received_notifications.where(read_at: nil).count
+    render json: { unread_count: count }
   end
 
   private
