@@ -27,6 +27,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'notifications/unread_count', to: 'notifications#unread_count'
+
   resources :notifications, only: [:index, :show, :destroy] do
     member do
       post :accept_request
