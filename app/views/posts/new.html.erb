@@ -76,7 +76,14 @@
         <div id="map" data-lat="<%= @post.latitude %>" data-lng="<%= @post.longitude %>" class="w-full h-64 border rounded-lg"></div>
       </div>
 
-      <%= f.submit 'Zatwierdź', class: 'w-full bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline', data: { turbo: false } %>
+      <%= f.submit 'Zatwierdź', class: 'w-full bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline', data: { turbo: false }, id: 'posts-new-submit-button' %>
     <% end %>
+  </div>
+</div>
+
+<div id="posts-new-loading-modal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+  <div class="bg-white p-4 rounded-lg flex items-center">
+    <div class="loader ease-linear rounded-full border-t-4 border-blue-500 h-12 w-12 animate-spin mr-4"></div>
+    <span>Dodawanie zlecenia...</span>
   </div>
 </div>
