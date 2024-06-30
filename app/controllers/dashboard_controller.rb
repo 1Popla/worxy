@@ -42,7 +42,11 @@ class DashboardController < ApplicationController
     @booking_progress = if @previous_month_bookings > 0
                           ((@current_month_bookings - @previous_month_bookings) / @previous_month_bookings.to_f) * 100
                         else
-                          100.0
+                          if @current_month_bookings > 0
+                            @current_month_bookings * 100.0
+                          else
+                            0.0
+                          end
                         end
   end
 
