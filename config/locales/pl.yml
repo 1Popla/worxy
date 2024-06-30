@@ -68,6 +68,20 @@ pl:
         email: "E-mail"
         password: "Hasło"
         password_confirmation: "Potwierdzenie hasła"
+      post:
+        title: "Tytuł"
+        description: "Opis"
+        price: "Cena"
+        category_id: "Kategoria"
+        subcategory_id: "Podkategoria"
+        availability: "Dostępność"
+        contact_information: "Informacje kontaktowe"
+        street: "Ulica"
+        city: "Miasto"
+        state: "Województwo"
+        country: "Kraj"
+        latitude: "Szerokość geograficzna"
+        longitude: "Długość geograficzna"
 
     errors:
       models:
@@ -80,6 +94,22 @@ pl:
           messages:
             blank: "nie może być puste"
             taken: "jest już zajęte"
+        post:
+          attributes:
+            title:
+              blank: "nie może być pusty"
+            description:
+              blank: "nie może być pusty"
+            price:
+              blank: "nie może być pusta"
+            category_id:
+              blank: "nie może być pusta"
+            subcategory_id:
+              blank: "nie może być pusta"
+          messages:
+            blank: "nie może być puste"
+            taken: "jest już zajęte"
+            required: "jest wymagane"
 
   errors:
     format: "%{attribute} %{message}"
@@ -179,6 +209,7 @@ pl:
       not_saved:
         one: "1 błąd uniemożliwił zapisanie tego %{resource}:"
         other: "%{count} błędów uniemożliwiło zapisanie tego %{resource}:"
+      required: "jest wymagane"
 
   number:
     currency:

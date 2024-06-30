@@ -34,7 +34,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource)
-    new_user_steps_path(resource)
+    resource.role == 'customer' ? dashboard_index_path : new_user_steps_path(resource)
   end
 
   def after_update_path_for(resource)
