@@ -1,5 +1,5 @@
 # spec/models/conversation_spec.rb
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Conversation, type: :model do
   let(:user1) { create(:user) }
@@ -34,13 +34,13 @@ RSpec.describe Conversation, type: :model do
     it "belongs to a sender" do
       association = Conversation.reflect_on_association(:sender)
       expect(association.macro).to eq(:belongs_to)
-      expect(association.class_name).to eq('User')
+      expect(association.class_name).to eq("User")
     end
 
     it "belongs to a recipient" do
       association = Conversation.reflect_on_association(:recipient)
       expect(association.macro).to eq(:belongs_to)
-      expect(association.class_name).to eq('User')
+      expect(association.class_name).to eq("User")
     end
 
     it "has many messages" do

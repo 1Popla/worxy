@@ -1,5 +1,5 @@
-require 'net/http'
-require 'json'
+require "net/http"
+require "json"
 
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :send_request]
@@ -11,8 +11,8 @@ class PostsController < ApplicationController
     @subcategories ||= []  # Ensure @subcategories is always defined
 
     @posts = Post.all
-    @customer_posts = Post.joins(:user).where(users: { role: "customer" }).page(params[:page]).per(10)
-    @worker_posts = Post.joins(:user).where(users: { role: "worker" }).page(params[:page]).per(10)
+    @customer_posts = Post.joins(:user).where(users: {role: "customer"}).page(params[:page]).per(10)
+    @worker_posts = Post.joins(:user).where(users: {role: "worker"}).page(params[:page]).per(10)
 
     if params[:category].present?
       @customer_posts = @customer_posts.where(category_id: params[:category])
@@ -106,13 +106,13 @@ class PostsController < ApplicationController
     user = User.find(params[:user_id])
     description = generate_description_for(user)
 
-    render json: { description: description }
+    render json: {description: description}
   end
 
   private
 
   def generate_description_for(user)
-    skills = user.skills.is_a?(Array) ? user.skills.join(', ') : user.skills
+    skills = user.skills.is_a?(Array) ? user.skills.join(", ") : user.skills
 
     user_data = {
       name: user.first_name,
@@ -133,15 +133,15 @@ class PostsController < ApplicationController
 
     request_body = {
       messages: [
-        { role: "user", content: prompt }
+        {role: "user", content: prompt}
       ],
       stream: false,
       max_tokens: 2048
     }.to_json
 
     request = Net::HTTP::Post.new(uri.path, {
-      'Content-Type' => 'application/json',
-      'Authorization' => "Bearer #{ENV['LLAMA_API_KEY']}"
+      "Content-Type" => "application/json",
+      "Authorization" => "Bearer #{ENV["LLAMA_API_KEY"]}"
     })
     request.body = request_body
 
@@ -159,10 +159,10 @@ class PostsController < ApplicationController
     result = JSON.parse(response_body)
 
     if result && result["choices"] && result["choices"][0] && result["choices"][0]["message"]
-      return result["choices"][0]["message"]["content"]
+      result["choices"][0]["message"]["content"]
     else
       Rails.logger.error("Unexpected API response structure: #{response_body}")
-      return "Błąd podczas generowania opisu. Proszę spróbować ponownie."
+      "Błąd podczas generowania opisu. Proszę spróbować ponownie."
     end
   rescue => e
     Rails.logger.error("Error generating description: #{e.message}")

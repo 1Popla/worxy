@@ -73,7 +73,7 @@ class NotificationsController < ApplicationController
 
   def unread_count
     count = current_user.received_notifications.where(read_at: nil).count
-    render json: { unread_count: count }
+    render json: {unread_count: count}
   end
 
   private

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Notification, type: :model do
   let(:recipient) { create(:user) }
@@ -39,13 +39,13 @@ RSpec.describe Notification, type: :model do
     it "belongs to a recipient" do
       association = Notification.reflect_on_association(:recipient)
       expect(association.macro).to eq(:belongs_to)
-      expect(association.class_name).to eq('User')
+      expect(association.class_name).to eq("User")
     end
 
     it "belongs to an actor" do
       association = Notification.reflect_on_association(:actor)
       expect(association.macro).to eq(:belongs_to)
-      expect(association.class_name).to eq('User')
+      expect(association.class_name).to eq("User")
     end
 
     it "belongs to a notifiable" do

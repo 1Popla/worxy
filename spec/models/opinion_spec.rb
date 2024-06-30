@@ -1,9 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Opinion, type: :model do
   let(:rater) { create(:user) }
   let(:ratee) { create(:user) }
-  
+
   let(:valid_attributes) do
     {
       rater: rater,
@@ -50,13 +50,13 @@ RSpec.describe Opinion, type: :model do
     it "belongs to a rater" do
       association = Opinion.reflect_on_association(:rater)
       expect(association.macro).to eq(:belongs_to)
-      expect(association.class_name).to eq('User')
+      expect(association.class_name).to eq("User")
     end
 
     it "belongs to a ratee" do
       association = Opinion.reflect_on_association(:ratee)
       expect(association.macro).to eq(:belongs_to)
-      expect(association.class_name).to eq('User')
+      expect(association.class_name).to eq("User")
     end
   end
 end
