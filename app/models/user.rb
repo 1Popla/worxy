@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+    :recoverable, :rememberable, :validatable
 
   has_many :conversations, foreign_key: :sender_id, dependent: :destroy
   has_many :messages, dependent: :destroy
@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   has_many_attached :portfolio_images
 
-  enum role: { worker: 0, customer: 1 }
+  enum role: {worker: 0, customer: 1}
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -27,7 +27,7 @@ class User < ApplicationRecord
   def average_rating
     return nil if received_opinions.empty?
     avg = received_opinions.average(:stars).round(2)
-    avg % 1 == 0 ? avg.to_i : avg
+    (avg % 1 == 0) ? avg.to_i : avg
   end
 
   def full_name

@@ -17,7 +17,7 @@ class BookingsController < ApplicationController
   def calendar
     customer_or_visible_booking_ids = current_user.bookings.select(:id)
     visible_booking_ids = Booking.where(visible_to_user_id: current_user.id).select(:id)
-    worker_booking_ids = Booking.joins(:post).where(posts: { user_id: current_user.id }).select(:id)
+    worker_booking_ids = Booking.joins(:post).where(posts: {user_id: current_user.id}).select(:id)
 
     @bookings = Booking.where(id: customer_or_visible_booking_ids + worker_booking_ids + visible_booking_ids).distinct
 
@@ -45,7 +45,7 @@ class BookingsController < ApplicationController
     else
       respond_to do |format|
         format.html { render :new }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('booking_form', partial: 'form', locals: { booking: @booking }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("booking_form", partial: "form", locals: {booking: @booking}) }
       end
     end
   end
@@ -62,7 +62,7 @@ class BookingsController < ApplicationController
     else
       respond_to do |format|
         format.html { render :edit }
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('booking_form', partial: 'form', locals: { booking: @booking }) }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("booking_form", partial: "form", locals: {booking: @booking}) }
       end
     end
   end
@@ -76,12 +76,12 @@ class BookingsController < ApplicationController
   end
 
   def complete_with_offered_price
-    @booking.update(status: 'completed', offered_price: @booking.offered_price)
+    @booking.update(status: "completed", offered_price: @booking.offered_price)
     redirect_to @booking, notice: "Booking completed with the offered price."
   end
 
   def negotiate_price
-    recipient = current_user == @booking.user ? @booking.post.user : @booking.user
+    recipient = (current_user == @booking.user) ? @booking.post.user : @booking.user
 
     Notification.create(
       recipient: recipient,
@@ -92,7 +92,7 @@ class BookingsController < ApplicationController
       price_offer: params[:new_price_offer],
       start_date_offer: @booking.start_date
     )
-    
+
     redirect_to @booking, notice: "Negotiation request sent successfully."
   end
 

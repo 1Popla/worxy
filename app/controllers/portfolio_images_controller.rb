@@ -7,9 +7,9 @@ class PortfolioImagesController < ApplicationController
   def create
     if params[:user][:portfolio_images]
       @user.portfolio_images.attach(params[:user][:portfolio_images])
-      redirect_to @user, notice: 'Images uploaded successfully.'
+      redirect_to @user, notice: "Images uploaded successfully."
     else
-      flash.now[:alert] = 'Please select images to upload.'
+      flash.now[:alert] = "Please select images to upload."
       render :new
     end
   end
@@ -19,7 +19,7 @@ class PortfolioImagesController < ApplicationController
     @image.purge
 
     respond_to do |format|
-      format.html { redirect_to user_path(@user), notice: 'Image was successfully deleted.' }
+      format.html { redirect_to user_path(@user), notice: "Image was successfully deleted." }
       format.turbo_stream { render turbo_stream: turbo_stream.remove("image-container-#{@image.id}") }
     end
   end

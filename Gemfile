@@ -21,9 +21,8 @@ gem "jquery-rails"
 gem "turbo-rails"
 gem "rails-ujs"
 gem "simple_calendar"
-gem 'aws-sdk-s3'
-gem 'activestorage', require: false
-
+gem "aws-sdk-s3"
+gem "activestorage", require: false
 
 gem "dotenv", groups: [:development, :test]
 
@@ -32,11 +31,11 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "rspec-rails"
   gem "standardrb"
-  gem 'database_cleaner-active_record'
+  gem "database_cleaner-active_record"
 end
 
 group :test do
-  gem 'faker'
+  gem "faker"
 end
 
 group :development do
