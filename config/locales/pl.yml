@@ -75,6 +75,8 @@ pl:
           attributes:
             current_password:
               blank: "nie może być puste"
+            email:
+              taken: "jest już zajęty"
           messages:
             blank: "nie może być puste"
             taken: "jest już zajęte"
