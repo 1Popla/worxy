@@ -46,6 +46,10 @@ class DashboardController < ApplicationController
     else
       0.0
     end
+
+    gon.all_bookings = @all_bookings
+    gon.completed_bookings = @completed_bookings
+    gon.pending_bookings = @pending_bookings
   end
 
   def map

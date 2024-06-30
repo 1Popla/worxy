@@ -23,6 +23,7 @@ gem "rails-ujs"
 gem "simple_calendar"
 gem "aws-sdk-s3"
 gem "activestorage", require: false
+gem 'gon'
 
 gem "dotenv", groups: [:development, :test]
 
