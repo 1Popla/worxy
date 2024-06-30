@@ -6,27 +6,45 @@ function initNewPostMap() {
   }
 
   var map = new google.maps.Map(mapElement, {
-    center: { lat: -34.397, lng: 150.644 },
+    center: { lat: 52.2297, lng: 21.0122 },
     zoom: 15
   });
 
   var marker;
   var geocoder = new google.maps.Geocoder();
-  var autocomplete = new google.maps.places.Autocomplete(document.getElementById('street'));
+  var autocomplete = new google.maps.places.Autocomplete(document.getElementById('street'), { types: ['geocode'] });
 
   autocomplete.addListener('place_changed', function () {
     var place = autocomplete.getPlace();
-    if (!place.geometry) {
+    if (!place.geometry || !place.geometry.location) {
+      console.error("Place geometry is not defined or does not have a valid location.");
       return;
     }
-    map.setCenter(place.geometry.location);
+
+    var location = place.geometry.location;
+    var lat = location.lat();
+    var lng = location.lng();
+
+    if (isNaN(lat) || isNaN(lng)) {
+      console.error("Invalid location coordinates:", location);
+      return;
+    }
+
+    // Update latitude and longitude fields
+    document.getElementById('latitude').value = lat;
+    document.getElementById('longitude').value = lng;
+
+    console.log("Setting map center to:", location);
+    console.log("Latitude:", lat, "Longitude:", lng);
+
+    map.setCenter({ lat: lat, lng: lng });
     map.setZoom(17);
 
     if (marker) {
-      marker.setPosition(place.geometry.location);
+      marker.setPosition({ lat: lat, lng: lng });
     } else {
       marker = new google.maps.Marker({
-        position: place.geometry.location,
+        position: { lat: lat, lng: lng },
         map: map
       });
     }
@@ -58,47 +76,38 @@ function initNewPostMap() {
       }
     });
   });
-
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      function (position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-
-        map.setCenter(pos);
-      },
-      function () {
-        handleLocationError(true, map.getCenter());
-      }
-    );
-  } else {
-    handleLocationError(false, map.getCenter());
-  }
 }
 
 function fillAddressFields(place) {
   var addressComponents = place.address_components;
+  var street = '';
+  var city = '';
+  var state = '';
+  var country = '';
 
   addressComponents.forEach(function (component) {
     var types = component.types;
     if (types.indexOf('street_number') !== -1) {
-      document.getElementById('street').value = component.long_name;
+      street = component.long_name;
     }
     if (types.indexOf('route') !== -1) {
-      document.getElementById('street').value += ' ' + component.long_name;
+      street += ' ' + component.long_name;
     }
     if (types.indexOf('locality') !== -1) {
-      document.getElementById('city').value = component.long_name;
+      city = component.long_name;
     }
     if (types.indexOf('administrative_area_level_1') !== -1) {
-      document.getElementById('state').value = component.long_name;
+      state = component.long_name;
     }
     if (types.indexOf('country') !== -1) {
-      document.getElementById('country').value = component.long_name;
+      country = component.long_name;
     }
   });
+
+  document.getElementById('street').value = street;
+  document.getElementById('city').value = city;
+  document.getElementById('state').value = state;
+  document.getElementById('country').value = country;
 }
 
 function handleLocationError(browserHasGeolocation, pos) {
