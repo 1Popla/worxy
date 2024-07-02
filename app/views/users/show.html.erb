@@ -1,10 +1,20 @@
 <div class="flex-1 overflow-auto">
-  <div class="container mx-auto p-4">
+  <div class="container mx-auto p-6 bg-gray-100">
     <div class="flex justify-between items-start mb-4">
       <div class="flex flex-col flex-1 mr-4">
-        <h1 class="text-xl font-bold text-gray-800">Profil</h1>
+        <h1 class="text-xl font-bold text-gray-800 flex items-center">
+          <span class="bg-blue-200 px-3 py-1 rounded-full flex items-center">
+            <i class="fas fa-user mr-2"></i>
+            Profil
+          </span>
+        </h1>
         <div class="bg-white shadow rounded-lg p-4 mt-4 flex-1">
-          <h2 class="text-lg font-bold text-gray-800 mb-4">Opis użytkownika</h2>
+          <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+            <span class="bg-green-200 px-3 py-1 rounded-full flex items-center">
+              <i class="fas fa-info-circle mr-2"></i>
+              Opis użytkownika
+            </span>
+          </h2>
           <p class="text-gray-500"><%= @user.description %></p>
         </div>
       </div>
@@ -16,7 +26,7 @@
             <button id="open-portfolio" class="bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded">Zobacz portfolio</button>
           </div>
         <% end %>
-        <div class="bg-white shadow rounded-lg p-4 w-full">
+        <div class="bg-white shadow rounded-lg p-4 w-full relative">
           <div class="flex justify-center">
             <div class="w-24 h-24 bg-gray-300 rounded-full mb-4"></div>
           </div>
@@ -48,7 +58,7 @@
             <p class="font-semibold text-gray-700">Ostatnia aktualizacja: <%= I18n.l(@user.updated_at, format: :long) %></p>
           </div>
           <% if @user.average_rating %>
-            <div id="user-average-rating" data-average-rating="<%= @user.average_rating %>" class="bg-white shadow rounded-lg p-4 w-full text-center mt-4">
+            <div id="user-average-rating" data-average-rating="<%= @user.average_rating %>" class="absolute top-4 right-4 bg-yellow-100 shadow rounded-lg p-4 w-full text-center mt-4">
               <p class="text-gray-700 font-semibold">Ocena użytkownika:</p>
               <div class="flex items-center justify-center mt-1">
                 <% average = @user.average_rating %>
@@ -72,12 +82,16 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
 
     <div class="mt-4 grid grid-cols-1">
       <div class="bg-white shadow rounded-lg p-4">
-        <h2 class="text-lg font-bold text-gray-800 mb-4">Opinie</h2>
+        <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+          <span class="bg-purple-200 px-3 py-1 rounded-full flex items-center">
+            <i class="fas fa-comments mr-2"></i>
+            Opinie
+          </span>
+        </h2>
         <% if current_user && @user.received_opinions.exists?(rater: current_user) %>
           <div>
             <h3 class="text-lg font-bold text-gray-800 mb-4">Twoja opinia:</h3>
