@@ -139,11 +139,12 @@
 </div>
 
 <script>
-  document.addEventListener('turbo:load', function () {
-    const thumbnails = document.getElementById('thumbnails');
-    const scrollLeftButton = document.getElementById('scroll-left');
-    const scrollRightButton = document.getElementById('scroll-right');
+ document.addEventListener('turbo:load', function () {
+  const thumbnails = document.getElementById('thumbnails');
+  const scrollLeftButton = document.getElementById('scroll-left');
+  const scrollRightButton = document.getElementById('scroll-right');
 
+  if (thumbnails && scrollLeftButton && scrollRightButton) {
     scrollLeftButton.addEventListener('click', function () {
       thumbnails.scrollBy({
         left: -100,
@@ -170,5 +171,13 @@
 
     window.addEventListener('resize', updateArrowsVisibility);
     updateArrowsVisibility();
-  });
+  } else {
+    console.error('One or more elements not found:', {
+      thumbnails,
+      scrollLeftButton,
+      scrollRightButton
+    });
+  }
+});
+
 </script>
