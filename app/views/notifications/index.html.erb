@@ -1,27 +1,32 @@
-  <div class="flex-1 overflow-auto">
-    <div class="container mx-auto p-4">
-      <div class="bg-white shadow rounded-lg p-4">
-        <h2 class="text-lg font-bold text-gray-800 mb-4">Wszystkie Powiadomienia</h2>
-        <% if @notifications.present? %>
-          <% @notifications.each do |notification| %>
-            <div class="mb-2">
-              <p class="text-gray-600">
-                <% if notification.action == 'sent you a request for' %>
-                  <%= link_to "#{notification.actor.first_name} wysłał Ci ofertę", notification_path(notification), class: 'text-blue-600 hover:text-blue-900' %>
-                <% elsif notification.action == 'request accepted' %>
-                  <%= link_to "#{notification.actor.first_name} zaakceptował twoją ofertę", notification_path(notification), class: 'text-blue-600 hover:text-blue-900' %>
-                <% elsif notification.action == 'request rejected' %>
-                  <%= link_to "#{notification.actor.first_name} odrzucił twoją ofertę", notification_path(notification), class: 'text-blue-600 hover:text-blue-900' %>
-                <% elsif notification.action == 'sent you a negotiation request' %>
-                  <%= link_to "#{notification.actor.first_name} wysłał Ci propozycję negocjacji", notification_path(notification), class: 'text-blue-600 hover:text-blue-900' %>
-                <% end %>
-              </p>
-              <p class="text-gray-500 text-sm"><%= I18n.l(notification.created_at, format: :long) %></p>
-            </div>
-          <% end %>
-        <% else %>
-          <p class="text-gray-500">Brak powiadomień.</p>
+<div class="flex-1 overflow-auto">
+  <div class="container mx-auto p-6 bg-gray-100 max-w-screen-md">
+    <div class="bg-white shadow-lg rounded-lg p-6">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+        <span class="bg-yellow-200 px-3 py-1 rounded-full flex items-center">
+          <i class="fas fa-bell mr-2"></i>
+          Powiadomienia
+        </span>
+      </h2>
+      <% if @notifications.present? %>
+        <% @notifications.each do |notification| %>
+          <div class="mb-4 p-4 bg-white shadow rounded-lg">
+            <p class="text-gray-700 mb-2">
+              <% if notification.action == 'sent you a request for' %>
+                <%= link_to "#{notification.actor.first_name} wysłał Ci ofertę", notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
+              <% elsif notification.action == 'request accepted' %>
+                <%= link_to "#{notification.actor.first_name} zaakceptował twoją ofertę", notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
+              <% elsif notification.action == 'request rejected' %>
+                <%= link_to "#{notification.actor.first_name} odrzucił twoją ofertę", notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
+              <% elsif notification.action == 'sent you a negotiation request' %>
+                <%= link_to "#{notification.actor.first_name} wysłał Ci propozycję negocjacji", notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
+              <% end %>
+            </p>
+            <p class="text-gray-500 text-sm"><%= I18n.l(notification.created_at, format: :long) %></p>
+          </div>
         <% end %>
-      </div>
+      <% else %>
+        <p class="text-gray-500 text-center">Brak powiadomień.</p>
+      <% end %>
     </div>
   </div>
+</div>

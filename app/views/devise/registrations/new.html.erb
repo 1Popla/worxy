@@ -1,54 +1,78 @@
-<div class="flex justify-center items-center min-h-screen bg-gray-100">
-  <div class="w-full max-w-lg">
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: true }, html: { class: 'bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4' }) do |f| %>
-      <% if resource.errors.any? %>
-        <div class="mb-4 text-red-500">
-          <ul>
-            <% resource.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
+<div class="min-h-screen bg-gray-100 text-gray-900 flex justify-center items-center">
+  <div class="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
+    <div class="w-full lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
+      <div class="mt-8 flex flex-col items-center">
+        <div class="w-full flex-1 mt-6">
+          <div class="my-8 border-b text-center">
+            <div
+              class="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
+              Zarejestruj się za pomocą e-maila
+            </div>
+          </div>
+
+          <div class="mx-auto max-w-xs">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: true }, html: { class: 'w-full max-w-xs' }) do |f| %>
+              <div class="mb-4">
+                <h2 class="text-2xl font-bold text-center text-gray-800">Rejestracja</h2>
+              </div>
+              <% if resource.errors.any? %>
+                <div class="mb-4 text-red-500">
+                  <ul>
+                    <% resource.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <div class="mb-4 flex space-x-2">
+                <div class="w-1/2">
+                  <%= f.label :first_name, "Imię", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+                  <%= f.text_field :first_name, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+                </div>
+                <div class="w-1/2">
+                  <%= f.label :last_name, "Nazwisko", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+                  <%= f.text_field :last_name, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+                </div>
+              </div>
+              <div class="mb-4 flex space-x-2">
+                <div class="w-1/2">
+                  <%= f.label :email, "Email", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+                  <%= f.email_field :email, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+                </div>
+                <div class="w-1/2">
+                  <%= f.label :role, "Rola", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+                  <%= f.select :role, [['Klient', 'customer'], ['Wykonawca', 'worker']], {}, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+                </div>
+              </div>
+              <div class="mb-4">
+                <%= f.label :phone_number, "Numer telefonu", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+                <div class="flex">
+                  <%= f.select :country_code, options_from_collection_for_select(CountryCode.all, 'code', 'display_name', selected: '+48'), {}, class: 'shadow appearance-none border rounded-l w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', data: { action: "change->country-code#updatePhoneNumber" } %>
+                  <%= f.text_field :phone_number, class: 'shadow appearance-none border rounded-r w-2/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', data: { target: "country-code.phoneNumber" }, placeholder: '+48' %>
+                </div>
+              </div>
+              <div class="mb-4 flex space-x-2">
+                <div class="w-1/2">
+                  <%= f.label :password, "Hasło", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+                  <%= f.password_field :password, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline', placeholder: 'Hasło' %>
+                </div>
+                <div class="w-1/2">
+                  <%= f.label :password_confirmation, "Potwierdź hasło", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+                  <%= f.password_field :password_confirmation, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline', placeholder: 'Powtórz hasło' %>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <%= f.submit 'Zarejestruj się', data: { turbo: true }, class: 'bg-yellow-300 hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+              </div>
             <% end %>
-          </ul>
-        </div>
-      <% end %>
-      <div class="mb-4">
-        <h2 class="text-2xl font-bold text-center text-gray-800">Rejestracja</h2>
-      </div>
-      <div class="mb-4">
-        <%= f.label :first_name, "Imię", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-        <%= f.text_field :first_name, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-      </div>
-      <div class="mb-4">
-        <%= f.label :last_name, "Nazwisko", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-        <%= f.text_field :last_name, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-      </div>
-      <div class="mb-4">
-        <%= f.label :email, "Email", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-        <%= f.email_field :email, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-      </div>
-      <div class="mb-4">
-        <%= f.label :password, "Hasło", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-        <%= f.password_field :password, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline', placeholder: '******************' %>
-      </div>
-      <div class="mb-6">
-        <%= f.label :password_confirmation, "Potwierdź hasło", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-        <%= f.password_field :password_confirmation, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline', placeholder: '******************' %>
-      </div>
-      <div class="mb-4">
-        <%= f.label :role, "Rola", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-        <%= f.select :role, [['Klient', 'customer'], ['Wykonawca', 'worker']], {}, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
-      </div>
-      <div class="mb-4">
-        <%= f.label :phone_number, "Numer telefonu", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-        <div class="flex">
-          <%= f.select :country_code, options_from_collection_for_select(CountryCode.all, 'code', 'display_name', selected: '+48'), {}, class: 'shadow appearance-none border rounded-l w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', data: { action: "change->country-code#updatePhoneNumber" } %>
-          <%= f.text_field :phone_number, class: 'shadow appearance-none border rounded-r w-2/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', data: { target: "country-code.phoneNumber" }, placeholder: '+48' %>
+              <p class="text-center text-gray-500 text-xs mt-4">©2024 Worxy. Wszelkie prawa zastrzeżone.</p>
+              <p class="text-center text-gray-500 text-xs mt-6">Posiadasz już konto?</p>
+              <%= render "devise/shared/links" %>
+          </div>
         </div>
       </div>
-      <div class="flex items-center justify-between">
-        <%= f.submit 'Zarejestruj się', data: { turbo: true }, class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
-      </div>
-    <% end %>
-    <p class="text-center text-gray-500 text-xs mt-4">©2024 Worxy. Wszelkie prawa zastrzeżone.</p>
-    <%= render "devise/shared/links" %>
+    </div>
+    <div class="w-full lg:flex-1 text-center hidden lg:flex" style="background-image: url('<%= asset_path 'register-panel-background.jpg' %>'); background-size: cover; background-position: center;">
+    </div>
   </div>
 </div>
