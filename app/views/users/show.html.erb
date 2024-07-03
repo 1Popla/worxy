@@ -1,6 +1,6 @@
 <div class="flex-1 overflow-auto">
   <div class="container mx-auto p-6 bg-gray-100">
-    <div class="flex justify-between items-start mb-4">
+    <div class="flex flex-col md:flex-row justify-between items-start mb-4">
       <div class="flex flex-col flex-1 mr-4">
         <h1 class="text-xl font-bold text-gray-800 flex items-center">
           <span class="bg-blue-200 px-3 py-1 rounded-full flex items-center">
@@ -18,17 +18,11 @@
           <p class="text-gray-500"><%= @user.description %></p>
         </div>
       </div>
-      <div class="flex flex-col items-start w-1/3">
-        <% if @user == current_user %>
-          <div class="flex space-x-4 mb-4 self-end">
-            <%= link_to 'Edytuj profil', edit_user_registration_path, class: 'bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded' %>
-            <%= link_to 'Edytuj portfolio', new_user_portfolio_image_path(@user), class: 'bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded' %>
-            <button id="open-portfolio" class="bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded">Zobacz portfolio</button>
-          </div>
-        <% end %>
+      <div class="flex flex-col items-start w-full md:w-1/3 mt-4 md:mt-0 relative">
         <div class="bg-white shadow rounded-lg p-4 w-full relative">
-          <div class="flex justify-center">
+          <div class="flex justify-center relative">
             <div class="w-24 h-24 bg-gray-300 rounded-full mb-4"></div>
+            <%= button_to 'Wyślij wiadomość', conversations_path(conversation: { recipient_id: @user.id }), method: :post, class: 'absolute top-0 right-0 bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold py-1 px-2 rounded-full mb-2 md:mb-0 text-sm' %>
           </div>
           <div class="mb-4">
             <p class="font-semibold text-gray-700">Imię: <%= @user.first_name %></p>
@@ -58,7 +52,7 @@
             <p class="font-semibold text-gray-700">Ostatnia aktualizacja: <%= I18n.l(@user.updated_at, format: :long) %></p>
           </div>
           <% if @user.average_rating %>
-            <div id="user-average-rating" data-average-rating="<%= @user.average_rating %>" class="absolute top-4 right-4 bg-yellow-100 shadow rounded-lg p-4 w-full text-center mt-4">
+            <div id="user-average-rating" data-average-rating="<%= @user.average_rating %>" class="bg-yellow-100 shadow rounded-lg p-4 w-full text-center mt-4">
               <p class="text-gray-700 font-semibold">Ocena użytkownika:</p>
               <div class="flex items-center justify-center mt-1">
                 <% average = @user.average_rating %>
@@ -78,7 +72,14 @@
               </div>
             </div>
           <% end %>
+          <button id="open-portfolio" class="bg-green-300 hover:bg-green-500 text-gray-800 font-bold py-2 px-4 rounded mt-4 inline-block">Zobacz portfolio</button>
         </div>
+        <% if @user == current_user %>
+          <div class="flex flex-wrap space-x-2 mb-4 self-end mt-4">
+            <%= link_to 'Edytuj profil', edit_user_registration_path, class: 'bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded mb-2 md:mb-0' %>
+            <%= link_to 'Edytuj portfolio', new_user_portfolio_image_path(@user), class: 'bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded mb-2 md:mb-0' %>
+          </div>
+        <% end %>
       </div>
     </div>
 
