@@ -151,7 +151,7 @@
   </div>
 </div>
 <script>
- document.addEventListener('turbo:load', function () {
+document.addEventListener('turbo:load', function () {
   const thumbnails = document.getElementById('thumbnails');
   const scrollLeftButton = document.getElementById('scroll-left');
   const scrollRightButton = document.getElementById('scroll-right');
@@ -183,13 +183,6 @@
 
     window.addEventListener('resize', updateArrowsVisibility);
     updateArrowsVisibility();
-  } else {
-    console.error('One or more elements not found:', {
-      thumbnails,
-      scrollLeftButton,
-      scrollRightButton
-    });
   }
 });
-
 </script>
