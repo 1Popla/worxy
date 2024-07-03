@@ -56,9 +56,15 @@
           <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
             <span class="bg-blue-200 px-3 py-1 rounded-full flex items-center">
               <i class="fas fa-user mr-2"></i>
-              Informacje twórcy zlecenia
+              Zleceniodawca
             </span>
           </h2>
+          <div class="flex justify-center mb-4 relative">
+            <div class="w-24 h-24 bg-gray-300 rounded-full mb-4"></div>
+            <% if user_signed_in? && current_user != @post.user %>
+              <%= button_to 'Wyślij wiadomość', conversations_path(conversation: { recipient_id: @post.user.id }), method: :post, class: 'absolute top-0 right-0 bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold py-1 px-2 rounded-full mb-2 md:mb-0 text-sm' %>
+            <% end %>
+          </div>
           <p class="font-semibold text-gray-700">Imię: <%= @post.user.first_name %></p>
           <% if user_signed_in? %>
             <p class="font-semibold text-gray-700">Numer telefonu: <%= @post.user.phone_number %></p>
@@ -66,9 +72,6 @@
             <p class="font-semibold text-gray-700">Numer telefonu: <%= link_to 'Zaloguj się, aby zobaczyć', new_user_session_path, class: 'text-blue-500' %></p>
           <% end %>
           <%= link_to 'Zobacz profil', user_path(@post.user), class: 'bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded mt-4 inline-block' %>
-          <% if user_signed_in? && current_user != @post.user %>
-            <%= button_to 'Wyślij wiadomość', conversations_path(conversation: { recipient_id: @post.user.id }), method: :post, class: 'bg-green-300 hover:bg-green-500 text-gray-800 font-bold py-2 px-4 rounded mt-4 inline-block' %>
-          <% end %>
         </div>
         <div class="bg-white shadow rounded-lg p-6">
           <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
