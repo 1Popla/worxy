@@ -2,6 +2,12 @@
   <div class="container mx-auto p-4 bg-gray-100">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <div class="lg:col-span-2 bg-white shadow rounded-lg p-4">
+        <h1 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+          <span class="bg-blue-200 px-3 py-1 rounded-full flex items-center">
+            <i class="fas fa-file-alt mr-2"></i>
+            <%= @post.title %>
+          </span>
+        </h1>
         <% if @post.images.attached? %>
           <div class="mb-4 border-2 border-gray-300 shadow-lg rounded p-2">
             <div id="main-image-container" class="mb-4 cursor-pointer w-full h-64 md:h-96 flex items-center justify-center border-b-2 border-gray-300 pb-2 rounded">
@@ -80,10 +86,17 @@
               <%= @post.street %>, <%= @post.city %>, <%= @post.state %>, <%= @post.country %>
             </p>
           </div>
-          <div class="text-sm text-gray-500">
+          <div class="text-sm text-gray-500 mb-4">
             <p>Utworzono: <%= I18n.l(@post.created_at, format: :long) %></p>
             <p>Ostatnia aktualizacja: <%= I18n.l(@post.updated_at, format: :long) %></p>
           </div>
+          <% if user_signed_in? && current_user != @post.user %>
+            <div class="flex justify-end">
+              <button id="open-modal" class="bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded">
+                Wyślij ofertę
+              </button>
+            </div>
+          <% end %>
         </div>
         <div class="bg-white shadow rounded-lg p-6 mt-6">
           <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
@@ -137,7 +150,6 @@
     <% end %>
   </div>
 </div>
-
 <script>
  document.addEventListener('turbo:load', function () {
   const thumbnails = document.getElementById('thumbnails');
