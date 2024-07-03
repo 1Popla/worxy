@@ -65,12 +65,12 @@
           <% end %>
         </div>
         <div>
-          <%= f.label :availability, "Dostępność", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-          <%= f.text_field :availability, placeholder: 'Dostępność', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          <%= f.label :availability, "Priorytet", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.select :availability, [['Brak', 'no_priority'], ['Wysoki', 'high_priority'], ['Średni', 'medium_priority'], ['Niski', 'low_uzgodnienia']], {}, { class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' } %>
         </div>
         <div>
-          <%= f.label :contact_information, "Informacje kontaktowe", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-          <%= f.text_field :contact_information, placeholder: 'Informacje kontaktowe', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          <%= f.label :contact_information, "Kontakt", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :contact_information, placeholder: 'Numer telefonu', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
         </div>
         <div>
           <%= f.label :street, "Ulica", class: 'block text-gray-700 text-sm font-bold mb-2' %>
