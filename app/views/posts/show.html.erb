@@ -7,12 +7,20 @@
             <div id="main-image-container" class="mb-4 cursor-pointer w-full h-64 md:h-96 flex items-center justify-center border-b-2 border-gray-300 pb-2 rounded">
               <%= image_tag @post.images.first.variant(resize_to_fill: [600, 400]).processed, id: "main-image", class: "object-contain max-w-full max-h-full rounded", data: { full_url: url_for(@post.images.first) } %>
             </div>
-            <div id="thumbnails" class="flex space-x-2 overflow-x-auto">
-              <% @post.images.each_with_index do |image, index| %>
-                <div class="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 overflow-hidden flex items-center justify-center border-2 border-gray-300 rounded-lg shadow-sm">
-                  <%= image_tag image.variant(resize_to_fill: [100, 100]).processed, class: "thumbnail cursor-pointer object-cover w-full h-full rounded", data: { index: index, full_url: url_for(image) } %>
-                </div>
-              <% end %>
+            <div class="relative">
+              <button id="scroll-left" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full shadow-md">
+                &lt;
+              </button>
+              <button id="scroll-right" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-200 p-2 rounded-full shadow-md">
+                &gt;
+              </button>
+              <div id="thumbnails" class="flex space-x-2 overflow-x-auto">
+                <% @post.images.each_with_index do |image, index| %>
+                  <div class="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 overflow-hidden flex items-center justify-center border-2 border-gray-300 rounded-lg shadow-sm">
+                    <%= image_tag image.variant(resize_to_fill: [100, 100]).processed, class: "thumbnail cursor-pointer object-cover w-full h-full rounded", data: { index: index, full_url: url_for(image) } %>
+                  </div>
+                <% end %>
+              </div>
             </div>
           </div>
         <% end %>
@@ -77,7 +85,7 @@
             <p>Ostatnia aktualizacja: <%= I18n.l(@post.updated_at, format: :long) %></p>
           </div>
         </div>
-        <div class="bg-white shadow rounded-lg p-6 mb-6">
+        <div class="bg-white shadow rounded-lg p-6 mt-6">
           <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
             <span class="bg-purple-200 px-3 py-1 rounded-full flex items-center">
               <i class="fas fa-map-marker-alt mr-2"></i>
@@ -129,3 +137,38 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  document.addEventListener('turbo:load', function () {
+    const thumbnails = document.getElementById('thumbnails');
+    const scrollLeftButton = document.getElementById('scroll-left');
+    const scrollRightButton = document.getElementById('scroll-right');
+
+    scrollLeftButton.addEventListener('click', function () {
+      thumbnails.scrollBy({
+        left: -100,
+        behavior: 'smooth'
+      });
+    });
+
+    scrollRightButton.addEventListener('click', function () {
+      thumbnails.scrollBy({
+        left: 100,
+        behavior: 'smooth'
+      });
+    });
+
+    const updateArrowsVisibility = () => {
+      if (thumbnails.scrollWidth > thumbnails.clientWidth) {
+        scrollLeftButton.style.display = 'block';
+        scrollRightButton.style.display = 'block';
+      } else {
+        scrollLeftButton.style.display = 'none';
+        scrollRightButton.style.display = 'none';
+      }
+    };
+
+    window.addEventListener('resize', updateArrowsVisibility);
+    updateArrowsVisibility();
+  });
+</script>
