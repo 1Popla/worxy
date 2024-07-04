@@ -10,7 +10,6 @@ class User < ApplicationRecord
 
   has_many_attached :portfolio_images
   has_one_attached :avatar
-  validates :avatar, attached: true, content_type: ['image/png', 'image/jpg', 'image/jpeg'], size: { less_than: 5.megabytes , message: 'is not given between size' }
 
   enum role: {worker: 0, customer: 1}
 

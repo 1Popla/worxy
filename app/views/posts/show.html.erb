@@ -43,20 +43,20 @@
               Zleceniodawca
             </span>
           </h2>
-<div class="flex flex-col items-center md:flex-row justify-center mb-4 relative">
-  <% if @post.user.avatar.attached? %>
-    <%= image_tag url_for(@post.user.avatar), class: 'w-24 h-24 rounded-full mb-4 md:mb-0 md:mr-4' %>
-  <% else %>
-    <div class="w-24 h-24 bg-gray-300 rounded-full mb-4 flex items-center justify-center md:mb-0 md:mr-4">
-      <i class="fas fa-user text-gray-500 text-3xl"></i>
-    </div>
-  <% end %>
-  <div class="flex flex-col items-center">
-    <% if user_signed_in? && current_user != @post.user %>
-      <%= button_to 'Wyślij wiadomość', conversations_path(conversation: { recipient_id: @post.user.id }), method: :post, class: 'bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold py-1 px-2 rounded-full mb-2 md:mb-0 text-sm md:absolute md:top-0 md:right-0' %>
-    <% end %>
-  </div>
-</div>
+          <div class="flex flex-col items-center md:flex-row justify-center mb-4 relative">
+            <% if @post.user.avatar.attached? %>
+              <%= image_tag url_for(@post.user.avatar), class: 'w-24 h-24 rounded-full mb-4 md:mb-0 md:mr-4' %>
+            <% else %>
+              <div class="w-24 h-24 bg-gray-300 rounded-full mb-4 flex items-center justify-center md:mb-0 md:mr-4">
+                <i class="fas fa-user text-gray-500 text-3xl"></i>
+              </div>
+            <% end %>
+            <div class="flex flex-col items-center">
+              <% if user_signed_in? && current_user != @post.user %>
+                <%= button_to 'Wyślij wiadomość', conversations_path(conversation: { recipient_id: @post.user.id }), method: :post, class: 'bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold py-1 px-2 rounded-full mb-2 md:mb-0 text-sm md:absolute md:top-0 md:right-0' %>
+              <% end %>
+            </div>
+          </div>
           <p class="font-semibold text-gray-700">Imię: <%= @post.user.first_name %></p>
           <% if user_signed_in? %>
             <p class="font-semibold text-gray-700">Numer telefonu: <%= @post.user.phone_number %></p>
