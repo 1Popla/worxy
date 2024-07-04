@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get "users/show"
   devise_for :users, controllers: {registrations: "users/registrations"}
+  patch 'avatar_upload', to: 'users#avatar_upload', as: 'avatar_upload'
 
   get "up" => "rails/health#show", :as => :rails_health_check
 
