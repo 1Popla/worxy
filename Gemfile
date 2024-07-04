@@ -24,6 +24,7 @@ gem "simple_calendar"
 gem "aws-sdk-s3"
 gem "activestorage", require: false
 gem 'gon'
+gem 'active_storage_validations'
 
 gem "dotenv", groups: [:development, :test]
 
