@@ -5,6 +5,12 @@
     </div>
     <ul class="space-y-2">
       <li>
+        <%= link_to dashboard_index_path, data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+          <i class="fas fa-tachometer-alt mr-2 text-gray-700"></i>
+          Dashboard
+        <% end %>
+      </li>
+      <li>
         <%= link_to new_post_path, data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-plus mr-2 text-gray-700"></i>
           Nowe ogłoszenie
@@ -83,6 +89,12 @@
 <div id="mobile-menu" class="lg:hidden hidden fixed top-16 left-0 bg-white w-full max-h-0 overflow-hidden rounded-t-lg shadow-lg z-40 transition-all duration-300 ease-in-out">
   <div class="p-4">
     <ul class="space-y-2">
+      <li>
+        <%= link_to dashboard_index_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+          <i class="fas fa-tachometer-alt mr-2 text-gray-700"></i>
+          Dashboard
+        <% end %>
+      </li>
       <li>
         <%= link_to new_post_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-plus mr-2 text-gray-700"></i>
