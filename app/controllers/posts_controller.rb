@@ -2,8 +2,8 @@ require "net/http"
 require "json"
 
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :send_request]
-  before_action :authenticate_user!, only: [:send_request]
+  before_action :set_post, only: [:show, :edit, :update, :send_request, :destroy]
+  before_action :authenticate_user!, only: [:send_request, :edit, :update, :destroy]
 
   def index
     @categories = Category.where(parent_id: nil)
@@ -83,6 +83,15 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @categories = Category.where(parent_id: nil)
     @subcategories = Category.where(parent_id: @post.category_id)
+  end
+
+  def destroy
+    if @post.user == current_user
+      @post.destroy
+      redirect_to posts_path, notice: 'Post został pomyślnie usunięty.'
+    else
+      redirect_to @post, alert: 'Nie masz uprawnień do usunięcia tego posta.'
+    end
   end
 
   def send_request

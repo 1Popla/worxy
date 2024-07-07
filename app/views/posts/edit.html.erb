@@ -1,0 +1,123 @@
+<h1 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+    <span class="bg-blue-200 px-3 py-1 rounded-full flex items-center">
+    <i class="fas fa-file-alt mr-2"></i>
+        Edycja
+    </span>
+</h1>
+<div class="flex-1 overflow-auto">
+  <div class="container mx-auto px-4 py-8">
+    <%= form_with model: @post, id: dom_id(@post), local: true, html: { multipart: true } do |f| %>
+      <% if @post.errors.any? %>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
+          <strong class="font-bold">Wystąpiły błędy:</strong>
+          <ul class="list-disc list-inside">
+            <% @post.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="grid grid-cols-1 gap-6 mb-6">
+        <div>
+          <%= f.label :title, "Tytuł", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :title, placeholder: 'Tytuł', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          <% if @post.errors[:title].any? %>
+            <div class="text-red-600 text-sm mt-1"><%= @post.errors[:title].join(", ") %></div>
+          <% end %>
+        </div>
+        <div>
+          <%= f.label :description, "Opis", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_area :description, placeholder: 'Opis', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', rows: 20, data: { target: "posts.description" } %>
+          <% if @post.errors[:description].any? %>
+            <div class="text-red-600 text-sm mt-1"><%= @post.errors[:description].join(", ") %></div>
+          <% end %>
+          <button type="button" id="generate-description" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Generuj opis przy użyciu AI</button>
+          <p id="generating-message" class="mt-2 text-blue-500 hidden" data-target="posts.generatingMessage">Generowanie opisu...</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6 mb-6">
+        <div>
+          <%= f.label :price, "Cena", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.number_field :price, placeholder: 'Cena', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', step: 0.01 %>
+          <% if @post.errors[:price].any? %>
+            <div class="text-red-600 text-sm mt-1"><%= @post.errors[:price].join(", ") %></div>
+          <% end %>
+        </div>
+        <div>
+          <%= f.label :availability, "Priorytet", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.select :availability, [['Brak', 'no_priority'], ['Wysoki', 'high_priority'], ['Średni', 'medium_priority'], ['Niski', 'low_priority']], {}, { class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' } %>
+        </div>
+        <div>
+          <%= f.label :contact_information, "Kontakt", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :contact_information, placeholder: 'Numer telefonu', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+        </div>
+        <div>
+          <%= f.label :street, "Ulica", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :street, id: 'street', placeholder: 'Ulica', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+        </div>
+        <div>
+          <%= f.label :city, "Miasto", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :city, id: 'city', placeholder: 'Miasto', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+        </div>
+        <div>
+          <%= f.label :state, "Województwo", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :state, id: 'state', placeholder: 'Województwo', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+        </div>
+        <div>
+          <%= f.label :country, "Kraj", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :country, id: 'country', placeholder: 'Kraj', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+        </div>
+      </div>
+
+      <div class="hidden">
+        <%= f.text_field :latitude, id: 'latitude', class: 'hidden' %>
+        <%= f.text_field :longitude, id: 'longitude', class: 'hidden' %>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-4">
+          <input id="map-click-checkbox" type="checkbox" class="mr-2 leading-tight">
+          <label for="map-click-checkbox" class="text-gray-700">Zaznacz aby uzupełnić adres klikając na mapę</label>
+        </div>
+        <div id="map" data-lat="<%= @post.latitude %>" data-lng="<%= @post.longitude %>" class="w-full h-64 border rounded-lg"></div>
+      </div>
+
+      <div class="flex justify-between items-center">
+        <%= f.submit 'Zatwierdź', class: 'bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline', data: { turbo: false }, id: 'posts-new-submit-button' %>
+        <button type="button" id="delete-post" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Usuń</button>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div id="delete-confirmation-modal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+  <div class="bg-white p-6 rounded-lg shadow-lg">
+    <h2 class="text-xl font-bold mb-4">Czy jesteś pewien że chcesz usunąć zlecenie?</h2>
+    <div class="flex justify-end">
+      <button id="cancel-delete" class="mr-4 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Anuluj</button>
+      <%= button_to 'Usuń', post_path(@post), method: :delete, class: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+    </div>
+  </div>
+</div>
+
+<div id="posts-new-loading-modal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+  <div class="bg-white p-4 rounded-lg flex items-center">
+    <div class="loader ease-linear rounded-full border-t-4 border-blue-500 h-12 w-12 animate-spin mr-4"></div>
+    <span>Dodawanie zlecenia...</span>
+  </div>
+</div>
+<script>
+ const deleteButton = document.getElementById('delete-post');
+  const deleteModal = document.getElementById('delete-confirmation-modal');
+  const cancelDeleteButton = document.getElementById('cancel-delete');
+
+  deleteButton.addEventListener('click', () => {
+    deleteModal.classList.remove('hidden');
+  });
+
+  cancelDeleteButton.addEventListener('click', () => {
+    deleteModal.classList.add('hidden');
+  });
+</script>
