@@ -9,7 +9,7 @@ class UserStepsController < ApplicationController
   def create
     @user = current_user
     if @user.update(user_params)
-      redirect_to dashboard_index_path, notice: "Profile updated successfully."
+      redirect_to posts_path, notice: "Profile updated successfully."
     else
       load_form_data
       render :new
@@ -24,7 +24,7 @@ class UserStepsController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to dashboard_index_path, notice: "Profile updated successfully."
+      redirect_to posts_path, notice: "Profile updated successfully."
     else
       load_form_data
       render :edit
