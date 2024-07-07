@@ -1,6 +1,18 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'gmail.com',
+    user_name: ENV['SMTP_USER_NAME'],
+    password: ENV['SMTP_PASSWORD'],
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -36,8 +48,12 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  # Care if the mailer can't send.
+  config.action_mailer.raise_delivery_errors = true
+
+  # Enable debugging for mailer
+  config.action_mailer.logger = ActiveSupport::Logger.new(STDOUT)
+  config.action_mailer.logger.level = :debug
 
   config.action_mailer.perform_caching = false
 
@@ -73,5 +89,4 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
-  config.action_mailer.default_url_options = {host: "localhost", port: 3000}
 end
