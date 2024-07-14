@@ -10,17 +10,17 @@ document.addEventListener('turbo:load', function() {
   const tutorialText = document.getElementById('tutorial-text');
 
   const steps = [
-    { element: 'dashboard-link', mobileElement: 'mobile-dashboard-link', offset: 50, text: "W tym miejscu znajdziesz dashboard.", hideArrow: true },
-    { element: 'new-post-link', mobileElement: 'mobile-new-post-link', offset: 50, text: "W tym miejscu dodasz ogłoszenie." },
-    { element: 'posts-link', mobileElement: 'mobile-posts-link', offset: 50, text: "Tutaj znajdziesz ogłoszenia." },
-    { element: 'user-posts-link', mobileElement: 'mobile-user-posts-link', offset: 50, text: "Tutaj znajdziesz swoje ogłoszenia." },
-    { element: 'conversations-link', mobileElement: 'mobile-conversations-link', offset: 50, text: "Tutaj możesz przeglądać swoje wiadomości." },
-    { element: 'notifications-link', mobileElement: 'mobile-notifications-link', offset: 50, text: "Tutaj znajdziesz swoje powiadomienia." },
-    { element: 'bookings-link', mobileElement: 'mobile-bookings-link', offset: 50, text: "Tutaj możesz przeglądać swoje zlecenia." },
-    { element: 'calendar-link', mobileElement: 'mobile-calendar-link', offset: 50, text: "Tutaj możesz zobaczyć swój kalendarz." },
-    { element: 'map-link', mobileElement: 'mobile-map-link', offset: 50, text: "Tutaj znajdziesz mapę zleceń." },
-    { element: 'profile-link', mobileElement: 'mobile-profile-link', offset: 50, text: "Tutaj możesz zobaczyć i edytować swój profil." },
-    { element: 'tutorial-button', mobileElement: 'mobile-tutorial-button', offset: 50, text: "W tym miejscu możesz uruchomić poradnik." }
+    { element: 'dashboard-link', mobileElement: 'mobile-dashboard-link', offset: 50, text: "W tym miejscu znajdziesz dashboard.", detailed_text: "Szczegółowy opis dashboardu.", hideArrow: true },
+    { element: 'new-post-link', mobileElement: 'mobile-new-post-link', offset: 50, text: "W tym miejscu dodasz ogłoszenie.", detailed_text: "Szczegółowy opis dodawania ogłoszenia." },
+    { element: 'posts-link', mobileElement: 'mobile-posts-link', offset: 50, text: "Tutaj znajdziesz ogłoszenia.", detailed_text: "Szczegółowy opis ogłoszeń." },
+    { element: 'user-posts-link', mobileElement: 'mobile-user-posts-link', offset: 50, text: "Tutaj znajdziesz swoje ogłoszenia.", detailed_text: "Szczegółowy opis twoich ogłoszeń." },
+    { element: 'conversations-link', mobileElement: 'mobile-conversations-link', offset: 50, text: "Tutaj możesz przeglądać swoje wiadomości.", detailed_text: "Szczegółowy opis wiadomości." },
+    { element: 'notifications-link', mobileElement: 'mobile-notifications-link', offset: 50, text: "Tutaj znajdziesz swoje powiadomienia.", detailed_text: "Szczegółowy opis powiadomień." },
+    { element: 'bookings-link', mobileElement: 'mobile-bookings-link', offset: 50, text: "Tutaj możesz przeglądać swoje zlecenia.", detailed_text: "Szczegółowy opis zleceń." },
+    { element: 'calendar-link', mobileElement: 'mobile-calendar-link', offset: 50, text: "Tutaj możesz zobaczyć swój kalendarz.", detailed_text: "Szczegółowy opis kalendarza." },
+    { element: 'map-link', mobileElement: 'mobile-map-link', offset: 50, text: "Tutaj znajdziesz mapę zleceń.", detailed_text: "Szczegółowy opis mapy zleceń." },
+    { element: 'profile-link', mobileElement: 'mobile-profile-link', offset: 50, text: "Tutaj możesz zobaczyć i edytować swój profil.", detailed_text: "Szczegółowy opis profilu użytkownika." },
+    { element: 'tutorial-button', mobileElement: 'mobile-tutorial-button', offset: 50, text: "W tym miejscu możesz uruchomić poradnik.", detailed_text: "Szczegółowy opis poradnika." }
   ];
 
   let currentStep = 0;
@@ -31,11 +31,13 @@ document.addEventListener('turbo:load', function() {
     arrow.classList.add('hidden');
     overlay.classList.remove('hidden');
 
-    if (window.innerWidth < 1024) {
-      introBox.style.top = '80%';
-    } else {
+    if (window.innerWidth >= 1024) {
       introBox.style.top = '50%';
+    } else {
+      introBox.style.top = '80%';
     }
+    introBox.style.left = '50%';
+    introBox.style.transform = 'translate(-50%, -50%)';
   }
 
   function showStep(stepIndex) {
@@ -56,6 +58,7 @@ document.addEventListener('turbo:load', function() {
       if (step.hideArrow) {
         arrow.classList.add('hidden');
       } else {
+        // Update arrow position and size
         const arrowStartX = stepBoxRect.left + (stepBoxRect.width / 2);
         const arrowStartY = stepBoxRect.top + (stepBoxRect.height / 2);
         const arrowEndX = rect.left + (rect.width / 2);
@@ -76,11 +79,13 @@ document.addEventListener('turbo:load', function() {
       stepBox.classList.remove('hidden');
       overlay.classList.remove('hidden');
 
-      if (window.innerWidth < 1024) {
-        stepBox.style.top = '80%';
-      } else {
+      if (window.innerWidth >= 1024) {
         stepBox.style.top = '50%';
+      } else {
+        stepBox.style.top = '80%';
       }
+      stepBox.style.left = '50%';
+      stepBox.style.transform = 'translate(-50%, -50%)';
 
       overlay.style.clipPath = `polygon(0% 0%, 0% 100%, ${rect.left + window.scrollX}px 100%, ${rect.left + window.scrollX}px ${rect.top + window.scrollY}px, ${rect.right + window.scrollX}px ${rect.top + window.scrollY}px, ${rect.right + window.scrollX}px ${rect.bottom + window.scrollY}px, ${rect.left + window.scrollX}px ${rect.bottom + window.scrollY}px, ${rect.left + window.scrollX}px 100%, 100% 100%, 100% 0%)`;
     }
@@ -111,4 +116,40 @@ document.addEventListener('turbo:load', function() {
       showStep(currentStep);
     });
   }
+
+  // Use the actual step index for detailed description
+  const detailedButtons = document.querySelectorAll('#detailed-description');
+
+  detailedButtons.forEach((button, index) => {
+    button.addEventListener('click', function () {
+      const step = steps[currentStep];
+      const detailedModal = document.createElement('div');
+      detailedModal.id = `detailed-modal-${index}`;
+      detailedModal.className = 'fixed bg-white p-4 rounded shadow-lg text-center';
+
+      if (window.innerWidth >= 1024) {
+        detailedModal.style.top = '50%';
+      } else {
+        detailedModal.style.top = '80%';
+      }
+      detailedModal.style.left = '50%';
+      detailedModal.style.transform = 'translate(-50%, -50%)';
+      detailedModal.style.zIndex = '70';
+
+      detailedModal.innerHTML = `
+        <p class="mb-4">${step.detailed_text}</p>
+        <button class="detailed-close px-4 py-2 bg-blue-500 text-white rounded">Zamknij</button>
+      `;
+      document.body.appendChild(detailedModal);
+
+      detailedModal.querySelector('.detailed-close').addEventListener('click', function () {
+        detailedModal.classList.add('hidden');
+        stepBox.classList.remove('hidden');
+        document.body.removeChild(detailedModal);
+      });
+
+      stepBox.classList.add('hidden');
+      detailedModal.classList.remove('hidden');
+    });
+  });
 });
