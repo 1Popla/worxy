@@ -5,62 +5,62 @@
     </div>
     <ul class="space-y-2">
       <li>
-        <%= link_to dashboard_index_path, data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to dashboard_index_path, id: 'dashboard-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-tachometer-alt mr-2 text-gray-700"></i>
           Dashboard
         <% end %>
       </li>
       <li>
-        <%= link_to new_post_path, data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to new_post_path, id: 'new-post-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-plus mr-2 text-gray-700"></i>
           Nowe ogłoszenie
         <% end %>
       </li>
       <li>
-        <%= link_to posts_path, data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to posts_path, id: 'posts-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-list mr-2 text-gray-700"></i>
           Ogłoszenia
         <% end %>
       </li>
       <li>
-        <%= link_to user_posts_posts_path, data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to user_posts_posts_path, id: 'user-posts-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-user mr-2 text-gray-700"></i>
           Moje Ogłoszenia
         <% end %>
       </li>
       <li>
-        <%= link_to conversations_path, data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to conversations_path, id: 'conversations-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-comments mr-2 text-gray-700"></i>
           Wiadomości
         <% end %>
       </li>
       <li class="relative">
-        <%= link_to notifications_path, data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700 notification-bell' do %>
+        <%= link_to notifications_path, id: 'notifications-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700 notification-bell' do %>
           <i class="fas fa-bell mr-2 text-gray-700"></i>
           Moje Powiadomienia
           <span id="notification-count" class="absolute top-0 right-0 mt-1 mr-2 h-5 w-5 text-xs text-black bg-yellow-400 rounded-full flex items-center justify-center hidden"></span>
         <% end %>
       </li>
       <li>
-        <%= link_to bookings_path, data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to bookings_path, id: 'bookings-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-briefcase mr-2 text-gray-700"></i>
           Zlecenia
         <% end %>
       </li>
       <li>
-        <%= link_to calendar_bookings_path, data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to calendar_bookings_path, id: 'calendar-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-calendar-alt mr-2 text-gray-700"></i>
           Zobacz Kalendarz
         <% end %>
       </li>
       <li>
-        <%= link_to dashboard_map_path, data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to dashboard_map_path, id: 'map-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-map mr-2 text-gray-700"></i>
           Mapa Zleceń
         <% end %>
       </li>
       <li>
-        <%= link_to user_path(current_user), data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to user_path(current_user), id: 'profile-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-user-circle mr-2 text-gray-700"></i>
           Profil Użytkownika
         <% end %>
@@ -70,6 +70,12 @@
           <i class="fas fa-sign-out-alt mr-2 text-gray-700"></i>
           Wyloguj
         <% end %>
+      </li>
+      <li>
+        <button id="tutorial-button" class="flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700">
+          <i class="fas fa-book mr-2 text-gray-700"></i>
+          Poradnik
+        </button>
       </li>
     </ul>
   </nav>
@@ -90,62 +96,62 @@
   <div class="p-4">
     <ul class="space-y-2">
       <li>
-        <%= link_to dashboard_index_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to dashboard_index_path, id: 'mobile-dashboard-link', data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-tachometer-alt mr-2 text-gray-700"></i>
           Dashboard
         <% end %>
       </li>
       <li>
-        <%= link_to new_post_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to new_post_path, id: 'mobile-new-post-link', data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-plus mr-2 text-gray-700"></i>
           Nowe ogłoszenie
         <% end %>
       </li>
       <li>
-        <%= link_to posts_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to posts_path, id: 'mobile-posts-link', data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-list mr-2 text-gray-700"></i>
           Ogłoszenia
         <% end %>
       </li>
       <li>
-        <%= link_to user_posts_posts_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to user_posts_posts_path, id: 'mobile-user-posts-link', data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-user mr-2 text-gray-700"></i>
           Moje Ogłoszenia
         <% end %>
       </li>
       <li>
-        <%= link_to conversations_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to conversations_path, id: 'mobile-conversations-link', data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-comments mr-2 text-gray-700"></i>
           Wiadomości
         <% end %>
       </li>
       <li class="relative">
-        <%= link_to notifications_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700 notification-bell' do %>
+        <%= link_to notifications_path, id: 'mobile-notifications-link', data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700 notification-bell' do %>
           <i class="fas fa-bell mr-2 text-gray-700"></i>
           Moje Powiadomienia
           <span id="notification-count-mobile" class="absolute top-0 right-0 mt-1 mr-2 h-5 w-5 text-xs text-black bg-yellow-400 rounded-full flex items-center justify-center hidden"></span>
         <% end %>
       </li>
       <li>
-        <%= link_to bookings_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to bookings_path, id: 'mobile-bookings-link', data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-briefcase mr-2 text-gray-700"></i>
           Zlecenia
         <% end %>
       </li>
       <li>
-        <%= link_to calendar_bookings_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to calendar_bookings_path, id: 'mobile-calendar-link', data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-calendar-alt mr-2 text-gray-700"></i>
           Zobacz Kalendarz
         <% end %>
       </li>
       <li>
-        <%= link_to dashboard_map_path, data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to dashboard_map_path, id: 'mobile-map-link', data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-map mr-2 text-gray-700"></i>
           Mapa Zleceń
         <% end %>
       </li>
       <li>
-        <%= link_to user_path(current_user), data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
+        <%= link_to user_path(current_user), id: 'mobile-profile-link', data: { turbo: true }, class: 'block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
           <i class="fas fa-user-circle mr-2 text-gray-700"></i>
           Profil Użytkownika
         <% end %>
@@ -155,6 +161,12 @@
           <i class="fas fa-sign-out-alt mr-2 text-gray-700"></i>
           Wyloguj
         <% end %>
+      </li>
+      <li>
+        <button id="mobile-tutorial-button" class="block p-2 rounded hover:bg-gray-200 text-gray-700">
+          <i class="fas fa-book mr-2 text-gray-700"></i>
+          Poradnik
+        </button>
       </li>
     </ul>
   </div>
