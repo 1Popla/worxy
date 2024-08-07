@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   def index
     @categories = Category.where(parent_id: nil)
     @subcategories = Category.where(parent_id: params[:category]) if params[:category].present?
-    @subcategories ||= []  # Ensure @subcategories is always defined
+    @subcategories ||= []
 
     @posts = Post.all
     @customer_posts = Post.joins(:user).where(users: {role: "customer"}).page(params[:page]).per(10)

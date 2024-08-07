@@ -34,3 +34,18 @@
   <% end %>
 </body>
 </html>
+
+<div id="tutorial-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+  <div id="tutorial-intro" class="fixed bg-white p-4 rounded shadow-lg text-center hidden" style="z-index: 60;">
+    <p class="mb-4">Za chwile zobaczysz poradnik, przelaczaj kroki klikajac przycisk "Dalej"</p>
+    <button id="tutorial-start" class="px-4 py-2 bg-blue-500 text-white rounded">Dalej</button>
+  </div>
+  <div id="tutorial-arrow" class="fixed w-1 h-1 bg-red-500 hidden" style="z-index: 55;"></div>
+  <div id="tutorial-step" class="fixed bg-white p-4 rounded shadow-lg text-center hidden" style="z-index: 60;">
+    <p id="tutorial-text" class="mb-4"></p>
+    <div class="flex justify-center space-x-2 mb-4">
+      <button id="detailed-description" class="px-4 py-2 bg-blue-500 text-white rounded">Dokladny opis</button>
+      <button id="tutorial-next" class="px-4 py-2 bg-blue-500 text-white rounded">Dalej</button>
+    </div>
+  </div>
+</div>
