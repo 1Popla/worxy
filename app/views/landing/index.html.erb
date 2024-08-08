@@ -85,46 +85,47 @@
     </nav>
 
 <header id="header" class="pt-16 md:pt-0">
-        <div class="header-top">
-            <div class="container">
-                <div class="row">
-                    <div class="logo">
-                        <a href="#"><img src="images/worxy-logo-cropped.png" alt="Logo" style="width: 75%;"></a>
-                    </div>
-                    <div class="contact-place" id="contact-container" style="cursor: pointer;">
-                        <div class="cp-01 phone">
-                            <div class="cp-inner">
-                                <div class="icon"><i class="fas fa-user fa-3x"></i></div>
-                                <div class="phone-text">
-                                    <span class="text">Kliknij!</span>
-                                    <span class="numbers">aby się zalogować</span>
-                                </div>
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="logo">
+                    <a href="#"><img src="images/worxy-logo-cropped.png" alt="Logo" style="width: 75%;"></a>
+                </div>
+                <div class="contact-place" id="contact-container">
+                    <a href="/users/sign_in" class="cp-01 phone w-96" style="text-decoration: none; color: inherit;">
+                        <div class="cp-inner">
+                            <div class="icon"><i class="fas fa-user-circle fa-3x"></i></div>
+                            <div class="phone-text">
+                                <span class="text">Kliknij!</span>
+                                <span class="numbers">aby się zalogować</span>
                             </div>
                         </div>
+                    </a>
 
-                        <div class="cp-01 mail">
-                            <div class="cp-inner">
-                                <div class="icon flaticon-email19"></div>
-                                <div class="phone-text">
-                                    <span class="text">Contact with E-mail</span>
-                                    <a href="mailto:info@yourmail.com" class="numbers">info@yourmail.com</a>
-                                </div>
-                            </div>    
-                        </div>
-                    </div>
+                    <a href="users/sign_up" class="cp-01 mail w-96" style="text-decoration: none; color: inherit;">
+                        <div class="cp-inner">
+                            <div class="icon"><i class="far fa-user-circle fa-3x"></i></div>
+                            <div class="phone-text">
+                                <span class="text">Kliknij!</span>
+                                <span class="numbers">aby się zarejestrować</span>
+                            </div>
+                        </div>    
+                    </a>
+                </div>
 
-                    <div class="top-social-media">
-                        <ul class="social-media">
-                            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#" class="vimeo"><i class="fa fa-vimeo"></i></a></li>
-                        </ul>
-                    </div>
+                <div class="top-social-media">
+                    <ul class="social-media">
+                        <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#" class="vimeo"><i class="fa fa-vimeo"></i></a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </header>
+    </div>
+</header>
+
 
         <!-- Header -->
 
@@ -848,14 +849,4 @@
         <script type='text/javascript' src='js/functions.js'></script>
     </body>
 </html>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  var contactContainers = document.querySelectorAll("#contact-container");
-  contactContainers.forEach(function(contactContainer) {
-    contactContainer.addEventListener("click", function(e) {
-      window.location.href = "/users/sign_in";
-    });
-  });
-});
 
-</script>
