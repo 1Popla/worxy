@@ -8,12 +8,12 @@ class UsersController < ApplicationController
   def avatar_upload
     if current_user.id == params[:user][:id].to_i
       if current_user.update(avatar_params)
-        flash[:notice] = 'Avatar updated successfully.'
+        flash[:notice] = "Avatar updated successfully."
       else
-        flash[:alert] = 'Failed to update avatar.'
+        flash[:alert] = "Failed to update avatar."
       end
     else
-      flash[:alert] = 'You are not authorized to update this avatar.'
+      flash[:alert] = "You are not authorized to update this avatar."
     end
     redirect_to request.referrer || root_path
   end

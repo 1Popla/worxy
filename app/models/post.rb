@@ -7,10 +7,10 @@ class Post < ApplicationRecord
   has_many_attached :images
   has_many :notifications, as: :notifiable, dependent: :destroy
 
-  validates :title, presence: { message: I18n.t('activerecord.errors.models.post.attributes.title.blank') }
-  validates :description, presence: { message: I18n.t('activerecord.errors.models.post.attributes.description.blank') }
-  validates :price, presence: { message: I18n.t('activerecord.errors.models.post.attributes.price.blank') }
-  validates :category_id, presence: { message: I18n.t('activerecord.errors.models.post.attributes.category_id.blank') }
+  validates :title, presence: {message: I18n.t("activerecord.errors.models.post.attributes.title.blank")}
+  validates :description, presence: {message: I18n.t("activerecord.errors.models.post.attributes.description.blank")}
+  validates :price, presence: {message: I18n.t("activerecord.errors.models.post.attributes.price.blank")}
+  validates :category_id, presence: {message: I18n.t("activerecord.errors.models.post.attributes.category_id.blank")}
 
   enum status: {draft: 0, pending: 1, active: 2, archived: 3}
 
