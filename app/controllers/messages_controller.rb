@@ -18,19 +18,10 @@ class MessagesController < ApplicationController
     @new_message = @conversation.messages.new(message_params.merge(user_id: current_user.id))
 
     if @new_message.save
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: [
-            turbo_stream.append("messages", partial: "messages/message", locals: { message: @new_message }),
-            turbo_stream.replace("message_form_errors", partial: "shared/form_errors", locals: { model: @new_message })
-          ]
-        end
-        format.html { redirect_to conversation_messages_path(@conversation) }
-      end
+      redirect_to conversation_messages_path(@conversation)
     else
       set_active_conversations_with_recipients
       @messages = @conversation.messages.page(params[:page]).per(20)
-
       flash.now[:alert] = @new_message.errors.full_messages.to_sentence
       render "index", status: :unprocessable_entity
     end

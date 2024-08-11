@@ -1,4 +1,4 @@
-<% if message.user_id == local_assigns[:current_user_id] %>
+<% if message.user_id == current_user_id %>
   <div class="flex justify-end mb-2">
     <p class="bg-blue-500 text-white rounded-lg p-2 max-w-xs break-words border border-blue-300 border-opacity-50">
       <%= message.body %>
