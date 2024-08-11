@@ -1,12 +1,12 @@
 databases:
-  - name: mysite_db
+  - name: worxy_db
     databaseName: better_fixly_production
     user: better_fixly
     plan: free
 
 services:
   - type: web
-    name: mysite
+    name: worxy
     runtime: ruby
     plan: free
     buildCommand: |
@@ -22,9 +22,20 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: mysite_db
+          name: worxy_db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          name: worxy_redis
+          type: redis
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
       - key: WEB_CONCURRENCY
         value: 2 # sensible default
+
+  - type: redis
+    name: worxy_redis
+    plan: free
+    ipAllowList:
+      - source: "0.0.0.0/0" # Allow all IPs (not recommended for production)
