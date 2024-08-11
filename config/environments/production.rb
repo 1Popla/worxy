@@ -12,7 +12,7 @@ Rails.application.configure do
     authentication: 'plain',
     enable_starttls_auto: true
   }
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'https://worxy.onrender.com' }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
