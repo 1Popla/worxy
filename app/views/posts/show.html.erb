@@ -3,16 +3,21 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <div class="lg:col-span-2 bg-white shadow rounded-lg p-4">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-4">
-          <div class="flex items-center mb-4 md:mb-0">
+          <div class="flex items-center w-full">
             <span class="bg-blue-200 px-3 py-1 rounded-full flex items-center">
               <i class="fas fa-file-alt mr-2"></i>
               <%= @post.title %>
             </span>
+            <% if user_signed_in? && current_user == @post.user %>
+              <%= link_to edit_post_path(@post), class: 'ml-auto bg-yellow-300 hover:bg-yellow-500 text-black-700 font-bold py-1 px-2 rounded flex items-center space-x-1' do %>
+                <i class="fas fa-pencil-alt"></i>
+                <span>Edytuj</span>
+              <% end %>
+            <% end %>
           </div>
-          <% if user_signed_in? && current_user == @post.user %>
-            <%= link_to 'Edytuj zlecenie', edit_post_path(@post), class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
-          <% end %>
         </div>
+
+
         <% if @post.images.attached? %>
           <div class="mb-4 border-2 border-gray-300 shadow-lg rounded p-2">
             <div id="main-image-container" class="mb-4 cursor-pointer w-full h-64 md:h-96 flex items-center justify-center border-b-2 border-gray-300 pb-2 rounded">
@@ -163,6 +168,7 @@
     <% end %>
   </div>
 </div>
+
 <script>
 document.addEventListener('turbo:load', function () {
   const thumbnails = document.getElementById('thumbnails');
