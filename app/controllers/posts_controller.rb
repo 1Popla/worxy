@@ -9,26 +9,31 @@ class PostsController < ApplicationController
     @categories = Category.where(parent_id: nil)
     @subcategories = Category.where(parent_id: params[:category]) if params[:category].present?
     @subcategories ||= []
-
+  
     @posts = Post.all
-    @customer_posts = Post.joins(:user).where(users: {role: "customer"}).page(params[:page]).per(10)
-    @worker_posts = Post.joins(:user).where(users: {role: "worker"}).page(params[:page]).per(10)
-
+    @customer_posts = Post.joins(:user).where(users: { role: "customer" }).page(params[:page]).per(10)
+    @worker_posts = Post.joins(:user).where(users: { role: "worker" }).page(params[:page]).per(10)
+  
     if params[:category].present?
       @customer_posts = @customer_posts.where(category_id: params[:category])
       @worker_posts = @worker_posts.where(category_id: params[:category])
     end
-
+  
     if params[:subcategory].present?
       @customer_posts = @customer_posts.where(subcategory_id: params[:subcategory])
       @worker_posts = @worker_posts.where(subcategory_id: params[:subcategory])
     end
-
+  
     if params[:search].present?
-      @customer_posts = @customer_posts.where("posts.title ILIKE ? OR posts.description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
-      @worker_posts = @worker_posts.where("posts.title ILIKE ? OR posts.description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+      @customer_posts = @customer_posts.where("unaccent(posts.title) ILIKE unaccent(?) OR unaccent(posts.description) ILIKE unaccent(?)", "%#{params[:search]}%", "%#{params[:search]}%")
+      @worker_posts = @worker_posts.where("unaccent(posts.title) ILIKE unaccent(?) OR unaccent(posts.description) ILIKE unaccent(?)", "%#{params[:search]}%", "%#{params[:search]}%")
     end
-
+  
+    if params[:city].present?
+      @customer_posts = @customer_posts.where("unaccent(city) ILIKE unaccent(?)", "%#{params[:city]}%")
+      @worker_posts = @worker_posts.where("unaccent(city) ILIKE unaccent(?)", "%#{params[:city]}%")
+    end
+  
     respond_to do |format|
       format.html
       format.json { render json: (params[:tab] == "worker") ? @worker_posts : @customer_posts }
