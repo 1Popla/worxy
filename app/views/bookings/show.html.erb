@@ -11,7 +11,7 @@
             </div>
             <div class="bg-gray-100 p-4 rounded-lg shadow-md">
               <p class="font-medium">Status:</p>
-              <p><%= @booking.status %></p>
+              <p><%= human_enum_name('booking.statuses', @booking.status) %></p>
             </div>
             <div class="bg-gray-100 p-4 rounded-lg shadow-md">
               <p class="font-medium">Data rozpoczęcia:</p>
@@ -39,7 +39,7 @@
             </div>
             <div class="bg-gray-100 p-4 rounded-lg shadow-md">
               <p class="font-medium">Priorytet:</p>
-              <p><%= @booking.post.availability %></p>
+              <p><%= human_readable_priority(@booking.post.availability) %></p>
             </div>
             <div class="bg-gray-100 p-4 rounded-lg shadow-md">
               <p class="font-medium">Telefon usługodawcy:</p>

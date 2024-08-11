@@ -17,7 +17,7 @@
 
   <div class="mb-4">
     <%= form.label :status, class: "block text-gray-700 text-sm font-bold mb-2" %>
-    <%= form.select :status, Booking.statuses.keys.map { |status| [status.titleize, status] }, {}, {class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"} %>
+    <%= form.select :status, Booking.statuses.keys.map { |status| [human_enum_name('booking.statuses', status), status] }, {}, {class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"} %>
   </div>
 
   <div class="mb-6">

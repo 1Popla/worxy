@@ -20,7 +20,7 @@
             <div class="mb-4">
               <div class="bg-gray-100 p-2 rounded-lg shadow-inner">
                 <span class="block font-medium text-gray-500">Status</span>
-                <span class="text-gray-600"><%= booking.status %></span>
+                <span class="text-gray-600"><%= human_enum_name('booking.statuses', booking.status) %></span>
               </div>
             </div>
             <div class="flex justify-between items-center">
@@ -44,7 +44,7 @@
           <% @bookings.each do |booking| %>
             <tr id="<%= dom_id(booking) %>" class="hover:bg-gray-50 transition-colors">
               <td class="py-4 px-6 whitespace-nowrap"><%= booking.post.title %></td>
-              <td class="py-4 px-6 whitespace-nowrap"><%= booking.status %></td>
+              <td class="py-4 px-6 whitespace-nowrap"><%= human_enum_name('booking.statuses', booking.status) %></td>
               <td class="py-4 px-6 whitespace-nowrap text-center">
                 <%= link_to 'Pokaż', booking, class: 'text-blue-600 hover:text-blue-900' %>
               </td>

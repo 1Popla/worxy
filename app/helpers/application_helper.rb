@@ -13,4 +13,21 @@ module ApplicationHelper
       'Nieznany'
     end
   end
+
+  def human_enum_name(enum_name, enum_key)
+    translations = {
+      "booking.statuses" => {
+        "pending" => "Oczekujący",
+        "confirmed" => "Potwierdzony",
+        "completed" => "Zakończony",
+        "cancelled" => "Anulowany"
+      },
+      "user.roles" => {
+        "worker" => "Pracownik",
+        "customer" => "Klient"
+      }
+    }
+
+    translations.dig(enum_name.to_s, enum_key.to_s) || enum_key.to_s.humanize
+  end
 end
