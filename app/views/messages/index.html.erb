@@ -27,11 +27,23 @@
 </div>
 
 <script>
+  function scrollToBottom() {
+    const messagesDiv = document.getElementById("messages");
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  }
+
+  document.addEventListener("turbo:load", scrollToBottom);
+
   document.addEventListener("turbo:submit-end", function(event) {
     const form = event.target;
     if (form && form.id === "new_message") {
       document.getElementById("message_body").value = "";
+      scrollToBottom();
     }
+  });
+
+  document.addEventListener("turbo:frame-render", function(event) {
+    scrollToBottom();
   });
 
   document.getElementById("message_body").addEventListener("keydown", function(event) {
