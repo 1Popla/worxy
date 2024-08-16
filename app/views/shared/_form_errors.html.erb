@@ -1,0 +1,10 @@
+<% if model.errors.any? %>
+  <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+    <strong class="font-bold">There were errors with your submission:</strong>
+    <ul class="mt-2 list-disc list-inside">
+      <% model.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

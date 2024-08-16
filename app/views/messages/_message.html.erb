@@ -1,0 +1,35 @@
+<% if message.user_id == current_user_id %>
+  <div class="flex justify-end mb-2">
+    <div class="flex items-center">
+      <p 
+        class="bg-blue-500 text-white rounded-lg p-2 max-w-xs break-words border border-blue-300 border-opacity-50"
+        title="<%= l(message.created_at, format: :long) %>">
+        <%= message.body %>
+      </p>
+      <% if message.user.avatar.attached? %>
+        <%= image_tag url_for(message.user.avatar), class: 'w-8 h-8 rounded-full ml-2' %>
+      <% else %>
+        <div class="w-8 h-8 bg-gray-300 rounded-full ml-2 flex items-center justify-center">
+          <i class="fas fa-user text-white"></i>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="flex justify-start mb-2">
+    <div class="flex items-center">
+      <% if message.user.avatar.attached? %>
+        <%= image_tag url_for(message.user.avatar), class: 'w-8 h-8 rounded-full mr-2' %>
+      <% else %>
+        <div class="w-8 h-8 bg-gray-300 rounded-full mr-2 flex items-center justify-center">
+          <i class="fas fa-user text-white"></i>
+        </div>
+      <% end %>
+      <p 
+        class="bg-gray-300 rounded-lg p-2 max-w-xs break-words"
+        title="<%= l(message.created_at, format: :long) %>">
+        <%= message.body %>
+      </p>
+    </div>
+  </div>
+<% end %>
