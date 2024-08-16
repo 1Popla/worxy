@@ -1,23 +1,43 @@
-<div id="messages">
-  <%= turbo_stream_from @conversation %>
-  <%= render partial: "messages/message", collection: @messages, as: :message, locals: { current_user_id: current_user.id } %>
-</div>
+<div class="flex flex-col h-full max-h-screen w-full border rounded-lg shadow-md">
+  <!-- Header with recipient's name -->
+  <div class="bg-blue-500 text-white text-center p-4 font-semibold rounded-t-lg">
+    <%= @conversation.recipient_id == current_user.id ? @conversation.sender.full_name : @conversation.recipient.full_name %>
+  </div>
 
-<%= turbo_frame_tag "message_form" do %>
-  <%= form_for [@conversation, @new_message], html: { data: { turbo_frame: "_top" }, id: "new_message" } do |f| %>
-    <div id="message_form_errors"></div>
-    <div class="mb-4">
-      <%= f.text_area :body, id: "message_body", class: "w-full rounded border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50", rows: 4 %>
-    </div>
-    <%= f.submit "Wyślij", class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+  <!-- Messages section with fixed height and scrollable area -->
+  <div id="messages" class="flex-grow overflow-y-auto p-4 bg-gray-100">
+    <%= turbo_stream_from "#{@conversation.id}_#{current_user.id}" %>
+    <%= render partial: "messages/message", collection: @messages, as: :message, locals: { current_user_id: current_user.id } %>
+  </div>
+
+  <!-- Message form at the bottom -->
+  <%= turbo_frame_tag "message_form" do %>
+    <%= form_for [@conversation, @new_message], html: { data: { turbo_frame: "_top" }, id: "new_message", class: "flex items-center p-4 bg-white border-t rounded-b-lg shadow-inner" } do |f| %>
+      <div id="message_form_errors" class="text-red-500"></div>
+      <div class="flex-grow">
+        <%= f.text_area :body, id: "message_body", class: "w-full rounded border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50", rows: 2, placeholder: "Wyślij swoją wiadomość..." %>
+      </div>
+      <button type="submit" class="ml-4 flex items-center justify-center w-10 h-10 bg-blue-500 rounded-full text-white shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10 9l5 3-5 3V9z" />
+        </svg>
+      </button>
+    <% end %>
   <% end %>
-<% end %>
+</div>
 
 <script>
   document.addEventListener("turbo:submit-end", function(event) {
     const form = event.target;
     if (form && form.id === "new_message") {
       document.getElementById("message_body").value = "";
+    }
+  });
+
+  document.getElementById("message_body").addEventListener("keydown", function(event) {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      document.getElementById("new_message").requestSubmit();
     }
   });
 </script>
