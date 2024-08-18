@@ -47,7 +47,11 @@ Rails.application.routes.draw do
 
   resources :conversations do
     resources :messages
+    collection do
+      post 'create_or_open'
+    end
   end
+  get 'search_users', to: 'conversations#search_users'
 
   resources :users, only: [:show] do
     resources :opinions, only: [:new, :create]

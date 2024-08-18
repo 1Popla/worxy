@@ -1,0 +1,11 @@
+<% if users.any? %>
+  <% users.each do |user| %>
+    <div class="p-2 hover:bg-gray-100 cursor-pointer">
+      <%= button_to "#{user.first_name} #{user.last_name}", create_or_open_conversations_path(recipient_id: user.id), method: :post, class: "block text-blue-500 hover:text-blue-700" %>
+    </div>
+  <% end %>
+<% else %>
+  <div class="p-2 text-gray-500">
+    Nie znaleziono użytkowników.
+  </div>
+<% end %>
