@@ -41,8 +41,13 @@ class ConversationsController < ApplicationController
   end
 
   def search_users
+    @page = [params[:page].to_i, 1].max
+    @per_page = 10
+
     if params[:query].present?
       @users = User.where("first_name ILIKE ? OR last_name ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
+                   .offset((@page - 1) * @per_page)
+                   .limit(@per_page)
     else
       @users = User.none
     end
