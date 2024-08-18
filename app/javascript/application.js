@@ -19,3 +19,4 @@ import './posts_new_loading_modal';
 import './avatar_upload';
 import './tutorial_modal';
 import './messages';
+import './conversations';
