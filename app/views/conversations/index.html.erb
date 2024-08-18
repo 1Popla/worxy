@@ -1,6 +1,5 @@
 <div class="flex flex-col h-full">
 
-  <!-- Top Section: Search Bar -->
   <div class="w-full bg-white shadow-lg p-6 mb-2">
     <h2 class="text-2xl font-bold mb-2">Zacznij nową konwersację</h2>
 
@@ -10,9 +9,7 @@
     </div>
   </div>
 
-  <!-- Bottom Section: Conversations List and Messages Window -->
   <div class="flex flex-1 lg:flex-row">
-    <!-- Conversations List -->
     <div class="w-full lg:w-1/3 bg-white shadow-lg h-full overflow-y-auto p-6">
       <h2 class="text-2xl font-bold mb-4">Aktywne konwersacje</h2>
       <% @active_conversations.each do |conversation| %>
@@ -43,7 +40,6 @@
       <% end %>
     </div>
 
-    <!-- Messages Window -->
     <div class="w-full lg:w-2/3 flex-1 overflow-auto" id="messages-window">
       <div id="messages-content">
         <div class="container mx-auto p-4">
@@ -72,7 +68,9 @@ document.addEventListener("turbo:load", function() {
     }
   }
 
-  if (searchInput) {
+  if (searchInput && !searchInput.dataset.listenerAttached) {
+    searchInput.dataset.listenerAttached = true;
+
     searchInput.addEventListener('keyup', function() {
       const query = searchInput.value.trim();
 
@@ -88,7 +86,6 @@ document.addEventListener("turbo:load", function() {
       }
     });
 
-    // Close dropdown and clear query when clicking outside
     document.addEventListener('click', function(event) {
       if (!searchInput.contains(event.target) && !usersList.contains(event.target)) {
         resetSearchState();
@@ -129,19 +126,19 @@ document.addEventListener("turbo:load", function() {
     });
   }
 
-  if (usersList) {
+  if (usersList && !usersList.dataset.listenerAttached) {
+    usersList.dataset.listenerAttached = true;
+
     usersList.addEventListener('scroll', function() {
       if (usersList.scrollTop + usersList.clientHeight >= usersList.scrollHeight) {
         loadUsers();
       }
     });
 
-    // Ensure search is reset when caching page
     document.addEventListener('turbo:before-cache', function() {
       resetSearchState();
     });
   }
 });
-
 
 </script>
