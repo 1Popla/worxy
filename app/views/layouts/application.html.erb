@@ -18,10 +18,10 @@
 </head>
 <body class="relative h-full min-h-screen overflow-auto">
   <% if user_signed_in? && !(controller_name == "landing" && action_name == "index") %>
-    <div class="flex h-full min-h-screen bg-gray-100">
+    <div class="flex h-full min-h-screen bg-gray-100 pb-16 lg:pb-0">
       <%= render 'shared/dashboard/sidebar' %>
 
-      <div class="flex-1 overflow-auto pt-16 lg:pt-0">
+      <div class="flex-1 overflow-auto lg:pt-0">
         <div class="container mx-auto p-4 max-w-7xl mx-auto">
           <%= yield %>
         </div>
