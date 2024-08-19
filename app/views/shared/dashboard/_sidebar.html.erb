@@ -86,10 +86,17 @@
     <%= link_to posts_path, id: 'mobile-posts-link', data: { turbo: true }, class: 'flex flex-col items-center justify-center p-2 mx-2' do %>
       <i class="fas fa-list text-gray-700 text-2xl"></i>
     <% end %>
+    <%= link_to dashboard_map_path, id: 'mobile-calendar-link', data: { turbo: true }, class: 'flex flex-col items-center justify-center p-2 mx-2' do %>
+      <i class="fas fa-map text-gray-700 text-2xl" style="margin-left: -50px;"></i>
+    <% end %>
 
     <button id="expand-menu-button" class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-yellow-300 text-black rounded-full w-16 h-16 focus:outline-none flex items-center justify-center shadow-lg transition duration-300 ease-in-out">
       <i class="fas fa-plus text-2xl transition-transform duration-300 ease-in-out"></i>
     </button>
+
+    <%= link_to user_path(current_user), id: 'mobile-profile-link', data: { turbo: true }, class: 'flex flex-col items-center justify-center p-2 mx-2' do %>
+      <i class="fas fa-user-circle text-gray-700 text-2xl" style="margin-right: -50px;"></i>
+    <% end %>
 
     <%= link_to dashboard_index_path, id: 'mobile-dashboard-link', data: { turbo: true }, class: 'flex flex-col items-center justify-center p-2 mx-2' do %>
       <i class="fas fa-tachometer-alt text-gray-700 text-2xl"></i>
@@ -137,18 +144,7 @@
           Zobacz Kalendarz
         <% end %>
       </li>
-      <li class="bg-gray-100 p-3 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
-        <i class="fas fa-map text-gray-700 text-lg mr-3"></i>
-        <%= link_to dashboard_map_path, id: 'expanded-map-link', data: { turbo: true }, class: 'text-xl text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left' do %>
-          Mapa Zleceń
-        <% end %>
-      </li>
-      <li class="bg-gray-100 p-3 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
-        <i class="fas fa-user-circle text-gray-700 text-lg mr-3"></i>
-        <%= link_to user_path(current_user), id: 'expanded-profile-link', data: { turbo: true }, class: 'text-xl text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left' do %>
-          Profil Użytkownika
-        <% end %>
-      </li>
+
       <li class="bg-gray-100 p-3 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
         <i class="fas fa-sign-out-alt text-red-600 text-lg mr-3"></i>
         <%= link_to destroy_user_session_path, method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'text-xl text-red-600 font-medium hover:bg-red-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left' do %>
