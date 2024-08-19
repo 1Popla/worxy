@@ -68,6 +68,6 @@ services:
 
   - type: redis
     name: worxy_redis
-    plan: standard
-    maxMemoryPolicy: noeviction
-    region: oregon
+    plan: free
+    ipAllowList:
+      - source: "0.0.0.0/0" # Allow all IPs (not recommended for production)
