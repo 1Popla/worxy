@@ -17,7 +17,7 @@ services:
   - key: AWS_BUCKET
     fromService:
       name: worxy
-      type: web # Example service type
+      type: web
       property: host
   - key: AWS_REGION
     sync: false
@@ -37,9 +37,28 @@ services:
     sync: false
   - key: WEB_CONCURRENCY
     sync: false
+  - key: DATABASE_URL
+    fromDatabase:
+      name: worxy_db
+  - key: REDIS_URL
+    fromService:
+      name: worxy_redis
+      type: redis
+      property: connectionString
   region: oregon
-  buildCommand: bundle install; bundle exec rake assets:precompile; bundle exec rake
-    assets:clean;
+  buildCommand: bundle install; bundle exec rake assets:precompile; bundle exec rake assets:clean
   startCommand: bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RACK_ENV:-development}
   pullRequestPreviewsEnabled: false
-version: "1"
+
+databases:
+- type: postgres
+  name: worxy_db
+  plan: standard
+  version: 16
+
+services:
+- type: redis
+  name: worxy_redis
+  plan: standard
+  maxMemoryPolicy: noeviction
+  region: oregon
