@@ -43,11 +43,24 @@ class ConversationsController < ApplicationController
   def search_users
     @page = [params[:page].to_i, 1].max
     @per_page = 10
-  
+    
     if params[:query].present?
-      @users = User.where("first_name ILIKE ? OR last_name ILIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
-                   .offset((@page - 1) * @per_page)
-                   .limit(@per_page)
+      search_terms = params[:query].strip.split.map(&:strip).reject(&:empty?)
+      
+      if search_terms.length > 1
+        first_name_term = search_terms[0]
+        last_name_term = search_terms[1]
+        
+        @users = User.where("first_name ILIKE ? AND last_name ILIKE ?", "%#{first_name_term}%", "%#{last_name_term}%")
+                     .or(User.where("first_name ILIKE ? AND last_name ILIKE ?", "%#{last_name_term}%", "%#{first_name_term}%"))
+                     .offset((@page - 1) * @per_page)
+                     .limit(@per_page)
+      else
+        query = "%#{search_terms.first}%"
+        @users = User.where("first_name ILIKE ? OR last_name ILIKE ?", query, query)
+                     .offset((@page - 1) * @per_page)
+                     .limit(@per_page)
+      end
     else
       @users = User.none
     end
@@ -59,7 +72,6 @@ class ConversationsController < ApplicationController
     end
   end
   
-
   private
 
   def conversation_params
