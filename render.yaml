@@ -50,15 +50,15 @@ services:
   startCommand: bundle exec puma -t 5:5 -p ${PORT:-3000} -e ${RACK_ENV:-development}
   pullRequestPreviewsEnabled: false
 
+- type: redis
+  name: worxy_redis
+  plan: standard
+  maxMemoryPolicy: noeviction
+  region: oregon
+
 databases:
 - type: postgres
   name: worxy_db
   plan: standard
   version: 16
-
-services:
-- type: redis
-  name: worxy_redis
-  plan: standard
-  maxMemoryPolicy: noeviction
   region: oregon
