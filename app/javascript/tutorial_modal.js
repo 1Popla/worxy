@@ -20,7 +20,7 @@ document.addEventListener('turbo:load', function() {
       element: 'new-post-link', 
       mobileElement: 'expanded-new-post-link', 
       offset: 50, 
-      text: "W zakładce poniżej, możesz dodać post w którym opiszesz swoje zlecenie oraz ustalisz wszystkie ważne do jego realizacji szczegóły.",
+      text: "W zakładce powyżej, możesz dodać post w którym opiszesz swoje zlecenie oraz ustalisz wszystkie ważne do jego realizacji szczegóły.",
       detailed_text: "Tutaj możesz dodać nowe ogłoszenie, które będzie widoczne dla wszystkich użytkowników.",
     },
     { 
@@ -90,6 +90,20 @@ document.addEventListener('turbo:load', function() {
   
   let currentStep = 0;
 
+  const isBelowNotificationLink = (stepElement) => {
+    const elementsBelowNotification = [
+      'notifications-link',
+      'bookings-link',
+      'calendar-link',
+      'map-link',
+      'profile-link',
+      'destroy_user_session_path',
+      'tutorial-button'
+    ];
+
+    return elementsBelowNotification.includes(stepElement);
+  };
+
   function showIntro() {
     introBox.classList.remove('hidden');
     stepBox.classList.add('hidden');
@@ -119,10 +133,15 @@ document.addEventListener('turbo:load', function() {
       stepBox.classList.remove('hidden');
       overlay.classList.remove('hidden');
 
+      // Adjust position based on step
       if (window.innerWidth < 1024) {
-        stepBox.style.top = '1%';
+        if (isBelowNotificationLink(step.element)) {
+          stepBox.style.top = '10%';  // Set to 80% for steps below or at notifications
+        } else {
+          stepBox.style.top = '50%';  // Default to 50%
+        }
       } else {
-        stepBox.style.top = '50%';
+        stepBox.style.top = '50%';  // Default to 50% for larger screens
       }
 
       overlay.style.clipPath = `polygon(0% 0%, 0% 100%, ${rect.left + window.scrollX}px 100%, ${rect.left + window.scrollX}px ${rect.top + window.scrollY}px, ${rect.right + window.scrollX}px ${rect.top + window.scrollY}px, ${rect.right + window.scrollX}px ${rect.bottom + window.scrollY}px, ${rect.left + window.scrollX}px ${rect.bottom + window.scrollY}px, ${rect.left + window.scrollX}px 100%, 100% 100%, 100% 0%)`;
@@ -155,7 +174,6 @@ document.addEventListener('turbo:load', function() {
     });
   }
 
-  // Use the actual step index for detailed description
   const detailedButtons = document.querySelectorAll('#detailed-description');
 
   detailedButtons.forEach((button, index) => {
@@ -165,10 +183,10 @@ document.addEventListener('turbo:load', function() {
       detailedModal.id = `detailed-modal-${index}`;
       detailedModal.className = 'fixed bg-white p-4 rounded shadow-lg text-center';
 
-      if (window.innerWidth >= 1024) {
-        detailedModal.style.top = '50%';
+      if (window.innerWidth >= 1024 || isBelowNotificationLink(step.element)) {
+        detailedModal.style.top = '80%'; // Set to 80% for steps below or at notifications
       } else {
-        detailedModal.style.top = '80%';
+        detailedModal.style.top = '50%'; // Default to 50%
       }
       detailedModal.style.left = '50%';
       detailedModal.style.transform = 'translate(-50%, -50%)';
