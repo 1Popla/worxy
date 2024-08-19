@@ -105,51 +105,57 @@
 </div>
 
 <div id="expanded-menu" class="lg:hidden fixed inset-0 bg-white z-40 hidden opacity-0 transition-opacity duration-300 ease-in-out">
-  <div class="flex flex-col justify-center items-center h-full px-4">
-    <ul class="space-y-4 text-center w-full">
-      <li class="bg-gray-100 p-3 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
-        <i class="fas fa-plus text-gray-700 text-lg mr-3"></i>
-        <%= link_to new_post_path, id: 'expanded-new-post-link', data: { turbo: true }, class: 'text-xl text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left' do %>
+  <div class="flex flex-col justify-center items-center h-full px-2">
+    <ul class="space-y-2 text-center w-full">
+      <li class="bg-gray-100 p-2 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
+        <i class="fas fa-plus text-gray-700 text-base mr-2"></i>
+        <%= link_to new_post_path, id: 'expanded-new-post-link', data: { turbo: true }, class: 'text-lg text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left' do %>
           Nowe ogłoszenie
         <% end %>
       </li>
-      <li class="bg-gray-100 p-3 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
-        <i class="fas fa-user text-gray-700 text-lg mr-3"></i>
-        <%= link_to user_posts_posts_path, id: 'expanded-user-posts-link', data: { turbo: true }, class: 'text-xl text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left' do %>
+      <li class="bg-gray-100 p-2 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
+        <i class="fas fa-user text-gray-700 text-base mr-2"></i>
+        <%= link_to user_posts_posts_path, id: 'expanded-user-posts-link', data: { turbo: true }, class: 'text-lg text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left' do %>
           Moje Ogłoszenia
         <% end %>
       </li>
-      <li class="bg-gray-100 p-3 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
-        <i class="fas fa-comments text-gray-700 text-lg mr-3"></i>
-        <%= link_to conversations_path, id: 'expanded-conversations-link', data: { turbo: true }, class: 'text-xl text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left' do %>
+      <li class="bg-gray-100 p-2 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
+        <i class="fas fa-comments text-gray-700 text-base mr-2"></i>
+        <%= link_to conversations_path, id: 'expanded-conversations-link', data: { turbo: true }, class: 'text-lg text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left' do %>
           Wiadomości
         <% end %>
       </li>
-      <li class="bg-gray-100 p-3 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
-        <i class="fas fa-bell text-gray-700 text-lg mr-3"></i>
-        <%= link_to notifications_path, id: 'expanded-notifications-link', data: { turbo: true }, class: 'text-xl text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left notification-bell' do %>
+      <li class="bg-gray-100 p-2 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
+        <i class="fas fa-bell text-gray-700 text-base mr-2"></i>
+        <%= link_to notifications_path, id: 'expanded-notifications-link', data: { turbo: true }, class: 'text-lg text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left notification-bell' do %>
           Moje Powiadomienia
-          <span id="notification-count-expanded" class="h-5 w-5 text-xs text-black bg-yellow-400 rounded-full flex items-center justify-center hidden"></span>
+          <span id="notification-count-expanded" class="h-4 w-4 text-xs text-black bg-yellow-400 rounded-full flex items-center justify-center hidden"></span>
         <% end %>
       </li>
-      <li class="bg-gray-100 p-3 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
-        <i class="fas fa-briefcase text-gray-700 text-lg mr-3"></i>
-        <%= link_to bookings_path, id: 'expanded-bookings-link', data: { turbo: true }, class: 'text-xl text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left' do %>
+      <li class="bg-gray-100 p-2 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
+        <i class="fas fa-briefcase text-gray-700 text-base mr-2"></i>
+        <%= link_to bookings_path, id: 'expanded-bookings-link', data: { turbo: true }, class: 'text-lg text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left' do %>
           Zlecenia
         <% end %>
       </li>
-      <li class="bg-gray-100 p-3 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
-        <i class="fas fa-calendar-alt text-gray-700 text-lg mr-3"></i>
-        <%= link_to calendar_bookings_path, id: 'expanded-calendar-link', data: { turbo: true }, class: 'text-xl text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left' do %>
+      <li class="bg-gray-100 p-2 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
+        <i class="fas fa-calendar-alt text-gray-700 text-base mr-2"></i>
+        <%= link_to calendar_bookings_path, id: 'expanded-calendar-link', data: { turbo: true }, class: 'text-lg text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left' do %>
           Zobacz Kalendarz
         <% end %>
       </li>
 
-      <li class="bg-gray-100 p-3 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
-        <i class="fas fa-sign-out-alt text-red-600 text-lg mr-3"></i>
-        <%= link_to destroy_user_session_path, method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'text-xl text-red-600 font-medium hover:bg-red-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left' do %>
+      <li class="bg-gray-100 p-2 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
+        <i class="fas fa-sign-out-alt text-red-600 text-base mr-2"></i>
+        <%= link_to destroy_user_session_path, method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'text-lg text-red-600 font-medium hover:bg-red-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left' do %>
           Wyloguj
         <% end %>
+      </li>
+      <li class="bg-gray-100 p-2 rounded-lg shadow-lg transition duration-200 ease-in-out flex items-center">
+        <i class="fas fa-book text-gray-700 text-base mr-2"></i>
+        <button id="expanded-tutorial-button" class="text-lg text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out flex-1 text-left">
+          Poradnik
+        </button>
       </li>
     </ul>
   </div>

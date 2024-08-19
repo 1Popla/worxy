@@ -1,43 +1,105 @@
 document.addEventListener('turbo:load', function() {
   const tutorialButton = document.getElementById('tutorial-button');
-  const mobileTutorialButton = document.getElementById('mobile-tutorial-button');
+  const expandMenuButton = document.getElementById('expanded-tutorial-button');
   const overlay = document.getElementById('tutorial-overlay');
   const introBox = document.getElementById('tutorial-intro');
   const stepBox = document.getElementById('tutorial-step');
-  const arrow = document.getElementById('tutorial-arrow');
   const startButton = document.getElementById('tutorial-start');
   const nextButton = document.getElementById('tutorial-next');
   const tutorialText = document.getElementById('tutorial-text');
 
   const steps = [
-    { element: 'dashboard-link', mobileElement: 'mobile-dashboard-link', offset: 50, text: "W tym miejscu znajdziesz dashboard.", detailed_text: "Szczegółowy opis dashboardu.", hideArrow: true },
-    { element: 'new-post-link', mobileElement: 'mobile-new-post-link', offset: 50, text: "W tym miejscu dodasz ogłoszenie.", detailed_text: "Szczegółowy opis dodawania ogłoszenia." },
-    { element: 'posts-link', mobileElement: 'mobile-posts-link', offset: 50, text: "Tutaj znajdziesz ogłoszenia.", detailed_text: "Szczegółowy opis ogłoszeń." },
-    { element: 'user-posts-link', mobileElement: 'mobile-user-posts-link', offset: 50, text: "Tutaj znajdziesz swoje ogłoszenia.", detailed_text: "Szczegółowy opis twoich ogłoszeń." },
-    { element: 'conversations-link', mobileElement: 'mobile-conversations-link', offset: 50, text: "Tutaj możesz przeglądać swoje wiadomości.", detailed_text: "Szczegółowy opis wiadomości." },
-    { element: 'notifications-link', mobileElement: 'mobile-notifications-link', offset: 50, text: "Tutaj znajdziesz swoje powiadomienia.", detailed_text: "Szczegółowy opis powiadomień." },
-    { element: 'bookings-link', mobileElement: 'mobile-bookings-link', offset: 50, text: "Tutaj możesz przeglądać swoje zlecenia.", detailed_text: "Szczegółowy opis zleceń." },
-    { element: 'calendar-link', mobileElement: 'mobile-calendar-link', offset: 50, text: "Tutaj możesz zobaczyć swój kalendarz.", detailed_text: "Szczegółowy opis kalendarza." },
-    { element: 'map-link', mobileElement: 'mobile-map-link', offset: 50, text: "Tutaj znajdziesz mapę zleceń.", detailed_text: "Szczegółowy opis mapy zleceń." },
-    { element: 'profile-link', mobileElement: 'mobile-profile-link', offset: 50, text: "Tutaj możesz zobaczyć i edytować swój profil.", detailed_text: "Szczegółowy opis profilu użytkownika." },
-    { element: 'tutorial-button', mobileElement: 'mobile-tutorial-button', offset: 50, text: "W tym miejscu możesz uruchomić poradnik.", detailed_text: "Szczegółowy opis poradnika." }
+    { 
+      element: 'dashboard-link', 
+      mobileElement: 'mobile-dashboard-link', 
+      offset: 50, 
+      text: "W tym miejscu znajdziesz dashboard.", 
+      detailed_text: "Dashboard jest centralnym miejscem, gdzie możesz zobaczyć najważniejsze informacje dotyczące Twojego konta.",
+    },
+    { 
+      element: 'new-post-link', 
+      mobileElement: 'expanded-new-post-link', 
+      offset: 50, 
+      text: "W tym miejscu dodasz ogłoszenie.",
+      detailed_text: "Tutaj możesz dodać nowe ogłoszenie, które będzie widoczne dla wszystkich użytkowników.",
+    },
+    { 
+      element: 'posts-link', 
+      mobileElement: 'mobile-posts-link', 
+      offset: 50, 
+      text: "Tutaj znajdziesz ogłoszenia.",
+      detailed_text: "W tej sekcji możesz przeglądać wszystkie dostępne ogłoszenia.",
+    },
+    { 
+      element: 'user-posts-link', 
+      mobileElement: 'expanded-user-posts-link', 
+      offset: 50, 
+      text: "Tutaj znajdziesz swoje ogłoszenia.",
+      detailed_text: "W tej sekcji znajdują się wszystkie ogłoszenia, które sam opublikowałeś.",
+    },
+    { 
+      element: 'conversations-link', 
+      mobileElement: 'expanded-conversations-link', 
+      offset: 50, 
+      text: "Tutaj możesz przeglądać swoje wiadomości.",
+      detailed_text: "Tutaj znajdziesz wszystkie wiadomości, które otrzymałeś od innych użytkowników.",
+    },
+    { 
+      element: 'notifications-link', 
+      mobileElement: 'expanded-notifications-link', 
+      offset: 50, 
+      text: "Tutaj znajdziesz swoje powiadomienia.",
+      detailed_text: "Ta sekcja pokazuje wszystkie powiadomienia, które otrzymałeś.",
+    },
+    { 
+      element: 'bookings-link', 
+      mobileElement: 'expanded-bookings-link', 
+      offset: 50, 
+      text: "Tutaj możesz przeglądać swoje zlecenia.",
+      detailed_text: "W tej sekcji znajdują się wszystkie Twoje zlecenia, które otrzymałeś lub zaakceptowałeś.",
+    },
+    { 
+      element: 'calendar-link', 
+      mobileElement: 'expanded-calendar-link', 
+      offset: 50, 
+      text: "Tutaj możesz zobaczyć swój kalendarz.",
+      detailed_text: "Kalendarz pozwala na zarządzanie Twoimi zleceniami oraz innymi ważnymi datami.",
+    },
+    { 
+      element: 'map-link', 
+      mobileElement: 'mobile-calendar-link', 
+      offset: 50, 
+      text: "Tutaj znajdziesz mapę zleceń.",
+      detailed_text: "Mapa pokazuje lokalizacje wszystkich dostępnych zleceń w Twojej okolicy.",
+    },
+    { 
+      element: 'profile-link', 
+      mobileElement: 'mobile-profile-link', 
+      offset: 50, 
+      text: "Tutaj możesz zobaczyć i edytować swój profil.",
+      detailed_text: "Profil użytkownika zawiera wszystkie Twoje dane osobowe oraz ustawienia konta.",
+    },
+    { 
+      element: 'tutorial-button', 
+      mobileElement: 'expand-menu-button', 
+      offset: 50, 
+      text: "W tym miejscu możesz uruchomić poradnik.",
+      detailed_text: "Poradnik prowadzi Cię krok po kroku przez najważniejsze funkcje aplikacji.",
+    }
   ];
-
+  
   let currentStep = 0;
 
   function showIntro() {
     introBox.classList.remove('hidden');
     stepBox.classList.add('hidden');
-    arrow.classList.add('hidden');
     overlay.classList.remove('hidden');
 
-    if (window.innerWidth >= 1024) {
-      introBox.style.top = '50%';
+    if (window.innerWidth < 1024) {
+      introBox.style.top = '1%';
     } else {
-      introBox.style.top = '80%';
+      introBox.style.top = '50%';
     }
-    introBox.style.left = '50%';
-    introBox.style.transform = 'translate(-50%, -50%)';
   }
 
   function showStep(stepIndex) {
@@ -51,41 +113,17 @@ document.addEventListener('turbo:load', function() {
 
     if (element) {
       const rect = element.getBoundingClientRect();
-      const stepBoxRect = stepBox.getBoundingClientRect();
 
       tutorialText.textContent = step.text;
-
-      if (step.hideArrow) {
-        arrow.classList.add('hidden');
-      } else {
-        // Update arrow position and size
-        const arrowStartX = stepBoxRect.left + (stepBoxRect.width / 2);
-        const arrowStartY = stepBoxRect.top + (stepBoxRect.height / 2);
-        const arrowEndX = rect.left + (rect.width / 2);
-        const arrowEndY = rect.top + (rect.height / 2);
-        const arrowLength = Math.sqrt(Math.pow(arrowEndX - arrowStartX, 2) + Math.pow(arrowEndY - arrowStartY, 2));
-        const arrowAngle = Math.atan2(arrowEndY - arrowStartY, arrowEndX - arrowStartX) * 180 / Math.PI;
-
-        arrow.style.width = `${arrowLength}px`;
-        arrow.style.height = '2px';
-        arrow.style.transform = `rotate(${arrowAngle}deg)`;
-        arrow.style.transformOrigin = `0 0`;
-        arrow.style.top = `${arrowStartY}px`;
-        arrow.style.left = `${arrowStartX}px`;
-
-        arrow.classList.remove('hidden');
-      }
 
       stepBox.classList.remove('hidden');
       overlay.classList.remove('hidden');
 
-      if (window.innerWidth >= 1024) {
-        stepBox.style.top = '50%';
+      if (window.innerWidth < 1024) {
+        stepBox.style.top = '1%';
       } else {
-        stepBox.style.top = '80%';
+        stepBox.style.top = '50%';
       }
-      stepBox.style.left = '50%';
-      stepBox.style.transform = 'translate(-50%, -50%)';
 
       overlay.style.clipPath = `polygon(0% 0%, 0% 100%, ${rect.left + window.scrollX}px 100%, ${rect.left + window.scrollX}px ${rect.top + window.scrollY}px, ${rect.right + window.scrollX}px ${rect.top + window.scrollY}px, ${rect.right + window.scrollX}px ${rect.bottom + window.scrollY}px, ${rect.left + window.scrollX}px ${rect.bottom + window.scrollY}px, ${rect.left + window.scrollX}px 100%, 100% 100%, 100% 0%)`;
     }
@@ -101,7 +139,7 @@ document.addEventListener('turbo:load', function() {
   }
 
   attachTutorialEvent(tutorialButton);
-  attachTutorialEvent(mobileTutorialButton);
+  attachTutorialEvent(expandMenuButton);
 
   if (startButton) {
     startButton.addEventListener('click', function () {
