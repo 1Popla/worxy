@@ -1,28 +1,51 @@
-  <div class="w-full lg:w-1/3 bg-white shadow-lg h-full overflow-y-auto p-6">
-    <h2 class="text-2xl font-bold mb-4">Moje Konwersacje</h2>
-    <% @active_conversations.each do |conversation| %>
-      <% if conversation.sender_id == current_user.id %>
-        <% recipient = User.find(conversation.recipient_id) %>
-      <% else %>
-        <% recipient = User.find(conversation.sender_id) %>
-      <% end %>
-      <%= link_to "#{recipient.first_name} #{recipient.last_name}", conversation_messages_path(conversation), remote: true, class: "block text-blue-500 hover:text-blue-700 mb-2 conversation-link" %>
-    <% end %>
+<div class="flex flex-col h-full">
 
-    <h2 class="text-2xl font-bold mt-6 mb-4">Zacznij nową konwersację</h2>
-    <%= form_for :conversation, url: conversations_path, class: "space-y-4" do |f| %>
-      <div class="mb-4">
-        <%= f.label :recipient_id, "Wybierz użytkownika", class: "block text-sm font-medium text-gray-700" %>
-        <%= f.collection_select :recipient_id, @selectable_users, :id, :full_name, { include_blank: true }, { required: true, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50" } %>
-      </div>
-      <%= f.submit "Zacznij nową konwersację", class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
-    <% end %>
+  <div class="w-full bg-white shadow-lg p-6 mb-2">
+    <h2 class="text-2xl font-bold mb-2">Zacznij nową konwersację</h2>
+
+    <div class="relative">
+      <input type="text" id="conversation-user-search" placeholder="Wyszukaj użytkownika..." class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-500 focus:ring-opacity-50">
+      <div id="conversation-users-list" class="absolute w-full bg-white border border-gray-300 rounded-md mt-1 z-10 overflow-y-auto hidden" style="height: 5cm;"></div>
+    </div>
   </div>
 
-  <div class="w-full lg:w-2/3 flex-1 overflow-auto" id="messages-window">
-    <div id="messages-content">
-      <div class="container mx-auto p-4">
-        <p class="text-gray-500">Wybierz konwersację, aby zobaczyć wiadomości.</p>
+  <div class="flex flex-1 lg:flex-row">
+    <div class="w-full lg:w-1/3 bg-white shadow-lg h-full overflow-y-auto p-6">
+      <h2 class="text-2xl font-bold mb-4">Aktywne konwersacje</h2>
+      <% @active_conversations.each do |conversation| %>
+        <% if conversation.sender_id == current_user.id %>
+          <% recipient = User.find(conversation.recipient_id) %>
+        <% else %>
+          <% recipient = User.find(conversation.sender_id) %>
+        <% end %>
+        <div class="flex items-center mb-4">
+          <% if recipient.avatar.attached? %>
+            <%= image_tag url_for(recipient.avatar), class: 'w-12 h-12 rounded-full mr-4' %>
+          <% else %>
+            <div class="w-12 h-12 bg-gray-300 rounded-full mr-4 flex items-center justify-center">
+              <i class="fas fa-user text-white"></i>
+            </div>
+          <% end %>
+
+          <div class="flex-1">
+            <%= link_to conversation_messages_path(conversation), remote: true, class: "block text-blue-500 hover:text-blue-700 mb-1 font-bold text-lg conversation-link" do %>
+              <%= "#{recipient.first_name} #{recipient.last_name}" %>
+            <% end %>
+            <p class="text-sm text-gray-600">
+              <% last_message = conversation.messages.last %>
+              <%= last_message ? truncate(last_message.body, length: 50) : "Brak wiadomości" %>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="w-full lg:w-2/3 flex-1 overflow-auto" id="conversation-messages-window">
+      <div id="conversation-messages-content">
+        <div class="container mx-auto p-4">
+          <p class="text-gray-500">Wybierz konwersację, aby zobaczyć wiadomości.</p>
+        </div>
       </div>
     </div>
   </div>
+</div>

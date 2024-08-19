@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   def index
     @categories = Category.where(parent_id: nil)
     @subcategories = Category.where(parent_id: params[:category]) if params[:category].present?
-    @subcategories ||= []  # Ensure @subcategories is always defined
+    @subcategories ||= []
 
     @posts = Post.all
     @customer_posts = Post.joins(:user).where(users: {role: "customer"}).page(params[:page]).per(10)
@@ -25,8 +25,13 @@ class PostsController < ApplicationController
     end
 
     if params[:search].present?
-      @customer_posts = @customer_posts.where("posts.title ILIKE ? OR posts.description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
-      @worker_posts = @worker_posts.where("posts.title ILIKE ? OR posts.description ILIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+      @customer_posts = @customer_posts.where("unaccent(posts.title) ILIKE unaccent(?) OR unaccent(posts.description) ILIKE unaccent(?)", "%#{params[:search]}%", "%#{params[:search]}%")
+      @worker_posts = @worker_posts.where("unaccent(posts.title) ILIKE unaccent(?) OR unaccent(posts.description) ILIKE unaccent(?)", "%#{params[:search]}%", "%#{params[:search]}%")
+    end
+
+    if params[:city].present?
+      @customer_posts = @customer_posts.where("unaccent(city) ILIKE unaccent(?)", "%#{params[:city]}%")
+      @worker_posts = @worker_posts.where("unaccent(city) ILIKE unaccent(?)", "%#{params[:city]}%")
     end
 
     respond_to do |format|
@@ -88,9 +93,9 @@ class PostsController < ApplicationController
   def destroy
     if @post.user == current_user
       @post.destroy
-      redirect_to posts_path, notice: 'Post został pomyślnie usunięty.'
+      redirect_to posts_path, notice: "Post został pomyślnie usunięty."
     else
-      redirect_to @post, alert: 'Nie masz uprawnień do usunięcia tego posta.'
+      redirect_to @post, alert: "Nie masz uprawnień do usunięcia tego posta."
     end
   end
 

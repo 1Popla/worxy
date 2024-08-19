@@ -13,6 +13,19 @@ class ConversationsController < ApplicationController
     @new_message = @conversation.messages.new
   end
 
+  def create_or_open
+    sender_id = current_user.id
+    recipient_id = params[:recipient_id]
+
+    @conversation = Conversation.between(sender_id, recipient_id).first_or_initialize(sender_id: sender_id, recipient_id: recipient_id)
+
+    if @conversation.new_record?
+      @conversation.save
+    end
+
+    redirect_to conversation_messages_path(@conversation)
+  end
+
   def create
     sender_id = current_user.id
     recipient_id = conversation_params[:recipient_id]
@@ -27,6 +40,38 @@ class ConversationsController < ApplicationController
     end
   end
 
+  def search_users
+    @page = [params[:page].to_i, 1].max
+    @per_page = 10
+    
+    if params[:query].present?
+      search_terms = params[:query].strip.split.map(&:strip).reject(&:empty?)
+      
+      if search_terms.length > 1
+        first_name_term = search_terms[0]
+        last_name_term = search_terms[1]
+        
+        @users = User.where("first_name ILIKE ? AND last_name ILIKE ?", "%#{first_name_term}%", "%#{last_name_term}%")
+                     .or(User.where("first_name ILIKE ? AND last_name ILIKE ?", "%#{last_name_term}%", "%#{first_name_term}%"))
+                     .offset((@page - 1) * @per_page)
+                     .limit(@per_page)
+      else
+        query = "%#{search_terms.first}%"
+        @users = User.where("first_name ILIKE ? OR last_name ILIKE ?", query, query)
+                     .offset((@page - 1) * @per_page)
+                     .limit(@per_page)
+      end
+    else
+      @users = User.none
+    end
+  
+    respond_to do |format|
+      format.turbo_stream do
+        render partial: 'conversations/users_list', locals: { users: @users }, formats: :html
+      end
+    end
+  end
+  
   private
 
   def conversation_params

@@ -4,4 +4,5 @@
 //= require_tree .
 //= require @hotwired/turbo-rails
 //= require chartkick
+//= require @hotwired/turbo-rails
 //= require Chart.bundle

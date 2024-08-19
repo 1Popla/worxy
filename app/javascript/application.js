@@ -2,7 +2,6 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-import "./message-scroll.js";
 import './posts_new_map';
 import './posts_show_map';
 import './detailed_map';
@@ -18,3 +17,6 @@ import './post_new_subcategories';
 import './dashboard_chart';
 import './posts_new_loading_modal';
 import './avatar_upload';
+import './tutorial_modal';
+import './messages';
+import './conversations';

@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   get "users/show"
-  
+
   devise_for :users, controllers: {
     registrations: "users/registrations",
-    passwords: "users/passwords"
+    passwords: "users/passwords",
+    sessions: "users/sessions"
   }
 
-  patch 'avatar_upload', to: 'users#avatar_upload', as: 'avatar_upload'
+  patch "avatar_upload", to: "users#avatar_upload", as: "avatar_upload"
 
   get "up" => "rails/health#show", :as => :rails_health_check
 
@@ -46,7 +47,11 @@ Rails.application.routes.draw do
 
   resources :conversations do
     resources :messages
+    collection do
+      post 'create_or_open'
+    end
   end
+  get 'search_users', to: 'conversations#search_users'
 
   resources :users, only: [:show] do
     resources :opinions, only: [:new, :create]

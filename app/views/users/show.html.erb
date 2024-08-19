@@ -65,7 +65,7 @@
             <p class="font-semibold text-gray-700">Doświadczenie: <%= @user.experience %></p>
           </div>
           <div class="mb-4">
-            <p class="font-semibold text-gray-700">Rola: <%= @user.role.capitalize %></p>
+            <p class="font-semibold text-gray-700">Rola: <%= human_enum_name('user.roles', @user.role) %></p>
           </div>
           <div class="mb-4">
             <p class="font-semibold text-gray-700">Konto utworzone: <%= I18n.l(@user.created_at, format: :long) %></p>

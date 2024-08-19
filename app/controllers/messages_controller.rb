@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
 
   def index
     set_active_conversations_with_recipients
-    @messages = @conversation.messages.page(params[:page]).per(20)
+    @messages = @conversation.messages.order(:created_at)
     @new_message = @conversation.messages.new
 
     respond_to do |format|
@@ -21,8 +21,7 @@ class MessagesController < ApplicationController
       redirect_to conversation_messages_path(@conversation)
     else
       set_active_conversations_with_recipients
-      @messages = @conversation.messages.page(params[:page]).per(20)
-
+      @messages = @conversation.messages.order(:created_at)
       flash.now[:alert] = @new_message.errors.full_messages.to_sentence
       render "index", status: :unprocessable_entity
     end
