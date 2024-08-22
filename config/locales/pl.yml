@@ -221,3 +221,11 @@ pl:
         precision: 2
         significant: false
         strip_insignificant_zeros: false
+
+  views:
+    pagination:
+      first: "Pierwsza"
+      last: "Ostatnia"
+      previous: "Poprzednia"
+      next: "Następna"
+      truncate: "..."
