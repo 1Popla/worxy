@@ -1,44 +1,108 @@
-  <div class="flex-1 overflow-auto">
-    <div class="container mx-auto px-4 py-8">
-      <div class="bg-white shadow rounded-lg p-6 space-y-8">
-        <h2 class="text-2xl font-bold text-gray-800 mb-8">Szczegóły Powiadomienia</h2>
-        <div class="flex flex-wrap lg:flex-nowrap space-y-4 lg:space-y-0">
-          <div class="w-full lg:w-1/3 lg:order-1 lg:pr-8">
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Szczegóły Pracownika</h3>
-            <p class="text-gray-600 mb-2"><strong>Imię i nazwisko:</strong> <%= @notification.actor.first_name %> <%= @notification.actor.last_name %></p>
-            <p class="text-gray-600 mb-2"><strong>Email:</strong> <%= @notification.actor.email %></p>
-            <p class="text-gray-600"><strong>Profil:</strong> <%= link_to "Zobacz Profil", user_path(@notification.actor), class: 'text-blue-600 hover:text-blue-900', data: { turbo_frame: "_top" } %></p>
-          </div>
-          <div class="w-full lg:w-2/3 lg:order-2 lg:pl-8">
-            <h3 class="text-xl font-bold text-gray-800 mb-4">Szczegóły Ogłoszenia</h3>
-            <% if @notification.notifiable.is_a?(Booking) %>
-              <p class="text-gray-600 mb-2"><strong>Tytuł:</strong> <%= @notification.notifiable.post.title %></p>
-              <p class="text-gray-600 mb-2"><strong>Opis:</strong> <%= @notification.notifiable.post.description %></p>
-              <p class="text-gray-600"><strong>Cena:</strong> <%= number_to_currency(@notification.notifiable.post.price) %></p>
-            <% elsif @notification.notifiable.is_a?(Post) %>
-              <p class="text-gray-600 mb-2"><strong>Tytuł:</strong> <%= @notification.notifiable.title %></p>
-              <p class="text-gray-600 mb-2"><strong>Opis:</strong> <%= @notification.notifiable.description %></p>
-              <p class="text-gray-600"><strong>Cena:</strong> <%= number_to_currency(@notification.notifiable.price) %></p>
-            <% end %>
-          </div>
+<div class="flex-1 overflow-auto">
+  <% if flash[:accept_notice] || flash[:accept_alert] || flash[:reject_notice] || flash[:reject_alert] %>
+    <div id="flash-messages" class="fixed top-4 right-4 z-50">
+      <% if flash[:accept_notice] %>
+        <div class="bg-green-500 text-white p-4 rounded-lg shadow-lg mb-2">
+          <%= flash[:accept_notice] %>
         </div>
-        <div class="flex flex-wrap lg:flex-nowrap space-y-4 lg:space-y-0">
-          <div class="w-full lg:w-2/3 pr-8">
-            <div class="mb-8">
-              <h3 class="text-xl font-bold text-gray-800 mb-4">Szczegóły Oferty</h3>
-              <p class="text-gray-600 mb-2"><strong>Proponowana cena:</strong> <%= number_to_currency(@notification.price_offer) %></p>
-              <p class="text-gray-600 mb-2"><strong>Proponowana data rozpoczęcia:</strong> <%= @notification.start_date_offer.present? ? I18n.l(@notification.start_date_offer, format: :long) : "Brak danych" %></p>
-              <h3 class="text-xl font-bold text-gray-800 mb-4 mt-8">Wiadomość</h3>
-              <p class="text-gray-600"><%= @notification.message %></p>
+      <% elsif flash[:accept_alert] %>
+        <div class="bg-red-500 text-white p-4 rounded-lg shadow-lg mb-2">
+          <%= flash[:accept_alert] %>
+        </div>
+      <% elsif flash[:reject_notice] %>
+        <div class="bg-red-500 text-white p-4 rounded-lg shadow-lg mb-2">
+          <%= flash[:reject_notice] %>
+        </div>
+      <% elsif flash[:reject_alert] %>
+        <div class="bg-red-500 text-white p-4 rounded-lg shadow-lg mb-2">
+          <%= flash[:reject_alert] %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class="container mx-auto px-4 py-8">
+  <div class="space-y-8">
+
+    <div class="bg-white shadow rounded-lg p-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Szczegóły Użytkownika</h2>
+      <div class="space-y-2">
+        <p class="text-gray-600"><strong>Imię i Nazwisko:</strong> <%= @notification.actor.first_name %> <%= @notification.actor.last_name %></p>
+        <p class="text-gray-600"><strong>Email:</strong> <%= @notification.actor.email %></p>
+        <p class="text-gray-600"><strong>Profil:</strong> <%= link_to "Zobacz Profil", user_path(@notification.actor), class: 'text-blue-600 hover:text-blue-900', data: { turbo_frame: "_top" } %></p>
+      </div>
+    </div>
+
+    <div class="bg-white shadow rounded-lg p-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Szczegóły Ogłoszenia</h2>
+
+      <div class="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
+        <% if @notification.notifiable.is_a?(Post) && @notification.notifiable.images.attached? %>
+          <div class="lg:w-1/2 h-64 lg:h-auto">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">Zdjęcie główne</h3>
+            <div class="shadow-lg rounded-lg h-full">
+              <%= image_tag @notification.notifiable.images.first.variant(resize_to_fill: [600, 400]).processed, class: "object-cover w-full h-full rounded-lg" %>
             </div>
           </div>
-        </div>
-        <% if @notification.action == 'sent you a request for' || @notification.action == 'sent you a negotiation request' %>
-          <div class="flex space-x-4">
-            <%= button_to 'Akceptuj Ofertę', accept_request_notification_path(@notification), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded', data: { turbo_frame: "_top" } %>
-            <%= button_to 'Odrzuć Ofertę', reject_request_notification_path(@notification), method: :delete, data: { confirm: 'Jesteś pewien?', turbo_frame: "_top" }, class: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' %>
+        <% end %>
+
+        <% if @notification.notifiable.is_a?(Post) %>
+          <div class="lg:w-1/2 h-64 lg:h-auto">
+            <h3 class="text-xl font-semibold text-gray-800 mb-2 mt-6 sm:mt-0">Lokalizacja Zlecenia</h3>
+            <div id="showMap" data-lat="<%= @notification.notifiable.latitude %>" data-lng="<%= @notification.notifiable.longitude %>" class="w-full h-full rounded-lg border"></div>
           </div>
         <% end %>
       </div>
+
+      <div class="space-y-2 mt-16">
+        <p class="text-gray-600"><strong>Tytuł:</strong> <%= @notification.notifiable.title %></p>
+        <p class="text-gray-600"><strong>Opis:</strong> <%= @notification.notifiable.description %></p>
+        <p class="text-gray-600"><strong>Cena:</strong> <%= number_to_currency(@notification.notifiable.price) %></p>
+      </div>
     </div>
+
+    <div class="bg-white shadow rounded-lg p-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Szczegóły Oferty</h2>
+      <div class="space-y-2">
+        <p class="text-gray-600"><strong>Proponowana Cena:</strong> <%= number_to_currency(@notification.price_offer) %></p>
+        <p class="text-gray-600"><strong>Proponowana Data Rozpoczęcia:</strong> <%= @notification.start_date_offer.present? ? I18n.l(@notification.start_date_offer, format: :long) : "Brak Danych" %></p>
+      </div>
+    </div>
+
+    <div class="bg-white shadow rounded-lg p-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Wiadomość</h2>
+      <p class="text-gray-600"><%= @notification.message %></p>
+    </div>
+
+    <div class="bg-white shadow rounded-lg p-6 text-center">
+      <% if @notification.status == 'accepted' %>
+        <div class="text-green-600 font-bold">Ta oferta została zaakceptowana</div>
+      <% elsif @notification.status == 'rejected' %>
+        <div class="text-red-600 font-bold">Odrzuciłeś tą ofertę</div>
+      <% elsif @notification.status == 'pending' || @notification.status.blank? %>
+        <div class="flex justify-center space-x-4">
+          <%= button_to 'Akceptuj Ofertę', accept_request_notification_path(@notification), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded', data: { turbo_frame: "_top" } %>
+          <%= button_to 'Odrzuć Ofertę', reject_request_notification_path(@notification), method: :delete, data: { confirm: 'Jesteś pewien?', turbo_frame: "_top" }, class: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' %>
+        </div>
+      <% end %>
+    </div>
+
   </div>
+</div>
+
+<script>
+  document.addEventListener('turbo:load', function() {
+    const flashMessages = document.getElementById('flash-messages');
+
+    if (flashMessages) {
+      setTimeout(() => {
+        flashMessages.style.transition = "opacity 0.5s ease";
+        flashMessages.style.opacity = "0";
+        setTimeout(() => {
+          flashMessages.remove();
+        }, 500);
+      }, 5000);
+    }
+  });
+</script>

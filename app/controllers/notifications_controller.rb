@@ -35,7 +35,7 @@ class NotificationsController < ApplicationController
     end
 
     if booking.persisted?
-      @notification.update(read_at: Time.zone.now)
+      @notification.update(read_at: Time.zone.now, status: "accepted")
       Notification.create(
         recipient: @notification.actor,
         actor: current_user,
@@ -44,14 +44,16 @@ class NotificationsController < ApplicationController
         price_offer: @notification.price_offer,
         start_date_offer: @notification.start_date_offer
       )
-      redirect_to bookings_path, notice: "Request accepted and booking created."
+      flash[:accept_notice] = "Oferta została zaakceptowana. Pomyślnie utworzono zlecenie."
     else
-      redirect_to notifications_path, alert: "Failed to create booking."
+      flash[:accept_alert] = "Nie udało się utworzyć zlecenia."
     end
+
+    redirect_to notification_path(@notification)
   end
 
   def reject_request
-    @notification.update(read_at: Time.zone.now)
+    @notification.update(read_at: Time.zone.now, status: "rejected")
     Notification.create(
       recipient: @notification.actor,
       actor: current_user,
@@ -60,7 +62,8 @@ class NotificationsController < ApplicationController
       price_offer: @notification.price_offer,
       start_date_offer: @notification.start_date_offer
     )
-    redirect_to notifications_path, notice: "Request rejected."
+    flash[:reject_notice] = "Oferta odrzucona."
+    redirect_to notification_path(@notification)
   end
 
   def destroy
