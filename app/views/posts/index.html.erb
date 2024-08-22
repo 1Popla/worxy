@@ -60,7 +60,7 @@
       <% if @worker_posts.present? %>
         <%= render 'posts/worker_posts' %>
         <div class="mt-6">
-          <%= paginate @worker_posts %>
+          <%= render 'posts/pagination', posts: @worker_posts %>
         </div>
       <% else %>
         <div class="w-full text-center">
@@ -71,7 +71,7 @@
       <% if @customer_posts.present? %>
         <%= render 'posts/customer_posts' %>
         <div class="mt-6">
-          <%= paginate @customer_posts %>
+          <%= render 'posts/pagination', posts: @customer_posts %>
         </div>
       <% else %>
         <div class="w-full text-center">
