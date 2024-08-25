@@ -67,23 +67,35 @@
         <!-- Search area -->
 
         
-        <!-- Header -->
 <nav class="bg-white shadow-md fixed w-full top-0 md:hidden z-50">
     <div class="container mx-auto flex items-center justify-between p-4">
         <!-- Mobile Logo -->
         <div class="logo">
-            <a href="#"><%= image_tag 'worxy-logo-cropped.png', alt: 'logo', class: "w-20" %></a>
+            <a href="#"><%= image_tag 'worxy-logo-cropped.png', alt: 'logo', class: "w-50" %></a>
         </div>
         <!-- Mobile Login -->
-        <a href="users/sign_in" class="contact-place flex items-center cursor-pointer border border-yellow-300 rounded-lg p-2 bg-yellow-300 text-black font-bold" id="contact-container">
-            <i class="fas fa-user-circle mr-2 text-black"></i>
-            <div>
-                <span class="text-black">Zaloguj się</span>
+        <div class="relative">
+            <div onclick="toggleDropdown()" class="contact-place flex items-center cursor-pointer border border-yellow-300 rounded-lg p-2 bg-gray-100 text-black font-bold whitespace-nowrap" id="contact-container">
+                <i class="fas fa-user-circle mr-2 text-yellow-500 text-xl"></i>
+                <div>
+                    <span class="text-black">Moje konto</span>
+                </div>
             </div>
-        </a>
+            <!-- Dropdown Menu -->
+            <div id="dropdownMenu" class="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg hidden">
+                <a href="users/sign_in" class="flex items-center px-4 py-2 text-black hover:bg-gray-100">
+                    <i class="fas fa-sign-in-alt mr-2 text-yellow-500"></i>
+                    <span class="flex-1 text-center">Zaloguj się</span>
+                </a>
+                <hr class="border-t-2 border-yellow-400 my-2 mx-4">
+                <a href="users/sign_up" class="flex items-center px-4 py-2 text-black hover:bg-gray-100">
+                    <i class="fas fa-user-plus mr-2 text-yellow-500"></i>
+                    <span class="flex-1 text-center">Zarejestruj się</span>
+                </a>
+            </div>
+        </div>
     </div>
 </nav>
-
 
 <header id="header" class="pt-16 md:pt-0">
     <div class="header-top">
@@ -802,3 +814,18 @@
     </body>
 </html>
 
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        dropdown.classList.toggle('hidden');
+    }
+
+    window.onclick = function(event) {
+        if (!event.target.closest('#contact-container')) {
+            const dropdown = document.getElementById('dropdownMenu');
+            if (!dropdown.classList.contains('hidden')) {
+                dropdown.classList.add('hidden');
+            }
+        }
+    }
+</script>
