@@ -22,7 +22,7 @@ document.addEventListener('turbo:load', function () {
             <p><strong>Data Rozpoczęcia:</strong> ${new Date(data.start_date).toLocaleString()}</p>
             <p><strong>Data Zakończenia:</strong> ${new Date(data.end_date).toLocaleString()}</p>
             <p><strong>Opis:</strong> ${data.post.description}</p>
-            <p><strong>Cena:</strong> ${data.post.price}</p>
+            <p><strong>Budżet:</strong> ${data.post.price}</p>
             <p><strong>Informacje Kontaktowe:</strong> ${data.post.contact_information}</p>
             <p><strong>Zabookowane przez:</strong> ${data.user.email}</p>
           `;

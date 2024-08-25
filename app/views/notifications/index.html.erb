@@ -1,4 +1,12 @@
 <div class="flex-1 overflow-auto">
+  <div id="flash-messages" class="fixed top-4 right-4 z-50">
+    <% if flash[:notification_destroy] %>
+      <div class="bg-red-500 text-white p-4 rounded-lg shadow-lg mb-2">
+        <%= flash[:notification_destroy] %>
+      </div>
+    <% end %>
+  </div>
+
   <div class="container mx-auto p-6 bg-gray-100 max-w-screen-md">
     <div class="bg-white shadow-lg rounded-lg p-6">
       <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
@@ -9,19 +17,24 @@
       </h2>
       <% if @notifications.present? %>
         <% @notifications.each do |notification| %>
-          <div class="mb-4 p-4 bg-white shadow rounded-lg">
-            <p class="text-gray-700 mb-2">
-              <% if notification.action == 'sent you a request for' %>
-                <%= link_to "#{notification.actor.first_name} wysłał Ci ofertę", notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
-              <% elsif notification.action == 'request accepted' %>
-                <%= link_to "#{notification.actor.first_name} zaakceptował twoją ofertę", notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
-              <% elsif notification.action == 'request rejected' %>
-                <%= link_to "#{notification.actor.first_name} odrzucił twoją ofertę", notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
-              <% elsif notification.action == 'sent you a negotiation request' %>
-                <%= link_to "#{notification.actor.first_name} wysłał Ci propozycję negocjacji", notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
-              <% end %>
-            </p>
-            <p class="text-gray-500 text-sm"><%= I18n.l(notification.created_at, format: :long) %></p>
+          <div id="notification_<%= notification.id %>" class="mb-4 p-4 bg-white shadow rounded-lg flex justify-between items-center">
+            <div>
+              <p class="text-gray-700 mb-2">
+                <% if notification.action == 'sent you a request for' %>
+                  <%= link_to "#{notification.actor.first_name} wysłał Ci ofertę", notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
+                <% elsif notification.action == 'request accepted' %>
+                  <%= link_to "#{notification.actor.first_name} zaakceptował twoją ofertę", notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
+                <% elsif notification.action == 'request rejected' %>
+                  <%= link_to "#{notification.actor.first_name} odrzucił twoją ofertę", notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
+                <% elsif notification.action == 'sent you a negotiation request' %>
+                  <%= link_to "#{notification.actor.first_name} wysłał Ci propozycję negocjacji", notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
+                <% end %>
+              </p>
+              <p class="text-gray-500 text-sm"><%= I18n.l(notification.created_at, format: :long) %></p>
+            </div>
+            <%= button_to notification_path(notification), method: :delete, data: { turbo_confirm: "Czy na pewno chcesz usunąć to powiadomienie?" }, class: 'text-red-600 hover:text-red-800 ml-4' do %>
+              <i class="fas fa-times"></i>
+            <% end %>
           </div>
         <% end %>
       <% else %>
@@ -30,3 +43,19 @@
     </div>
   </div>
 </div>
+<script>
+document.addEventListener('turbo:load', function() {
+  const flashMessages = document.getElementById('flash-messages');
+
+  if (flashMessages) {
+    setTimeout(() => {
+      flashMessages.style.transition = "opacity 0.5s ease";
+      flashMessages.style.opacity = "0";
+      setTimeout(() => {
+        flashMessages.remove();
+      }, 500);
+    }, 5000);
+  }
+});
+
+</script>

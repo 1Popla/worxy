@@ -10,6 +10,20 @@
             </div>
           </div>
 
+          <% if flash[:register_notice] || flash[:alert] %>
+            <div id="flash-messages" class="mb-4 w-full lg:fixed lg:top-1/2 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 lg:w-auto lg:px-6">
+              <% if flash[:register_notice] %>
+                <div class="bg-green-500 text-white p-4 rounded-lg shadow-lg mb-2">
+                  <%= flash[:register_notice] %>
+                </div>
+              <% elsif flash[:alert] %>
+                <div class="bg-red-500 text-white p-4 rounded-lg shadow-lg mb-2">
+                  <%= flash[:alert] %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+
           <div class="mx-auto max-w-xs">
             <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: true }, html: { class: 'w-full max-w-xs' }) do |f| %>
               <div class="mb-4">
@@ -77,44 +91,18 @@
   </div>
 </div>
 
-<div id="modalOverlay" class="fixed inset-0 bg-black bg-opacity-50 z-40" style="display: none;"></div>
-<div id="verificationModal" class="fixed inset-0 flex items-center justify-center z-50 p-4 sm:p-0" style="display: none;">
-  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md mx-auto">
-    <div class="flex justify-between items-center mb-4">
-      <h5 class="text-xl font-medium text-gray-800" id="verificationModalLabel">Potwierdzenie Email</h5>
-      <button type="button" class="text-gray-400 hover:text-gray-600" onclick="closeModal()">
-        <span class="text-2xl">&times;</span>
-      </button>
-    </div>
-    <div class="mb-6 space-y-4">
-      <p class="text-gray-700">Wysłano link weryfikacyjny na twój email.</p>
-      <p class="text-gray-700">Prosimy o sprawdzenie swojej skrzynki pocztowej.</p>
-      <p class="text-red-700">Jeśli nie widzisz wiadomości, sprawdź folder SPAM.</p>
-    </div>
-    <div class="flex justify-end">
-      <button type="button" class="bg-yellow-500 text-black font-bold py-2 px-4 rounded hover:bg-yellow-500" onclick="closeModal()">Zamknij</button>
-    </div>
-  </div>
-</div>
+<script>
+  document.addEventListener('turbo:load', function() {
+    const flashMessages = document.getElementById('flash-messages');
 
-<script type="text/javascript">
-  document.addEventListener("turbo:load", function() {
-    <% if flash[:notice] %>
-      showModal();
-    <% end %>
+    if (flashMessages) {
+      setTimeout(() => {
+        flashMessages.style.transition = "opacity 0.5s ease";
+        flashMessages.style.opacity = "0";
+        setTimeout(() => {
+          flashMessages.remove();
+        }, 500);
+      }, 10000);
+    }
   });
-
-  function showModal() {
-    var modal = document.getElementById('verificationModal');
-    var overlay = document.getElementById('modalOverlay');
-    modal.style.display = 'flex';
-    overlay.style.display = 'block';
-  }
-
-  function closeModal() {
-    var modal = document.getElementById('verificationModal');
-    var overlay = document.getElementById('modalOverlay');
-    modal.style.display = 'none';
-    overlay.style.display = 'none';
-  }
 </script>

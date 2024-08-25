@@ -1,5 +1,5 @@
 <div class="flex-1 overflow-auto">
-  <div class="container mx-auto px-4 py-8">
+  <div class="container mx-auto px-4 py-8 max-w-5xl">
     <div class="mb-6 space-y-4">
       <%= form_with url: posts_path, method: :get, local: true, class: "space-y-4 w-full" do |f| %>
         <div class="flex space-x-4">
@@ -60,7 +60,7 @@
       <% if @worker_posts.present? %>
         <%= render 'posts/worker_posts' %>
         <div class="mt-6">
-          <%= paginate @worker_posts %>
+          <%= render 'posts/pagination', posts: @worker_posts %>
         </div>
       <% else %>
         <div class="w-full text-center">
@@ -71,7 +71,7 @@
       <% if @customer_posts.present? %>
         <%= render 'posts/customer_posts' %>
         <div class="mt-6">
-          <%= paginate @customer_posts %>
+          <%= render 'posts/pagination', posts: @customer_posts %>
         </div>
       <% else %>
         <div class="w-full text-center">

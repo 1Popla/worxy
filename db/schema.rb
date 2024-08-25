@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_11_161043) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_22_120901) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -103,6 +103,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_11_161043) do
     t.text "message"
     t.decimal "price_offer"
     t.date "start_date_offer"
+    t.string "status"
     t.index ["actor_id"], name: "index_notifications_on_actor_id"
     t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id"
     t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
