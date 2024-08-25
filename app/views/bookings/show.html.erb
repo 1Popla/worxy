@@ -1,7 +1,11 @@
 <div class="flex-1 overflow-auto">
   <div class="container mx-auto px-4 py-8">
     <div class="bg-white shadow-lg rounded-lg p-8 relative">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="absolute top-0 right-0 bg-red-500 text-white text-xs md:text-sm font-bold px-4 py-2 rounded-bl-lg z-50 w-full md:w-auto">
+        Platforma Worxy nie posiada wewnętrznego systemu płatności, pamiętaj aby uzgodnić warunki opłat z klientem/wykonawcą.
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 md:mt-0">
         <div class="col-span-2">
           <h1 class="text-3xl font-semibold mb-6 border-b pb-4">Szczegóły Rezerwacji</h1>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -34,7 +38,7 @@
               <p><%= @booking.post.description %></p>
             </div>
             <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-              <p class="font-medium">Pierwotna cena:</p>
+              <p class="font-medium">Budżet:</p>
               <p><%= number_to_currency(@booking.post.price) %></p>
             </div>
             <div class="bg-gray-100 p-4 rounded-lg shadow-md">
@@ -88,11 +92,11 @@
         <% else %>
           <% if @booking.pending_negotiation? %>
             <%= button_to 'Zakończ zlecenie', complete_with_offered_price_booking_path(@booking), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed text-center', disabled: true %>
-            <button id="negotiate-modal-open-btn" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed text-center" disabled>Negocjuj proponowaną cenę</button>
+            <button id="negotiate-modal-open-btn" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed text-center" disabled>Negocjuj budżet</button>
             <p class="text-red-500 text-sm mt-2 text-center">Przed zaakceptowaniem użytkownik musi potwierdzić cenę</p>
           <% else %>
             <%= button_to 'Zakończ zlecenie', complete_with_offered_price_booking_path(@booking), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-center' %>
-            <button id="negotiate-modal-open-btn" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-center">Negocjuj proponowaną cenę</button>
+            <button id="negotiate-modal-open-btn" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-center">Negocjuj budżet</button>
           <% end %>
         <% end %>
       </div>
@@ -103,7 +107,7 @@
 <div id="negotiate-modal" class="fixed inset-0 hidden items-center justify-center z-50">
   <div class="bg-black bg-opacity-50 absolute inset-0"></div>
   <div class="bg-white rounded-lg shadow-lg p-6 z-50 w-full max-w-lg mx-auto">
-    <h2 class="text-2xl font-semibold mb-4">Negocjuj proponowaną cenę</h2>
+    <h2 class="text-2xl font-semibold mb-4">Negocjuj budżet.</h2>
     <%= form_with url: negotiate_price_booking_path(@booking), method: :post, local: true do |form| %>
       <div class="mb-4">
         <%= form.label :new_price_offer, "Nowa cena", class: "block text-sm font-medium text-gray-700" %>

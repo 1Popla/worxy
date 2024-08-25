@@ -39,8 +39,8 @@
 
       <div class="grid grid-cols-2 gap-6 mb-6">
         <div>
-          <%= f.label :price, "Cena", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-          <%= f.number_field :price, placeholder: 'Cena', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', step: 0.01 %>
+          <%= f.label :price, "Budżet", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.number_field :price, placeholder: 'Budżet', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', step: 0.01 %>
           <% if @post.errors[:price].any? %>
             <div class="text-red-600 text-sm mt-1"><%= @post.errors[:price].join(", ") %></div>
           <% end %>

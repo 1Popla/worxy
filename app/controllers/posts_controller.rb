@@ -110,10 +110,12 @@ class PostsController < ApplicationController
         price_offer: params[:price_offer],
         start_date_offer: params[:start_date_offer]
       )
-      redirect_to @post, notice: "Propozycja wysłana do klienta pomyślnie."
+      flash[:request_notice] = "Oferta dotycząca zlecenia #{@post.title.titleize} wysłana."
     else
-      redirect_to @post, alert: "Nie masz uprawnień do wysyłania propozycji."
+      flash[:request_alert] = "Nie masz uprawnień do wysyłania propozycji."
     end
+
+    redirect_to post_path(@post)
   end
 
   def generate_description
