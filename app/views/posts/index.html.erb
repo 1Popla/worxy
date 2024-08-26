@@ -14,7 +14,7 @@
           <div class="w-1/2 relative">
             <div class="relative">
               <input type="text" placeholder="Szukaj kategorii..." class="p-2 border border-gray-300 rounded-lg shadow-sm w-full mb-2" id="categorySearchInput">
-              <div class="absolute z-10 bg-white border border-gray-300 rounded-lg shadow-sm w-full max-h-64 overflow-y-auto" id="categoryDropdown" style="display: none;">
+              <div class="absolute z-10 bg-white border border-gray-300 rounded-lg shadow-sm w-full max-h-64 overflow-y-auto" id="categoryDropdown" style="display: none; list-style-type: none; z-index: 9999;">
                 <ul class="list-none p-0 m-0">
                   <% @categories.each do |category| %>
                     <li class="p-2 hover:bg-gray-100 cursor-pointer" data-value="<%= category.id %>"><%= category.name %></li>
@@ -27,7 +27,7 @@
           <div class="w-1/2 relative">
             <div class="relative">
               <input type="text" placeholder="Szukaj podkategorii..." class="p-2 border border-gray-300 rounded-lg shadow-sm w-full mb-2" id="subcategorySearchInput">
-              <div class="absolute z-10 bg-white border border-gray-300 rounded-lg shadow-sm w-full max-h-64 overflow-y-auto" id="subcategoryDropdown" style="display: none;">
+              <div class="absolute z-10 bg-white border border-gray-300 rounded-lg shadow-sm w-full max-h-64 overflow-y-auto" id="subcategoryDropdown" style="display: none; list-style-type: none; z-index: 9999;">
                 <ul class="list-none p-0 m-0">
                   <% @subcategories.each do |subcategory| %>
                     <li class="p-2 hover:bg-gray-100 cursor-pointer" data-value="<%= subcategory.id %>"><%= subcategory.name %></li>
