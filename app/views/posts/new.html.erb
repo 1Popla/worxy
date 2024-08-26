@@ -52,14 +52,36 @@
         </div>
         <div>
           <%= f.label :category_id, "Kategoria", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-          <%= f.collection_select :category_id, @categories, :id, :name, { prompt: "Wybierz kategorię" }, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', id: 'post_category_id' %>
+          <div class="relative">
+            <%= f.text_field :category_search, placeholder: 'Kategorie...', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', id: 'categorySearchInput' %>
+            <div class="absolute z-10 bg-white border border-gray-300 rounded-lg shadow-sm w-full max-h-64 overflow-y-auto" id="categoryDropdown" style="display: none; list-style-type: none; z-index: 9999;">
+              <ul class="list-none p-0 m-0">
+                <% @categories.each do |category| %>
+                  <li class="p-2 hover:bg-gray-100 cursor-pointer" data-value="<%= category.id %>"><%= category.name %></li>
+                <% end %>
+              </ul>
+            </div>
+            <%= f.hidden_field :category_id, id: "categorySelectHidden", value: @post.category_id %>
+          </div>
           <% if @post.errors[:category_id].any? %>
             <div class="text-red-600 text-sm mt-1"><%= @post.errors[:category_id].join(", ") %></div>
           <% end %>
         </div>
         <div>
           <%= f.label :subcategory_id, "Podkategoria", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-          <%= f.collection_select :subcategory_id, [], :id, :name, { prompt: "Wybierz podkategorię" }, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', id: 'post_subcategory_id' %>
+          <div class="relative">
+            <%= f.text_field :subcategory_search, placeholder: 'Podkategorie...', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', id: 'subcategorySearchInput' %>
+            <div class="absolute z-10 bg-white border border-gray-300 rounded-lg shadow-sm w-full max-h-64 overflow-y-auto" id="subcategoryDropdown" style="display: none; list-style-type: none; z-index: 9999;">
+              <ul class="list-none p-0 m-0">
+                <% if @post.category_id.present? %>
+                  <% @subcategories.each do |subcategory| %>
+                    <li class="p-2 hover:bg-gray-100 cursor-pointer" data-value="<%= subcategory.id %>"><%= subcategory.name %></li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+            <%= f.hidden_field :subcategory_id, id: "subcategorySelectHidden", value: @post.subcategory_id %>
+          </div>
           <% if @post.errors[:subcategory_id].any? %>
             <div class="text-red-600 text-sm mt-1"><%= @post.errors[:subcategory_id].join(", ") %></div>
           <% end %>

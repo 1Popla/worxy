@@ -81,10 +81,12 @@
       <% elsif @notification.status == 'rejected' %>
         <div class="text-red-600 font-bold">Odrzuciłeś tą ofertę</div>
       <% elsif @notification.status == 'pending' || @notification.status.blank? %>
-        <div class="flex justify-center space-x-4">
-          <%= button_to 'Akceptuj Ofertę', accept_request_notification_path(@notification), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded', data: { turbo_frame: "_top" } %>
-          <%= button_to 'Odrzuć Ofertę', reject_request_notification_path(@notification), method: :delete, data: { confirm: 'Jesteś pewien?', turbo_frame: "_top" }, class: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' %>
-        </div>
+        <% if @notification.action == 'sent you a request for' || @notification.action == 'sent you a negotiation request' %>
+          <div class="flex justify-center space-x-4">
+            <%= button_to 'Akceptuj Ofertę', accept_request_notification_path(@notification), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded', data: { turbo_frame: "_top" } %>
+            <%= button_to 'Odrzuć Ofertę', reject_request_notification_path(@notification), method: :delete, data: { confirm: 'Jesteś pewien?', turbo_frame: "_top" }, class: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' %>
+          </div>
+        <% end %>
       <% end %>
     </div>
 

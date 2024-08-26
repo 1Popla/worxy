@@ -96,6 +96,10 @@ class BookingsController < ApplicationController
     redirect_to @booking, notice: "Negotiation request sent successfully."
   end
 
+  def navigation
+    @bookings = current_user.bookings.includes(:post)
+  end
+
   private
 
   def set_booking
