@@ -104,6 +104,10 @@
             <p class="text-gray-700 text-base"><%= @post.category.name %></p>
           </div>
           <div class="mb-4">
+            <p class="font-semibold text-gray-700">Podkategoria:</p>
+            <p class="text-gray-700 text-base"><%= @post.subcategory.name %></p>
+          </div>
+          <div class="mb-4">
             <p class="font-semibold text-gray-700">Priorytet:</p>
             <p class="text-gray-700 text-base"><%= human_readable_priority(@post.availability) %></p>
           </div>
