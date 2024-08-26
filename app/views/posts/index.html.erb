@@ -13,7 +13,7 @@
         <div class="flex space-x-4">
           <div class="w-1/2 relative">
             <div class="relative">
-              <input type="text" placeholder="Szukaj kategorii..." class="p-2 border border-gray-300 rounded-lg shadow-sm w-full mb-2" id="categorySearchInput">
+              <input type="text" placeholder="Kategorie..." class="p-2 border border-gray-300 rounded-lg shadow-sm w-full mb-2" id="categorySearchInput">
               <div class="absolute z-10 bg-white border border-gray-300 rounded-lg shadow-sm w-full max-h-64 overflow-y-auto" id="categoryDropdown" style="display: none; list-style-type: none; z-index: 9999;">
                 <ul class="list-none p-0 m-0">
                   <% @categories.each do |category| %>
@@ -26,7 +26,7 @@
           </div>
           <div class="w-1/2 relative">
             <div class="relative">
-              <input type="text" placeholder="Szukaj podkategorii..." class="p-2 border border-gray-300 rounded-lg shadow-sm w-full mb-2" id="subcategorySearchInput">
+              <input type="text" placeholder="Podkategorie..." class="p-2 border border-gray-300 rounded-lg shadow-sm w-full mb-2" id="subcategorySearchInput">
               <div class="absolute z-10 bg-white border border-gray-300 rounded-lg shadow-sm w-full max-h-64 overflow-y-auto" id="subcategoryDropdown" style="display: none; list-style-type: none; z-index: 9999;">
                 <ul class="list-none p-0 m-0">
                   <% @subcategories.each do |subcategory| %>
