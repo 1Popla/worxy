@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   resources :subcategories, only: [:index]
 
+  get 'bookings/navigation', to: 'bookings#navigation', as: 'bookings_navigation'
+
   resources :bookings do
     collection do
       get "calendar"

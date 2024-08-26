@@ -1,0 +1,24 @@
+<div class="container mx-auto px-4 py-8 relative">
+  <div class="bg-white shadow-lg rounded-lg p-6 border border-gray-200 relative">
+    
+    <div class="absolute top-0 right-0 bg-yellow-500 text-black text-sm font-bold py-2 px-4 rounded-bl-lg">
+      Po przejściu do Google Maps, upewniej się, że pole "Twoja lokalizacja" jest poprawne.
+    </div>
+    
+    <h2 class="text-2xl font-bold mb-4 text-gray-800 mt-16">Twoje Rezerwacje:</h2>
+    
+    <% if @bookings.any? %>
+      <% @bookings.each do |booking| %>
+        <div class="bg-gray-100 rounded-lg overflow-hidden border border-gray-300 p-4 mb-4 transition duration-200 ease-in-out hover:bg-gray-200">
+          <h3 class="text-xl font-bold text-gray-900"><%= booking.post.title %></h3>
+          <p class="text-gray-700 mt-2"><strong>Data rozpoczęcia:</strong> <%= booking.start_date.strftime('%d-%m-%Y %H:%M') %></p>
+          <p class="text-gray-700"><strong>Data zakończenia:</strong> <%= booking.end_date.strftime('%d-%m-%Y %H:%M') %></p>
+          <p class="text-gray-700"><strong>Adres:</strong> <%= booking.post.address%></p>
+          <%= link_to 'Nawiguj', "https://www.google.com/maps/dir/?api=1&origin=My+Location&destination=#{booking.post.latitude},#{booking.post.longitude}&travelmode=driving&dir_action=navigate", target: "_blank", class: 'inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 mt-4 rounded' %>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-gray-700">Brak rezerwacji do wyświetlenia.</p>
+    <% end %>
+  </div>
+</div>
