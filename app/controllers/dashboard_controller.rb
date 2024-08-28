@@ -47,7 +47,8 @@ class DashboardController < ApplicationController
       0.0
     end
 
-    @total_earnings = @bookings.sum(Arel.sql("COALESCE(final_price, offered_price)"))
+    @total_earnings = @bookings.where(include_in_chart: true).sum(Arel.sql("COALESCE(final_price, offered_price)"))
+
     gon.booking_titles = @bookings.pluck('posts.title')
     gon.booking_prices = @bookings.pluck(Arel.sql("COALESCE(final_price, offered_price)"))
 
@@ -61,5 +62,11 @@ class DashboardController < ApplicationController
     @bookings = Booking.where(user: current_user)
       .or(Booking.where(post: current_user.posts))
       .order(start_date: :asc)
+  end
+
+  def update_booking_in_chart
+    booking = Booking.find(params[:id])
+    booking.update(include_in_chart: params[:include_in_chart] == 'true')
+    head :ok
   end
 end

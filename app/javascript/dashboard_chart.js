@@ -1,21 +1,62 @@
 document.addEventListener('turbo:load', function () {
-  // Check if the chart container exists before proceeding
-  var chartContainer = document.getElementById('chart-container');
+  function updateEarningsChart() {
+    const checkedCheckboxes = document.querySelectorAll('.include-booking-checkbox:checked');
+    const titles = [];
+    const prices = [];
+    let totalEarnings = 0;
+
+    checkedCheckboxes.forEach(checkbox => {
+      const bookingId = checkbox.getAttribute('data-booking-id');
+      const row = checkbox.closest('tr');
+      const title = row.querySelector('td:nth-child(1) a').innerText;
+      const price = parseFloat(row.querySelector('td:nth-child(3)').innerText.replace(/[^0-9.-]+/g, ""));
+
+      titles.push(title);
+      prices.push(price);
+      totalEarnings += price;
+    });
+
+    if (window.earningsChart) {
+      window.earningsChart.data.labels = titles;
+      window.earningsChart.data.datasets[0].data = prices;
+      window.earningsChart.update();
+    }
+
+    const totalEarningsElement = document.getElementById('total-earnings');
+    if (totalEarningsElement) {
+      totalEarningsElement.innerText = `Łączne Zarobki: ${totalEarnings.toFixed(2)} PLN`;
+    }
+  }
+
+  function loadCheckboxStates() {
+    const savedStates = JSON.parse(localStorage.getItem('checkboxStates')) || {};
+    document.querySelectorAll('.include-booking-checkbox').forEach(checkbox => {
+      const bookingId = checkbox.getAttribute('data-booking-id');
+      checkbox.checked = savedStates[bookingId] === true;
+    });
+  }
+
+  function saveCheckboxStates() {
+    const states = {};
+    document.querySelectorAll('.include-booking-checkbox').forEach(checkbox => {
+      const bookingId = checkbox.getAttribute('data-booking-id');
+      states[bookingId] = checkbox.checked;
+    });
+    localStorage.setItem('checkboxStates', JSON.stringify(states));
+  }
+
+  const chartContainer = document.getElementById('chart-container');
   if (chartContainer) {
-    // Destroy existing chart instance if it exists
     if (window.bookingChart instanceof Chart) {
       window.bookingChart.destroy();
     }
 
-    // Show the loading spinner if it exists
-    var loadingSpinner = document.getElementById('loading-spinner');
+    const loadingSpinner = document.getElementById('loading-spinner');
     if (loadingSpinner) {
       loadingSpinner.classList.add('flex', 'items-center', 'justify-center');
 
-      // Check if the loader already exists before creating a new one
       if (!loadingSpinner.querySelector('.loader')) {
-        // Create and style loader
-        var loader = document.createElement('div');
+        const loader = document.createElement('div');
         loader.classList.add('loader', 'border-4', 'border-gray-200', 'border-solid', 'border-l-blue-600', 'w-9', 'h-9', 'rounded-full', 'animate-spin');
         loadingSpinner.appendChild(loader);
       }
@@ -23,7 +64,7 @@ document.addEventListener('turbo:load', function () {
       loadingSpinner.style.display = 'flex';
     }
 
-    var ctx = document.getElementById('bookingChart').getContext('2d');
+    const ctx = document.getElementById('bookingChart').getContext('2d');
     window.bookingChart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -39,7 +80,7 @@ document.addEventListener('turbo:load', function () {
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        indexAxis: window.innerWidth < 768 ? 'y' : 'x', // Use horizontal layout on mobile
+        indexAxis: window.innerWidth < 768 ? 'y' : 'x',
         scales: {
           y: {
             beginAtZero: true
@@ -47,7 +88,6 @@ document.addEventListener('turbo:load', function () {
         },
         animation: {
           onComplete: function () {
-            // Hide the loading spinner once the chart animation is complete
             if (loadingSpinner) {
               loadingSpinner.style.display = 'none';
             }
@@ -56,24 +96,19 @@ document.addEventListener('turbo:load', function () {
       }
     });
   }
-});
-document.addEventListener('turbo:load', function () {
-  // Check if the earnings chart container exists before proceeding
-  var earningsChartContainer = document.getElementById('earnings-chart-container');
+
+  const earningsChartContainer = document.getElementById('earnings-chart-container');
   if (earningsChartContainer) {
-    // Destroy existing chart instance if it exists
     if (window.earningsChart instanceof Chart) {
       window.earningsChart.destroy();
     }
 
-    // Show the loading spinner if it exists
-    var earningsLoadingSpinner = document.getElementById('earnings-loading-spinner');
+    const earningsLoadingSpinner = document.getElementById('earnings-loading-spinner');
     if (earningsLoadingSpinner) {
       earningsLoadingSpinner.classList.add('flex', 'items-center', 'justify-center');
 
-      // Create and style loader
       if (!earningsLoadingSpinner.querySelector('.loader')) {
-        var loader = document.createElement('div');
+        const loader = document.createElement('div');
         loader.classList.add('loader', 'border-4', 'border-gray-200', 'border-solid', 'border-l-blue-600', 'w-9', 'h-9', 'rounded-full', 'animate-spin');
         earningsLoadingSpinner.appendChild(loader);
       }
@@ -81,7 +116,7 @@ document.addEventListener('turbo:load', function () {
       earningsLoadingSpinner.style.display = 'flex';
     }
 
-    var earningsCtx = document.getElementById('earningsChart').getContext('2d');
+    const earningsCtx = document.getElementById('earningsChart').getContext('2d');
     window.earningsChart = new Chart(earningsCtx, {
       type: 'pie',
       data: {
@@ -108,7 +143,6 @@ document.addEventListener('turbo:load', function () {
         },
         animation: {
           onComplete: function () {
-            // Hide the loading spinner once the chart animation is complete
             if (earningsLoadingSpinner) {
               earningsLoadingSpinner.style.display = 'none';
             }
@@ -116,5 +150,35 @@ document.addEventListener('turbo:load', function () {
         }
       }
     });
+
+    loadCheckboxStates();
+    updateEarningsChart();
   }
+
+  loadCheckboxStates();
+
+  document.querySelectorAll('.include-booking-checkbox').forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      const bookingId = this.getAttribute('data-booking-id');
+      const includeInChart = this.checked;
+
+      fetch('/dashboard/update_booking_in_chart', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({
+          id: bookingId,
+          include_in_chart: includeInChart
+        })
+      })
+      .then(response => {
+        if (response.ok) {
+          saveCheckboxStates();
+          updateEarningsChart();
+        }
+      });
+    });
+  });
 });

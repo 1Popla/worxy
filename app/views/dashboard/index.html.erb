@@ -44,7 +44,6 @@
       </div>
     </div>
     
-    <!-- Powiadomienia Section -->
     <div class="mb-6 bg-white shadow-lg rounded-lg p-6">
       <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
         <span class="bg-yellow-200 px-3 py-1 rounded-full flex items-center">
@@ -76,7 +75,6 @@
     </div>
 
     <% if current_user.worker? %>
-      <!-- Raporty i Zarobki Section -->
       <div class="mb-6 bg-white shadow-lg rounded-lg p-6">
         <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
           <span class="bg-purple-200 px-3 py-1 rounded-full flex items-center">
@@ -85,16 +83,13 @@
           </span>
         </h2>
         
-        <!-- Container for charts with responsive flexbox -->
         <div class="flex flex-col md:flex-row md:space-x-6 space-y-6 md:space-y-0">
-          <!-- Bookings Chart Container -->
           <div class="bg-white shadow-lg rounded-lg p-6 w-full md:w-1/2">
             <h3 class="text-lg font-bold text-gray-900 mb-4">Zlecenia</h3>
             <div id="chart-container" class="relative h-64 mb-4">
               <canvas id="bookingChart" class="w-full h-full"></canvas>
               <div id="loading-spinner" class="absolute inset-0 flex items-center justify-center"></div>
             </div>
-            <!-- Bookings Data under the Chart -->
             <div class="mt-4">
               <p class="text-gray-700">W tym miesiącu: <%= @current_month_bookings %></p>
               <p class="text-gray-700">W poprzednim miesiącu: <%= @previous_month_bookings %></p>
@@ -105,22 +100,19 @@
             </div>
           </div>
           
-          <!-- Earnings Chart Container -->
           <div class="bg-white shadow-lg rounded-lg p-6 w-full md:w-1/2">
             <h3 class="text-lg font-bold text-gray-900 mb-4">Zarobki</h3>
             <div id="earnings-chart-container" class="relative h-64 mb-4">
               <canvas id="earningsChart" class="w-full h-full"></canvas>
               <div id="earnings-loading-spinner" class="absolute inset-0 flex items-center justify-center"></div>
             </div>
-            <!-- Łączne Zarobki under the Chart -->
             <div class="mt-4">
-              <p class="text-gray-700">Łączne Zarobki: <%= number_to_currency(@total_earnings, unit: 'PLN') %></p>
+              <div id="total-earnings">Łączne Zarobki: <%= @total_earnings.to_f %> PLN</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Twoje Rezerwacje Section -->
       <div class="bg-white shadow-lg rounded-lg p-6">
         <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
           <span class="bg-blue-200 px-3 py-1 rounded-full flex items-center">
@@ -152,7 +144,10 @@
                     <%= number_to_currency(booking.final_price || booking.offered_price, unit: 'PLN') %>
                   </td>
                   <td class="px-6 py-4 border-b border-gray-300">
-                    <i class="fas fa-pencil-alt text-blue-500 hover:text-blue-700 cursor-pointer" data-booking-id="<%= booking.id %>"></i>
+                    <div class="flex items-center space-x-2">
+                      <i class="fas fa-pencil-alt text-blue-500 hover:text-blue-700 cursor-pointer" data-booking-id="<%= booking.id %>"></i>
+                      <input type="checkbox" class="include-booking-checkbox" data-booking-id="<%= booking.id %>" <% if booking.include_in_chart %>checked<% end %> />
+                    </div>
                   </td>
                 </tr>
               <% end %>

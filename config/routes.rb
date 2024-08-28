@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", :as => :rails_health_check
 
+  patch 'dashboard/update_booking_in_chart', to: 'dashboard#update_booking_in_chart'
+
   resources :dashboard, only: [:index]
   resources :posts do
     member do
