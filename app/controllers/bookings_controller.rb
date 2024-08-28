@@ -105,7 +105,9 @@ class BookingsController < ApplicationController
   end
 
   def navigation
-    @bookings = current_user.bookings.includes(:post)
+    customer_bookings = current_user.bookings.includes(:post)
+    creator_bookings = Booking.joins(:post).where(posts: { user_id: current_user.id })
+    @bookings = (customer_bookings + creator_bookings).uniq
   end
 
   private
