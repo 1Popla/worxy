@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     member do
       post :complete_with_offered_price
       post :negotiate_price
+      post :update_final_price
     end
   end
 

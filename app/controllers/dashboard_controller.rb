@@ -47,6 +47,10 @@ class DashboardController < ApplicationController
       0.0
     end
 
+    @total_earnings = @bookings.sum(Arel.sql("COALESCE(final_price, offered_price)"))
+    gon.booking_titles = @bookings.pluck('posts.title')
+    gon.booking_prices = @bookings.pluck(Arel.sql("COALESCE(final_price, offered_price)"))
+
     gon.all_bookings = @all_bookings
     gon.completed_bookings = @completed_bookings
     gon.pending_bookings = @pending_bookings
