@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_booking, only: [:show, :edit, :update, :destroy, :complete_with_offered_price, :negotiate_price]
+  before_action :set_booking, only: [:show, :edit, :update, :destroy, :complete_with_offered_price, :negotiate_price, :update_final_price]
   before_action :check_user, only: [:edit, :update, :destroy]
   before_action :check_user_view, only: [:show]
   before_action :set_selectable_users_and_posts, only: [:new, :edit, :create, :update]
@@ -9,9 +9,9 @@ class BookingsController < ApplicationController
   def index
     customer_or_visible_booking_ids = current_user.bookings.select(:id)
     visible_booking_ids = Booking.where(visible_to_user_id: current_user.id).select(:id)
-    worker_booking_ids = Booking.joins(:post).where(posts: {user_id: current_user.id}).select(:id)
-
-    @bookings = Booking.where(id: customer_or_visible_booking_ids + worker_booking_ids + visible_booking_ids).distinct
+    worker_booking_ids = Booking.joins(:post).where(posts: { user_id: current_user.id }).select(:id)
+  
+    @bookings = Booking.includes(:post).where(id: customer_or_visible_booking_ids + worker_booking_ids + visible_booking_ids).distinct
   end
 
   def calendar
@@ -96,8 +96,18 @@ class BookingsController < ApplicationController
     redirect_to @booking, notice: "Negotiation request sent successfully."
   end
 
+  def update_final_price
+    if @booking.update(final_price_params)
+      redirect_to dashboard_index_path, notice: 'Oferowana cena została zaktualizowana.'
+    else
+      redirect_to dashboard_index_path, alert: 'Wystąpił błąd podczas aktualizacji ceny.'
+    end
+  end
+
   def navigation
-    @bookings = current_user.bookings.includes(:post)
+    customer_bookings = current_user.bookings.includes(:post)
+    creator_bookings = Booking.joins(:post).where(posts: { user_id: current_user.id })
+    @bookings = (customer_bookings + creator_bookings).uniq
   end
 
   private
@@ -107,7 +117,11 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:post_id, :status, :visible_to_user_id, :start_date, :end_date, :offered_price)
+    params.require(:booking).permit(:post_id, :status, :visible_to_user_id, :start_date, :end_date, :offered_price, :final_price)
+  end
+
+  def final_price_params
+    params.require(:booking).permit(:final_price)
   end
 
   def check_user

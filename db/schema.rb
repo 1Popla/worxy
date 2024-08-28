@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_22_120901) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_28_203413) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -54,6 +54,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_22_120901) do
     t.datetime "end_date"
     t.decimal "offered_price"
     t.date "start_date_offer"
+    t.decimal "final_price"
+    t.boolean "include_in_chart"
     t.index ["post_id"], name: "index_bookings_on_post_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
