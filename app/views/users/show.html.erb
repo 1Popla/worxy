@@ -36,7 +36,7 @@
                 <div class="absolute inset-0 bg-black bg-opacity-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </div>
             <% end %>
-            <%= button_to 'Wyślij wiadomość', conversations_path(conversation: { recipient_id: @user.id }), method: :post, class: 'absolute top-0 right-0 bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold py-1 px-2 rounded-full mb-2 md:mb-0 text-sm' %>
+            <%= button_to 'Wyślij wiadomość', conversations_path(conversation: { recipient_id: @user.id }), method: :post, class: 'absolute top-0 right-0 bg-worxyYellow hover:bg-yellow-700 text-black font-bold py-1 px-2 rounded-full mb-2 md:mb-0 text-sm' %>
           </div>
           <% if @user == current_user %>
             <div class="hidden">
@@ -98,8 +98,8 @@
         </div>
         <% if @user == current_user %>
           <div class="flex flex-wrap space-x-2 mb-4 self-end mt-4">
-            <%= link_to 'Edytuj profil', edit_user_registration_path, class: 'bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded mb-2 md:mb-0' %>
-            <%= link_to 'Edytuj portfolio', new_user_portfolio_image_path(@user), class: 'bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded mb-2 md:mb-0' %>
+            <%= link_to 'Edytuj profil', edit_user_registration_path, class: 'bg-worxyYellow hover:bg-yellow-700  text-gray-800 font-bold py-2 px-4 rounded mb-2 md:mb-0' %>
+            <%= link_to 'Edytuj portfolio', new_user_portfolio_image_path(@user), class: 'bg-worxyYellow hover:bg-yellow-700  text-gray-800 font-bold py-2 px-4 rounded mb-2 md:mb-0' %>
           </div>
         <% end %>
       </div>
@@ -132,7 +132,7 @@
             </div>
           </div>
         <% else %>
-          <%= link_to 'Dodaj opinię', new_user_opinion_path(@user), class: 'bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded' if @user != current_user %>
+          <%= link_to 'Dodaj opinię', new_user_opinion_path(@user), class: 'bg-worxyYellow hover:bg-yellow-700  text-gray-800  font-bold py-2 px-4 rounded' if @user != current_user %>
         <% end %>
         <h3 class="text-lg font-bold text-gray-800 mt-4">Pozostałe opinie:</h3>
         <% if @user.received_opinions.any? %>
@@ -169,7 +169,7 @@
           <p class="text-gray-500">Brak zdjęć w portfolio</p>
         <% end %>
       </div>
-      <button id="user-show-close-portfolio-bottom" class="mt-4 mx-auto bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold py-2 px-4 rounded block">Zamknij</button>
+      <button id="user-show-close-portfolio-bottom" class="mt-4 mx-auto bg-worxyYellow hover:bg-yellow-700  text-gray-800 font-bold py-2 px-4 rounded block">Zamknij</button>
     </div>
   </div>
 
@@ -204,7 +204,7 @@
           </div>
         </div>
         <div class="mt-5 sm:mt-6">
-          <button type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-yellow-300 hover:bg-yellow-500 text-gray-800 font-bold sm:text-sm" id="close-modal-button">
+          <button type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-worxyYellow hover:bg-yellow-700  text-gray-800 font-bold sm:text-sm" id="close-modal-button">
             Zamknij
           </button>
         </div>

@@ -49,10 +49,10 @@
     <div class="mb-6 border-b border-gray-200">
       <ul class="flex w-full">
         <li class="flex-1">
-          <%= link_to 'Oferty klientów', posts_path(tab: 'customer', category: params[:category], subcategory: params[:subcategory], search: params[:search]), class: "block text-center p-4 text-sm sm:text-base whitespace-nowrap #{params[:tab] == 'worker' ? 'bg-white text-black border shadow-md rounded-t-lg' : 'bg-white text-black border-b-4 border-yellow-300 shadow-lg rounded-t-lg'}" %>
+          <%= link_to 'Oferty klientów', posts_path(tab: 'customer', category: params[:category], subcategory: params[:subcategory], search: params[:search]), class: "block text-center p-4 text-sm sm:text-base whitespace-nowrap #{params[:tab] == 'worker' ? 'bg-white text-black border shadow-md rounded-t-lg' : 'bg-white text-black border-b-4 border-worxyYellow shadow-lg rounded-t-lg'}" %>
         </li>
         <li class="flex-1">
-          <%= link_to 'Oferty fachowców', posts_path(tab: 'worker', category: params[:category], subcategory: params[:subcategory], search: params[:search]), class: "block text-center p-4 text-sm sm:text-base whitespace-nowrap #{params[:tab] == 'worker' ? 'bg-white text-black border-b-4 border-yellow-300 shadow-lg rounded-t-lg' : 'bg-white text-black border shadow-md rounded-t-lg'}" %>
+          <%= link_to 'Oferty fachowców', posts_path(tab: 'worker', category: params[:category], subcategory: params[:subcategory], search: params[:search]), class: "block text-center p-4 text-sm sm:text-base whitespace-nowrap #{params[:tab] == 'worker' ? 'bg-white text-black border-b-4 border-worxyYellow shadow-lg rounded-t-lg' : 'bg-white text-black border shadow-md rounded-t-lg'}" %>
         </li>
       </ul>
     </div>

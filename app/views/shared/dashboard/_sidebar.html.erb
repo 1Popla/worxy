@@ -38,7 +38,7 @@
         <%= link_to notifications_path, id: 'notifications-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700 notification-bell' do %>
           <i class="fas fa-bell mr-2 text-gray-700"></i>
           Moje Powiadomienia
-          <span id="notification-count" class="absolute top-0 right-0 mt-1 mr-2 h-5 w-5 text-xs text-black bg-yellow-400 rounded-full flex items-center justify-center hidden"></span>
+          <span id="notification-count" class="absolute top-0 right-0 mt-1 mr-2 h-5 w-5 text-xs text-black bg-worxyYellow rounded-full flex items-center justify-center hidden"></span>
         <% end %>
       </li>
       <li>
@@ -90,7 +90,7 @@
       <i class="fas fa-map text-gray-700 text-2xl"></i>
     <% end %>
 
-    <button id="expand-menu-button" class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-yellow-300 text-black rounded-full w-16 h-16 flex items-center justify-center shadow-lg transition duration-300 ease-in-out">
+    <button id="expand-menu-button" class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-worxyYellow text-black rounded-full w-16 h-16 flex items-center justify-center shadow-lg transition duration-300 ease-in-out">
       <i class="fas fa-plus text-2xl transition-transform duration-300 ease-in-out"></i>
     </button>
 
@@ -129,7 +129,7 @@
         <%= link_to notifications_path, id: 'expanded-notifications-link', data: { turbo: true }, class: 'flex items-center text-lg text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out notification-bell' do %>
           <i class="fas fa-bell text-gray-700 text-base mr-2"></i>
           <span>Moje Powiadomienia</span>
-          <span id="notification-count-expanded" class="ml-2 h-4 w-4 text-xs text-black bg-yellow-400 rounded-full flex items-center justify-center hidden"></span>
+          <span id="notification-count-expanded" class="ml-2 h-4 w-4 text-xs text-black bg-worxyYellow rounded-full flex items-center justify-center hidden"></span>
         <% end %>
       </li>
       <li class="bg-gray-100 p-2 rounded-lg shadow-lg transition duration-200 ease-in-out">
@@ -172,7 +172,7 @@
         menu.classList.add('opacity-100');
       }, 10);
       
-      button.classList.remove('bg-yellow-300');
+      button.classList.remove('bg-worxyYellow');
       button.classList.add('bg-red-500');
       icon.classList.add('rotate-45');
     } else {
@@ -182,7 +182,7 @@
       }, { once: true });
 
       button.classList.remove('bg-red-500');
-      button.classList.add('bg-yellow-300');
+      button.classList.add('bg-worxyYellow');
       icon.classList.remove('rotate-45');
     }
   });

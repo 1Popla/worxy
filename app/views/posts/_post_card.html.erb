@@ -1,4 +1,4 @@
-<div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row <%= 'border-4 border-yellow-300' if post.user == current_user %> relative">
+<div class="bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row <%= 'border-4 border-worxyYellow' if post.user == current_user %> relative">
   <% if post.availability == 'high_priority' %>
     <div class="absolute top-0 left-0 bg-red-500 text-white text-base font-bold py-2 px-4 rounded-br-lg flex items-center space-x-2 z-10">
       <img src="<%= asset_path('icons/flame-svgrepo-com.svg') %>" class="h-6 w-6 animate-bounce" alt="Flame Icon">
@@ -54,7 +54,7 @@
       <div class="text-sm text-gray-500">
         <p>Utworzono: <%= I18n.l(post.created_at, format: :long) %></p>
       </div>
-      <%= link_to 'Otwórz', post_path(post), class: 'inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded', data: { turbo: "true" } %>
+      <%= link_to 'Otwórz', post_path(post), class: 'inline-block bg-worxyYellow hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded', data: { turbo: "true" } %>
     </div>
   </div>
 </div>
