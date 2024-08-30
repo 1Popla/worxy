@@ -1,78 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Worxy.pl</title>
+ <!-- stylesheet link tags for landing page -->
+    <%= stylesheet_link_tag '/css/bootstrap.min.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/font-awesome.min.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/flat-icon/MyIcons/flaticon.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/animate.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/jquery.mCustomScrollbar.min.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/jquery.fs.boxer.min.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/flexslider.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/swiper.min.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/screen.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/slider.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/style.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/responsive.css', media: 'all', 'data-turbo-track': 'reload' %>
+<!-- end of stylesheet section -->
 
-        <!-- Meta --> 
-        <meta name="description" content="Plumber Zone is a Creative Multipurpose HTML5 Template">
-        <meta name="keywords" content="Plumber, HTML5, Multipurpose, Template">
-        <meta name="author" content="CodexCoder">
-
-        <!-- Mobile Specific Meta -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-
-        
-
-        <!-- Framework Styles -->
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
-
-        <!-- Fonts Styles -->
-        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/> 
-        <link rel="stylesheet" type="text/css" href="flat-icon/MyIcons/flaticon.css">
-
-        <!-- Plugins Styles --> 
-        <link rel="stylesheet" href="css/animate.css">
-        <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
-        <link rel="stylesheet" href="css/jquery.fs.boxer.min.css">
-        <link rel="stylesheet" href="css/flexslider.css">
-        <link rel="stylesheet" href="css/swiper.min.css">
-        <link rel="stylesheet" href="css/screen.css">
-          
-        <!-- Home slider style -->
-        <link rel="stylesheet" href="css/slider.css">
-
-        <!-- Project Styles -->
-        <link rel="stylesheet" href="css/style.css"> 
-
-        <!-- Responsive Styles -->
-        <link rel="stylesheet" type="text/css" href="css/responsive.css" >
-    </head>
-
-    <body>
-        <!--  preloader  -->
-        <div id="loading">
-            <div id="loading-center">
-                <div id="loading-center-absolute">
-                    <div class="object" id="object_four"></div>
-                    <div class="object" id="object_three"></div>
-                    <div class="object" id="object_two"></div>
-                    <div class="object" id="object_one"></div>
-                </div>
-            </div>
+<div id="loading">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="object" id="object_four"></div>
+            <div class="object" id="object_three"></div>
+            <div class="object" id="object_two"></div>
+            <div class="object" id="object_one"></div>
         </div>
-        <!--  preloader  -->
+    </div>
+</div>
 
+<!-- Search area -->
+<div class="search-area">
+    <div class="search-area-inner">
+        <form action="">
+            <input type="text" name="search" placeholder="Type & Hits Enter...">
+        </form>
+    </div>
+</div>
 
-        <!-- Search area -->
-        <div class="search-area">
-            <div class="search-area-inner">
-                <form action="">
-                    <input type="text" name="search" placeholder="Type & Hits Enter...">
-                </form>
-            </div>  
-        </div>
-        <!-- Search area -->
-
-        
 <nav class="bg-white shadow-md fixed w-full top-0 md:hidden z-50">
     <div class="container mx-auto flex items-center justify-between p-4">
         <!-- Mobile Logo -->
         <div class="logo">
-    <a href="#"><%= image_tag 'worxy-logo-cropped.svg', alt: 'logo', class: "w-[150px]" %></a>
-</div>
+            <a href="#"><%= image_tag 'worxy-logo-cropped.svg', alt: 'logo', class: "w-[150px]" %></a>
+        </div>
 
         <!-- Mobile Login -->
         <div class="relative">
@@ -129,10 +95,10 @@
 
                 <div class="top-social-media">
                     <ul class="social-media">
-                        <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#" class="vimeo"><i class="fa fa-vimeo"></i></a></li>
+                        <li><a href="#" class="facebook"><i class="fab fa-facebook"></i></a></li>
+                        <li><a href="#" class="twitter"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a></li>
+                        <li><a href="#" class="vimeo"><i class="fab fa-vimeo"></i></a></li>
                     </ul>
                 </div>
             </div>
@@ -145,8 +111,6 @@
 
 
         <div id="content" class="v2">
-
-
             <div class="home-slider-area">
                 <div class="sleekslider">
                     <div class="slide active bg-1">
@@ -172,9 +136,9 @@
                                 <a href="/users/sign_up" class="custom-btn  animated slideInUp">Zarejestruj się</a>
                             </div>
                             <div class="iimage2 animated slideInRight">
-                            <%= image_tag 'header-constructor.png', alt: 'images' %>
+                                <%= image_tag 'header-constructor.png', alt: 'images' %>
                             </div>
-                        </div>              
+                        </div>
                     </div>
                     <div class="slide bg-3">
                         <div class="slide-container item-three">
@@ -190,13 +154,12 @@
                                 <a href="/users/sign_up" class="custom-btn  animated slideInUp">Zarejestruj się</a>
                             </div>
                             <div class="iimage3 animated slideInRight">
-                            <%= image_tag 'woman-constructor.png', alt: 'images' %>
+                                <%= image_tag 'woman-constructor.png', alt: 'images' %>
                             </div>
-                        </div>              
+                        </div>
                     </div>
                 </div>
             </div>
-
 
             <div class="best-service-section">
                 <div class="container">
@@ -244,9 +207,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    
-                   
                                 </div>
                                 <div class="best-service-container-next">
                                     <i class="fa fa-angle-left"></i>
@@ -260,7 +220,6 @@
                 </div>
             </div>
 
-            
             <div class="expertness-choose">
                 <div class="container">
                     <div class="row">
@@ -275,7 +234,7 @@
                                         <div class="expert-name">Hydraulik</div>
                                         <div class="progress">
                                             <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"  style="width: 65%;">
-                                            <span>65%</span>
+                                                <span>65%</span>
                                             </div>
                                         </div>
                                     </div>
@@ -390,8 +349,7 @@
                     </div>
                 </div>
             </div>
-            
-            
+
             <div id="countdown">
                 <div class="container">
                     <div class="row">
@@ -418,7 +376,6 @@
                     </div>
                 </div>
             </div>
-            
 
             <div class="pricing-table">
                 <div class="container">
@@ -776,44 +733,21 @@
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <div class="container">
-                    <div class="row">
-                        <div class="footer-bottom-area">
-                            <div class="footer-bottom-left">
-                                <p>&copy; 2024. Wszelkie prawa zastrzeżone.</p>
-                            </div>
-                            <div class="footer-bottom-right">
-                                <a href="#" class="term-condition"> Warunki korzystania</a>
-                                <a href="#" class="privacy-policy"> Polityka prywatności</a>
-                                <ul class="social-media">
-                                    <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
-                                    <li><a href="#" class="vimeo"><i class="fa fa-vimeo"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </footer>
 
 
-        <div class="scroll-top">
-            <div class="scrollToTop">
-                <span><i class="fa fa-arrow-up"></i></span>
-            </div> 
-        </div>
+<div class="scroll-top">
+    <div class="scrollToTop">
+        <span><i class="fa fa-arrow-up"></i></span>
+    </div>
+</div>
 
+<!-- jquery and stylesheets include -->
+    <script type='text/javascript' src='js/plugins.js'></script>
+    <script type="text/javascript" src="javascripts/sleekslider.min.js"></script>
+    <script type="text/javascript" src="javascripts/app.js"></script>
+    <script type='text/javascript' src='js/functions.js'></script>
 
-        <!-- jquery include -->
-        <script type='text/javascript' src='js/plugins.js'></script>
-        <script type="text/javascript" src="javascripts/sleekslider.min.js"></script>
-        <script type="text/javascript" src="javascripts/app.js"></script>
-        <script type='text/javascript' src='js/functions.js'></script>
-    </body>
-</html>
 
 <script>
     function toggleDropdown() {
