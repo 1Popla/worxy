@@ -113,71 +113,72 @@
         </div>
       </div>
 
-<div class="bg-white shadow-lg rounded-lg p-6 relative">
-  <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
-    <span class="bg-blue-200 px-3 py-1 rounded-full flex items-center">
-      <i class="fas fa-list mr-2"></i>
-      Tabela zarobków
-    </span>
-  </h2>
+      <div class="bg-white shadow-lg rounded-lg p-6 relative">
+        <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+          <span class="bg-blue-200 px-3 py-1 rounded-full flex items-center">
+            <i class="fas fa-list mr-2"></i>
+            Tabela zarobków
+          </span>
+        </h2>
 
-  <% if @bookings.present? %>
-    <!-- Left Arrow -->
-    <div class="absolute inset-y-0 left-0 flex items-center md:hidden">
-      <button id="scroll-left" class="bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-    </div>
+        <% if @bookings.present? %>
+          <!-- Left Arrow -->
+          <div class="absolute inset-y-0 left-0 flex items-center md:hidden">
+            <button id="scroll-left" class="bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+          </div>
 
-    <!-- Right Arrow -->
-    <div class="absolute inset-y-0 right-0 flex items-center md:hidden">
-      <button id="scroll-right" class="bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-    </div>
+          <!-- Right Arrow -->
+          <div class="absolute inset-y-0 right-0 flex items-center md:hidden">
+            <button id="scroll-right" class="bg-blue-600 text-white p-2 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
 
-    <div id="scrollable-table" class="overflow-x-auto relative">
-      <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-        <thead class="bg-gray-50">
-          <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nazwa Rezerwacji</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data Utworzenia</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Zarobki</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Akcje</th>
-          </tr>
-        </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          <% @bookings.each do |booking| %>
-            <tr class="hover:bg-gray-100 transition-colors">
-              <td class="px-6 py-4 whitespace-nowrap">
-                <%= link_to booking.post.title, booking_path(booking), class: 'text-blue-700 hover:text-blue-900' %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <%= I18n.l(booking.created_at, format: :long) %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <%= number_to_currency(booking.final_price || booking.offered_price, unit: 'PLN') %>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex items-center space-x-2">
-                  <i class="fas fa-pencil-alt text-blue-500 hover:text-blue-700 cursor-pointer" data-booking-id="<%= booking.id %>"></i>
-                  <input type="checkbox" class="include-booking-checkbox" data-booking-id="<%= booking.id %>" <% if booking.include_in_chart %>checked<% end %> />
-                </div>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  <% else %>
-    <p class="text-gray-500">Brak rezerwacji.</p>
-  <% end %>
-</div>
-<% end %>
+          <div id="scrollable-table" class="overflow-x-auto relative">
+            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nazwa Rezerwacji</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data Utworzenia</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Zarobki</th>
+                  <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Edytuj kwotę</th>
+                  <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Uwzględnij</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <% @bookings.each do |booking| %>
+                  <tr class="hover:bg-gray-100 transition-colors">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <%= link_to booking.post.title, booking_path(booking), class: 'text-blue-700 hover:text-blue-900' %>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <%= I18n.l(booking.created_at, format: :long) %>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                      <%= number_to_currency(booking.final_price || booking.offered_price, unit: 'PLN') %>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                      <i class="fas fa-pencil-alt text-blue-500 hover:text-blue-700 cursor-pointer inline-block align-middle" data-booking-id="<%= booking.id %>"></i>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                      <input type="checkbox" class="include-booking-checkbox align-middle" data-booking-id="<%= booking.id %>" <% if booking.include_in_chart %>checked<% end %> />
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <p class="text-gray-500">Brak rezerwacji.</p>
+        <% end %>
+      </div>
+    <% end %>
 
     <div id="edit-price-modal" class="fixed inset-0 hidden items-center justify-center z-50">
       <div class="bg-black bg-opacity-50 absolute inset-0 z-40"></div>
