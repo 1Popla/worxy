@@ -23,7 +23,7 @@ module ApplicationHelper
         "cancelled" => "Anulowany"
       },
       "user.roles" => {
-        "worker" => "Pracownik",
+        "worker" => "Fachowiec",
         "customer" => "Klient"
       }
     }
