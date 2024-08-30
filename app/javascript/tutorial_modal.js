@@ -105,15 +105,19 @@ document.addEventListener('turbo:load', function() {
   };
 
   function showIntro() {
-    introBox.classList.remove('hidden');
-    stepBox.classList.add('hidden');
-    overlay.classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    if (window.innerWidth < 1024) {
-      introBox.style.top = '1%';
-    } else {
-      introBox.style.top = '50%';
-    }
+    setTimeout(() => {
+      introBox.classList.remove('hidden');
+      stepBox.classList.add('hidden');
+      overlay.classList.remove('hidden');
+
+      if (window.innerWidth < 1024) {
+        introBox.style.top = '1%';
+      } else {
+        introBox.style.top = '50%';
+      }
+    }, 500);
   }
 
   function showStep(stepIndex) {
@@ -133,15 +137,14 @@ document.addEventListener('turbo:load', function() {
       stepBox.classList.remove('hidden');
       overlay.classList.remove('hidden');
 
-      // Adjust position based on step
       if (window.innerWidth < 1024) {
         if (isBelowNotificationLink(step.element)) {
-          stepBox.style.top = '10%';  // Set to 80% for steps below or at notifications
+          stepBox.style.top = '10%';
         } else {
-          stepBox.style.top = '50%';  // Default to 50%
+          stepBox.style.top = '50%';
         }
       } else {
-        stepBox.style.top = '50%';  // Default to 50% for larger screens
+        stepBox.style.top = '50%';
       }
 
       overlay.style.clipPath = `polygon(0% 0%, 0% 100%, ${rect.left + window.scrollX}px 100%, ${rect.left + window.scrollX}px ${rect.top + window.scrollY}px, ${rect.right + window.scrollX}px ${rect.top + window.scrollY}px, ${rect.right + window.scrollX}px ${rect.bottom + window.scrollY}px, ${rect.left + window.scrollX}px ${rect.bottom + window.scrollY}px, ${rect.left + window.scrollX}px 100%, 100% 100%, 100% 0%)`;
@@ -184,9 +187,9 @@ document.addEventListener('turbo:load', function() {
       detailedModal.className = 'fixed bg-white p-4 rounded shadow-lg text-center';
 
       if (window.innerWidth >= 1024 || isBelowNotificationLink(step.element)) {
-        detailedModal.style.top = '80%'; // Set to 80% for steps below or at notifications
+        detailedModal.style.top = '80%';
       } else {
-        detailedModal.style.top = '50%'; // Default to 50%
+        detailedModal.style.top = '50%';
       }
       detailedModal.style.left = '50%';
       detailedModal.style.transform = 'translate(-50%, -50%)';
