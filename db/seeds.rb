@@ -2683,8 +2683,7 @@ Rails.configuration.x.app_data = {
   experience_levels: experience_levels
 }
 
-categories = Category.all
-
+categories = Category.where(parent_id: nil)
 categories.each do |category|
   unless Category.exists?(name: "Inne", parent_id: category.id)
     Category.create!(name: "Inne", parent_id: category.id)
