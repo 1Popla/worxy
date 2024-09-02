@@ -25,13 +25,6 @@
 </div>
 
 <!-- Search area -->
-<div class="search-area">
-    <div class="search-area-inner">
-        <form action="">
-            <input type="text" name="search" placeholder="Type & Hits Enter...">
-        </form>
-    </div>
-</div>
 
 <nav class="bg-white shadow-md fixed w-full top-0 md:hidden z-50">
     <div class="container mx-auto flex items-center justify-between p-4">
@@ -116,45 +109,14 @@
                     <div class="slide active bg-1">
                         <div class="slide-container item-one">
                             <div class="image-one animated slideInLeft">
-                                <%= image_tag 'https://worxy.s3.eu-north-1.amazonaws.com/landing-page-images/man.png', alt: 'images' %>
+                                <%= image_tag 'man.png', alt: 'images' %>
                             </div>
                             <div class="image-two animated bounceInUp">
-                                <%= image_tag 'https://worxy.s3.eu-north-1.amazonaws.com/landing-page-images/multiple-image-background.png', alt: 'images' %>
+                                <%= image_tag 'multiple-image-background.png', alt: 'images' %>
                             </div>
                             <div class="text">
                                 <h2 class="animated slideInRight">zatrudnij fachowca</h2>
                                 <h1 class="animated slideInRight">Worxy</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide bg-2">
-                        <div class="slide-container item-two">
-                            <div class="text">
-                                <h2 class="itext1 animated slideInDown"> Worxy to</h2>
-                                <h1 class="itext2 animated slideInLeft">Jedyna platforma</h1>
-                                <h3 class="itext3 animated slideInLeft">która dba o potrzeby naszych klientów</h3>
-                                <a href="/users/sign_up" class="custom-btn  animated slideInUp">Zarejestruj się</a>
-                            </div>
-                            <div class="iimage2 animated slideInRight">
-                                <%= image_tag 'https://worxy.s3.eu-north-1.amazonaws.com/landing-page-images/header-constructor.png', alt: 'images' %>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="slide bg-3">
-                        <div class="slide-container item-three">
-                            <div class="text animated slideInLeft">
-                                <h2 class="itext1">Używając aplikacji</h2>
-                                <h1 class="itext2">Worxy</h1>
-                                <h3 class="itext3">Zapewnimy Ci</h3>
-                                <ul>
-                                    <li><i class="fa fa-caret-right"></i>Obszerną bazę klientów</li>
-                                    <li><i class="fa fa-caret-right"></i>Bezpieczny system płatności</li>
-                                    <li><i class="fa fa-caret-right"></i>Dopasowane usługi do twoich potrzeb</li>
-                                </ul>
-                                <a href="/users/sign_up" class="custom-btn  animated slideInUp">Zarejestruj się</a>
-                            </div>
-                            <div class="iimage3 animated slideInRight">
-                                <%= image_tag 'https://worxy.s3.eu-north-1.amazonaws.com/landing-page-images/woman-constructor.png', alt: 'images' %>
                             </div>
                         </div>
                     </div>
@@ -174,7 +136,7 @@
                                     <div class="swiper-slide">
                                         <div class="div post-item">
                                             <div class="post-thumb">
-                                                <a href="#"><%= image_tag 'https://worxy.s3.eu-north-1.amazonaws.com/landing-page-images/ai-posts.jpg', alt: 'Thumb' %></a>
+                                                <a href="#"><%= image_tag 'ai-posts.jpg', alt: 'Thumb' %></a>
                                             </div>
                                             <div class="content">
                                                 <h3 class="title"><a href="#">Fachowcy dla Każdego</a></h3>
@@ -186,7 +148,7 @@
                                     <div class="swiper-slide">
                                         <div class="div post-item">
                                             <div class="post-thumb">
-                                                <a href="#"><%= image_tag 'https://worxy.s3.eu-north-1.amazonaws.com/landing-page-images/home-service-money.jpg', alt: 'Thumb' %></a>
+                                                <a href="#"><%= image_tag 'home-service-money.jpg', alt: 'Thumb' %></a>
                                             </div>
                                             <div class="content">
                                                 <h3 class="title"><a href="#">Darmowe członkostwo</a></h3>
@@ -198,7 +160,7 @@
                                     <div class="swiper-slide">
                                         <div class="div post-item">
                                             <div class="post-thumb">
-                                                <a href="#"><%= image_tag 'https://worxy.s3.eu-north-1.amazonaws.com/landing-page-images/close-up-men-handshake.jpg', alt: 'Thumb' %></a>
+                                                <a href="#"><%= image_tag 'close-up-men-handshake.jpg', alt: 'Thumb' %></a>
                                             </div>
                                             <div class="content">
                                                 <h3 class="title"><a href="#">Twój głos się liczy!</a></h3>
@@ -321,21 +283,21 @@
                                 </div>
                                 <div class="flexslider">
                                     <ul class="slides">
-                                        <li data-thumb="https://worxy.s3.eu-north-1.amazonaws.com/landing-page-images/piotr-janowski.jpg">
+                                        <li data-thumb="<%= asset_path 'piotr-janowski.jpg' %>">
                                             <div class="testimonial-content">
                                                 <p class="description">Jako wykonawca, serwis Worxy jest dla mnie absolutnym strzałem w dziesiątkę. Platforma jest darmowa, co pozwala mi na swobodne szukanie klientów bez żadnych kosztów, co w innych serwisach bywa problematyczne.</p>
                                                 <h3 class="client-name">Piotr Janowski</h3>
                                                 <strong class="designation">Użytkownik Worxy</strong>
                                             </div>
                                         </li>
-                                        <li data-thumb="https://worxy.s3.eu-north-1.amazonaws.com/landing-page-images/dawid-szymaniuk.jpg">
+                                        <li data-thumb="<%= asset_path 'dawid-szymaniuk.jpg' %>">
                                             <div class="testimonial-content">
                                                 <p class="description">Aplikacja Worxy stawia użytkownika na pierwszym miejscu, zawsze słuchając jego potrzeb i opinii. Klient jest dla nich najważniejszy, co sprawia, że korzystanie z serwisu jest przyjemne i efektywne. Polecam!</p>
                                                 <h3 class="client-name">Dawid Szymaniuk</h3>
                                                 <strong class="designation">Użytkownik Worxy</strong>
                                             </div>
                                         </li>
-                                        <li data-thumb="https://worxy.s3.eu-north-1.amazonaws.com/landing-page-images/anna-kaminska.jpg">
+                                        <li data-thumb="<%= asset_path 'anna-kaminska.jpg' %>">
                                             <div class="testimonial-content">
                                                 <p class="description">Polecam Worxy! Aplikacja posiada system opinii, który ostrzega użytkowników przed potencjalnymi oszustami. Dostępne są zarówno negatywne, jak i pozytywne opinie, co pozwala na świadome wybory zleceniodawców.</p>
                                                 <h3 class="client-name">Anna Kamińska</h3>
@@ -456,7 +418,7 @@
                                     <div class="col-xl-4 col-sm-6 col-12">
                                         <div class="post-item">
                                             <div class="post-thumb">
-                                                <a href="#"><%= image_tag 'https://worxy.s3.eu-north-1.amazonaws.com/landing-page-images/ai-posts.jpg', alt: 'News thumb' %></a>
+                                                <a href="#"><%= image_tag 'ai-posts.jpg', alt: 'News thumb' %></a>
                                                 <div class="content">
                                                     <h2 class="title"><a href="#">Nowe Usługi Dostępne</a></h2>
                                                     <div class="meta">
@@ -473,7 +435,7 @@
                                     <div class="col-xl-4 col-sm-6 col-12">
                                         <div class="post-item">
                                             <div class="post-thumb">
-                                                <a href="#"><%= image_tag 'https://worxy.s3.eu-north-1.amazonaws.com/landing-page-images/home-service-money.jpg', alt: 'News thumb' %></a>
+                                                <a href="#"><%= image_tag 'home-service-money.jpg', alt: 'News thumb' %></a>
                                                 <div class="content">
                                                     <h2 class="title"><a href="#">Oszczędzaj z Worxy</a></h2>
                                                     <div class="meta">
@@ -490,7 +452,7 @@
                                     <div class="col-xl-4 col-sm-6 col-12">
                                         <div class="post-item">
                                             <div class="post-thumb">
-                                                <a href="#"><%= image_tag 'https://worxy.s3.eu-north-1.amazonaws.com/landing-page-images/close-up-men-handshake.jpg', alt: 'News thumb' %></a>
+                                                <a href="#"><%= image_tag 'close-up-men-handshake.jpg', alt: 'News thumb' %></a>
                                                 <div class="content">
                                                     <h2 class="title"><a href="#">Zaufani Profesjonaliści</a></h2>
                                                     <div class="meta">
@@ -510,124 +472,6 @@
                     </div>
                 </div>
             </div>
-
-
-            
-            <div id="expert" class="hidden">
-                <div class="container">
-                    <div class="row">
-                        <div class="expert-inner">
-                            <div class="section-title">
-                                <h2 class="title"><span>Our Experts</span></h2>
-                                <p class="title-desc">Out Service is so much helpful for your business</p>
-                            </div>
-                            <div class="row g-4 justify-content-center">
-                                <div class="col-xl-3 col-md-4 col-sm-6 col-12">
-                                    <div class="post-item">
-                                        <div class="post-thumb">
-                                            <!--    <a href="#"><img src="images/home1/client3.jpg" alt="client"></a> -->
-                                        </div>
-                                        <div class="content">
-                                            <h3 class="name"><a href="#">Rokey Moesa</a></h3>
-                                            <p class="designation">Plumber</p>
-                                        </div>
-                                    </div> 
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6 col-12">
-                                    <div class="post-item">
-                                        <div class="post-thumb">
-                                            <!--    <a href="#"><img src="images/home1/client3.jpg" alt="client"></a> -->
-                                        </div>
-                                        <div class="content">
-                                            <h3 class="name"><a href="#">Rokey Moesa</a></h3>
-                                            <p class="designation">Plumber</p>
-                                        </div>
-                                    </div> 
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6 col-12">
-                                    <div class="post-item">
-                                        <div class="post-thumb">
-                                            <!--    <a href="#"><img src="images/home1/client3.jpg" alt="client"></a> -->
-                                        </div>
-                                        <div class="content">
-                                            <h3 class="name"><a href="#">Rokey Moesa</a></h3>
-                                            <p class="designation">Plumber</p>
-                                        </div>
-                                    </div> 
-                                </div>
-                                <div class="col-xl-3 col-md-4 col-sm-6 col-12">
-                                    <div class="post-item">
-                                        <div class="post-thumb">
-                                            <!--    <a href="#"><img src="images/home1/client3.jpg" alt="client"></a> -->
-                                        </div>
-                                        <div class="content">
-                                            <h3 class="name"><a href="#">Rokey Moesa</a></h3>
-                                            <p class="designation">Plumber</p>
-                                        </div>
-                                    </div> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        
-        <div id="client" class="hidden">
-            <div class="container">
-                <div class="row">
-                    <div class="client-area">
-                        <div class="client-slider-container">
-                            <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="client-item">
-                                        <div class="client-item-inner">
-                                            <!--    <a href="#"><img src="images/home1/client3.jpg" alt="client"></a> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="client-item">
-                                        <div class="client-item-inner">
-                                            <!--    <a href="#"><img src="images/home1/client3.jpg" alt="client"></a> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="client-item">
-                                        <div class="client-item-inner">
-                                            <!--    <a href="#"><img src="images/home1/client3.jpg" alt="client"></a> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="client-item">
-                                        <div class="client-item-inner">
-                                            <!--    <a href="#"><img src="images/home1/client3.jpg" alt="client"></a> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="client-item">
-                                        <div class="client-item-inner">
-                                            <!--    <a href="#"><img src="images/home1/client3.jpg" alt="client"></a> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <div class="client-item">
-                                        <div class="client-item-inner">
-                                        <!--    <a href="#"><img src="images/home1/client3.jpg" alt="client"></a> -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         
         <footer id="footer">
@@ -672,7 +516,7 @@
                                     <ul class="small-post-list">
                                         <li class="post-item">
                                             <div class="post-thumb">
-                                                <a href="#"><%= image_tag 'https://worxy.s3.eu-north-1.amazonaws.com/landing-page-images/close-up-men-handshake.jpg', alt: 'News thumb' %></a>
+                                                <a href="#"><%= image_tag 'close-up-men-handshake.jpg', alt: 'News thumb' %></a>
                                             </div>
                                             <div class="content">
                                                 <h4><a href="#">Jak znaleźć najlepszego hydraulika w okolicy.</a></h4>
@@ -683,7 +527,7 @@
                                         </li>
                                         <li class="post-item">
                                             <div class="post-thumb">
-                                                <a href="#"><%= image_tag 'https://worxy.s3.eu-north-1.amazonaws.com/landing-page-images/close-up-men-handshake.jpg', alt: 'News thumb' %></a>
+                                                <a href="#"><%= image_tag 'close-up-men-handshake.jpg', alt: 'News thumb' %></a>
                                             </div>
                                             <div class="content">
                                                 <h4><a href="#">Top 5 porad dotyczących konserwacji domu.</a></h4>
@@ -694,7 +538,7 @@
                                         </li>
                                         <li class="post-item">
                                             <div class="post-thumb">
-                                                <a href="#"><%= image_tag 'https://worxy.s3.eu-north-1.amazonaws.com/landing-page-images/close-up-men-handshake.jpg', alt: 'News thumb' %></a>
+                                                <a href="#"><%= image_tag 'close-up-men-handshake.jpg', alt: 'News thumb' %></a>
                                             </div>
                                             <div class="content">
                                                 <h4><a href="#">Jak przygotować dom na zimę.</a></h4>
@@ -725,7 +569,7 @@
                             <div class="row">
                                 <div class="footer-right">
                                     <div class="footer-right-image">
-                                        <%= image_tag 'https://worxy.s3.eu-north-1.amazonaws.com/landing-page-images/footer-big.png', alt: 'image' %></a>
+                                        <%= image_tag 'footer-big.png', alt: 'image' %></a>
                                     </div>
                                 </div>
                             </div>
