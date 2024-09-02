@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   patch 'dashboard/update_booking_in_chart', to: 'dashboard#update_booking_in_chart'
 
   resources :dashboard, only: [:index]
+
+  get 'posts/:category_slug(/:subcategory_slug)', to: 'posts#filter_by_slug', as: 'filter_posts_by_slug', constraints: ->(req) do
+    Category.exists?(slug: req.params[:category_slug])
+  end
   resources :posts do
     member do
       post "send_request"

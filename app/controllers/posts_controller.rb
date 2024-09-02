@@ -125,6 +125,35 @@ class PostsController < ApplicationController
     render json: {description: description}
   end
 
+  def filter_by_slug
+    category = Category.find_by!(slug: params[:category_slug])
+
+    subcategory = category.subcategories.find_by!(slug: params[:subcategory_slug]) if params[:subcategory_slug].present?
+
+    if category
+      @categories = Category.where(parent_id: nil)
+      @subcategories = category.subcategories
+
+      @customer_posts = Post.joins(:user).where(users: { role: 'customer' }, category_id: category.id)
+      @worker_posts = Post.joins(:user).where(users: { role: 'worker' }, category_id: category.id)
+
+      if subcategory
+        @customer_posts = @customer_posts.where(subcategory_id: subcategory.id)
+        @worker_posts = @worker_posts.where(subcategory_id: subcategory.id)
+      end
+
+      @customer_posts = @customer_posts.page(params[:page]).per(10)
+      @worker_posts = @worker_posts.page(params[:page]).per(10)
+
+      render :index
+    else
+      redirect_to posts_path, alert: "Kategoria lub podkategoria nie istnieje."
+    end
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to posts_path, alert: "Kategoria lub podkategoria nie istnieje."
+  end
+
   private
 
   def generate_description_for(user)
