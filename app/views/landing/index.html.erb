@@ -1,375 +1,1033 @@
-<div id="categories" class="bg-gray-50 pb-12">
-    <div class="container mx-auto">
-        <div class="row">
-            <div class="categories-inner">
-                <div class="section-title text-center mb-5">
-                    <h2 class="text-3xl font-bold mb-2"><span>Popularne kategorie</span></h2>
-                    <p class="text-lg text-gray-600">Przejrzyj nasze kategorie, aby znaleźć usługi odpowiadające Twoim potrzebom</p>
+ <!-- stylesheet link tags for landing page -->
+    <%= stylesheet_link_tag '/css/bootstrap.min.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/font-awesome.min.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/flat-icon/MyIcons/flaticon.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/animate.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/jquery.mCustomScrollbar.min.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/jquery.fs.boxer.min.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/flexslider.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/swiper.min.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/screen.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/slider.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/style.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= stylesheet_link_tag '/css/responsive.css', media: 'all', 'data-turbo-track': 'reload' %>
+<!-- end of stylesheet section -->
+
+
+<nav class="bg-white shadow-md fixed w-full top-0 md:hidden z-50">
+    <div class="container mx-auto flex items-center justify-between p-4">
+        <!-- Mobile Logo -->
+        <div class="logo">
+            <a href="#"><%= image_tag 'worxy-logo-cropped.svg', alt: 'logo', class: "w-[150px]" %></a>
+        </div>
+
+        <!-- Mobile Login -->
+        <div class="relative">
+            <div onclick="toggleDropdown()" class="contact-place flex items-center cursor-pointer border border-worxyYellow rounded-lg p-2 bg-gray-100 text-black font-bold whitespace-nowrap" id="contact-container">
+                <i class="fas fa-user-circle mr-2 text-yellow-500 text-xl"></i>
+                <div>
+                    <span class="text-black">Moje konto</span>
                 </div>
-                <div class="row flex flex-wrap justify-center gap-4">
-                    <!-- Hydraulika Category -->
-                    <div class="col-xl-3 col-md-4 col-sm-6 col-12">
-                        <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
-                            <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
-                                <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
-                                    <i class="fa fa-wrench text-xl text-worxyYellow mr-2"></i> Hydraulika
-                                </div>
-                                <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
-                            </div>
-                            <!-- Dropdown for Hydraulika Subcategories -->
-                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
-                                <ul class="text-left text-gray-700">
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/hydraulika/naprawa-rur" class="flex items-center">
-                                            <i class="fa fa-wrench text-worxyYellow mr-2"></i> Naprawa rur
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/hydraulika/instalacja-kranow" class="flex items-center">
-                                            <i class="fa fa-wrench text-worxyYellow mr-2"></i> Instalacja kranów
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/hydraulika/konserwacja-rur" class="flex items-center">
-                                            <i class="fa fa-wrench text-worxyYellow mr-2"></i> Konserwacja rur
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/hydraulika/naprawa-toalet" class="flex items-center">
-                                            <i class="fa fa-wrench text-worxyYellow mr-2"></i> Naprawa toalet
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <!-- Dropdown Menu -->
+            <div id="dropdownMenu" class="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg hidden">
+                <a href="users/sign_in" class="flex items-center px-4 py-2 text-black hover:bg-gray-100">
+                    <i class="fas fa-sign-in-alt mr-2 text-yellow-500"></i>
+                    <span class="flex-1 text-center">Zaloguj się</span>
+                </a>
+                <hr class="border-t-2 border-yellow-400 my-2 mx-4">
+                <a href="users/sign_up" class="flex items-center px-4 py-2 text-black hover:bg-gray-100">
+                    <i class="fas fa-user-plus mr-2 text-yellow-500"></i>
+                    <span class="flex-1 text-center">Zarejestruj się</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
 
-                    <!-- Elektryka Category -->
-                    <div class="col-xl-3 col-md-4 col-sm-6 col-12">
-                        <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
-                            <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
-                                <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
-                                    <i class="fa fa-bolt text-xl text-worxyYellow mr-2"></i> Elektryka
-                                </div>
-                                <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
-                            </div>
-                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
-                                <ul class="text-left text-gray-700">
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/elektryka/montaz-gniadzek" class="flex items-center">
-                                            <i class="fa fa-bolt text-worxyYellow mr-2"></i> Montaż gniazdek
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/elektryka/instalacja-oswietlenia" class="flex items-center">
-                                            <i class="fa fa-bolt text-worxyYellow mr-2"></i> Instalacja oświetlenia
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/elektryka/naprawa-instalacji" class="flex items-center">
-                                            <i class="fa fa-bolt text-worxyYellow mr-2"></i> Naprawa instalacji
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/elektryka/montaz-urzadzen" class="flex items-center">
-                                            <i class="fa fa-bolt text-worxyYellow mr-2"></i> Montaż urządzeń
-                                        </a>
-                                    </li>
-                                </ul>
+<header id="header" class="pt-16 md:pt-0">
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="logo">
+                    <a href="#"><%= image_tag 'worxy-logo-cropped.svg', alt: 'logo', class: "w-[250px]" %></a>
+                </div>
+                <div class="contact-place" id="contact-container">
+                    <a href="/users/sign_in" class="cp-01 phone w-96" style="text-decoration: none; color: inherit;">
+                        <div class="cp-inner">
+                            <div class="icon"><i class="fas fa-user-circle fa-3x"></i></div>
+                            <div class="phone-text">
+                                <span class="text">Kliknij!</span>
+                                <span class="numbers">aby się zalogować</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
-                    <!-- Stolarka Category -->
-                    <div class="col-xl-3 col-md-4 col-sm-6 col-12">
-                        <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
-                            <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
-                                <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
-                                    <i class="fa fa-hammer text-xl text-worxyYellow mr-2"></i> Stolarka
-                                </div>
-                                <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
+                    <a href="users/sign_up" class="cp-01 mail w-96" style="text-decoration: none; color: inherit;">
+                        <div class="cp-inner">
+                            <div class="icon"><i class="far fa-user-circle fa-3x"></i></div>
+                            <div class="phone-text">
+                                <span class="text">Kliknij!</span>
+                                <span class="numbers">aby się zarejestrować</span>
                             </div>
-                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
-                                <ul class="text-left text-gray-700">
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/stolarka/montaz-drzwi" class="flex items-center">
-                                            <i class="fa fa-hammer text-worxyYellow mr-2"></i> Montaż drzwi
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/stolarka/montaz-okien" class="flex items-center">
-                                            <i class="fa fa-hammer text-worxyYellow mr-2"></i> Montaż okien
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/stolarka/naprawa-mebli" class="flex items-center">
-                                            <i class="fa fa-hammer text-worxyYellow mr-2"></i> Naprawa mebli
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/stolarka/renowacja-mebli" class="flex items-center">
-                                            <i class="fa fa-hammer text-worxyYellow mr-2"></i> Renowacja mebli
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                        </div>    
+                    </a>
+                </div>
 
-                    <!-- Sprzątanie Category -->
-                    <div class="col-xl-3 col-md-4 col-sm-6 col-12">
-                        <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
-                            <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
-                                <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
-                                    <i class="fa fa-broom text-xl text-worxyYellow mr-2"></i> Sprzątanie
-                                </div>
-                                <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
-                            </div>
-                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
-                                <ul class="text-left text-gray-700">
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/sprzatanie/odkurzanie" class="flex items-center">
-                                            <i class="fa fa-broom text-worxyYellow mr-2"></i> Odkurzanie
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/sprzatanie/mycie-okien" class="flex items-center">
-                                            <i class="fa fa-broom text-worxyYellow mr-2"></i> Mycie okien
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/sprzatanie/czyszczenie-dywanow" class="flex items-center">
-                                            <i class="fa fa-broom text-worxyYellow mr-2"></i> Czyszczenie dywanów
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/sprzatanie/organizacja-przestrzeni" class="flex items-center">
-                                            <i class="fa fa-broom text-worxyYellow mr-2"></i> Organizacja przestrzeni
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Ogrodnictwo Category -->
-                    <div class="col-xl-3 col-md-4 col-sm-6 col-12">
-                        <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
-                            <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
-                                <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
-                                    <i class="fa fa-leaf text-xl text-worxyYellow mr-2"></i> Ogrodnictwo
-                                </div>
-                                <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
-                            </div>
-                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
-                                <ul class="text-left text-gray-700">
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/ogrodnictwo/przycinanie-drzew" class="flex items-center">
-                                            <i class="fa fa-leaf text-worxyYellow mr-2"></i> Przycinanie drzew
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/ogrodnictwo/sadzenie-roslin" class="flex items-center">
-                                            <i class="fa fa-leaf text-worxyYellow mr-2"></i> Sadzenie roślin
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/ogrodnictwo/koszenie-trawnika" class="flex items-center">
-                                            <i class="fa fa-leaf text-worxyYellow mr-2"></i> Koszenie trawnika
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/ogrodnictwo/utrzymanie-ogrodu" class="flex items-center">
-                                            <i class="fa fa-leaf text-worxyYellow mr-2"></i> Utrzymanie ogrodu
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Malowanie Category -->
-                    <div class="col-xl-3 col-md-4 col-sm-6 col-12">
-                        <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
-                            <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
-                                <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
-                                    <i class="fa fa-paint-roller text-xl text-worxyYellow mr-2"></i> Malowanie
-                                </div>
-                                <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
-                            </div>
-                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
-                                <ul class="text-left text-gray-700">
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/malowanie/malowanie-scian" class="flex items-center">
-                                            <i class="fa fa-paint-roller text-worxyYellow mr-2"></i> Malowanie ścian
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/malowanie/malowanie-sufitow" class="flex items-center">
-                                            <i class="fa fa-paint-roller text-worxyYellow mr-2"></i> Malowanie sufitów
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/malowanie/malowanie-mebli" class="flex items-center">
-                                            <i class="fa fa-paint-roller text-worxyYellow mr-2"></i> Malowanie mebli
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/malowanie/malowanie-drzwi" class="flex items-center">
-                                            <i class="fa fa-paint-roller text-worxyYellow mr-2"></i> Malowanie drzwi
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Przeprowadzki Category -->
-                    <div class="col-xl-3 col-md-4 col-sm-6 col-12">
-                        <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
-                            <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
-                                <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
-                                    <i class="fa fa-truck text-xl text-worxyYellow mr-2"></i> Przeprowadzki
-                                </div>
-                                <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
-                            </div>
-                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
-                                <ul class="text-left text-gray-700">
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/przeprowadzki/pakowanie" class="flex items-center">
-                                            <i class="fa fa-truck text-worxyYellow mr-2"></i> Pakowanie
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/przeprowadzki/transport" class="flex items-center">
-                                            <i class="fa fa-truck text-worxyYellow mr-2"></i> Transport
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/przeprowadzki/rozpakowywanie" class="flex items-center">
-                                            <i class="fa fa-truck text-worxyYellow mr-2"></i> Rozpakowywanie
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/przeprowadzki/montaz-mebli" class="flex items-center">
-                                            <i class="fa fa-truck text-worxyYellow mr-2"></i> Montaż mebli
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Zwalczanie Szkodników Category -->
-                    <div class="col-xl-3 col-md-4 col-sm-6 col-12">
-                        <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
-                            <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
-                                <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
-                                    <i class="fa fa-bug text-xl text-worxyYellow mr-2"></i> Zwalczanie Szkodników
-                                </div>
-                                <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
-                            </div>
-                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
-                                <ul class="text-left text-gray-700">
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/zwalczanie-szkodnikow/dezynsekcja" class="flex items-center">
-                                            <i class="fa fa-bug text-worxyYellow mr-2"></i> Dezynsekcja
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/zwalczanie-szkodnikow/dezynfekcja" class="flex items-center">
-                                            <i class="fa fa-bug text-worxyYellow mr-2"></i> Dezynfekcja
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/zwalczanie-szkodnikow/deratyzacja" class="flex items-center">
-                                            <i class="fa fa-bug text-worxyYellow mr-2"></i> Deratyzacja
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/zwalczanie-szkodnikow/usuwanie-gniazd" class="flex items-center">
-                                            <i class="fa fa-bug text-worxyYellow mr-2"></i> Usuwanie gniazd
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Dekarstwo Category -->
-                    <div class="col-xl-3 col-md-4 col-sm-6 col-12">
-                        <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
-                            <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
-                                <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
-                                    <i class="fa fa-home text-xl text-worxyYellow mr-2"></i> Dekarstwo
-                                </div>
-                                <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
-                            </div>
-                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
-                                <ul class="text-left text-gray-700">
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/dekarstwo/montaz-dachowek" class="flex items-center">
-                                            <i class="fa fa-home text-worxyYellow mr-2"></i> Montaż dachówek
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/dekarstwo/naprawa-dachu" class="flex items-center">
-                                            <i class="fa fa-home text-worxyYellow mr-2"></i> Naprawa dachu
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/dekarstwo/izolacja-dachu" class="flex items-center">
-                                            <i class="fa fa-home text-worxyYellow mr-2"></i> Izolacja dachu
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/dekarstwo/montaz-rzygaczy" class="flex items-center">
-                                            <i class="fa fa-home text-worxyYellow mr-2"></i> Montaż rzygaczy
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Złota Rączka Category -->
-                    <div class="col-xl-3 col-md-4 col-sm-6 col-12">
-                        <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
-                            <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
-                                <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
-                                    <i class="fa fa-tools text-xl text-worxyYellow mr-2"></i> Złota Rączka
-                                </div>
-                                <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
-                            </div>
-                            <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
-                                <ul class="text-left text-gray-700">
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/zlota-raczka/naprawa-domowa" class="flex items-center">
-                                            <i class="fa fa-tools text-worxyYellow mr-2"></i> Naprawa domowa
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/zlota-raczka/montaz-mebli" class="flex items-center">
-                                            <i class="fa fa-tools text-worxyYellow mr-2"></i> Montaż mebli
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/zlota-raczka/malowanie" class="flex items-center">
-                                            <i class="fa fa-tools text-worxyYellow mr-2"></i> Malowanie
-                                        </a>
-                                    </li>
-                                    <li class="px-4 py-2 hover:bg-gray-100">
-                                        <a href="/posts/zlota-raczka/drobne-naprawy" class="flex items-center">
-                                            <i class="fa fa-tools text-worxyYellow mr-2"></i> Drobne naprawy
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Add more categories if needed -->
+                <div class="top-social-media">
+                    <ul class="social-media">
+                        <li><a href="#" class="facebook"><i class="fab fa-facebook"></i></a></li>
+                        <li><a href="#" class="twitter"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a></li>
+                        <li><a href="#" class="vimeo"><i class="fab fa-vimeo"></i></a></li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+</header>
+
+
+        <!-- Header -->
+
+
+        <div id="content" class="v2">
+            <div class="home-slider-area">
+                <div class="sleekslider">
+                    <div class="slide active bg-1">
+                        <div class="slide-container item-one">
+                            <div class="image-one animated slideInLeft">
+                                <%= image_tag 'man.png', alt: 'images' %>
+                            </div>
+                            <div class="image-two animated bounceInUp">
+                                <%= image_tag 'multiple-image-background.png', alt: 'images' %>
+                            </div>
+                            <div class="text">
+                                <h2 class="animated slideInRight">zatrudnij fachowca</h2>
+                                <h1 class="animated slideInRight">Worxy</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="best-service-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="section-title">
+                            <h2 class="title"><span>Nasze usługi</span></h2>
+                            <p class="title-desc">Usługi w Worxy są tworzone z myślą o naszych użytkownikach.</p>
+                        </div>
+                        <div class="best-service">
+                            <div class="best-service-container">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <div class="div post-item">
+                                            <div class="post-thumb">
+                                                <a href="#"><%= image_tag 'ai-posts.jpg', alt: 'Thumb' %></a>
+                                            </div>
+                                            <div class="content">
+                                                <h3 class="title"><a href="#">Fachowcy dla Każdego</a></h3>
+                                                <div class="excerpt">Niezależnie od tego, czy zepsuła się pralka, czy potrzebujesz wniesienia szafy, na Worxy znajdziesz fachowców z każdej dziedziny, gotowych do pomocy.</div>
+                                                <a href="#" class="custom-btn">Zobacz więcej</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="div post-item">
+                                            <div class="post-thumb">
+                                                <a href="#"><%= image_tag 'home-service-money.jpg', alt: 'Thumb' %></a>
+                                            </div>
+                                            <div class="content">
+                                                <h3 class="title"><a href="#">Darmowe członkostwo</a></h3>
+                                                <div class="excerpt">Nasi użytkownicy mogą korzystać z funkcjonalności Worxy zupełnie ZA DARMO, dzięki czemu mogą przeznaczyć środki na rozwój ich biznesów.</div>
+                                                <a href="#" class="custom-btn">Zobacz więcej</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <div class="div post-item">
+                                            <div class="post-thumb">
+                                                <a href="#"><%= image_tag 'close-up-men-handshake.jpg', alt: 'Thumb' %></a>
+                                            </div>
+                                            <div class="content">
+                                                <h3 class="title"><a href="#">Twój głos się liczy!</a></h3>
+                                                <div class="excerpt">Głos naszych użytkowników jest na pierwszym miejscu. Dzięki systemowi opinii, będziemy mogli wysłuchać waszych uwag aby usprawnić Worxy według potrzeb użytkowników.</div>
+                                                <a href="#" class="custom-btn">Zobacz więcej</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="best-service-container-next">
+                                    <i class="fa fa-angle-left"></i>
+                                </div>
+                                <div class="best-service-container-prev">
+                                    <i class="fa fa-angle-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expertness-choose">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 col-12">
+                            <div class="exeprtness">
+                                <div class="section-title">
+                                    <h2 class="title"><span>Popularne zlecenia</span></h2>
+                                    <p class="title-desc">Pomożemy Ci znaleźć zlecenie</p>
+                                </div>
+                                <div class="expertness-area">
+                                    <div class="progress-item mb-4">
+                                        <div class="expert-name">Hydraulik</div>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"  style="width: 65%;">
+                                                <span>65%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="progress-item mb-4">
+                                        <div class="expert-name">Elektryk</div>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+                                                <span>80%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="progress-item mb-4">
+                                        <div class="expert-name">Złota rączka</div>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="width: 92%;">
+                                                <span>92%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="progress-item mb-4">
+                                        <div class="expert-name">Przeprowadzki</div>
+                                        <div class="progress">
+                                            <div class="progress-bar" role="progressbar" aria-valuenow="2" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
+                                                <span>70%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <div class="why-choose">
+                                <div class="section-title">
+                                    <h2 class="title"><span>Czemu WORXY?</span></h2>
+                                    <p class="title-desc">Liczy sie każdy szczegół!</p>
+                                </div>
+                                <div class="why-choose-area">
+                                    <div class="choose-item">
+                                        <div class="choose-icon">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                        <div class="choose-content">
+                                            <h3>Fachowcy na wyciągnięcie ręki</h3>
+                                            <p>Oferujemy dostęp do doświadczonych specjalistów w każdej dziedzinie.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="why-choose-area">
+                                    <div class="choose-item">
+                                        <div class="choose-icon">
+                                            <i class="fa fa-heartbeat"></i>
+                                        </div>
+                                        <div class="choose-content">
+                                            <h3>Zadbamy o Twój dom</h3>
+                                            <p>Otrzymasz szybką i skuteczną pomoc w każdej sytuacji.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="why-choose-area">
+                                    <div class="choose-item">
+                                        <div class="choose-icon">
+                                            <i class="fa fa-line-chart"></i>
+                                        </div>
+                                        <div class="choose-content">
+                                            <h3>Wysoka jakość usług</h3>
+                                            <p>Dążymy do pełnego zadowolenia naszych klientów poprzez indywidualne podejście.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="categories" class="bg-gray-50 pb-12">
+                <div class="container mx-auto">
+                    <div class="row">
+                        <div class="categories-inner">
+                            <div class="section-title text-center mb-5">
+                                <h2 class="text-3xl font-bold mb-2"><span>Popularne kategorie</span></h2>
+                                <p class="text-lg text-gray-600">Przejrzyj nasze kategorie, aby znaleźć usługi odpowiadające Twoim potrzebom</p>
+                            </div>
+                            <div class="row flex flex-wrap justify-center gap-4">
+                                <!-- Hydraulika Category -->
+                                <div class="col-xl-3 col-md-4 col-sm-6 col-12">
+                                    <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
+                                        <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
+                                            <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
+                                                <i class="fa fa-wrench text-xl text-worxyYellow mr-2"></i> Hydraulika
+                                            </div>
+                                            <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
+                                        </div>
+                                        <!-- Dropdown for Hydraulika Subcategories -->
+                                        <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
+                                            <ul class="text-left text-gray-700">
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/hydraulika/naprawa-rur" class="flex items-center">
+                                                        <i class="fa fa-wrench text-worxyYellow mr-2"></i> Naprawa rur
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/hydraulika/instalacja-kranow" class="flex items-center">
+                                                        <i class="fa fa-wrench text-worxyYellow mr-2"></i> Instalacja kranów
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/hydraulika/konserwacja-rur" class="flex items-center">
+                                                        <i class="fa fa-wrench text-worxyYellow mr-2"></i> Konserwacja rur
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/hydraulika/naprawa-toalet" class="flex items-center">
+                                                        <i class="fa fa-wrench text-worxyYellow mr-2"></i> Naprawa toalet
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Elektryka Category -->
+                                <div class="col-xl-3 col-md-4 col-sm-6 col-12">
+                                    <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
+                                        <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
+                                            <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
+                                                <i class="fa fa-bolt text-xl text-worxyYellow mr-2"></i> Elektryka
+                                            </div>
+                                            <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
+                                        </div>
+                                        <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
+                                            <ul class="text-left text-gray-700">
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/elektryka/montaz-gniadzek" class="flex items-center">
+                                                        <i class="fa fa-bolt text-worxyYellow mr-2"></i> Montaż gniazdek
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/elektryka/instalacja-oswietlenia" class="flex items-center">
+                                                        <i class="fa fa-bolt text-worxyYellow mr-2"></i> Instalacja oświetlenia
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/elektryka/naprawa-instalacji" class="flex items-center">
+                                                        <i class="fa fa-bolt text-worxyYellow mr-2"></i> Naprawa instalacji
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/elektryka/montaz-urzadzen" class="flex items-center">
+                                                        <i class="fa fa-bolt text-worxyYellow mr-2"></i> Montaż urządzeń
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Stolarka Category -->
+                                <div class="col-xl-3 col-md-4 col-sm-6 col-12">
+                                    <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
+                                        <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
+                                            <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
+                                                <i class="fa fa-hammer text-xl text-worxyYellow mr-2"></i> Stolarka
+                                            </div>
+                                            <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
+                                        </div>
+                                        <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
+                                            <ul class="text-left text-gray-700">
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/stolarka/montaz-drzwi" class="flex items-center">
+                                                        <i class="fa fa-hammer text-worxyYellow mr-2"></i> Montaż drzwi
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/stolarka/montaz-okien" class="flex items-center">
+                                                        <i class="fa fa-hammer text-worxyYellow mr-2"></i> Montaż okien
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/stolarka/naprawa-mebli" class="flex items-center">
+                                                        <i class="fa fa-hammer text-worxyYellow mr-2"></i> Naprawa mebli
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/stolarka/renowacja-mebli" class="flex items-center">
+                                                        <i class="fa fa-hammer text-worxyYellow mr-2"></i> Renowacja mebli
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sprzątanie Category -->
+                                <div class="col-xl-3 col-md-4 col-sm-6 col-12">
+                                    <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
+                                        <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
+                                            <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
+                                                <i class="fa fa-broom text-xl text-worxyYellow mr-2"></i> Sprzątanie
+                                            </div>
+                                            <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
+                                        </div>
+                                        <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
+                                            <ul class="text-left text-gray-700">
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/sprzatanie/odkurzanie" class="flex items-center">
+                                                        <i class="fa fa-broom text-worxyYellow mr-2"></i> Odkurzanie
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/sprzatanie/mycie-okien" class="flex items-center">
+                                                        <i class="fa fa-broom text-worxyYellow mr-2"></i> Mycie okien
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/sprzatanie/czyszczenie-dywanow" class="flex items-center">
+                                                        <i class="fa fa-broom text-worxyYellow mr-2"></i> Czyszczenie dywanów
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/sprzatanie/organizacja-przestrzeni" class="flex items-center">
+                                                        <i class="fa fa-broom text-worxyYellow mr-2"></i> Organizacja przestrzeni
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Ogrodnictwo Category -->
+                                <div class="col-xl-3 col-md-4 col-sm-6 col-12">
+                                    <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
+                                        <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
+                                            <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
+                                                <i class="fa fa-leaf text-xl text-worxyYellow mr-2"></i> Ogrodnictwo
+                                            </div>
+                                            <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
+                                        </div>
+                                        <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
+                                            <ul class="text-left text-gray-700">
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/ogrodnictwo/przycinanie-drzew" class="flex items-center">
+                                                        <i class="fa fa-leaf text-worxyYellow mr-2"></i> Przycinanie drzew
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/ogrodnictwo/sadzenie-roslin" class="flex items-center">
+                                                        <i class="fa fa-leaf text-worxyYellow mr-2"></i> Sadzenie roślin
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/ogrodnictwo/koszenie-trawnika" class="flex items-center">
+                                                        <i class="fa fa-leaf text-worxyYellow mr-2"></i> Koszenie trawnika
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/ogrodnictwo/utrzymanie-ogrodu" class="flex items-center">
+                                                        <i class="fa fa-leaf text-worxyYellow mr-2"></i> Utrzymanie ogrodu
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Malowanie Category -->
+                                <div class="col-xl-3 col-md-4 col-sm-6 col-12">
+                                    <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
+                                        <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
+                                            <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
+                                                <i class="fa fa-paint-roller text-xl text-worxyYellow mr-2"></i> Malowanie
+                                            </div>
+                                            <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
+                                        </div>
+                                        <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
+                                            <ul class="text-left text-gray-700">
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/malowanie/malowanie-scian" class="flex items-center">
+                                                        <i class="fa fa-paint-roller text-worxyYellow mr-2"></i> Malowanie ścian
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/malowanie/malowanie-sufitow" class="flex items-center">
+                                                        <i class="fa fa-paint-roller text-worxyYellow mr-2"></i> Malowanie sufitów
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/malowanie/malowanie-mebli" class="flex items-center">
+                                                        <i class="fa fa-paint-roller text-worxyYellow mr-2"></i> Malowanie mebli
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/malowanie/malowanie-drzwi" class="flex items-center">
+                                                        <i class="fa fa-paint-roller text-worxyYellow mr-2"></i> Malowanie drzwi
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Przeprowadzki Category -->
+                                <div class="col-xl-3 col-md-4 col-sm-6 col-12">
+                                    <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
+                                        <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
+                                            <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
+                                                <i class="fa fa-truck text-xl text-worxyYellow mr-2"></i> Przeprowadzki
+                                            </div>
+                                            <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
+                                        </div>
+                                        <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
+                                            <ul class="text-left text-gray-700">
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/przeprowadzki/pakowanie" class="flex items-center">
+                                                        <i class="fa fa-truck text-worxyYellow mr-2"></i> Pakowanie
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/przeprowadzki/transport" class="flex items-center">
+                                                        <i class="fa fa-truck text-worxyYellow mr-2"></i> Transport
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/przeprowadzki/rozpakowywanie" class="flex items-center">
+                                                        <i class="fa fa-truck text-worxyYellow mr-2"></i> Rozpakowywanie
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/przeprowadzki/montaz-mebli" class="flex items-center">
+                                                        <i class="fa fa-truck text-worxyYellow mr-2"></i> Montaż mebli
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Zwalczanie Szkodników Category -->
+                                <div class="col-xl-3 col-md-4 col-sm-6 col-12">
+                                    <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
+                                        <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
+                                            <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
+                                                <i class="fa fa-bug text-xl text-worxyYellow mr-2"></i> Zwalczanie Szkodników
+                                            </div>
+                                            <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
+                                        </div>
+                                        <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
+                                            <ul class="text-left text-gray-700">
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/zwalczanie-szkodnikow/dezynsekcja" class="flex items-center">
+                                                        <i class="fa fa-bug text-worxyYellow mr-2"></i> Dezynsekcja
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/zwalczanie-szkodnikow/dezynfekcja" class="flex items-center">
+                                                        <i class="fa fa-bug text-worxyYellow mr-2"></i> Dezynfekcja
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/zwalczanie-szkodnikow/deratyzacja" class="flex items-center">
+                                                        <i class="fa fa-bug text-worxyYellow mr-2"></i> Deratyzacja
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/zwalczanie-szkodnikow/usuwanie-gniazd" class="flex items-center">
+                                                        <i class="fa fa-bug text-worxyYellow mr-2"></i> Usuwanie gniazd
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Dekarstwo Category -->
+                                <div class="col-xl-3 col-md-4 col-sm-6 col-12">
+                                    <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
+                                        <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
+                                            <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
+                                                <i class="fa fa-home text-xl text-worxyYellow mr-2"></i> Dekarstwo
+                                            </div>
+                                            <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
+                                        </div>
+                                        <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
+                                            <ul class="text-left text-gray-700">
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/dekarstwo/montaz-dachowek" class="flex items-center">
+                                                        <i class="fa fa-home text-worxyYellow mr-2"></i> Montaż dachówek
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/dekarstwo/naprawa-dachu" class="flex items-center">
+                                                        <i class="fa fa-home text-worxyYellow mr-2"></i> Naprawa dachu
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/dekarstwo/izolacja-dachu" class="flex items-center">
+                                                        <i class="fa fa-home text-worxyYellow mr-2"></i> Izolacja dachu
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/dekarstwo/montaz-rzygaczy" class="flex items-center">
+                                                        <i class="fa fa-home text-worxyYellow mr-2"></i> Montaż rzygaczy
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Złota Rączka Category -->
+                                <div class="col-xl-3 col-md-4 col-sm-6 col-12">
+                                    <div x-data="{ open: false }" class="post-item text-center bg-white p-3 rounded-lg shadow-lg transform transition hover:scale-105">
+                                        <div @click="open = !open" class="post-thumb cursor-pointer flex justify-between items-center">
+                                            <div class="category-link flex items-center justify-center text-xl font-semibold text-gray-800">
+                                                <i class="fa fa-tools text-xl text-worxyYellow mr-2"></i> Złota Rączka
+                                            </div>
+                                            <i :class="open ? 'rotate-180' : ''" class="fa fa-chevron-down text-xl text-gray-500 transition-transform duration-200"></i>
+                                        </div>
+                                        <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" class="mt-2 bg-white rounded-lg shadow-lg" style="display: none;">
+                                            <ul class="text-left text-gray-700">
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/zlota-raczka/naprawa-domowa" class="flex items-center">
+                                                        <i class="fa fa-tools text-worxyYellow mr-2"></i> Naprawa domowa
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/zlota-raczka/montaz-mebli" class="flex items-center">
+                                                        <i class="fa fa-tools text-worxyYellow mr-2"></i> Montaż mebli
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/zlota-raczka/malowanie" class="flex items-center">
+                                                        <i class="fa fa-tools text-worxyYellow mr-2"></i> Malowanie
+                                                    </a>
+                                                </li>
+                                                <li class="px-4 py-2 hover:bg-gray-100">
+                                                    <a href="/posts/zlota-raczka/drobne-naprawy" class="flex items-center">
+                                                        <i class="fa fa-tools text-worxyYellow mr-2"></i> Drobne naprawy
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Add more categories if needed -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="testimonial-section">
+                <div class="overlay">
+                    <div class="container">
+                        <div class="row">
+                            <div class="our-client-say">
+                                <div class="section-title">
+                                    <h2 class="title"><span>Co o nas mówią?</span></h2>
+                                    <p class="title-desc">Nasze usługi pomogą Ci znaleźć klientów!</p>
+                                </div>
+                                <div class="flexslider">
+                                    <ul class="slides">
+                                        <li data-thumb="<%= asset_path 'piotr-janowski.jpg' %>">
+                                            <div class="testimonial-content">
+                                                <p class="description">Jako wykonawca, serwis Worxy jest dla mnie absolutnym strzałem w dziesiątkę. Platforma jest darmowa, co pozwala mi na swobodne szukanie klientów bez żadnych kosztów, co w innych serwisach bywa problematyczne.</p>
+                                                <h3 class="client-name">Piotr Janowski</h3>
+                                                <strong class="designation">Użytkownik Worxy</strong>
+                                            </div>
+                                        </li>
+                                        <li data-thumb="<%= asset_path 'dawid-szymaniuk.jpg' %>">
+                                            <div class="testimonial-content">
+                                                <p class="description">Aplikacja Worxy stawia użytkownika na pierwszym miejscu, zawsze słuchając jego potrzeb i opinii. Klient jest dla nich najważniejszy, co sprawia, że korzystanie z serwisu jest przyjemne i efektywne. Polecam!</p>
+                                                <h3 class="client-name">Dawid Szymaniuk</h3>
+                                                <strong class="designation">Użytkownik Worxy</strong>
+                                            </div>
+                                        </li>
+                                        <li data-thumb="<%= asset_path 'anna-kaminska.jpg' %>">
+                                            <div class="testimonial-content">
+                                                <p class="description">Polecam Worxy! Aplikacja posiada system opinii, który ostrzega użytkowników przed potencjalnymi oszustami. Dostępne są zarówno negatywne, jak i pozytywne opinie, co pozwala na świadome wybory zleceniodawców.</p>
+                                                <h3 class="client-name">Anna Kamińska</h3>
+                                                <strong class="designation">Użytkownik Worxy</strong>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="countdown">
+                <div class="container">
+                    <div class="row">
+                        <div class="cd-container">
+                            <div class="cd-container-inner">
+                                <div class="cd-item">
+                                    <span class="number-outer"><span class="number">128</span>+</span>
+                                    <span class="count-name">Fachowców</span>
+                                </div>
+                                <div class="cd-item">
+                                    <span class="number-outer"><span class="number">520</span>+</span>
+                                    <span class="count-name">Zadowolonych klientów</span>
+                                </div>
+                                <div class="cd-item">
+                                    <span class="number-outer"><span class="number">85</span>+</span>
+                                    <span class="count-name">Kategorii</span>
+                                </div>
+                                <div class="cd-item">
+                                    <span class="number-outer"><span class="number">2000</span>+</span>
+                                    <span class="count-name">Podkategorii</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pricing-table">
+                <div class="container">
+                    <div class="row">
+                        <div class="section-title">
+                            <h2 class="title"><span>Cennik</span></h2>
+                            <p class="title-desc">Worxy zadba o rozwój Twojej firmy!</p>
+                        </div>
+                        <div class="pricing-wrapper">
+                            <div class="row justify-content-center g-4">
+                                <div class="col-xl-4 col-md-6 col-12">
+                                    <div class="pricing-item">
+                                        <h3 class="pricing-title">Podstawowa</h3>
+                                        <div class="price">
+                                            <div class="currency"><span>$FREE</span></div>
+                                            <span class="month">Miesięcznie</span>
+                                        </div>
+                                        <ul>
+                                            <li>Tworzenie ogłoszeń</li>
+                                            <li>Mapa zleceń</li>
+                                            <li>System opinii</li>
+                                            <li>Kalendarz zleceń</li>
+                                            <li>Negocjacje cen</li>
+                                        </ul>
+                                        <a href="#" class="custom-btn">Dołącz</a>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-6 col-12">
+                                    <div class="pricing-item table-border">
+                                        <h3 class="pricing-title">Grupowa</h3>
+                                        <div class="price">
+                                            <div class="currency"><span>$FREE</span></div>
+                                            <span class="month">Miesięcznie</span>
+                                        </div>
+                                        <ul>
+                                            <li>Funkcje Sztucznej inteligencji</li>
+                                            <li>Prywatne wiadomości</li>
+                                            <li>Raporty zarobkowe</li>
+                                            <li>Wsparcie techniczne</li>
+                                            <li>System powiadomień</li>
+                                        </ul>
+                                        <a href="#" class="custom-btn">Dołącz</a>
+                                    </div>
+                                </div>
+                                <div class="col-xl-4 col-md-6 col-12">
+                                    <div class="pricing-item">
+                                        <h3 class="pricing-title">Zaawansowana</h3>
+                                        <div class="price">
+                                            <div class="currency"><span>$FREE</span></div>
+                                            <span class="month">Miesięcznie</span>
+                                        </div>
+                                        <ul>
+                                            <li>System nawigacji</li>
+                                            <li>Mapa zleceń</li>
+                                            <li>System opinii</li>
+                                            <li>Kalendarz zleceń</li>
+                                            <li>Negocjacje cen</li>
+                                        </ul>
+                                        <a href="#" class="custom-btn">Dołącz</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-news">
+                <div class="overlay">
+                    <div class="container">
+                        <div class="row">
+                            <div class="section-title">
+                                <h2 class="title"><span>Najnowsze Informacje</span></h2>
+                                <p class="title-desc">Bądź na bieżąco z nowościami Worxy</p>
+                            </div>
+                            <div class="news-area">
+                                <div class="row justify-content-center g-4">
+                                    <div class="col-xl-4 col-sm-6 col-12">
+                                        <div class="post-item">
+                                            <div class="post-thumb">
+                                                <a href="#"><%= image_tag 'ai-posts.jpg', alt: 'News thumb' %></a>
+                                                <div class="content">
+                                                    <h2 class="title"><a href="#">Nowe Usługi Dostępne</a></h2>
+                                                    <div class="meta">
+                                                        <span class="calendar"><i class="fa fa-calendar"></i> 02 Sty, 2022</span>
+                                                        <span>|</span>
+                                                        <a href="#"><i class="fa fa-comment-o"></i> 00 Komentarzy</a>
+                                                    </div>
+                                                    <div class="excerpt">Worxy rozszerza ofertę o nowe usługi, zapewniając jeszcze większy komfort i wygodę w zamawianiu usług domowych.</div>
+                                                    <a href="#" class="custom-btn">Załaduj więcej</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-sm-6 col-12">
+                                        <div class="post-item">
+                                            <div class="post-thumb">
+                                                <a href="#"><%= image_tag 'home-service-money.jpg', alt: 'News thumb' %></a>
+                                                <div class="content">
+                                                    <h2 class="title"><a href="#">Oszczędzaj z Worxy</a></h2>
+                                                    <div class="meta">
+                                                        <span class="calendar"><i class="fa fa-calendar"></i> 02 Sty, 2022</span>
+                                                        <span>|</span>
+                                                        <a href="#"><i class="fa fa-comment-o"></i> 00 Komentarzy</a>
+                                                    </div>
+                                                    <div class="excerpt">Dowiedz się, jak dzięki Worxy możesz zaoszczędzić na usługach domowych, korzystając z naszych specjalnych ofert.</div>
+                                                    <a href="#" class="custom-btn">Załaduj więcej</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-sm-6 col-12">
+                                        <div class="post-item">
+                                            <div class="post-thumb">
+                                                <a href="#"><%= image_tag 'close-up-men-handshake.jpg', alt: 'News thumb' %></a>
+                                                <div class="content">
+                                                    <h2 class="title"><a href="#">Zaufani Profesjonaliści</a></h2>
+                                                    <div class="meta">
+                                                        <span class="calendar"><i class="fa fa-calendar"></i> 02 Sty, 2022</span>
+                                                        <span>|</span>
+                                                        <a href="#"><i class="fa fa-comment-o"></i> 00 Komentarzy</a>
+                                                    </div>
+                                                    <div class="excerpt">Worxy współpracuje tylko z zaufanymi i sprawdzonymi profesjonalistami, aby zapewnić najwyższą jakość usług domowych.</div>
+                                                    <a href="#" class="custom-btn">Załaduj więcej</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <div id="client" class="hidden">
+            <div class="container">
+                <div class="row">
+                    <div class="client-area">
+                        <div class="client-slider-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="client-item">
+                                        <div class="client-item-inner">
+                                            <!--    <a href="#"><img src="images/home1/client3.jpg" alt="client"></a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="client-item">
+                                        <div class="client-item-inner">
+                                            <!--    <a href="#"><img src="images/home1/client3.jpg" alt="client"></a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="client-item">
+                                        <div class="client-item-inner">
+                                            <!--    <a href="#"><img src="images/home1/client3.jpg" alt="client"></a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="client-item">
+                                        <div class="client-item-inner">
+                                            <!--    <a href="#"><img src="images/home1/client3.jpg" alt="client"></a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="client-item">
+                                        <div class="client-item-inner">
+                                            <!--    <a href="#"><img src="images/home1/client3.jpg" alt="client"></a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="client-item">
+                                        <div class="client-item-inner">
+                                        <!--    <a href="#"><img src="images/home1/client3.jpg" alt="client"></a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <footer id="footer">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer-top-inner">
+                            <div class="news-letter">
+                                <div class="news-letter-inner">
+                                    <h3 class="title">Dołącz do naszego newslettera</h3>
+                                    <form action="#">
+                                        <input type="email" placeholder="Wpisz swój e-mail tutaj">
+                                        <button type="submit">Subskrybuj</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-middle">
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="row">
+                                <div class="widget about">
+                                    <h3 class="title">O Worxy</h3>
+                                    <div class="excerpt">Worxy to Twoje kompleksowe rozwiązanie do zamawiania usług domowych. Szybko, wygodnie i bezpiecznie rezerwuj usługi, których potrzebujesz.</div>
+                                    <address class="address">
+                                        <ul>
+                                            <li><span><i class="fa fa-envelope-o"></i></span> <a href="#">worxy.info@gmail.com</a></li>
+                                            <li><span><i class="fa fa-globe"></i></span> <a href="#">www.worxy.com</a></li>
+                                        </ul>
+                                    </address>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="row">
+                                <div class="widget w-plr-post">
+                                    <h3 class="title">Popularne posty</h3>
+                                    <ul class="small-post-list">
+                                        <li class="post-item">
+                                            <div class="post-thumb">
+                                                <a href="#"><%= image_tag 'close-up-men-handshake.jpg', alt: 'News thumb' %></a>
+                                            </div>
+                                            <div class="content">
+                                                <h4><a href="#">Jak znaleźć najlepszego hydraulika w okolicy.</a></h4>
+                                                <div class="meta">
+                                                    <span class="calendar"><i class="fa fa-calendar"></i> 02 stycznia 2022</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="post-item">
+                                            <div class="post-thumb">
+                                                <a href="#"><%= image_tag 'close-up-men-handshake.jpg', alt: 'News thumb' %></a>
+                                            </div>
+                                            <div class="content">
+                                                <h4><a href="#">Top 5 porad dotyczących konserwacji domu.</a></h4>
+                                                <div class="meta">
+                                                    <span class="calendar"><i class="fa fa-calendar"></i> 02 stycznia 2022</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="post-item">
+                                            <div class="post-thumb">
+                                                <a href="#"><%= image_tag 'close-up-men-handshake.jpg', alt: 'News thumb' %></a>
+                                            </div>
+                                            <div class="content">
+                                                <h4><a href="#">Jak przygotować dom na zimę.</a></h4>
+                                                <div class="meta">
+                                                    <span class="calendar"><i class="fa fa-calendar"></i> 02 stycznia 2022</span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="widget wtps">
+                                <h3 class="title">Najlepsze usługi</h3>
+                                <ul class="top-service">
+                                    <li><a href="#"><i class="fa fa-angle-right"></i>Zatkane odpływy</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i>Inspekcja kamerą</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i>Cofanie ścieków</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i>Naprawy hydrauliczne</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i>Zamarznięte rury</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i>Typowe naprawy</a></li>
+                                    <li><a href="#"><i class="fa fa-angle-right"></i>Bezwykopowe rury</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 col-12">
+                            <div class="row">
+                                <div class="footer-right">
+                                    <div class="footer-right-image">
+                                        <%= image_tag 'footer-big.png', alt: 'image' %></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+<div class="scroll-top">
+    <div class="scrollToTop">
+        <span><i class="fa fa-arrow-up"></i></span>
+    </div>
 </div>
+
+<!-- jquery and stylesheets include -->
+    <script type='text/javascript' src='js/plugins.js'></script>
+    <script type="text/javascript" src="javascripts/sleekslider.min.js"></script>
+    <script type="text/javascript" src="javascripts/app.js"></script>
+    <script type='text/javascript' src='js/functions.js'></script>
+
+
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdownMenu');
+        if (dropdown) {
+            dropdown.classList.toggle('hidden');
+        }
+    }
+
+    window.onclick = function(event) {
+        const dropdown = document.getElementById('dropdownMenu');
+        if (dropdown && !event.target.closest('#contact-container')) {
+            if (!dropdown.classList.contains('hidden')) {
+                dropdown.classList.add('hidden');
+            }
+        }
+    }
+</script>
