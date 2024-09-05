@@ -56,9 +56,16 @@
       </div>
 
       <div class="space-y-2 mt-16">
-        <p class="text-gray-600"><strong>Tytuł:</strong> <%= @notification.notifiable.title %></p>
-        <p class="text-gray-600"><strong>Opis:</strong> <%= @notification.notifiable.description %></p>
-        <p class="text-gray-600"><strong>Budżet:</strong> <%= number_to_currency(@notification.notifiable.price) %></p>
+        <% if @notification.notifiable.is_a?(Post) %>
+          <p class="text-gray-600"><strong>Tytuł:</strong> <%= @notification.notifiable.title %></p>
+          <p class="text-gray-600"><strong>Opis:</strong> <%= @notification.notifiable.description %></p>
+          <p class="text-gray-600"><strong>Budżet:</strong> <%= number_to_currency(@notification.notifiable.price) %></p>
+        <% elsif @notification.notifiable.is_a?(Booking) %>
+          <p class="text-gray-600"><strong>Status:</strong> <%= @notification.notifiable.status %></p>
+          <p class="text-gray-600"><strong>Data rozpoczęcia:</strong> <%= @notification.notifiable.start_date %></p>
+          <p class="text-gray-600"><strong>Data zakończenia:</strong> <%= @notification.notifiable.end_date %></p>
+          <p class="text-gray-600"><strong>Cena oferowana:</strong> <%= number_to_currency(@notification.notifiable.offered_price) %></p>
+        <% end %>
       </div>
     </div>
 
