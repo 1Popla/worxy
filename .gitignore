@@ -70,3 +70,4 @@ yarn-debug.log*
 /config/master.key
 /config/database.yml
 
+app/assets/builds/tailwind.css
