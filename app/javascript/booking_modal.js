@@ -16,15 +16,41 @@ document.addEventListener('turbo:load', function () {
         .then(response => response.json())
         .then(data => {
           modalContent.innerHTML = `
-            <h2 class="text-xl font-semibold mb-4">Szczegóły Rezerwacji</h2>
-            <p><strong>Tytuł Ogłoszenia:</strong> ${data.post.title}</p>
-            <p><strong>Status:</strong> ${data.status}</p>
-            <p><strong>Data Rozpoczęcia:</strong> ${new Date(data.start_date).toLocaleString()}</p>
-            <p><strong>Data Zakończenia:</strong> ${new Date(data.end_date).toLocaleString()}</p>
-            <p><strong>Opis:</strong> ${data.post.description}</p>
-            <p><strong>Budżet:</strong> ${data.post.price}</p>
-            <p><strong>Informacje Kontaktowe:</strong> ${data.post.contact_information}</p>
-            <p><strong>Zabookowane przez:</strong> ${data.user.email}</p>
+            <h2 class="text-2xl font-semibold text-center mb-6 border-b pb-4">Szczegóły Rezerwacji</h2>
+            <dl class="divide-y divide-gray-200 text-gray-700">
+              <div class="py-3 flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
+                <dt class="font-medium text-gray-900 sm:mr-4">Tytuł Ogłoszenia:</dt>
+                <dd class="mt-1 sm:mt-0">${data.post.title}</dd>
+              </div>
+              <div class="py-3 flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
+                <dt class="font-medium text-gray-900 sm:mr-4">Status:</dt>
+                <dd class="mt-1 sm:mt-0">${data.status}</dd>
+              </div>
+              <div class="py-3 flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
+                <dt class="font-medium text-gray-900 sm:mr-4">Data Rozpoczęcia:</dt>
+                <dd class="mt-1 sm:mt-0">${new Date(data.start_date).toLocaleString()}</dd>
+              </div>
+              <div class="py-3 flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
+                <dt class="font-medium text-gray-900 sm:mr-4">Data Zakończenia:</dt>
+                <dd class="mt-1 sm:mt-0">${new Date(data.end_date).toLocaleString()}</dd>
+              </div>
+              <div class="py-3 flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
+                <dt class="font-medium text-gray-900 sm:mr-4">Opis:</dt>
+                <dd class="mt-1 sm:mt-0 sm:max-w-sm">${data.post.description}</dd>
+              </div>
+              <div class="py-3 flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
+                <dt class="font-medium text-gray-900 sm:mr-4">Budżet:</dt>
+                <dd class="mt-1 sm:mt-0">${data.post.price}</dd>
+              </div>
+              <div class="py-3 flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
+                <dt class="font-medium text-gray-900 sm:mr-4">Informacje Kontaktowe:</dt>
+                <dd class="mt-1 sm:mt-0">${data.post.contact_information}</dd>
+              </div>
+              <div class="py-3 flex flex-col sm:flex-row sm:justify-between sm:items-baseline">
+                <dt class="font-medium text-gray-900 sm:mr-4">Zabookowane przez:</dt>
+                <dd class="mt-1 sm:mt-0">${data.user.email}</dd>
+              </div>
+            </dl>
           `;
 
           modal.classList.remove('hidden');
