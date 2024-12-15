@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Twoja oferta została zaakceptowana</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    .email-container {
+      max-width: 600px;
+      margin: 30px auto;
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .email-header {
+      background-color: #28a745;
+      color: #ffffff;
+      text-align: center;
+      padding: 20px;
+    }
+    .email-header h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .email-body {
+      padding: 20px 30px;
+      color: #333333;
+    }
+    .email-body p {
+      line-height: 1.6;
+      margin: 15px 0;
+      font-size: 16px;
+    }
+    .email-body p strong {
+      font-weight: bold;
+      color: #000000;
+    }
+    .cta-button-container {
+      text-align: center;
+      margin: 30px 0;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 15px 30px;
+      color: #ffffff;
+      background-color: #28a745;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 50px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+    .cta-button:hover {
+      background-color: #218838;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+    .email-footer {
+      background: #f9f9f9;
+      padding: 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #666666;
+    }
+    .email-footer p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="email-header">
+      <h1>Twoja oferta została zaakceptowana</h1>
+    </div>
+    <div class="email-body">
+      <p>Witaj <%= @recipient.first_name %>,</p>
+      <p>Z radością informujemy, że Twoja oferta dotycząca ogłoszenia "<strong><%= @notifiable.title %></strong>" została zaakceptowana!</p>
+      <p><strong>Proponowana cena:</strong> <%= number_to_currency(@notification.price_offer) %></p>
+      <p><strong>Data rozpoczęcia:</strong> <%= @notification.start_date_offer.present? ? I18n.l(@notification.start_date_offer, format: :long) : "nie określono" %></p>
+      <p>Odwiedź swoje konto, aby zobaczyć więcej szczegółów i skontaktować się z klientem.</p>
+      <div class="cta-button-container">
+        <a href="<%= notification_url(@notification) %>" class="cta-button">ZOBACZ SZCZEGÓŁY</a>
+      </div>
+    </div>
+    <div class="email-footer">
+      <p>Serdecznie pozdrawiamy,</p>
+      <p>Zespół Worxy</p>
+    </div>
+  </div>
+</body>
+</html>
