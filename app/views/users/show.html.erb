@@ -1,29 +1,37 @@
 <div class="flex-1 overflow-auto">
   <div class="container mx-auto p-6 bg-gray-100">
+    <div class="mb-4">
+      <h1 class="text-xl font-bold text-gray-800 flex items-center">
+        <span class="bg-blue-200 px-3 py-1 rounded-full flex items-center">
+          <i class="fas fa-user mr-2"></i>
+          Profil
+        </span>
+      </h1>
+    </div>
     <div class="flex flex-col md:flex-row justify-between items-start mb-4">
       <div class="flex flex-col flex-1 mr-4">
-        <h1 class="text-xl font-bold text-gray-800 flex items-center">
-          <span class="bg-blue-200 px-3 py-1 rounded-full flex items-center">
-            <i class="fas fa-user mr-2"></i>
-            Profil
-          </span>
-        </h1>
-        <div class="bg-white shadow rounded-lg p-4 mt-4 flex-1">
+        <div class="bg-white shadow rounded-lg p-4 flex flex-col" style="min-height: 300px;">
           <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
             <span class="bg-green-200 px-3 py-1 rounded-full flex items-center">
               <i class="fas fa-info-circle mr-2"></i>
               Opis użytkownika
             </span>
           </h2>
-          <p class="text-gray-500"><%= @user.description %></p>
+          <div class="flex-1">
+            <% if @user.description.present? %>
+              <p class="text-gray-500 break-words"><%= @user.description %></p>
+            <% else %>
+              <p class="text-gray-500 break-words">&nbsp;</p>
+            <% end %>
+          </div>
         </div>
       </div>
       <div class="flex flex-col items-start w-full md:w-1/3 mt-4 md:mt-0 relative">
-        <div class="bg-white shadow rounded-lg p-4 w-full relative">
-          <div class="flex justify-center relative group">
+        <div class="bg-white shadow rounded-lg p-4 w-full relative overflow-hidden flex flex-col h-full">
+          <div class="flex justify-center relative group mb-4">
             <% if @user.avatar.attached? %>
               <div class="relative w-24 h-24 cursor-pointer" id="user-profile-avatar-container">
-                <%= image_tag url_for(@user.avatar), class: 'w-24 h-24 rounded-full mb-4' %>
+                <%= image_tag url_for(@user.avatar), class: 'w-24 h-24 rounded-full mb-4 object-cover' %>
                 <% if @user == current_user %>
                   <div class="absolute inset-0 bg-black bg-opacity-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                     <i class="fas fa-camera text-white text-2xl"></i>
@@ -36,7 +44,7 @@
                 <div class="absolute inset-0 bg-black bg-opacity-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </div>
             <% end %>
-            <%= button_to 'Wyślij wiadomość', conversations_path(conversation: { recipient_id: @user.id }), method: :post, class: 'absolute top-0 right-0 bg-worxyYellow hover:bg-yellow-700 text-black font-bold py-1 px-2 rounded-full mb-2 md:mb-0 text-sm' %>
+            <%= button_to 'Wyślij wiadomość', conversations_path(conversation: { recipient_id: @user.id }), method: :post, class: 'absolute top-0 right-0 bg-worxyYellow hover:bg-yellow-700 text-black font-bold py-1 px-2 rounded-full text-sm' %>
           </div>
           <% if @user == current_user %>
             <div class="hidden">
@@ -46,32 +54,37 @@
               <% end %>
             </div>
           <% end %>
-          <div class="mb-4">
-            <p class="font-semibold text-gray-700">Imię: <%= @user.first_name %></p>
-          </div>
-          <div class="mb-4">
-            <p class="font-semibold text-gray-700">Email: <%= @user.email %></p>
-          </div>
-          <div class="mb-4">
-            <p class="font-semibold text-gray-700">Numer telefonu: <%= @user.phone_number %></p>
-          </div>
-          <div class="mb-4">
-            <p class="font-semibold text-gray-700">Specjalizacja: <%= @user.skills %></p>
-          </div>
-          <div class="mb-4">
-            <p class="font-semibold text-gray-700">Lokalizacja: <%= @user.location %></p>
-          </div>
-          <div class="mb-4">
-            <p class="font-semibold text-gray-700">Doświadczenie: <%= @user.experience %></p>
-          </div>
-          <div class="mb-4">
-            <p class="font-semibold text-gray-700">Rola: <%= human_enum_name('user.roles', @user.role) %></p>
-          </div>
-          <div class="mb-4">
-            <p class="font-semibold text-gray-700">Konto utworzone: <%= I18n.l(@user.created_at, format: :long) %></p>
-          </div>
-          <div class="mb-4">
-            <p class="font-semibold text-gray-700">Ostatnia aktualizacja: <%= I18n.l(@user.updated_at, format: :long) %></p>
+          <div class="flex-1 space-y-2">
+            <% if @user.first_name.present? %>
+              <p class="font-semibold text-gray-700">Imię: <span class="font-normal text-gray-800 break-words"><%= @user.first_name %></span></p>
+            <% end %>
+
+            <% if @user.email.present? %>
+              <p class="font-semibold text-gray-700">Email: <span class="font-normal text-gray-800 break-words"><%= @user.email %></span></p>
+            <% end %>
+
+            <% if @user.phone_number.present? %>
+              <p class="font-semibold text-gray-700">Numer telefonu: <span class="font-normal text-gray-800 break-words"><%= @user.phone_number %></span></p>
+            <% end %>
+
+            <% if @user.skills.present? %>
+              <p class="font-semibold text-gray-700">Specjalizacja: <span class="font-normal text-gray-800 break-words"><%= @user.skills %></span></p>
+            <% end %>
+
+            <% if @user.location.present? %>
+              <p class="font-semibold text-gray-700">Lokalizacja: <span class="font-normal text-gray-800 break-words"><%= @user.location %></span></p>
+            <% end %>
+
+            <% if @user.experience.present? %>
+              <p class="font-semibold text-gray-700">Doświadczenie: <span class="font-normal text-gray-800 break-words"><%= @user.experience %></span></p>
+            <% end %>
+
+            <% if @user.role.present? %>
+              <p class="font-semibold text-gray-700">Rola: <span class="font-normal text-gray-800 break-words"><%= human_enum_name('user.roles', @user.role) %></span></p>
+            <% end %>
+
+            <p class="font-semibold text-gray-700">Konto utworzone: <span class="font-normal text-gray-800 break-words"><%= I18n.l(@user.created_at, format: :long) %></span></p>
+            <p class="font-semibold text-gray-700">Ostatnia aktualizacja: <span class="font-normal text-gray-800 break-words"><%= I18n.l(@user.updated_at, format: :long) %></span></p>
           </div>
           <% if @user.average_rating %>
             <div id="user-average-rating" data-average-rating="<%= @user.average_rating %>" class="bg-yellow-100 shadow rounded-lg p-4 w-full text-center mt-4">
@@ -94,12 +107,13 @@
               </div>
             </div>
           <% end %>
-          <button id="open-portfolio" class="bg-green-300 hover:bg-green-500 text-gray-800 font-bold py-2 px-4 rounded mt-4 inline-block">Zobacz portfolio</button>
+          <button id="open-portfolio" class="bg-green-300 hover:bg-green-500 text-gray-800 font-bold py-2 px-4 rounded mt-4 inline-block w-full text-center">Zobacz portfolio</button>
         </div>
+
         <% if @user == current_user %>
-          <div class="flex flex-wrap space-x-2 mb-4 self-end mt-4">
-            <%= link_to 'Edytuj profil', edit_user_registration_path, class: 'bg-worxyYellow hover:bg-yellow-700  text-gray-800 font-bold py-2 px-4 rounded mb-2 md:mb-0' %>
-            <%= link_to 'Edytuj portfolio', new_user_portfolio_image_path(@user), class: 'bg-worxyYellow hover:bg-yellow-700  text-gray-800 font-bold py-2 px-4 rounded mb-2 md:mb-0' %>
+          <div class="flex flex-wrap space-x-2 mt-4 justify-end">
+            <%= link_to 'Edytuj profil', edit_user_registration_path, class: 'bg-worxyYellow hover:bg-yellow-700 text-gray-800 font-bold py-2 px-4 rounded' %>
+            <%= link_to 'Edytuj portfolio', new_user_portfolio_image_path(@user), class: 'bg-worxyYellow hover:bg-yellow-700 text-gray-800 font-bold py-2 px-4 rounded' %>
           </div>
         <% end %>
       </div>
@@ -118,8 +132,8 @@
         <% if current_user && @user.received_opinions.exists?(rater: current_user) %>
           <div>
             <h3 class="text-lg font-bold text-gray-800 mb-4">Twoja opinia:</h3>
+            <% opinion = @user.received_opinions.find_by(rater: current_user) %>
             <div class="mt-4 p-4 border rounded bg-gray-50">
-              <% opinion = @user.received_opinions.find_by(rater: current_user) %>
               <p class="font-semibold"><%= opinion.rater.first_name %> <%= opinion.rater.last_name %></p>
               <div class="flex">
                 <% (1..5).each do |star| %>
@@ -128,16 +142,18 @@
                   </svg>
                 <% end %>
               </div>
-              <p class="text-gray-600"><%= opinion.comment %></p>
+              <p class="text-gray-600 break-words"><%= opinion.comment %></p>
             </div>
           </div>
         <% else %>
-          <%= link_to 'Dodaj opinię', new_user_opinion_path(@user), class: 'bg-worxyYellow hover:bg-yellow-700  text-gray-800  font-bold py-2 px-4 rounded' if @user != current_user %>
+          <% if @user != current_user %>
+            <%= link_to 'Dodaj opinię', new_user_opinion_path(@user), class: 'bg-worxyYellow hover:bg-yellow-700 text-gray-800 font-bold py-2 px-4 rounded' %>
+          <% end %>
         <% end %>
         <h3 class="text-lg font-bold text-gray-800 mt-4">Pozostałe opinie:</h3>
         <% if @user.received_opinions.any? %>
           <% @user.received_opinions.each do |opinion| %>
-            <div class="mt-4 p-4 border rounded">
+            <div class="mt-4 p-4 border rounded bg-gray-50">
               <p class="font-semibold"><%= opinion.rater.first_name %> <%= opinion.rater.last_name %></p>
               <div class="flex">
                 <% (1..5).each do |star| %>
@@ -146,7 +162,7 @@
                   </svg>
                 <% end %>
               </div>
-              <p class="text-gray-600"><%= opinion.comment %></p>
+              <p class="text-gray-600 break-words"><%= opinion.comment %></p>
             </div>
           <% end %>
         <% else %>
@@ -169,7 +185,7 @@
           <p class="text-gray-500">Brak zdjęć w portfolio</p>
         <% end %>
       </div>
-      <button id="user-show-close-portfolio-bottom" class="mt-4 mx-auto bg-worxyYellow hover:bg-yellow-700  text-gray-800 font-bold py-2 px-4 rounded block">Zamknij</button>
+      <button id="user-show-close-portfolio-bottom" class="mt-4 mx-auto bg-worxyYellow hover:bg-yellow-700 text-gray-800 font-bold py-2 px-4 rounded block">Zamknij</button>
     </div>
   </div>
 
@@ -204,7 +220,7 @@
           </div>
         </div>
         <div class="mt-5 sm:mt-6">
-          <button type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-worxyYellow hover:bg-yellow-700  text-gray-800 font-bold sm:text-sm" id="close-modal-button">
+          <button type="button" class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-worxyYellow hover:bg-yellow-700 text-gray-800 font-bold sm:text-sm" id="close-modal-button">
             Zamknij
           </button>
         </div>
