@@ -68,3 +68,6 @@ yarn-debug.log*
 !/storage/.keep
 /public/uploads
 /config/master.key
+/config/database.yml
+
+app/assets/builds/tailwind.css

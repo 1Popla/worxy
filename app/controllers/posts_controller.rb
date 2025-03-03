@@ -101,7 +101,7 @@ class PostsController < ApplicationController
 
   def send_request
     if current_user.worker? || current_user.customer?
-      Notification.create(
+      notification = Notification.create(
         recipient: @post.user,
         actor: current_user,
         action: "sent you a request for",
@@ -110,11 +110,14 @@ class PostsController < ApplicationController
         price_offer: params[:price_offer],
         start_date_offer: params[:start_date_offer]
       )
+  
+      NotificationMailer.offer_notification(notification).deliver_later
+  
       flash[:request_notice] = "Oferta dotycząca zlecenia #{@post.title.titleize} wysłana."
     else
       flash[:request_alert] = "Nie masz uprawnień do wysyłania propozycji."
     end
-
+  
     redirect_to post_path(@post)
   end
 

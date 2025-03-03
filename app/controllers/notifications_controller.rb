@@ -14,7 +14,7 @@ class NotificationsController < ApplicationController
   def accept_request
     @notification = Notification.find(params[:id])
     notifiable = @notification.notifiable
-
+  
     if notifiable.is_a?(Post)
       post = notifiable
       booking = Booking.create(
@@ -33,7 +33,7 @@ class NotificationsController < ApplicationController
         end_date: (@notification.start_date_offer || booking.start_date) + 1.week
       )
     end
-
+  
     if booking.persisted?
       @notification.update(read_at: Time.zone.now, status: "accepted")
       Notification.create(
@@ -44,13 +44,17 @@ class NotificationsController < ApplicationController
         price_offer: @notification.price_offer,
         start_date_offer: @notification.start_date_offer
       )
+  
+      NotificationMailer.request_accepted(@notification).deliver_later
+  
       flash[:accept_notice] = "Oferta została zaakceptowana. Pomyślnie utworzono zlecenie."
     else
       flash[:accept_alert] = "Nie udało się utworzyć zlecenia."
     end
-
+  
     redirect_to notification_path(@notification)
   end
+  
 
   def reject_request
     @notification.update(read_at: Time.zone.now, status: "rejected")
@@ -62,6 +66,9 @@ class NotificationsController < ApplicationController
       price_offer: @notification.price_offer,
       start_date_offer: @notification.start_date_offer
     )
+  
+    NotificationMailer.request_rejected(@notification).deliver_later
+  
     flash[:reject_notice] = "Oferta odrzucona."
     redirect_to notification_path(@notification)
   end

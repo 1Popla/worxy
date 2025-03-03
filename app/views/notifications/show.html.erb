@@ -22,81 +22,132 @@
   <% end %>
 </div>
 
-<div class="container mx-auto px-4 py-8">
-  <div class="space-y-8">
-
-    <div class="bg-white shadow rounded-lg p-6">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">Szczegóły Użytkownika</h2>
-      <div class="space-y-2">
-        <p class="text-gray-600"><strong>Imię i Nazwisko:</strong> <%= @notification.actor.first_name %> <%= @notification.actor.last_name %></p>
-        <p class="text-gray-600"><strong>Email:</strong> <%= @notification.actor.email %></p>
-        <p class="text-gray-600"><strong>Profil:</strong> <%= link_to "Zobacz Profil", user_path(@notification.actor), class: 'text-blue-600 hover:text-blue-900', data: { turbo_frame: "_top" } %></p>
+<div class="container mx-auto px-4 py-8 space-y-8">
+  <div class="bg-white shadow rounded-lg p-6">
+    <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+      <span class="bg-blue-200 px-3 py-1 rounded-full flex items-center">
+        <i class="fas fa-user mr-2"></i>
+        Szczegóły Użytkownika
+      </span>
+    </h2>
+    <div class="space-y-6">
+      <div class="border-b pb-4 overflow-hidden">
+        <p class="text-gray-800 font-bold">Imię i Nazwisko:</p>
+        <p class="text-gray-600 ml-4 break-words"><%= @notification.actor.first_name %> <%= @notification.actor.last_name %></p>
+      </div>
+      <div class="border-b pb-4 overflow-hidden">
+        <p class="text-gray-800 font-bold">Email:</p>
+        <p class="text-gray-600 ml-4 break-words"><%= @notification.actor.email %></p>
+      </div>
+      <div class="overflow-hidden">
+        <p class="text-gray-800 font-bold">Profil:</p>
+        <p class="text-gray-600 ml-4 break-words"><%= link_to "Zobacz Profil", user_path(@notification.actor), class: 'text-blue-600 hover:text-blue-900', data: { turbo_frame: "_top" } %></p>
       </div>
     </div>
+  </div>
 
-    <div class="bg-white shadow rounded-lg p-6">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">Szczegóły Ogłoszenia</h2>
-
-      <div class="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
-        <% if @notification.notifiable.is_a?(Post) && @notification.notifiable.images.attached? %>
-          <div class="lg:w-1/2 h-64 lg:h-auto">
-            <h3 class="text-xl font-semibold text-gray-800 mb-2">Zdjęcie główne</h3>
-            <div class="shadow-lg rounded-lg h-full">
-              <%= image_tag @notification.notifiable.images.first.variant(resize_to_fill: [600, 400]).processed, class: "object-cover w-full h-full rounded-lg" %>
-            </div>
+  <div class="bg-white shadow rounded-lg p-6">
+    <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+      <span class="bg-yellow-200 px-3 py-1 rounded-full flex items-center">
+        <i class="fas fa-bullhorn mr-2"></i>
+        Szczegóły Ogłoszenia
+      </span>
+    </h2>
+    <div class="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
+      <% if @notification.notifiable.is_a?(Post) && @notification.notifiable.images.attached? %>
+        <div class="lg:w-1/2 h-64 lg:h-auto">
+          <h3 class="text-md font-bold text-gray-800 mb-2">Zdjęcie główne</h3>
+          <div class="shadow-lg rounded-lg h-full">
+            <%= image_tag @notification.notifiable.images.first.variant(resize_to_fill: [600, 400]).processed, class: "object-cover w-full h-full rounded-lg" %>
           </div>
-        <% end %>
+        </div>
+      <% end %>
 
-        <% if @notification.notifiable.is_a?(Post) %>
-          <div class="lg:w-1/2 h-64 lg:h-auto">
-            <h3 class="text-xl font-semibold text-gray-800 mb-2 mt-6 sm:mt-0">Lokalizacja Zlecenia</h3>
-            <div id="showMap" data-lat="<%= @notification.notifiable.latitude %>" data-lng="<%= @notification.notifiable.longitude %>" class="w-full h-full rounded-lg border"></div>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="space-y-2 mt-16">
-        <% if @notification.notifiable.is_a?(Post) %>
-          <p class="text-gray-600"><strong>Tytuł:</strong> <%= @notification.notifiable.title %></p>
-          <p class="text-gray-600"><strong>Opis:</strong> <%= @notification.notifiable.description %></p>
-          <p class="text-gray-600"><strong>Budżet:</strong> <%= number_to_currency(@notification.notifiable.price) %></p>
-        <% elsif @notification.notifiable.is_a?(Booking) %>
-          <p class="text-gray-600"><strong>Status:</strong> <%= @notification.notifiable.status %></p>
-          <p class="text-gray-600"><strong>Data rozpoczęcia:</strong> <%= @notification.notifiable.start_date %></p>
-          <p class="text-gray-600"><strong>Data zakończenia:</strong> <%= @notification.notifiable.end_date %></p>
-          <p class="text-gray-600"><strong>Cena oferowana:</strong> <%= number_to_currency(@notification.notifiable.offered_price) %></p>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="bg-white shadow rounded-lg p-6">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">Szczegóły Oferty</h2>
-      <div class="space-y-2">
-        <p class="text-gray-600"><strong>Proponowana Cena:</strong> <%= number_to_currency(@notification.price_offer) %></p>
-        <p class="text-gray-600"><strong>Proponowana Data Rozpoczęcia:</strong> <%= @notification.start_date_offer.present? ? I18n.l(@notification.start_date_offer, format: :long) : "Brak Danych" %></p>
-      </div>
-    </div>
-
-    <div class="bg-white shadow rounded-lg p-6">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">Wiadomość</h2>
-      <p class="text-gray-600"><%= @notification.message %></p>
-    </div>
-
-    <div class="bg-white shadow rounded-lg p-6 text-center">
-      <% if @notification.status == 'accepted' %>
-        <div class="text-green-600 font-bold">Ta oferta została zaakceptowana</div>
-      <% elsif @notification.status == 'rejected' %>
-        <div class="text-red-600 font-bold">Odrzuciłeś tą ofertę</div>
-      <% elsif @notification.status == 'pending' || @notification.status.blank? %>
-        <% if @notification.action == 'sent you a request for' || @notification.action == 'sent you a negotiation request' %>
-          <div class="flex justify-center space-x-4">
-            <%= button_to 'Akceptuj Ofertę', accept_request_notification_path(@notification), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded', data: { turbo_frame: "_top" } %>
-            <%= button_to 'Odrzuć Ofertę', reject_request_notification_path(@notification), method: :delete, data: { confirm: 'Jesteś pewien?', turbo_frame: "_top" }, class: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' %>
-          </div>
-        <% end %>
+      <% if @notification.notifiable.is_a?(Post) %>
+        <div class="lg:w-1/2 h-64 lg:h-auto">
+          <h3 class="text-md font-bold text-gray-800 mb-2 mt-6 lg:mt-0">Lokalizacja Zlecenia</h3>
+          <div id="showMap" data-lat="<%= @notification.notifiable.latitude %>" data-lng="<%= @notification.notifiable.longitude %>" class="w-full h-full rounded-lg border"></div>
+        </div>
       <% end %>
     </div>
 
+    <div class="space-y-6 mt-8">
+      <% if @notification.notifiable.is_a?(Post) %>
+        <div class="border-b pb-4 overflow-hidden">
+          <p class="text-gray-800 font-bold">Tytuł:</p>
+          <p class="text-gray-600 ml-4 break-words"><%= @notification.notifiable.title %></p>
+        </div>
+        <div class="border-b pb-4 overflow-hidden">
+          <p class="text-gray-800 font-bold">Opis:</p>
+          <p class="text-gray-600 ml-4 break-words"><%= @notification.notifiable.description %></p>
+        </div>
+        <div class="overflow-hidden">
+          <p class="text-gray-800 font-bold">Budżet:</p>
+          <p class="text-gray-600 ml-4"><%= number_to_currency(@notification.notifiable.price) %></p>
+        </div>
+      <% elsif @notification.notifiable.is_a?(Booking) %>
+        <div class="border-b pb-4 overflow-hidden">
+          <p class="text-gray-800 font-bold">Status:</p>
+          <p class="text-gray-600 ml-4 break-words"><%= @notification.notifiable.status %></p>
+        </div>
+        <div class="border-b pb-4 overflow-hidden">
+          <p class="text-gray-800 font-bold">Data rozpoczęcia:</p>
+          <p class="text-gray-600 ml-4 break-words"><%= @notification.notifiable.start_date %></p>
+        </div>
+        <div class="border-b pb-4 overflow-hidden">
+          <p class="text-gray-800 font-bold">Data zakończenia:</p>
+          <p class="text-gray-600 ml-4 break-words"><%= @notification.notifiable.end_date %></p>
+        </div>
+        <div class="overflow-hidden">
+          <p class="text-gray-800 font-bold">Cena oferowana:</p>
+          <p class="text-gray-600 ml-4"><%= number_to_currency(@notification.notifiable.offered_price) %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="bg-white shadow rounded-lg p-6">
+    <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+      <span class="bg-purple-200 px-3 py-1 rounded-full flex items-center">
+        <i class="fas fa-file-invoice mr-2"></i>
+        Szczegóły Oferty
+      </span>
+    </h2>
+    <div class="space-y-6">
+      <div class="border-b pb-4 overflow-hidden">
+        <p class="text-gray-800 font-bold">Proponowana Cena:</p>
+        <p class="text-gray-600 ml-4"><%= number_to_currency(@notification.price_offer) %></p>
+      </div>
+      <div class="overflow-hidden">
+        <p class="text-gray-800 font-bold">Proponowana Data Rozpoczęcia:</p>
+        <p class="text-gray-600 ml-4 break-words"><%= @notification.start_date_offer.present? ? I18n.l(@notification.start_date_offer, format: :long) : "Brak Danych" %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white shadow rounded-lg p-6">
+    <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+      <span class="bg-green-200 px-3 py-1 rounded-full flex items-center">
+        <i class="fas fa-envelope mr-2"></i>
+        Wiadomość
+      </span>
+    </h2>
+    <p class="text-gray-600 break-words overflow-hidden"><%= @notification.message %></p>
+  </div>
+
+  <div class="bg-white shadow rounded-lg p-6 text-center">
+    <% if @notification.status == 'accepted' %>
+      <div class="text-green-600 font-bold">Ta oferta została zaakceptowana</div>
+    <% elsif @notification.status == 'rejected' %>
+      <div class="text-red-600 font-bold">Odrzuciłeś tą ofertę</div>
+    <% elsif @notification.status == 'pending' || @notification.status.blank? %>
+      <% if @notification.action == 'sent you a request for' || @notification.action == 'sent you a negotiation request' %>
+        <div class="flex justify-center space-x-4">
+          <%= button_to 'Akceptuj Ofertę', accept_request_notification_path(@notification), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded', data: { turbo_frame: "_top" } %>
+          <%= button_to 'Odrzuć Ofertę', reject_request_notification_path(@notification), method: :delete, data: { confirm: 'Jesteś pewien?', turbo_frame: "_top" }, class: 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded' %>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>
 
