@@ -4,16 +4,32 @@
       <%= form_with url: posts_path, method: :get, local: true, class: "space-y-4 w-full" do |f| %>
         <div class="flex space-x-4">
           <div class="w-2/3">
-            <%= f.text_field :search, value: params[:search], placeholder: "Szukaj...", class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500", id: "categorySearch" %>
+            <%= f.text_field :search,
+                value: params[:search],
+                placeholder: t('post.index.search_placeholder'),
+                class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
+                id: "categorySearch"
+            %>
           </div>
           <div class="w-1/3">
-            <%= f.text_field :city, value: params[:city], placeholder: "Miasto", class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500", id: "citySearch" %>
+            <%= f.text_field :city,
+                value: params[:city],
+                placeholder: t('post.index.city_placeholder'),
+                class: "w-full p-4 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
+                id: "citySearch"
+            %>
           </div>
         </div>
+
         <div class="flex space-x-4">
           <div class="w-1/2 relative">
             <div class="relative">
-              <input type="text" placeholder="Kategorie..." class="p-2 border border-gray-300 rounded-lg shadow-sm w-full mb-2" id="categorySearchInput">
+              <input
+                type="text"
+                placeholder="<%= t('post.index.category_placeholder') %>"
+                class="p-2 border border-gray-300 rounded-lg shadow-sm w-full mb-2"
+                id="categorySearchInput"
+              >
               <div class="absolute z-10 bg-white border border-gray-300 rounded-lg shadow-sm w-full max-h-64 overflow-y-auto" id="categoryDropdown" style="display: none; list-style-type: none; z-index: 9999;">
                 <ul class="list-none p-0 m-0">
                   <% @categories.each do |category| %>
@@ -24,9 +40,15 @@
             </div>
             <%= f.hidden_field :category, id: "categorySelectHidden", value: params[:category] %>
           </div>
+
           <div class="w-1/2 relative">
             <div class="relative">
-              <input type="text" placeholder="Podkategorie..." class="p-2 border border-gray-300 rounded-lg shadow-sm w-full mb-2" id="subcategorySearchInput">
+              <input
+                type="text"
+                placeholder="<%= t('post.index.subcategory_placeholder') %>"
+                class="p-2 border border-gray-300 rounded-lg shadow-sm w-full mb-2"
+                id="subcategorySearchInput"
+              >
               <div class="absolute z-10 bg-white border border-gray-300 rounded-lg shadow-sm w-full max-h-64 overflow-y-auto" id="subcategoryDropdown" style="display: none; list-style-type: none; z-index: 9999;">
                 <ul class="list-none p-0 m-0">
                   <% @subcategories.each do |subcategory| %>
@@ -38,10 +60,12 @@
             <%= f.hidden_field :subcategory, id: "subcategorySelectHidden", value: params[:subcategory] %>
           </div>
         </div>
+
         <%= f.hidden_field :tab, value: params[:tab] %>
+
         <div class="flex space-x-4">
-          <%= f.submit 'Zastosuj', class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
-          <%= link_to 'Wyczyść', posts_path, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
+          <%= f.submit t('post.index.apply_button'), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+          <%= link_to t('post.index.clear_button'), posts_path, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
         </div>
       <% end %>
     </div>
@@ -49,10 +73,16 @@
     <div class="mb-6 border-b border-gray-200">
       <ul class="flex w-full">
         <li class="flex-1">
-          <%= link_to 'Oferty klientów', posts_path(tab: 'customer', category: params[:category], subcategory: params[:subcategory], search: params[:search]), class: "block text-center p-4 text-sm sm:text-base whitespace-nowrap #{params[:tab] == 'worker' ? 'bg-white text-black border shadow-md rounded-t-lg' : 'bg-white text-black border-b-4 border-worxyYellow shadow-lg rounded-t-lg'}" %>
+          <%= link_to t('post.index.customer_offers'),
+              posts_path(tab: 'customer', category: params[:category], subcategory: params[:subcategory], search: params[:search]),
+              class: "block text-center p-4 text-sm sm:text-base whitespace-nowrap #{params[:tab] == 'worker' ? 'bg-white text-black border shadow-md rounded-t-lg' : 'bg-white text-black border-b-4 border-worxyYellow shadow-lg rounded-t-lg'}"
+          %>
         </li>
         <li class="flex-1">
-          <%= link_to 'Oferty fachowców', posts_path(tab: 'worker', category: params[:category], subcategory: params[:subcategory], search: params[:search]), class: "block text-center p-4 text-sm sm:text-base whitespace-nowrap #{params[:tab] == 'worker' ? 'bg-white text-black border-b-4 border-worxyYellow shadow-lg rounded-t-lg' : 'bg-white text-black border shadow-md rounded-t-lg'}" %>
+          <%= link_to t('post.index.worker_offers'),
+              posts_path(tab: 'worker', category: params[:category], subcategory: params[:subcategory], search: params[:search]),
+              class: "block text-center p-4 text-sm sm:text-base whitespace-nowrap #{params[:tab] == 'worker' ? 'bg-white text-black border-b-4 border-worxyYellow shadow-lg rounded-t-lg' : 'bg-white text-black border shadow-md rounded-t-lg'}"
+          %>
         </li>
       </ul>
     </div>
@@ -62,15 +92,15 @@
     <% if params[:category].present? || params[:subcategory].present? || params[:search].present? %>
       <div class="mb-4">
         <p>
-          Wyniki wyszukiwania 
+          <%= t('post.index.search_results') %>
           <% if params[:search].present? %>
-            dla "<%= params[:search] %>"
+            <%= t('post.index.search_for') %> "<%= params[:search] %>"
           <% end %>
           <% if params[:category].present? %>
-            w kategorii <%= Category.find(params[:category]).name %>
+            <%= t('post.index.in_category') %> <%= Category.find(params[:category]).name %>
           <% end %>
           <% if params[:subcategory].present? %>
-            <%= " > " + Category.find(params[:subcategory]).name %>
+            <%= t('post.index.greater_symbol') + Category.find(params[:subcategory]).name %>
           <% end %>
         </p>
       </div>
@@ -84,7 +114,7 @@
         </div>
       <% else %>
         <div class="w-full text-center">
-          <p>Brak wyników wyszukiwania.</p>
+          <p><%= t('post.index.no_results') %></p>
         </div>
       <% end %>
     <% else %>
@@ -95,7 +125,7 @@
         </div>
       <% else %>
         <div class="w-full text-center">
-          <p>Brak wyników wyszukiwania.</p>
+          <p><%= t('post.index.no_results') %></p>
         </div>
       <% end %>
     <% end %>

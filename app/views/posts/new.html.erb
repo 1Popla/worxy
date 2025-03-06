@@ -3,22 +3,26 @@
     <%= form_with model: @post, id: dom_id(@post), local: true, html: { multipart: true } do |f| %>
       <% if @post.errors.any? %>
         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
-          <strong class="font-bold">Wystąpiły błędy:</strong>
+          <strong class="font-bold"><%= t('post.form.errors_occurred') %></strong>
           <ul class="list-disc list-inside">
+            <% @post.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
           </ul>
         </div>
       <% end %>
 
       <div class="grid grid-cols-1 gap-6 mb-6">
         <div>
-          <%= f.label :title, "Tytuł", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-          <%= f.text_field :title, placeholder: 'Tytuł', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          <%= f.label :title, t('post.form.title'), class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :title, placeholder: t('post.form.title_placeholder'), class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
           <% if @post.errors[:title].any? %>
             <div class="text-red-600 text-sm mt-1"><%= @post.errors[:title].join(", ") %></div>
           <% end %>
         </div>
+
         <div>
-          <%= f.label :images, "Zdjęcia", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.label :images, t('post.form.images'), class: 'block text-gray-700 text-sm font-bold mb-2' %>
           <div id="image-upload-gallery" class="flex flex-wrap gap-4">
             <% 6.times do |i| %>
               <div class="relative border-dashed border-2 border-gray-400 rounded-lg w-32 h-32 flex items-center justify-center overflow-hidden" id="upload-container-<%= i %>">
@@ -31,29 +35,35 @@
             <% end %>
           </div>
         </div>
+
         <div>
-          <%= f.label :description, "Opis", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-          <%= f.text_area :description, placeholder: 'Opis', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', rows: 20, data: { target: "posts.description" } %>
+          <%= f.label :description, t('post.form.description'), class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_area :description, placeholder: t('post.form.description_placeholder'), class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', rows: 20, data: { target: "posts.description" } %>
           <% if @post.errors[:description].any? %>
             <div class="text-red-600 text-sm mt-1"><%= @post.errors[:description].join(", ") %></div>
           <% end %>
-          <button type="button" id="generate-description" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Generuj opis przy użyciu AI</button>
-          <p id="generating-message" class="mt-2 text-blue-500 hidden" data-target="posts.generatingMessage">Generowanie opisu...</p>
+          <button type="button" id="generate-description" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            <%= t('post.form.generate_description') %>
+          </button>
+          <p id="generating-message" class="mt-2 text-blue-500 hidden" data-target="posts.generatingMessage">
+            <%= t('post.form.generating_message') %>
+          </p>
         </div>
       </div>
 
       <div class="grid grid-cols-2 gap-6 mb-6">
         <div>
-          <%= f.label :price, "Budżet", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-          <%= f.number_field :price, placeholder: 'Budżet', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', step: 0.01 %>
+          <%= f.label :price, t('post.form.price'), class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.number_field :price, placeholder: t('post.form.price_placeholder'), class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', step: 0.01 %>
           <% if @post.errors[:price].any? %>
             <div class="text-red-600 text-sm mt-1"><%= @post.errors[:price].join(", ") %></div>
           <% end %>
         </div>
+
         <div>
-          <%= f.label :category_id, "Kategoria", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.label :category_id, t('post.form.category'), class: 'block text-gray-700 text-sm font-bold mb-2' %>
           <div class="relative">
-            <%= f.text_field :category_search, placeholder: 'Kategorie...', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', id: 'categorySearchInput' %>
+            <%= f.text_field :category_search, placeholder: t('post.form.category_placeholder'), class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', id: 'categorySearchInput' %>
             <div class="absolute z-10 bg-white border border-gray-300 rounded-lg shadow-sm w-full max-h-64 overflow-y-auto" id="categoryDropdown" style="display: none; list-style-type: none; z-index: 9999;">
               <ul class="list-none p-0 m-0">
                 <% @categories.each do |category| %>
@@ -67,10 +77,11 @@
             <div class="text-red-600 text-sm mt-1"><%= @post.errors[:category_id].join(", ") %></div>
           <% end %>
         </div>
+
         <div>
-          <%= f.label :subcategory_id, "Podkategoria", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.label :subcategory_id, t('post.form.subcategory'), class: 'block text-gray-700 text-sm font-bold mb-2' %>
           <div class="relative">
-            <%= f.text_field :subcategory_search, placeholder: 'Podkategorie...', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', id: 'subcategorySearchInput' %>
+            <%= f.text_field :subcategory_search, placeholder: t('post.form.subcategory_placeholder'), class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', id: 'subcategorySearchInput' %>
             <div class="absolute z-10 bg-white border border-gray-300 rounded-lg shadow-sm w-full max-h-64 overflow-y-auto" id="subcategoryDropdown" style="display: none; list-style-type: none; z-index: 9999;">
               <ul class="list-none p-0 m-0">
                 <% if @post.category_id.present? %>
@@ -86,29 +97,43 @@
             <div class="text-red-600 text-sm mt-1"><%= @post.errors[:subcategory_id].join(", ") %></div>
           <% end %>
         </div>
+
         <div>
-          <%= f.label :availability, "Priorytet", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-          <%= f.select :availability, [['Brak', 'no_priority'], ['Wysoki', 'high_priority'], ['Średni', 'medium_priority'], ['Niski', 'low_uzgodnienia']], {}, { class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' } %>
+          <%= f.label :availability, t('post.form.availability'), class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.select :availability, [
+                [ t('post.form.no_priority'), 'no_priority' ],
+                [ t('post.form.high_priority'), 'high_priority' ],
+                [ t('post.form.medium_priority'), 'medium_priority' ],
+                [ t('post.form.low_priority'), 'low_uzgodnienia' ]
+              ],
+              {},
+              { class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' }
+          %>
         </div>
+
         <div>
-          <%= f.label :contact_information, "Kontakt", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-          <%= f.text_field :contact_information, placeholder: 'Numer telefonu', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          <%= f.label :contact_information, t('post.form.contact_information'), class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :contact_information, placeholder: t('post.form.contact_placeholder'), class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
         </div>
+
         <div>
-          <%= f.label :street, "Ulica", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-          <%= f.text_field :street, id: 'street', placeholder: 'Ulica', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          <%= f.label :street, t('post.form.street'), class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :street, id: 'street', placeholder: t('post.form.street_placeholder'), class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
         </div>
+
         <div>
-          <%= f.label :city, "Miasto", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-          <%= f.text_field :city, id: 'city', placeholder: 'Miasto', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          <%= f.label :city, t('post.form.city'), class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :city, id: 'city', placeholder: t('post.form.city_placeholder'), class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
         </div>
+
         <div>
-          <%= f.label :state, "Województwo", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-          <%= f.text_field :state, id: 'state', placeholder: 'Województwo', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          <%= f.label :state, t('post.form.state'), class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :state, id: 'state', placeholder: t('post.form.state_placeholder'), class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
         </div>
+
         <div>
-          <%= f.label :country, "Kraj", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-          <%= f.text_field :country, id: 'country', placeholder: 'Kraj', class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+          <%= f.label :country, t('post.form.country'), class: 'block text-gray-700 text-sm font-bold mb-2' %>
+          <%= f.text_field :country, id: 'country', placeholder: t('post.form.country_placeholder'), class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
         </div>
       </div>
 
@@ -120,12 +145,12 @@
       <div class="mb-6">
         <div class="flex items-center mb-4">
           <input id="map-click-checkbox" type="checkbox" class="mr-2 leading-tight">
-          <label for="map-click-checkbox" class="text-gray-700">Zaznacz aby uzupełnić adres klikając na mapę</label>
+          <label for="map-click-checkbox" class="text-gray-700"><%= t('post.form.fill_address_map') %></label>
         </div>
         <div id="map" data-lat="<%= @post.latitude %>" data-lng="<%= @post.longitude %>" class="w-full h-64 border rounded-lg"></div>
       </div>
 
-      <%= f.submit 'Zatwierdź', class: 'w-full bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline', data: { turbo: false }, id: 'posts-new-submit-button' %>
+      <%= f.submit t('post.form.submit_button'), class: 'w-full bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline', data: { turbo: false }, id: 'posts-new-submit-button' %>
     <% end %>
   </div>
 </div>
@@ -133,6 +158,6 @@
 <div id="posts-new-loading-modal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
   <div class="bg-white p-4 rounded-lg flex items-center">
     <div class="loader ease-linear rounded-full border-t-4 border-blue-500 h-12 w-12 animate-spin mr-4"></div>
-    <span>Dodawanie zlecenia...</span>
+    <span><%= t('post.form.adding_order') %></span>
   </div>
 </div>

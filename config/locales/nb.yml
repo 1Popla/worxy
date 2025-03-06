@@ -1,0 +1,415 @@
+nb:
+  messages:
+    index:
+      heading_html: "Samtale med %{user_name}"
+      message_placeholder: "Skriv meldingen din..."
+
+  conversations:
+    index:
+      start_conversation: "Start en ny samtale"
+      user_search_placeholder: "Søk etter en bruker..."
+      active_conversations: "Aktive samtaler"
+      no_messages: "Ingen meldinger"
+      select_conversation: "Velg en samtale for å se meldingene."
+
+  post:
+    show:
+      # Flash / general
+      request_notice_html: "%{message}"
+      request_alert_html: "%{message}"
+
+      # Post info
+      edit: "Rediger"
+      description: "Beskrivelse"
+      requestor: "Kunde"
+      send_message: "Send melding"
+
+      first_name: "Fornavn"
+      phone_number: "Telefonnummer"
+      login_to_see: "Logg inn for å se"
+
+      view_profile: "Se profil"
+      details: "Detaljer"
+      budget: "Budsjett"
+      category: "Kategori"
+      subcategory: "Underkategori"
+      priority: "Prioritet"
+      contact: "Kontakt"
+      address: "Adresse"
+      created_at: "Opprettet"
+      updated_at: "Sist oppdatert"
+      send_offer: "Send tilbud"
+      job_location: "Jobbplassering"
+
+      # Offer modal
+      message: "Melding"
+      message_placeholder: "Skriv meldingen din..."
+      proposed_price: "Foreslått pris"
+      price_placeholder: "Fyll inn foreslått pris..."
+      proposed_start_date: "Foreslått startdato"
+      start_date_placeholder: "Velg en startdato..."
+      cancel: "Avbryt"
+
+    card:
+      flame_icon_alt: "Flammeikon"
+      high_priority: "Høy prioritet"
+
+      category: "Kategori"
+      subcategory: "Underkategori"
+      budget: "Budsjett"
+      currency: " NOK"
+
+      created_at: "Opprettet"
+      open: "Åpen"
+
+    index:
+      search_placeholder: "Søk..."
+      city_placeholder: "By"
+      category_placeholder: "Kategorier..."
+      subcategory_placeholder: "Underkategorier..."
+
+      apply_button: "Bruk"
+      clear_button: "Nullstill"
+
+      customer_offers: "Tilbud fra kunde"
+      worker_offers: "Tilbud fra arbeidstaker"
+
+      search_results: "Søkeresultater"
+      search_for: "for"
+      in_category: "i kategori"
+      greater_symbol: " > "
+
+      no_results: "Ingen resultater funnet."
+
+    form:
+      errors_occurred: "Det oppsto feil:"
+      title: "Tittel"
+      title_placeholder: "Tittel"
+      images: "Bilder"
+      description: "Beskrivelse"
+      description_placeholder: "Beskrivelse"
+      generate_description: "Generer beskrivelse ved hjelp av AI"
+      generating_message: "Genererer beskrivelse..."
+      
+      price: "Budsjett"
+      price_placeholder: "Budsjett"
+      category: "Kategori"
+      category_placeholder: "Søk i kategorier..."
+      subcategory: "Underkategori"
+      subcategory_placeholder: "Søk i underkategorier..."
+      
+      availability: "Prioritet"
+      no_priority: "Ingen"
+      high_priority: "Høy"
+      medium_priority: "Middels"
+      low_priority: "Lav"
+      
+      contact_information: "Kontakt"
+      contact_placeholder: "Telefonnummer"
+      
+      street: "Gate"
+      street_placeholder: "Gate"
+      city: "By"
+      city_placeholder: "By"
+      state: "Fylke"
+      state_placeholder: "Fylke"
+      country: "Land"
+      country_placeholder: "Land"
+      
+      fill_address_map: "Huk av for å fylle inn adresse ved å klikke på kartet"
+      submit_button: "Send inn"
+      adding_order: "Legger til innlegg..."
+
+  dashboard:
+    messages_title: "Meldinger"
+    no_messages: "Ingen meldinger."
+    your_bookings_title: "Dine bestillinger"
+    no_bookings: "Ingen bestillinger."
+
+    notifications_title: "Varsler"
+    no_notifications: "Ingen varsler."
+    action_sent_request: "%{actor} sendte deg et tilbud"
+    action_request_accepted: "%{actor} aksepterte tilbudet ditt"
+    action_request_rejected: "%{actor} avslo tilbudet ditt"
+    action_sent_negotiation: "%{actor} sendte deg et forhandlingsforslag"
+    confirm_question: "Er du sikker?"
+    view_all_notifications: "Vis alle varsler"
+
+    reports_and_earnings: "Rapporter og Inntjening"
+    bookings_label: "Bestillinger"
+    this_month: "Denne måneden"
+    previous_month: "Forrige måned"
+    progress: "Fremgang"
+
+    earnings_label: "Inntjening"
+    total_earnings: "Total inntjening"
+    earnings_table: "Inntjeningsoversikt"
+
+    booking_name_column: "Bestillingsnavn"
+    created_at_column: "Opprettet"
+    earnings_column: "Inntjening"
+    edit_amount_column: "Rediger beløp"
+    include_column: "Inkluder"
+    no_reservations: "Ingen reservasjoner."
+
+    edit_earnings_title: "Rediger inntjening"
+    new_price_label: "Ny pris"
+    cancel_button: "Avbryt"
+    save_button: "Lagre"
+
+  sidebar:
+    main_title: "Hoved"
+    dashboard: "Dashbord"
+    new_post: "Nytt innlegg"
+    posts: "Innlegg"
+    user_posts: "Mine innlegg"
+
+    communication_title: "Kommunikasjon"
+    messages: "Meldinger"
+    my_notifications: "Mine varsler"
+
+    orders_title: "Bestillinger"
+    orders: "Bestillinger"
+    view_calendar: "Vis kalender"
+    job_map: "Jobbkart"
+
+    user_title: "Bruker"
+    user_profile: "Brukerprofil"
+    tutorial: "Veiledning"
+
+    log_out: "Logg ut"
+    confirm_logout: "Er du sikker?"
+
+    view_profile: "Se profil"
+
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%B %d, %Y"
+    day_names:
+      - Søndag
+      - Mandag
+      - Tirsdag
+      - Onsdag
+      - Torsdag
+      - Fredag
+      - Lørdag
+    abbr_day_names:
+      - Søn
+      - Man
+      - Tir
+      - Ons
+      - Tor
+      - Fre
+      - Lør
+    month_names:
+      - ~
+      - Januar
+      - Februar
+      - Mars
+      - April
+      - Mai
+      - Juni
+      - Juli
+      - August
+      - September
+      - Oktober
+      - November
+      - Desember
+    abbr_month_names:
+      - ~
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - Mai
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Okt
+      - Nov
+      - Des
+    order:
+      - :year
+      - :month
+      - :day
+
+  time:
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      short: "%d %b %H:%M"
+      long: "%B %d, %Y %H:%M"
+    am: "am"
+    pm: "pm"
+
+  activerecord:
+    attributes:
+      user:
+        current_password: "Nåværende passord"
+        email: "E-post"
+        password: "Passord"
+        password_confirmation: "Bekreft passord"
+      post:
+        title: "Tittel"
+        description: "Beskrivelse"
+        price: "Pris"
+        category_id: "Kategori"
+        subcategory_id: "Underkategori"
+        availability: "Tilgjengelighet"
+        contact_information: "Kontaktinformasjon"
+        street: "Gate"
+        city: "By"
+        state: "Fylke"
+        country: "Land"
+        latitude: "Breddegrad"
+        longitude: "Lengdegrad"
+
+    errors:
+      models:
+        user:
+          attributes:
+            current_password:
+              blank: "kan ikke være tom"
+            email:
+              taken: "er allerede tatt"
+          messages:
+            blank: "kan ikke være tom"
+            taken: "er allerede tatt"
+        post:
+          attributes:
+            title:
+              blank: "kan ikke være tom"
+            description:
+              blank: "kan ikke være tom"
+            price:
+              blank: "kan ikke være tom"
+            category_id:
+              blank: "kan ikke være tom"
+            subcategory_id:
+              blank: "kan ikke være tom"
+          messages:
+            blank: "kan ikke være tom"
+            taken: "er allerede tatt"
+            required: "er påkrevd"
+
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      inclusion: "er ikke inkludert i listen"
+      exclusion: "er reservert"
+      invalid: "er ugyldig"
+      confirmation: "stemmer ikke med bekreftelse"
+      accepted: "må aksepteres"
+      empty: "kan ikke være tom"
+      blank: "kan ikke være tom"
+      present: "må være tom"
+      too_long: "er for lang (maksimalt %{count} tegn)"
+      too_short: "er for kort (minimum %{count} tegn)"
+      wrong_length: "har feil lengde (bør være %{count} tegn)"
+      not_a_number: "er ikke et tall"
+      not_an_integer: "må være et heltall"
+      greater_than: "må være større enn %{count}"
+      greater_than_or_equal_to: "må være større enn eller lik %{count}"
+      equal_to: "må være lik %{count}"
+      less_than: "må være mindre enn %{count}"
+      less_than_or_equal_to: "må være mindre enn eller lik %{count}"
+      other_than: "må være noe annet enn %{count}"
+      odd: "må være oddetall"
+      even: "må være partall"
+      taken: "er allerede tatt"
+      record_invalid: "Validering feilet: %{errors}"
+      content_type_invalid: "har ugyldig innholdstype"
+      size_less_than: "må være mindre enn %{size}"
+    template:
+      header:
+        one: "Kunne ikke lagre %{model} på grunn av 1 feil"
+        other: "Kunne ikke lagre %{model} på grunn av %{count} feil"
+      body:
+        one: "Det oppsto 1 feil:"
+        other: "Det oppsto %{count} feil:"
+
+  devise:
+    confirmations:
+      confirmed: "E-postadressen din er bekreftet."
+      send_instructions: "Du vil motta en e-post med instruksjoner for å bekrefte e-postadressen din i løpet av noen få minutter."
+      send_paranoid_instructions: "Hvis e-postadressen din finnes i databasen vår, vil du motta en e-post med instruksjoner for å bekrefte e-postadressen din i løpet av noen få minutter."
+    failure:
+      already_authenticated: "Du er allerede innlogget."
+      inactive: "Kontoen din er ikke aktivert ennå."
+      invalid: "Ugyldig %{authentication_keys} eller passord."
+      locked: "Kontoen din er låst."
+      last_attempt: "Du har ett forsøk igjen før kontoen din blir låst."
+      not_found_in_database: "Ugyldig %{authentication_keys} eller passord."
+      timeout: "Økten din er utløpt. Vennligst logg inn på nytt."
+      unauthenticated: "Du må logge inn eller registrere deg før du kan fortsette."
+      unconfirmed: "Du må bekrefte e-postadressen din før du kan fortsette."
+    mailer:
+      confirmation_instructions:
+        subject: "Instruksjoner for e-postbekreftelse"
+      reset_password_instructions:
+        subject: "Instruksjoner for tilbakestilling av passord"
+      unlock_instructions:
+        subject: "Instruksjoner for opplåsing"
+      email_changed:
+        subject: "E-postadresse endret"
+      password_change:
+        subject: "Passord endret"
+    omniauth_callbacks:
+      failure: "Kunne ikke autentisere deg fra %{kind} fordi \"%{reason}\"."
+      success: "Autentisering fra %{kind}-konto var vellykket."
+    passwords:
+      no_token: "Du kan ikke gå inn på denne siden uten å komme via en lenke for tilbakestilling av passord. Kontroller at du brukte den fullstendige URL-en i e-posten du mottok."
+      send_instructions: "Du vil motta en e-post med instruksjoner om hvordan du tilbakestiller passordet ditt om noen få minutter."
+      send_paranoid_instructions: "Hvis e-postadressen din finnes i databasen vår, vil du motta en lenke for passordgjenoppretting til e-posten din i løpet av noen få minutter."
+      updated: "Passordet ditt er endret. Du er nå innlogget."
+      updated_not_active: "Passordet ditt er endret."
+    registrations:
+      destroyed: "Ha det bra! Kontoen din er slettet. Vi håper å se deg igjen snart."
+      signed_up: "Velkommen! Du har registrert deg."
+      signed_up_but_inactive: "Du har registrert deg, men kontoen din er ikke aktivert ennå."
+      signed_up_but_locked: "Du har registrert deg, men kontoen din er låst."
+      signed_up_but_unconfirmed: "En melding med en bekreftelseslenke er sendt til e-postadressen din. Vennligst klikk på lenken for å aktivere kontoen din."
+      update_needs_confirmation: "Kontoen din ble oppdatert, men vi må bekrefte den nye e-postadressen din. Sjekk e-posten din og klikk bekreftelseslenken."
+      updated: "Kontoen din er oppdatert."
+      updated_but_not_signed_in: "Kontoen din er oppdatert, men siden du endret passordet, må du logge inn på nytt."
+    sessions:
+      signed_in: "Du har logget inn."
+      signed_out: "Du har logget ut."
+      already_signed_out: "Du er allerede utlogget."
+    unlocks:
+      send_instructions: "Du vil motta en e-post med instruksjoner om hvordan du låser opp kontoen din i løpet av noen få minutter."
+      send_paranoid_instructions: "Hvis kontoen din finnes, vil du motta en e-post med instruksjoner for opplåsing i løpet av noen få minutter."
+      unlocked: "Kontoen din er låst opp. Vennligst logg inn."
+
+  errors:
+    messages:
+      already_confirmed: "var allerede bekreftet, prøv å logge inn"
+      confirmation_period_expired: "må bekreftes innen %{period}, vennligst be om en ny"
+      expired: "er utløpt, vennligst be om en ny"
+      not_found: "ikke funnet"
+      not_locked: "var ikke låst"
+      not_saved:
+        one: "1 feil forhindret denne %{resource} fra å bli lagret:"
+        other: "%{count} feil forhindret denne %{resource} fra å bli lagret:"
+      required: "er påkrevd"
+
+  number:
+    currency:
+      format:
+        format: "%n %u"
+        unit: "NOK"
+        separator: "."
+        delimiter: ","
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: false
+
+  views:
+    pagination:
+      first: "Første"
+      last: "Siste"
+      previous: "Forrige"
+      next: "Neste"
+      truncate: "..."
