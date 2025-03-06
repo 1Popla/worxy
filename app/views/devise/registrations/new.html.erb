@@ -5,8 +5,9 @@
         <div class="w-full flex-1 mt-6">
           <div class="my-8 border-b text-center">
             <div
-              class="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
-              Zarejestruj się za pomocą e-maila
+              class="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2"
+            >
+              <%= t('devise.registrations.new.register_via_email') %>
             </div>
           </div>
 
@@ -25,10 +26,20 @@
           <% end %>
 
           <div class="mx-auto max-w-xs">
-            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: true }, html: { class: 'w-full max-w-xs' }) do |f| %>
+            <%= form_for(
+                  resource,
+                  as: resource_name,
+                  url: registration_path(resource_name),
+                  data: { turbo: true },
+                  html: { class: 'w-full max-w-xs' }
+              ) do |f|
+            %>
               <div class="mb-4">
-                <h2 class="text-2xl font-bold text-center text-gray-800">Rejestracja</h2>
+                <h2 class="text-2xl font-bold text-center text-gray-800">
+                  <%= t('devise.registrations.new.register_header') %>
+                </h2>
               </div>
+
               <% if resource.errors.any? %>
                 <div class="mb-4 text-red-500">
                   <ul>
@@ -38,55 +49,129 @@
                   </ul>
                 </div>
               <% end %>
+
+              <!-- First & Last Name Fields -->
               <div class="mb-4 flex space-x-2">
                 <div class="w-1/2">
-                  <%= f.label :first_name, "Imię", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-                  <%= f.text_field :first_name, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+                  <%= f.label :first_name,
+                      t('devise.registrations.new.fields.first_name'),
+                      class: 'block text-gray-700 text-sm font-bold mb-2'
+                  %>
+                  <%= f.text_field :first_name,
+                      class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                  %>
                 </div>
                 <div class="w-1/2">
-                  <%= f.label :last_name, "Nazwisko", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-                  <%= f.text_field :last_name, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+                  <%= f.label :last_name,
+                      t('devise.registrations.new.fields.last_name'),
+                      class: 'block text-gray-700 text-sm font-bold mb-2'
+                  %>
+                  <%= f.text_field :last_name,
+                      class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                  %>
                 </div>
               </div>
+
+              <!-- Email & Role Fields -->
               <div class="mb-4 flex space-x-2">
                 <div class="w-1/2">
-                  <%= f.label :email, "Email", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-                  <%= f.email_field :email, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+                  <%= f.label :email,
+                      t('devise.registrations.new.fields.email'),
+                      class: 'block text-gray-700 text-sm font-bold mb-2'
+                  %>
+                  <%= f.email_field :email,
+                      class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                  %>
                 </div>
                 <div class="w-1/2">
-                  <%= f.label :role, "Rola", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-                  <%= f.select :role, [['Klient', 'customer'], ['Fachowiec', 'worker']], {}, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' %>
+                  <%= f.label :role,
+                      t('devise.registrations.new.fields.role'),
+                      class: 'block text-gray-700 text-sm font-bold mb-2'
+                  %>
+                  <%= f.select :role,
+                      [
+                        [t('devise.registrations.new.roles.customer'), 'customer'],
+                        [t('devise.registrations.new.roles.worker'), 'worker']
+                      ],
+                      {},
+                      class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                  %>
                 </div>
               </div>
+
+              <!-- Phone Number -->
               <div class="mb-4">
-                <%= f.label :phone_number, "Numer telefonu", class: 'block text-gray-700 text-sm font-bold mb-2' %>
+                <%= f.label :phone_number,
+                    t('devise.registrations.new.fields.phone_number'),
+                    class: 'block text-gray-700 text-sm font-bold mb-2'
+                %>
                 <div class="flex">
-                  <%= f.select :country_code, options_from_collection_for_select(CountryCode.all, 'code', 'display_name', selected: '+48'), {}, class: 'shadow appearance-none border rounded-l w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', data: { action: "change->country-code#updatePhoneNumber" } %>
-                  <%= f.text_field :phone_number, class: 'shadow appearance-none border rounded-r w-2/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline', data: { target: "country-code.phoneNumber" }, placeholder: '+48' %>
+                  <%= f.select :country_code,
+                      options_from_collection_for_select(CountryCode.all, 'code', 'display_name', selected: '+48'),
+                      {},
+                      class: 'shadow appearance-none border rounded-l w-1/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+                      data: { action: "change->country-code#updatePhoneNumber" }
+                  %>
+                  <%= f.text_field :phone_number,
+                      class: 'shadow appearance-none border rounded-r w-2/3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline',
+                      data: { target: "country-code.phoneNumber" },
+                      placeholder: '+48'
+                  %>
                 </div>
               </div>
+
+              <!-- Password & Password Confirmation -->
               <div class="mb-4 flex space-x-2">
                 <div class="w-1/2">
-                  <%= f.label :password, "Hasło", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-                  <%= f.password_field :password, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline', placeholder: 'Hasło' %>
+                  <%= f.label :password,
+                      t('devise.registrations.new.fields.password'),
+                      class: 'block text-gray-700 text-sm font-bold mb-2'
+                  %>
+                  <%= f.password_field :password,
+                      class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline',
+                      placeholder: t('devise.registrations.new.fields.password_placeholder')
+                  %>
                 </div>
                 <div class="w-1/2">
-                  <%= f.label :password_confirmation, "Potwierdź hasło", class: 'block text-gray-700 text-sm font-bold mb-2' %>
-                  <%= f.password_field :password_confirmation, class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline', placeholder: 'Powtórz hasło' %>
+                  <%= f.label :password_confirmation,
+                      t('devise.registrations.new.fields.password_confirmation'),
+                      class: 'block text-gray-700 text-sm font-bold mb-2'
+                  %>
+                  <%= f.password_field :password_confirmation,
+                      class: 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline',
+                      placeholder: t('devise.registrations.new.fields.password_confirmation_placeholder')
+                  %>
                 </div>
               </div>
+
+              <!-- Submit Button -->
               <div class="flex items-center justify-between">
-                <%= f.submit 'Zarejestruj się', data: { turbo: true }, class: 'bg-worxyYellow hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' %>
+                <%= f.submit t('devise.registrations.new.register_button'),
+                    data: { turbo: true },
+                    class: 'bg-worxyYellow hover:bg-yellow-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                %>
               </div>
             <% end %>
-              <p class="text-center text-gray-500 text-xs mt-4">©2024 Worxy. Wszelkie prawa zastrzeżone.</p>
-              <p class="text-center text-gray-500 text-xs mt-6">Posiadasz już konto?</p>
-              <%= render "devise/shared/links" %>
+
+            <p class="text-center text-gray-500 text-xs mt-4">
+              <%= t('devise.registrations.new.copyright') %>
+            </p>
+
+            <p class="text-center text-gray-500 text-xs mt-6">
+              <%= t('devise.registrations.new.have_account') %>
+            </p>
+
+            <%= render "devise/shared/links" %>
           </div>
         </div>
       </div>
     </div>
-    <div class="w-full lg:flex-1 text-center hidden lg:flex" style="background-image: url('<%= asset_path 'register-panel-background.jpg' %>'); background-size: cover; background-position: center;">
+
+    <!-- Background image (desktop only) -->
+    <div
+      class="w-full lg:flex-1 text-center hidden lg:flex"
+      style="background-image: url('<%= asset_path 'register-panel-background.jpg' %>'); background-size: cover; background-position: center;"
+    >
     </div>
   </div>
 </div>

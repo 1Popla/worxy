@@ -6,91 +6,114 @@
       </div>
       <hr class="mb-6 border-gray-300">
 
-      <h2 class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">Główne</h2>
+        <div class="flex flex-col items-start space-y-2 mb-6">
+          <span class="text-sm font-medium text-gray-700"><%= t('select_language') %></span>
+          <div class="flex items-center space-x-4">
+            <%= link_to url_for(locale: :en), class: "hover:opacity-80" do %>
+              <%= image_tag("https://flagicons.lipis.dev/flags/4x3/gb.svg", alt: "English", class: "w-6 h-6") %>
+            <% end %>
+            <%= link_to url_for(locale: :nb), class: "hover:opacity-80" do %>
+              <%= image_tag("https://flagicons.lipis.dev/flags/4x3/no.svg", alt: "Norsk", class: "w-6 h-6") %>
+            <% end %>
+          </div>
+        </div>
+
+      <h2 class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">
+        <%= t('sidebar.main_title') %>
+      </h2>
       <ul class="space-y-2 mb-6">
         <li>
           <%= link_to dashboard_index_path, id: 'dashboard-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
             <i class="fas fa-tachometer-alt mr-2 text-gray-700"></i>
-            Dashboard
+            <%= t('sidebar.dashboard') %>
           <% end %>
         </li>
         <li>
           <%= link_to new_post_path, id: 'new-post-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
             <i class="fas fa-plus mr-2 text-gray-700"></i>
-            Nowe ogłoszenie
+            <%= t('sidebar.new_post') %>
           <% end %>
         </li>
         <li>
           <%= link_to posts_path, id: 'posts-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
             <i class="fas fa-list mr-2 text-gray-700"></i>
-            Ogłoszenia
+            <%= t('sidebar.posts') %>
           <% end %>
         </li>
         <li>
           <%= link_to user_posts_posts_path, id: 'user-posts-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
             <i class="fas fa-user mr-2 text-gray-700"></i>
-            Moje Ogłoszenia
+            <%= t('sidebar.user_posts') %>
           <% end %>
         </li>
       </ul>
 
-      <h2 class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">Komunikacja</h2>
+      <h2 class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">
+        <%= t('sidebar.communication_title') %>
+      </h2>
       <ul class="space-y-2 mb-6">
         <li>
           <%= link_to conversations_path, id: 'conversations-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
             <i class="fas fa-comments mr-2 text-gray-700"></i>
-            Wiadomości
+            <%= t('sidebar.messages') %>
           <% end %>
         </li>
         <li class="relative">
           <%= link_to notifications_path, id: 'notifications-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700 notification-bell' do %>
             <i class="fas fa-bell mr-2 text-gray-700"></i>
-            Moje Powiadomienia
+            <%= t('sidebar.my_notifications') %>
             <span id="notification-count" class="absolute top-0 right-0 mt-1 mr-2 h-5 w-5 text-xs text-black bg-worxyYellow rounded-full flex items-center justify-center hidden"></span>
           <% end %>
         </li>
       </ul>
 
-      <h2 class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">Zlecenia</h2>
+      <h2 class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">
+        <%= t('sidebar.orders_title') %>
+      </h2>
       <ul class="space-y-2 mb-6">
         <li>
           <%= link_to bookings_path, id: 'bookings-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
             <i class="fas fa-briefcase mr-2 text-gray-700"></i>
-            Zlecenia
+            <%= t('sidebar.orders') %>
           <% end %>
         </li>
         <li>
           <%= link_to calendar_bookings_path, id: 'calendar-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
             <i class="fas fa-calendar-alt mr-2 text-gray-700"></i>
-            Zobacz Kalendarz
+            <%= t('sidebar.view_calendar') %>
           <% end %>
         </li>
         <li>
           <%= link_to dashboard_map_path, id: 'map-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
             <i class="fas fa-map mr-2 text-gray-700"></i>
-            Mapa Zleceń
+            <%= t('sidebar.job_map') %>
           <% end %>
         </li>
       </ul>
 
-      <h2 class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">Użytkownik</h2>
+      <h2 class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-2">
+        <%= t('sidebar.user_title') %>
+      </h2>
       <ul class="space-y-2">
         <li>
           <%= link_to user_path(current_user), id: 'profile-link', data: { turbo: true }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700' do %>
             <i class="fas fa-user-circle mr-2 text-gray-700"></i>
-            Profil Użytkownika
+            <%= t('sidebar.user_profile') %>
           <% end %>
         </li>
         <li>
           <button id="tutorial-button" class="flex items-center block p-2 rounded hover:bg-gray-200 text-gray-700">
             <i class="fas fa-book mr-2 text-gray-700"></i>
-            Poradnik
+            <%= t('sidebar.tutorial') %>
           </button>
         </li>
         <li>
-          <%= link_to destroy_user_session_path, method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-red-600' do %>
+          <%= link_to destroy_user_session_path,
+                      method: :delete,
+                      data: { turbo: false, confirm: t('sidebar.confirm_logout') },
+                      class: 'flex items-center block p-2 rounded hover:bg-gray-200 text-red-600' do %>
             <i class="fas fa-sign-out-alt mr-2 text-gray-700"></i>
-            Wyloguj
+            <%= t('sidebar.log_out') %>
           <% end %>
         </li>
       </ul>
@@ -107,8 +130,12 @@
         <% end %>
 
         <div>
-          <p class="text-gray-800 font-semibold"><%= current_user.first_name %> <%= current_user.last_name %></p>
-          <p class="text-gray-500 text-sm">Wyświetl profil</p>
+          <p class="text-gray-800 font-semibold">
+            <%= current_user.first_name %> <%= current_user.last_name %>
+          </p>
+          <p class="text-gray-500 text-sm">
+            <%= t('sidebar.view_profile') %>
+          </p>
         </div>
       <% end %>
     </div>
@@ -120,7 +147,7 @@
     <%= link_to posts_path, id: 'mobile-posts-link', data: { turbo: true }, class: 'flex flex-col items-center justify-center p-2 mx-2' do %>
       <i class="fas fa-list text-gray-700 text-2xl"></i>
     <% end %>
-    <%= link_to dashboard_map_path, id: 'mobile-calendar-link', data: { turbo: true }, class: 'flex flex-col items-center justify-center p-2 mx-2 -ml-12' do %> <!-- Adjust margin with Tailwind -->
+    <%= link_to dashboard_map_path, id: 'mobile-calendar-link', data: { turbo: true }, class: 'flex flex-col items-center justify-center p-2 mx-2 -ml-12' do %>
       <i class="fas fa-map text-gray-700 text-2xl"></i>
     <% end %>
 
@@ -128,7 +155,7 @@
       <i class="fas fa-plus text-2xl transition-transform duration-300 ease-in-out"></i>
     </button>
 
-    <%= link_to user_path(current_user), id: 'mobile-profile-link', data: { turbo: true }, class: 'flex flex-col items-center justify-center p-2 mx-2 -mr-12' do %> <!-- Adjust margin with Tailwind -->
+    <%= link_to user_path(current_user), id: 'mobile-profile-link', data: { turbo: true }, class: 'flex flex-col items-center justify-center p-2 mx-2 -mr-12' do %>
       <i class="fas fa-user-circle text-gray-700 text-2xl"></i>
     <% end %>
 
@@ -144,50 +171,53 @@
       <li class="bg-gray-100 p-2 rounded-lg shadow-lg transition duration-200 ease-in-out">
         <%= link_to new_post_path, id: 'expanded-new-post-link', data: { turbo: true }, class: 'flex items-center text-lg text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out' do %>
           <i class="fas fa-plus text-gray-700 text-base mr-2"></i>
-          <span>Nowe ogłoszenie</span>
+          <span><%= t('sidebar.new_post') %></span>
         <% end %>
       </li>
       <li class="bg-gray-100 p-2 rounded-lg shadow-lg transition duration-200 ease-in-out">
         <%= link_to user_posts_posts_path, id: 'expanded-user-posts-link', data: { turbo: true }, class: 'flex items-center text-lg text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out' do %>
           <i class="fas fa-user text-gray-700 text-base mr-2"></i>
-          <span>Moje Ogłoszenia</span>
+          <span><%= t('sidebar.user_posts') %></span>
         <% end %>
       </li>
       <li class="bg-gray-100 p-2 rounded-lg shadow-lg transition duration-200 ease-in-out">
         <%= link_to conversations_path, id: 'expanded-conversations-link', data: { turbo: true }, class: 'flex items-center text-lg text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out' do %>
           <i class="fas fa-comments text-gray-700 text-base mr-2"></i>
-          <span>Wiadomości</span>
+          <span><%= t('sidebar.messages') %></span>
         <% end %>
       </li>
       <li class="bg-gray-100 p-2 rounded-lg shadow-lg transition duration-200 ease-in-out">
         <%= link_to notifications_path, id: 'expanded-notifications-link', data: { turbo: true }, class: 'flex items-center text-lg text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out notification-bell' do %>
           <i class="fas fa-bell text-gray-700 text-base mr-2"></i>
-          <span>Moje Powiadomienia</span>
+          <span><%= t('sidebar.my_notifications') %></span>
           <span id="notification-count-expanded" class="ml-2 h-4 w-4 text-xs text-black bg-worxyYellow rounded-full flex items-center justify-center hidden"></span>
         <% end %>
       </li>
       <li class="bg-gray-100 p-2 rounded-lg shadow-lg transition duration-200 ease-in-out">
         <%= link_to bookings_path, id: 'expanded-bookings-link', data: { turbo: true }, class: 'flex items-center text-lg text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out' do %>
           <i class="fas fa-briefcase text-gray-700 text-base mr-2"></i>
-          <span>Zlecenia</span>
+          <span><%= t('sidebar.orders') %></span>
         <% end %>
       </li>
       <li class="bg-gray-100 p-2 rounded-lg shadow-lg transition duration-200 ease-in-out">
         <%= link_to calendar_bookings_path, id: 'expanded-calendar-link', data: { turbo: true }, class: 'flex items-center text-lg text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out' do %>
           <i class="fas fa-calendar-alt text-gray-700 text-base mr-2"></i>
-          <span>Zobacz Kalendarz</span>
+          <span><%= t('sidebar.view_calendar') %></span>
         <% end %>
       </li>
       <li class="bg-gray-100 p-2 rounded-lg shadow-lg transition duration-200 ease-in-out">
-        <%= link_to destroy_user_session_path, method: :delete, data: { turbo: false, confirm: 'Are you sure?' }, class: 'flex items-center text-lg text-red-600 font-medium hover:bg-red-50 p-2 rounded-lg transition duration-200 ease-in-out' do %>
+        <%= link_to destroy_user_session_path,
+                    method: :delete,
+                    data: { turbo: false, confirm: t('sidebar.confirm_logout') },
+                    class: 'flex items-center text-lg text-red-600 font-medium hover:bg-red-50 p-2 rounded-lg transition duration-200 ease-in-out' do %>
           <i class="fas fa-sign-out-alt text-red-600 text-base mr-2"></i>
-          <span>Wyloguj</span>
+          <span><%= t('sidebar.log_out') %></span>
         <% end %>
       </li>
       <li class="bg-gray-100 p-2 rounded-lg shadow-lg transition duration-200 ease-in-out">
         <button id="expanded-tutorial-button" class="flex items-center text-lg text-gray-700 font-medium hover:bg-blue-50 p-2 rounded-lg transition duration-200 ease-in-out">
           <i class="fas fa-book text-gray-700 text-base mr-2"></i>
-          <span>Poradnik</span>
+          <span><%= t('sidebar.tutorial') %></span>
         </button>
       </li>
     </ul>
@@ -205,7 +235,7 @@
       setTimeout(function() {
         menu.classList.add('opacity-100');
       }, 10);
-      
+
       button.classList.remove('bg-worxyYellow');
       button.classList.add('bg-red-500');
       icon.classList.add('rotate-45');

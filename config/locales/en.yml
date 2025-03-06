@@ -1,31 +1,472 @@
-# Files in the config/locales directory are used for internationalization and
-# are automatically loaded by Rails. If you want to use locales other than
-# English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more about the API, please read the Rails Internationalization guide
-# at https://guides.rubyonrails.org/i18n.html.
-#
-# Be aware that YAML interprets the following case-insensitive strings as
-# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
-# must be quoted to be interpreted as strings. For example:
-#
-#     en:
-#       "yes": yup
-#       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  user:
+    show:
+      profile: "Profile"
+      user_description: "User Description"
+      send_message: "Send message"
+      first_name: "First Name"
+      email: "Email"
+      phone_number: "Phone Number"
+      skills: "Skills"
+      location: "Location"
+      experience: "Experience"
+      role: "Role"
+      account_created: "Account created"
+      last_updated: "Last updated"
+      user_rating: "User Rating"
+      see_portfolio: "See portfolio"
+      edit_profile: "Edit profile"
+      edit_portfolio: "Edit portfolio"
+
+      opinions: "Opinions"
+      your_opinion: "Your opinion:"
+      add_opinion: "Add opinion"
+      other_opinions: "Other opinions:"
+      no_opinions: "No opinions"
+      no_portfolio_images: "No images in portfolio"
+      close: "Close"
+      warning: "Warning!"
+      low_opinions_warning: "This user has low ratings. Use caution."
+
+  messages:
+    index:
+      heading_html: "Conversation with %{user_name}"
+      message_placeholder: "Type your message..."
+
+  conversations:
+    index:
+      start_conversation: "Start a new conversation"
+      user_search_placeholder: "Search for a user..."
+      active_conversations: "Active conversations"
+      no_messages: "No messages"
+      select_conversation: "Select a conversation to view its messages."
+
+  post:
+    show:
+      # Flash / general
+      request_notice_html: "%{message}"
+      request_alert_html: "%{message}"
+
+      # Post info
+      edit: "Edit"
+      description: "Description"
+      requestor: "Customer"
+      send_message: "Send message"
+
+      first_name: "First name"
+      phone_number: "Phone number"
+      login_to_see: "Log in to see"
+
+      view_profile: "View profile"
+      details: "Details"
+      budget: "Budget"
+      category: "Category"
+      subcategory: "Subcategory"
+      priority: "Priority"
+      contact: "Contact"
+      address: "Address"
+      created_at: "Created at"
+      updated_at: "Last updated"
+      send_offer: "Send offer"
+      job_location: "Job location"
+
+      # Offer modal
+      message: "Message"
+      message_placeholder: "Enter your message..."
+      proposed_price: "Proposed price"
+      price_placeholder: "Enter your proposed price..."
+      proposed_start_date: "Proposed start date"
+      start_date_placeholder: "Pick a start date..."
+      cancel: "Cancel"
+
+    card:
+      flame_icon_alt: "Flame Icon"
+      high_priority: "High Priority"
+
+      category: "Category"
+      subcategory: "Subcategory"
+      budget: "Budget"
+      currency: " NOK"
+
+      created_at: "Created at"
+      open: "Open"
+
+    index:
+      search_placeholder: "Search..."
+      city_placeholder: "City"
+      category_placeholder: "Categories..."
+      subcategory_placeholder: "Subcategories..."
+
+      apply_button: "Apply"
+      clear_button: "Clear"
+
+      customer_offers: "Customer Offers"
+      worker_offers: "Worker Offers"
+
+      search_results: "Search results"
+      search_for: "for"
+      in_category: "in category"
+      greater_symbol: " > "
+
+      no_results: "No results found."
+
+    form:
+      errors_occurred: "There were errors:"
+      title: "Title"
+      title_placeholder: "Title"
+      images: "Images"
+      description: "Description"
+      description_placeholder: "Description"
+      generate_description: "Generate description using AI"
+      generating_message: "Generating description..."
+
+      price: "Budget"
+      price_placeholder: "Budget"
+      category: "Category"
+      category_placeholder: "Search categories..."
+      subcategory: "Subcategory"
+      subcategory_placeholder: "Search subcategories..."
+
+      availability: "Priority"
+      no_priority: "None"
+      high_priority: "High"
+      medium_priority: "Medium"
+      low_priority: "Low"
+
+      contact_information: "Contact"
+      contact_placeholder: "Phone number"
+
+      street: "Street"
+      street_placeholder: "Street"
+      city: "City"
+      city_placeholder: "City"
+      state: "State"
+      state_placeholder: "State"
+      country: "Country"
+      country_placeholder: "Country"
+
+      fill_address_map: "Check to fill in address by clicking on the map"
+      submit_button: "Submit"
+      adding_order: "Adding post..."
+
+  dashboard:
+    messages_title: "Messages"
+    no_messages: "No messages."
+    your_bookings_title: "Your Bookings"
+    no_bookings: "No bookings."
+
+    notifications_title: "Notifications"
+    no_notifications: "No notifications."
+    action_sent_request: "%{actor} sent you an offer"
+    action_request_accepted: "%{actor} accepted your offer"
+    action_request_rejected: "%{actor} rejected your offer"
+    action_sent_negotiation: "%{actor} sent you a negotiation proposal"
+    confirm_question: "Are you sure?"
+    view_all_notifications: "View all notifications"
+
+    reports_and_earnings: "Reports & Earnings"
+    bookings_label: "Bookings"
+    this_month: "This month"
+    previous_month: "Previous month"
+    progress: "Progress"
+
+    earnings_label: "Earnings"
+    total_earnings: "Total Earnings"
+    earnings_table: "Earnings Table"
+
+    booking_name_column: "Booking Name"
+    created_at_column: "Created At"
+    earnings_column: "Earnings"
+    edit_amount_column: "Edit Amount"
+    include_column: "Include"
+    no_reservations: "No reservations."
+
+    edit_earnings_title: "Edit Earnings"
+    new_price_label: "New price"
+    cancel_button: "Cancel"
+    save_button: "Save"
+
+  sidebar:
+    main_title: "Main"
+    dashboard: "Dashboard"
+    new_post: "New Post"
+    posts: "Posts"
+    user_posts: "My Posts"
+
+    communication_title: "Communication"
+    messages: "Messages"
+    my_notifications: "My Notifications"
+
+    orders_title: "Orders"
+    orders: "Orders"
+    view_calendar: "View Calendar"
+    job_map: "Job Map"
+
+    user_title: "User"
+    user_profile: "User Profile"
+    tutorial: "Tutorial"
+
+    log_out: "Log Out"
+    confirm_logout: "Are you sure?"
+
+    view_profile: "View Profile"
+
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%B %d, %Y"
+    day_names:
+      - Sunday
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
+    abbr_day_names:
+      - Sun
+      - Mon
+      - Tue
+      - Wed
+      - Thu
+      - Fri
+      - Sat
+    month_names:
+      - ~
+      - January
+      - February
+      - March
+      - April
+      - May
+      - June
+      - July
+      - August
+      - September
+      - October
+      - November
+      - December
+    abbr_month_names:
+      - ~
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - May
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Oct
+      - Nov
+      - Dec
+    order:
+      - :year
+      - :month
+      - :day
+
+  time:
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      short: "%d %b %H:%M"
+      long: "%B %d, %Y %H:%M"
+    am: 'am'
+    pm: 'pm'
+
+  activerecord:
+    attributes:
+      user:
+        current_password: "Current password"
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+      post:
+        title: "Title"
+        description: "Description"
+        price: "Price"
+        category_id: "Category"
+        subcategory_id: "Subcategory"
+        availability: "Availability"
+        contact_information: "Contact information"
+        street: "Street"
+        city: "City"
+        state: "State"
+        country: "Country"
+        latitude: "Latitude"
+        longitude: "Longitude"
+
+    errors:
+      models:
+        user:
+          attributes:
+            current_password:
+              blank: "can't be blank"
+            email:
+              taken: "has already been taken"
+          messages:
+            blank: "can't be blank"
+            taken: "has already been taken"
+        post:
+          attributes:
+            title:
+              blank: "can't be blank"
+            description:
+              blank: "can't be blank"
+            price:
+              blank: "can't be blank"
+            category_id:
+              blank: "can't be blank"
+            subcategory_id:
+              blank: "can't be blank"
+          messages:
+            blank: "can't be blank"
+            taken: "has already been taken"
+            required: "is required"
+
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      inclusion: "is not included in the list"
+      exclusion: "is reserved"
+      invalid: "is invalid"
+      confirmation: "doesn't match confirmation"
+      accepted: "must be accepted"
+      empty: "can't be empty"
+      blank: "can't be blank"
+      present: "must be blank"
+      too_long: "is too long (maximum is %{count} characters)"
+      too_short: "is too short (minimum is %{count} characters)"
+      wrong_length: "is the wrong length (should be %{count} characters)"
+      not_a_number: "is not a number"
+      not_an_integer: "must be an integer"
+      greater_than: "must be greater than %{count}"
+      greater_than_or_equal_to: "must be greater than or equal to %{count}"
+      equal_to: "must be equal to %{count}"
+      less_than: "must be less than %{count}"
+      less_than_or_equal_to: "must be less than or equal to %{count}"
+      other_than: "must be other than %{count}"
+      odd: "must be odd"
+      even: "must be even"
+      taken: "has already been taken"
+      record_invalid: "Validation failed: %{errors}"
+      content_type_invalid: "has invalid content type"
+      size_less_than: "must be less than %{size}"
+      already_confirmed: "was already confirmed, please try signing in"
+      confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
+      expired: "has expired, please request a new one"
+      not_found: "not found"
+      not_locked: "was not locked"
+      not_saved:
+        one: "1 error prohibited this %{resource} from being saved:"
+        other: "%{count} errors prohibited this %{resource} from being saved:"
+      required: "is required"
+    template:
+      header:
+        one: "Could not save %{model} because of 1 error"
+        other: "Could not save %{model} because of %{count} errors"
+      body:
+        one: "There was 1 error:"
+        other: "There were %{count} errors:"
+
+  number:
+    currency:
+      format:
+        format: "%n %u"
+        unit: "NOK"
+        separator: "."
+        delimiter: ","
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: false
+
+  views:
+    pagination:
+      first: "First"
+      last: "Last"
+      previous: "Previous"
+      next: "Next"
+      truncate: "..."
+
+  devise:
+    confirmations:
+      confirmed: "Your email address has been successfully confirmed."
+      send_instructions: "You will receive an email with instructions for confirming your email address within a few minutes."
+      send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for confirming your email address within a few minutes."
+    failure:
+      already_authenticated: "You are already signed in."
+      inactive: "Your account is not activated yet."
+      invalid: "Invalid %{authentication_keys} or password."
+      locked: "Your account is locked."
+      last_attempt: "You have one more attempt before your account is locked."
+      not_found_in_database: "Invalid %{authentication_keys} or password."
+      timeout: "Your session expired. Please sign in again to continue."
+      unauthenticated: "You need to sign in or sign up before continuing."
+      unconfirmed: "You need to confirm your email address before continuing."
+    mailer:
+      confirmation_instructions:
+        subject: "Confirmation instructions"
+      reset_password_instructions:
+        subject: "Reset password instructions"
+      unlock_instructions:
+        subject: "Unlock instructions"
+      email_changed:
+        subject: "Email Changed"
+      password_change:
+        subject: "Password Changed"
+    omniauth_callbacks:
+      failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
+      success: "Successfully authenticated from %{kind} account."
+    passwords:
+      no_token: "You can't access this page without coming from a password reset email. Please make sure you used the full URL provided in your email."
+      send_instructions: "You will receive an email with instructions on how to reset your password in a few minutes."
+      send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
+      updated: "Your password has been changed successfully. You are now signed in."
+      updated_not_active: "Your password has been changed successfully."
+    registrations:
+      destroyed: "Goodbye! Your account has been successfully cancelled. We hope to see you again soon."
+      signed_up: "Welcome! You have signed up successfully."
+      signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
+      signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
+      signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please click the link to activate your account."
+      update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and click the confirmation link."
+      updated: "Your account has been updated successfully."
+      updated_but_not_signed_in: "Your account has been updated successfully, but since you changed your password, you need to sign in again."
+      new:
+        register_via_email: "Register using your email"
+        register_header: "Sign Up"
+        register_button: "Register"
+        have_account: "Already have an account?"
+        copyright: "©2024 Worxy. All rights reserved."
+
+        fields:
+          first_name: "First Name"
+          last_name: "Last Name"
+          email: "Email"
+          role: "Role"
+          phone_number: "Phone Number"
+          password: "Password"
+          password_placeholder: "Password"
+          password_confirmation: "Confirm Password"
+          password_confirmation_placeholder: "Re-enter password"
+
+        roles:
+          customer: "Customer"
+          worker: "Worker"
+
+    sessions:
+      login_via_email: "Sign in using your email"
+      sign_in_header: "Sign In"
+      sign_in_button: "Sign In"
+      no_account: "Don't have an account?"
+      signed_in: "Signed in successfully."
+      signed_out: "Signed out successfully."
+      already_signed_out: "Signed out successfully."
+      fields:
+        email: "Email"
+        password: "Password"
+        password_placeholder: "Password"
+
+    unlocks:
+      send_instructions: "You will receive an email with instructions on how to unlock your account in a few minutes."
+      send_paranoid_instructions: "If your account exists, you will receive an email with instructions on how to unlock it in a few minutes."
+      unlocked: "Your account has been unlocked successfully. Please sign in to continue."
