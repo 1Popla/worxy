@@ -1,7 +1,9 @@
 <%= form_with(model: booking, local: false, class: "bg-white shadow-md rounded px-4 py-4 mb-4") do |form| %>
   <% if booking.errors.any? %>
     <div id="error_explanation" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-      <strong class="font-bold"><%= pluralize(booking.errors.count, "błąd") %> uniemożliwiło zapisanie rezerwacji:</strong>
+      <strong class="font-bold">
+        <%= pluralize(booking.errors.count, t('bookings.form.error')) %> <%= t('bookings.form.prevented_booking_save') %>:
+      </strong>
       <ul class="list-disc pl-5 mt-3">
       <% booking.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,32 +13,32 @@
   <% end %>
 
   <div class="mb-4">
-    <%= form.label :post_id, 'Tytuł ogłoszenia', class: "block text-gray-700 text-sm font-bold mb-2" %>
-    <%= form.collection_select :post_id, @selectable_posts, :id, :title, {include_blank: 'Wybierz ogłoszenie'}, {class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"} %>
+    <%= form.label :post_id, t('bookings.form.post_title'), class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.collection_select :post_id, @selectable_posts, :id, :title, { include_blank: t('bookings.form.select_post') }, { class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" } %>
   </div>
 
   <div class="mb-4">
-    <%= form.label :status, class: "block text-gray-700 text-sm font-bold mb-2" %>
-    <%= form.select :status, Booking.statuses.keys.map { |status| [human_enum_name('booking.statuses', status), status] }, {}, {class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"} %>
+    <%= form.label :status, t('bookings.form.status'), class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.select :status, Booking.statuses.keys.map { |status| [human_enum_name('booking.statuses', status), status] }, {}, { class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" } %>
   </div>
 
   <div class="mb-6">
-    <%= form.label :visible_to_user_id, 'Klient', class: "block text-gray-700 text-sm font-bold mb-2" %>
-    <%= form.collection_select :visible_to_user_id, @selectable_users, :id, :email, {include_blank: 'Brak (Domyślnie)'}, {class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"} %>
+    <%= form.label :visible_to_user_id, t('bookings.form.client'), class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.collection_select :visible_to_user_id, @selectable_users, :id, :email, { include_blank: t('bookings.form.none_default') }, { class: "block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-2 px-3 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" } %>
   </div>
 
   <div class="mb-4">
-    <%= form.label :start_date, 'Data rozpoczęcia', class: "block text-gray-700 text-sm font-bold mb-2" %>
-    <%= form.datetime_local_field :start_date, class: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500", placeholder: "Wybierz datę i godzinę rozpoczęcia..." %>
+    <%= form.label :start_date, t('bookings.form.start_date'), class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.datetime_local_field :start_date, class: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500", placeholder: t('bookings.form.start_date_placeholder') %>
   </div>
 
   <div class="mb-4">
-    <%= form.label :end_date, 'Data zakończenia', class: "block text-gray-700 text-sm font-bold mb-2" %>
-    <%= form.datetime_local_field :end_date, class: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500", placeholder: "Wybierz datę i godzinę zakończenia..." %>
+    <%= form.label :end_date, t('bookings.form.end_date'), class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.datetime_local_field :end_date, class: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500", placeholder: t('bookings.form.end_date_placeholder') %>
   </div>
 
   <div class="flex items-center justify-center space-x-4">
-    <%= link_to 'Wróć', bookings_path, class: 'inline-block bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded transition-colors duration-200' %>
-    <%= form.submit 'Zapisz', class: 'bg-worxyYellow text-black font-bold py-2 px-4 rounded hover:opacity-90 transition-colors duration-200' %>
+    <%= link_to t('bookings.form.back'), bookings_path, class: 'inline-block bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded transition-colors duration-200' %>
+    <%= form.submit t('bookings.form.save'), class: 'bg-worxyYellow text-black font-bold py-2 px-4 rounded hover:opacity-90 transition-colors duration-200' %>
   </div>
 <% end %>

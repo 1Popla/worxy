@@ -1,4 +1,168 @@
 nb:
+  shared:
+    links:
+      sign_in: "Logg inn"
+      sign_up: "Registrer deg"
+      forgot_password: "Glemt passordet ditt?"
+      confirmation: "Har du ikke mottatt en bekreftelsesepost?"
+      unlock: "Har du ikke mottatt instruksjoner for å låse opp kontoen?"
+      sign_in_through: "Logg inn med %{provider}"
+
+  bookings:
+    navigation:
+      google_maps_warning: "Etter å ha navigert til Google Maps, pass på at feltet 'Din posisjon' er riktig."
+      your_bookings: "Dine bestillinger:"
+      start_date_label: "Startdato:"
+      end_date_label: "Sluttdato:"
+      address_label: "Adresse:"
+      navigate: "Naviger"
+      no_bookings: "Ingen bestillinger å vise."
+
+    calendar:
+      title: "Kalender"
+      previous_month: "Forrige måned"
+      next_month: "Neste måned"
+      month_year: "%{month} %{year}"
+      close: "Lukk"
+
+    form:
+      error: "feil"
+      prevented_booking_save: "hindret bestillingen i å bli lagret"
+      post_title: "Bestillingstittel"
+      select_post: "Velg en annonse"
+      status: "Status"
+      client: "Kunde"
+      none_default: "Ingen (standard)"
+      start_date: "Startdato"
+      start_date_placeholder: "Velg startdato og -tid..."
+      end_date: "Sluttdato"
+      end_date_placeholder: "Velg sluttdato og -tid..."
+      back: "Tilbake"
+      save: "Lagre"
+
+    show:
+      payment_warning: "Worxy-plattformen har ikke et internt betalingssystem. Vennligst avtal betalingsvilkår med kunden/leverandøren."
+      booking_details_title: "Bestillingsdetaljer"
+      basic_info_title: "Grunnleggende informasjon"
+      ad_title_label: "Bestillingstittel:"
+      status_label: "Status:"
+      start_date_label: "Startdato:"
+      end_date_label: "Sluttdato:"
+      offered_price_label: "Tilbudt pris:"
+      main_image_title: "Hovedbilde"
+      post_details_title: "Annonseinformasjon"
+      description_label: "Beskrivelse:"
+      budget_label: "Budsjett:"
+      priority_label: "Prioritet:"
+      contact_label: "Telefonnummer til tjenesteyter:"
+      client_details_title: "Kundedetaljer"
+      booked_by_label: "Bestilt av:"
+      visible_to_label: "Synlig for:"
+      created_by_label: "Opprettet av:"
+      edit_booking: "Rediger bestilling"
+      back: "Tilbake"
+      completed_message: "Bestillingen er fullført."
+      complete_booking: "Fullfør bestilling"
+      negotiate_price: "Forhandle pris"
+      confirm_price_message: "Før godkjenning må brukeren bekrefte prisen."
+
+    index:
+      title: "Bestillinger"
+      service: "Tjeneste"
+      status: "Status"
+      actions:
+        title: "Handlinger"
+        show: "Vis"
+        edit: "Rediger"
+        delete: "Slett"
+      delete_confirmation: "Er du sikker på at du vil slette denne bestillingen?"
+      new_booking: "Ny bestilling"
+
+  opinions:
+    new:
+      title: "Ny vurdering for %{first_name} %{last_name}"
+      rating_label: "Vurdering (1 til 5)"
+      selected_rating: "Valgt: %{count} stjerner"
+      comment_label: "Kommentar (valgfritt)"
+      submit: "Send inn"
+      cancel: "Avbryt"
+
+  notifications:
+    show:
+      user_details: "Brukerdetaljer"
+      first_and_last_name: "Fornavn og etternavn:"
+      email: "E-post:"
+      profile: "Profil:"
+      view_profile: "Vis profil"
+      advertisement_details: "Annonseinformasjon"
+      main_image: "Hovedbilde"
+      job_location: "Jobbplassering"
+      title: "Tittel:"
+      description: "Beskrivelse:"
+      budget: "Budsjett:"
+      status: "Status:"
+      start_date: "Startdato:"
+      end_date: "Sluttdato:"
+      offered_price: "Tilbudt pris:"
+      offer_details: "Tilbudsdetaljer"
+      proposed_price: "Foreslått pris:"
+      proposed_start_date: "Foreslått startdato:"
+      no_data: "Ingen data"
+      message: "Melding"
+      offer_accepted: "Dette tilbudet er akseptert"
+      offer_rejected: "Du har avslått dette tilbudet"
+      accept_offer: "Aksepter tilbud"
+      reject_offer: "Avslå tilbud"
+      are_you_sure: "Er du sikker?"
+    index:
+      title: "Varsler"
+      no_notifications: "Ingen varsler."
+      delete_confirmation: "Er du sikker på at du vil slette dette varselet?"
+      flash:
+        notification_destroy: "Varsel slettet."
+      actions:
+        sent_request: "%{actor} sendte deg et tilbud"
+        request_accepted: "%{actor} aksepterte tilbudet ditt"
+        request_rejected: "%{actor} avslo tilbudet ditt"
+        sent_negotiation: "%{actor} sendte deg en forhandlingsforespørsel"
+
+  user:
+    user_steps:
+      complete_profile: "Fullfør profilen din"
+      description_label: "Beskrivelse"
+      skills_label: "Ferdigheter"
+      location_label: "Lokasjon"
+      experience_label: "Erfaring"
+      save: "Lagre"
+
+    show:
+      profile: "Profil"
+      user_description: "Brukerbeskrivelse"
+      send_message: "Send melding"
+      first_name: "Fornavn"
+      email: "E-post"
+      phone_number: "Telefonnummer"
+      skills: "Ferdigheter"
+      location: "Lokasjon"
+      experience: "Erfaring"
+      role: "Rolle"
+      account_created: "Konto opprettet"
+      last_updated: "Sist oppdatert"
+      user_rating: "Brukervurdering"
+      see_portfolio: "Se portefølje"
+      edit_profile: "Rediger profil"
+      edit_portfolio: "Rediger portefølje"
+
+      opinions: "Vurderinger"
+      your_opinion: "Din vurdering:"
+      add_opinion: "Legg til vurdering"
+      other_opinions: "Andre vurderinger:"
+      no_opinions: "Ingen vurderinger"
+      no_portfolio_images: "Ingen bilder i porteføljen"
+      close: "Lukk"
+      warning: "Advarsel!"
+      low_opinions_warning: "Denne brukeren har lave vurderinger. Vær forsiktig."
+
   messages:
     index:
       heading_html: "Samtale med %{user_name}"
@@ -13,12 +177,15 @@ nb:
       select_conversation: "Velg en samtale for å se meldingene."
 
   post:
+    user_post:
+      title: "Mine annonser"
+      no_posts: "Du har ingen annonser."
+      pagination: "Paginering"
+
     show:
-      # Flash / general
       request_notice_html: "%{message}"
       request_alert_html: "%{message}"
 
-      # Post info
       edit: "Rediger"
       description: "Beskrivelse"
       requestor: "Kunde"
@@ -28,7 +195,7 @@ nb:
       phone_number: "Telefonnummer"
       login_to_see: "Logg inn for å se"
 
-      view_profile: "Se profil"
+      view_profile: "Vis profil"
       details: "Detaljer"
       budget: "Budsjett"
       category: "Kategori"
@@ -41,11 +208,10 @@ nb:
       send_offer: "Send tilbud"
       job_location: "Jobbplassering"
 
-      # Offer modal
       message: "Melding"
       message_placeholder: "Skriv meldingen din..."
       proposed_price: "Foreslått pris"
-      price_placeholder: "Fyll inn foreslått pris..."
+      price_placeholder: "Oppgi foreslått pris..."
       proposed_start_date: "Foreslått startdato"
       start_date_placeholder: "Velg en startdato..."
       cancel: "Avbryt"
@@ -60,7 +226,7 @@ nb:
       currency: " NOK"
 
       created_at: "Opprettet"
-      open: "Åpen"
+      open: "Åpne"
 
     index:
       search_placeholder: "Søk..."
@@ -71,15 +237,15 @@ nb:
       apply_button: "Bruk"
       clear_button: "Nullstill"
 
-      customer_offers: "Tilbud fra kunde"
-      worker_offers: "Tilbud fra arbeidstaker"
+      customer_offers: "Tilbud til kunde"
+      worker_offers: "Tilbud til arbeidstaker"
 
       search_results: "Søkeresultater"
       search_for: "for"
       in_category: "i kategori"
       greater_symbol: " > "
 
-      no_results: "Ingen resultater funnet."
+      no_results: "Ingen treff."
 
     form:
       errors_occurred: "Det oppsto feil:"
@@ -88,25 +254,25 @@ nb:
       images: "Bilder"
       description: "Beskrivelse"
       description_placeholder: "Beskrivelse"
-      generate_description: "Generer beskrivelse ved hjelp av AI"
+      generate_description: "Generer beskrivelse med AI"
       generating_message: "Genererer beskrivelse..."
-      
+
       price: "Budsjett"
       price_placeholder: "Budsjett"
       category: "Kategori"
       category_placeholder: "Søk i kategorier..."
       subcategory: "Underkategori"
       subcategory_placeholder: "Søk i underkategorier..."
-      
+
       availability: "Prioritet"
       no_priority: "Ingen"
       high_priority: "Høy"
       medium_priority: "Middels"
       low_priority: "Lav"
-      
+
       contact_information: "Kontakt"
       contact_placeholder: "Telefonnummer"
-      
+
       street: "Gate"
       street_placeholder: "Gate"
       city: "By"
@@ -115,12 +281,15 @@ nb:
       state_placeholder: "Fylke"
       country: "Land"
       country_placeholder: "Land"
-      
+
       fill_address_map: "Huk av for å fylle inn adresse ved å klikke på kartet"
       submit_button: "Send inn"
-      adding_order: "Legger til innlegg..."
+      adding_order: "Legger til annonse..."
 
   dashboard:
+    map:
+      title: "Kart over dine bestillinger"
+      open_navigation: "Åpne navigasjon"
     messages_title: "Meldinger"
     no_messages: "Ingen meldinger."
     your_bookings_title: "Dine bestillinger"
@@ -135,34 +304,34 @@ nb:
     confirm_question: "Er du sikker?"
     view_all_notifications: "Vis alle varsler"
 
-    reports_and_earnings: "Rapporter og Inntjening"
+    reports_and_earnings: "Rapporter & inntekter"
     bookings_label: "Bestillinger"
     this_month: "Denne måneden"
     previous_month: "Forrige måned"
     progress: "Fremgang"
 
-    earnings_label: "Inntjening"
-    total_earnings: "Total inntjening"
-    earnings_table: "Inntjeningsoversikt"
+    earnings_label: "Inntekter"
+    total_earnings: "Totale inntekter"
+    earnings_table: "Inntektstabell"
 
     booking_name_column: "Bestillingsnavn"
     created_at_column: "Opprettet"
-    earnings_column: "Inntjening"
+    earnings_column: "Inntekter"
     edit_amount_column: "Rediger beløp"
     include_column: "Inkluder"
     no_reservations: "Ingen reservasjoner."
 
-    edit_earnings_title: "Rediger inntjening"
+    edit_earnings_title: "Rediger inntekter"
     new_price_label: "Ny pris"
     cancel_button: "Avbryt"
     save_button: "Lagre"
 
   sidebar:
-    main_title: "Hoved"
-    dashboard: "Dashbord"
-    new_post: "Nytt innlegg"
-    posts: "Innlegg"
-    user_posts: "Mine innlegg"
+    main_title: "Hovedmeny"
+    dashboard: "Oversikt"
+    new_post: "Ny annonse"
+    posts: "Annonser"
+    user_posts: "Mine annonser"
 
     communication_title: "Kommunikasjon"
     messages: "Meldinger"
@@ -180,7 +349,7 @@ nb:
     log_out: "Logg ut"
     confirm_logout: "Er du sikker?"
 
-    view_profile: "Se profil"
+    view_profile: "Vis profil"
 
   date:
     formats:
@@ -241,8 +410,8 @@ nb:
       default: "%a, %d %b %Y %H:%M:%S %z"
       short: "%d %b %H:%M"
       long: "%B %d, %Y %H:%M"
-    am: "am"
-    pm: "pm"
+    am: 'am'
+    pm: 'pm'
 
   activerecord:
     attributes:
@@ -273,10 +442,10 @@ nb:
             current_password:
               blank: "kan ikke være tom"
             email:
-              taken: "er allerede tatt"
+              taken: "er allerede i bruk"
           messages:
             blank: "kan ikke være tom"
-            taken: "er allerede tatt"
+            taken: "er allerede i bruk"
         post:
           attributes:
             title:
@@ -291,7 +460,7 @@ nb:
               blank: "kan ikke være tom"
           messages:
             blank: "kan ikke være tom"
-            taken: "er allerede tatt"
+            taken: "er allerede i bruk"
             required: "er påkrevd"
 
   errors:
@@ -300,13 +469,13 @@ nb:
       inclusion: "er ikke inkludert i listen"
       exclusion: "er reservert"
       invalid: "er ugyldig"
-      confirmation: "stemmer ikke med bekreftelse"
-      accepted: "må aksepteres"
+      confirmation: "stemmer ikke med bekreftelsen"
+      accepted: "må være akseptert"
       empty: "kan ikke være tom"
       blank: "kan ikke være tom"
       present: "må være tom"
       too_long: "er for lang (maksimalt %{count} tegn)"
-      too_short: "er for kort (minimum %{count} tegn)"
+      too_short: "er for kort (minst %{count} tegn)"
       wrong_length: "har feil lengde (bør være %{count} tegn)"
       not_a_number: "er ikke et tall"
       not_an_integer: "må være et heltall"
@@ -315,77 +484,14 @@ nb:
       equal_to: "må være lik %{count}"
       less_than: "må være mindre enn %{count}"
       less_than_or_equal_to: "må være mindre enn eller lik %{count}"
-      other_than: "må være noe annet enn %{count}"
+      other_than: "må være ulik %{count}"
       odd: "må være oddetall"
       even: "må være partall"
-      taken: "er allerede tatt"
+      taken: "er allerede i bruk"
       record_invalid: "Validering feilet: %{errors}"
-      content_type_invalid: "har ugyldig innholdstype"
+      content_type_invalid: "har ugyldig filtype"
       size_less_than: "må være mindre enn %{size}"
-    template:
-      header:
-        one: "Kunne ikke lagre %{model} på grunn av 1 feil"
-        other: "Kunne ikke lagre %{model} på grunn av %{count} feil"
-      body:
-        one: "Det oppsto 1 feil:"
-        other: "Det oppsto %{count} feil:"
-
-  devise:
-    confirmations:
-      confirmed: "E-postadressen din er bekreftet."
-      send_instructions: "Du vil motta en e-post med instruksjoner for å bekrefte e-postadressen din i løpet av noen få minutter."
-      send_paranoid_instructions: "Hvis e-postadressen din finnes i databasen vår, vil du motta en e-post med instruksjoner for å bekrefte e-postadressen din i løpet av noen få minutter."
-    failure:
-      already_authenticated: "Du er allerede innlogget."
-      inactive: "Kontoen din er ikke aktivert ennå."
-      invalid: "Ugyldig %{authentication_keys} eller passord."
-      locked: "Kontoen din er låst."
-      last_attempt: "Du har ett forsøk igjen før kontoen din blir låst."
-      not_found_in_database: "Ugyldig %{authentication_keys} eller passord."
-      timeout: "Økten din er utløpt. Vennligst logg inn på nytt."
-      unauthenticated: "Du må logge inn eller registrere deg før du kan fortsette."
-      unconfirmed: "Du må bekrefte e-postadressen din før du kan fortsette."
-    mailer:
-      confirmation_instructions:
-        subject: "Instruksjoner for e-postbekreftelse"
-      reset_password_instructions:
-        subject: "Instruksjoner for tilbakestilling av passord"
-      unlock_instructions:
-        subject: "Instruksjoner for opplåsing"
-      email_changed:
-        subject: "E-postadresse endret"
-      password_change:
-        subject: "Passord endret"
-    omniauth_callbacks:
-      failure: "Kunne ikke autentisere deg fra %{kind} fordi \"%{reason}\"."
-      success: "Autentisering fra %{kind}-konto var vellykket."
-    passwords:
-      no_token: "Du kan ikke gå inn på denne siden uten å komme via en lenke for tilbakestilling av passord. Kontroller at du brukte den fullstendige URL-en i e-posten du mottok."
-      send_instructions: "Du vil motta en e-post med instruksjoner om hvordan du tilbakestiller passordet ditt om noen få minutter."
-      send_paranoid_instructions: "Hvis e-postadressen din finnes i databasen vår, vil du motta en lenke for passordgjenoppretting til e-posten din i løpet av noen få minutter."
-      updated: "Passordet ditt er endret. Du er nå innlogget."
-      updated_not_active: "Passordet ditt er endret."
-    registrations:
-      destroyed: "Ha det bra! Kontoen din er slettet. Vi håper å se deg igjen snart."
-      signed_up: "Velkommen! Du har registrert deg."
-      signed_up_but_inactive: "Du har registrert deg, men kontoen din er ikke aktivert ennå."
-      signed_up_but_locked: "Du har registrert deg, men kontoen din er låst."
-      signed_up_but_unconfirmed: "En melding med en bekreftelseslenke er sendt til e-postadressen din. Vennligst klikk på lenken for å aktivere kontoen din."
-      update_needs_confirmation: "Kontoen din ble oppdatert, men vi må bekrefte den nye e-postadressen din. Sjekk e-posten din og klikk bekreftelseslenken."
-      updated: "Kontoen din er oppdatert."
-      updated_but_not_signed_in: "Kontoen din er oppdatert, men siden du endret passordet, må du logge inn på nytt."
-    sessions:
-      signed_in: "Du har logget inn."
-      signed_out: "Du har logget ut."
-      already_signed_out: "Du er allerede utlogget."
-    unlocks:
-      send_instructions: "Du vil motta en e-post med instruksjoner om hvordan du låser opp kontoen din i løpet av noen få minutter."
-      send_paranoid_instructions: "Hvis kontoen din finnes, vil du motta en e-post med instruksjoner for opplåsing i løpet av noen få minutter."
-      unlocked: "Kontoen din er låst opp. Vennligst logg inn."
-
-  errors:
-    messages:
-      already_confirmed: "var allerede bekreftet, prøv å logge inn"
+      already_confirmed: "er allerede bekreftet, vennligst prøv å logge inn"
       confirmation_period_expired: "må bekreftes innen %{period}, vennligst be om en ny"
       expired: "er utløpt, vennligst be om en ny"
       not_found: "ikke funnet"
@@ -394,6 +500,13 @@ nb:
         one: "1 feil forhindret denne %{resource} fra å bli lagret:"
         other: "%{count} feil forhindret denne %{resource} fra å bli lagret:"
       required: "er påkrevd"
+    template:
+      header:
+        one: "Kunne ikke lagre %{model} på grunn av 1 feil"
+        other: "Kunne ikke lagre %{model} på grunn av %{count} feil"
+      body:
+        one: "Det var 1 feil:"
+        other: "Det var %{count} feil:"
 
   number:
     currency:
@@ -413,3 +526,107 @@ nb:
       previous: "Forrige"
       next: "Neste"
       truncate: "..."
+
+  devise:
+    confirmations:
+      confirmed: "E-postadressen din er bekreftet."
+      send_instructions: "Du vil motta en e-post med instruksjoner for å bekrefte e-postadressen din om noen minutter."
+      send_paranoid_instructions: "Hvis e-postadressen din finnes i databasen vår, vil du motta en e-post med instruksjoner for å bekrefte e-postadressen din om noen minutter."
+    failure:
+      already_authenticated: "Du er allerede logget inn."
+      inactive: "Kontoen din er ikke aktivert ennå."
+      invalid: "Ugyldig %{authentication_keys} eller passord."
+      locked: "Kontoen din er låst."
+      last_attempt: "Du har ett forsøk igjen før kontoen låses."
+      not_found_in_database: "Ugyldig %{authentication_keys} eller passord."
+      timeout: "Økten din er utløpt. Vennligst logg inn igjen for å fortsette."
+      unauthenticated: "Du må logge inn eller registrere deg før du kan fortsette."
+      unconfirmed: "Du må bekrefte e-postadressen din før du kan fortsette."
+    mailer:
+      confirmation_instructions:
+        subject: "Bekreftelsesinstruksjoner"
+      reset_password_instructions:
+        subject: "Instruksjoner for tilbakestilling av passord"
+      unlock_instructions:
+        subject: "Instruksjoner for å låse opp konto"
+      email_changed:
+        subject: "E-post endret"
+      password_change:
+        subject: "Passord endret"
+    omniauth_callbacks:
+      failure: "Kunne ikke autentisere deg fra %{kind} fordi \"%{reason}\"."
+      success: "Vellykket autentisert med %{kind}-konto."
+    passwords:
+      no_token: "Du kan ikke få tilgang til denne siden uten å komme fra en e-post for tilbakestilling av passord. Pass på at du brukte den fullstendige URL-en som ble gitt i e-posten."
+      send_instructions: "Du vil motta en e-post med instruksjoner om hvordan du tilbakestiller passordet ditt om noen minutter."
+      send_paranoid_instructions: "Hvis e-postadressen din finnes i databasen vår, vil du motta en lenke for passordgjenoppretting om noen minutter."
+      updated: "Passordet ditt er endret. Du er nå logget inn."
+      updated_not_active: "Passordet ditt er endret."
+    registrations:
+      destroyed: "Ha det! Kontoen din er slettet. Vi håper å se deg igjen snart."
+      signed_up: "Velkommen! Du er nå registrert."
+      signed_up_but_inactive: "Du er registrert, men vi kunne ikke logge deg inn fordi kontoen din ikke er aktivert ennå."
+      signed_up_but_locked: "Du er registrert, men vi kunne ikke logge deg inn fordi kontoen din er låst."
+      signed_up_but_unconfirmed: "En melding med en bekreftelseslenke er sendt til e-postadressen din. Vennligst klikk på lenken for å aktivere kontoen."
+      update_needs_confirmation: "Du oppdaterte kontoen din, men vi må bekrefte den nye e-postadressen din. Sjekk e-posten din og klikk på bekreftelseslenken."
+      updated: "Kontoen din er oppdatert."
+      updated_but_not_signed_in: "Kontoen din er oppdatert, men siden du endret passord, må du logge inn igjen."
+      new:
+        register_via_email: "Registrer deg med e-posten din"
+        register_header: "Registrer deg"
+        register_button: "Registrer"
+        have_account: "Har du allerede en konto?"
+        copyright: "©2024 Worxy. Alle rettigheter forbeholdt."
+
+        fields:
+          first_name: "Fornavn"
+          last_name: "Etternavn"
+          email: "E-post"
+          role: "Rolle"
+          phone_number: "Telefonnummer"
+          password: "Passord"
+          password_placeholder: "Passord"
+          password_confirmation: "Bekreft passord"
+          password_confirmation_placeholder: "Skriv inn passordet på nytt"
+
+        roles:
+          customer: "Kunde"
+          worker: "Arbeidstaker"
+
+    sessions:
+      login_via_email: "Logg inn med e-posten din"
+      sign_in_header: "Logg inn"
+      sign_in_button: "Logg inn"
+      no_account: "Har du ikke en konto?"
+      signed_in: "Du er nå logget inn."
+      signed_out: "Du er nå logget ut."
+      already_signed_out: "Du er allerede logget ut."
+      fields:
+        email: "E-post"
+        password: "Passord"
+        password_placeholder: "Passord"
+
+    unlocks:
+      send_instructions: "Du vil motta en e-post med instruksjoner om hvordan du låser opp kontoen din om noen minutter."
+      send_paranoid_instructions: "Hvis kontoen din finnes, vil du motta en e-post med instruksjoner om hvordan du låser den opp om noen minutter."
+      unlocked: "Kontoen din er låst opp. Logg inn for å fortsette."
+
+  helpers:
+    priority:
+      no_priority: "Ingen"
+      high_priority: "Høy"
+      medium_priority: "Middels"
+      low_priority: "Lav"
+      unknown: "Ukjent"
+
+    booking:
+      statuses:
+        pending: "Venter"
+        confirmed: "Bekreftet"
+        completed: "Fullført"
+        cancelled: "Kansellert"
+
+    user:
+      roles:
+        worker: "Arbeidstaker"
+        customer: "Kunde"

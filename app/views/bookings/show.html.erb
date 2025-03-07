@@ -2,36 +2,42 @@
   <div class="container mx-auto px-4 py-8">
     <div class="bg-white shadow-lg rounded-lg p-8 relative mb-8">
       <div class="absolute top-0 right-0 bg-red-500 text-white text-xs md:text-sm font-bold px-4 py-2 rounded-bl-lg z-50 w-full md:w-auto">
-        Platforma Worxy nie posiada wewnętrznego systemu płatności, pamiętaj aby uzgodnić warunki opłat z klientem/wykonawcą.
+        <%= t('bookings.show.payment_warning') %>
       </div>
       <div class="text-center mt-12">
-        <h1 class="text-3xl font-bold mb-6 border-b-2 border-gray-200 pb-4">Szczegóły Rezerwacji</h1>
+        <h1 class="text-3xl font-bold mb-6 border-b-2 border-gray-200 pb-4">
+          <%= t('bookings.show.booking_details_title') %>
+        </h1>
       </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="bg-white shadow-lg rounded-lg p-6">
-        <h2 class="text-xl font-semibold mb-4 text-center">Podstawowe Informacje</h2>
+        <h2 class="text-xl font-semibold mb-4 text-center">
+          <%= t('bookings.show.basic_info_title') %>
+        </h2>
         <div class="border-b-2 border-gray-200 mb-4"></div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-            <p class="font-medium">Nazwa ogłoszenia:</p>
-            <p><%= link_to @booking.post.title, @booking.post, class: "text-blue-500 hover:text-blue-700" %></p>
+            <p class="font-medium"><%= t('bookings.show.ad_title_label') %></p>
+            <p>
+              <%= link_to @booking.post.title, @booking.post, class: "text-blue-500 hover:text-blue-700" %>
+            </p>
           </div>
           <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-            <p class="font-medium">Status:</p>
+            <p class="font-medium"><%= t('bookings.show.status_label') %></p>
             <p><%= human_enum_name('booking.statuses', @booking.status) %></p>
           </div>
           <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-            <p class="font-medium">Data rozpoczęcia:</p>
+            <p class="font-medium"><%= t('bookings.show.start_date_label') %></p>
             <p><%= I18n.l(@booking.start_date, format: :long) %></p>
           </div>
           <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-            <p class="font-medium">Data zakończenia:</p>
+            <p class="font-medium"><%= t('bookings.show.end_date_label') %></p>
             <p><%= I18n.l(@booking.end_date, format: :long) %></p>
           </div>
           <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-            <p class="font-medium">Proponowana cena:</p>
+            <p class="font-medium"><%= t('bookings.show.offered_price_label') %></p>
             <p><%= number_to_currency(@booking.offered_price) %></p>
           </div>
         </div>
@@ -39,7 +45,9 @@
 
       <% if @booking.post.images.attached? %>
       <div class="bg-white shadow-lg rounded-lg p-6">
-        <h2 class="text-xl font-semibold mb-4 text-center">Zdjęcie główne</h2>
+        <h2 class="text-xl font-semibold mb-4 text-center">
+          <%= t('bookings.show.main_image_title') %>
+        </h2>
         <div class="border-b-2 border-gray-200 mb-4"></div>
         <div class="flex justify-center items-center">
           <div class="w-full h-48 object-cover rounded-lg border border-gray-200 shadow-sm overflow-hidden">
@@ -51,68 +59,78 @@
     </div>
 
     <div class="bg-white shadow-lg rounded-lg p-6 mt-8">
-      <h2 class="text-xl font-semibold mb-4 text-center">Dane Ogłoszenia</h2>
+      <h2 class="text-xl font-semibold mb-4 text-center">
+        <%= t('bookings.show.post_details_title') %>
+      </h2>
       <div class="border-b-2 border-gray-200 mb-4"></div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-          <p class="font-medium">Opis:</p>
+          <p class="font-medium"><%= t('bookings.show.description_label') %></p>
           <p><%= @booking.post.description %></p>
         </div>
         <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-          <p class="font-medium">Budżet:</p>
+          <p class="font-medium"><%= t('bookings.show.budget_label') %></p>
           <p><%= number_to_currency(@booking.post.price) %></p>
         </div>
         <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-          <p class="font-medium">Priorytet:</p>
+          <p class="font-medium"><%= t('bookings.show.priority_label') %></p>
           <p><%= human_readable_priority(@booking.post.availability) %></p>
         </div>
         <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-          <p class="font-medium">Telefon usługodawcy:</p>
+          <p class="font-medium"><%= t('bookings.show.contact_label') %></p>
           <p><%= @booking.post.contact_information %></p>
         </div>
       </div>
     </div>
 
     <div class="bg-white shadow-lg rounded-lg p-6 mt-8">
-      <h2 class="text-xl font-semibold mb-4 text-center">Dane Zleceniodawcy</h2>
+      <h2 class="text-xl font-semibold mb-4 text-center">
+        <%= t('bookings.show.client_details_title') %>
+      </h2>
       <div class="border-b-2 border-gray-200 mb-4"></div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-          <p class="font-medium">Zabookowane przez:</p>
+          <p class="font-medium"><%= t('bookings.show.booked_by_label') %></p>
           <p><%= @booking.user.full_name %></p>
         </div>
         <% if @booking.visible_to_user %>
         <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-          <p class="font-medium">Widoczne dla:</p>
+          <p class="font-medium"><%= t('bookings.show.visible_to_label') %></p>
           <p><%= @booking.visible_to_user.email %></p>
         </div>
         <% end %>
         <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-          <p class="font-medium">Utworzone przez:</p>
+          <p class="font-medium"><%= t('bookings.show.created_by_label') %></p>
           <p><%= @booking.post.user.full_name %></p>
         </div>
       </div>
     </div>
 
     <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 justify-center mt-8">
-      <%= link_to 'Edytuj zlecenie', edit_booking_path(@booking), class: 'bg-worxyYellow hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-center' %>
-      <%= link_to 'Wróć', dashboard_index_path, class: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded text-center' %>
+      <%= link_to t('bookings.show.edit_booking'), edit_booking_path(@booking), class: 'bg-worxyYellow hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-center' %>
+      <%= link_to t('bookings.show.back'), dashboard_index_path, class: 'bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded text-center' %>
 
       <% if @booking.status == 'completed' %>
-        <p class="text-orange-500 text-sm mt-2 text-center">Zlecenie zostało pomyślnie ukończone.</p>
+        <p class="text-orange-500 text-sm mt-2 text-center">
+          <%= t('bookings.show.completed_message') %>
+        </p>
       <% else %>
         <% if @booking.pending_negotiation? %>
-          <%= button_to 'Zakończ zlecenie', complete_with_offered_price_booking_path(@booking), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed text-center', disabled: true %>
-          <button id="negotiate-modal-open-btn" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed text-center" disabled>Negocjuj budżet</button>
-          <p class="text-red-500 text-sm mt-2 text-center">Przed zaakceptowaniem użytkownik musi potwierdzić cenę</p>
+          <%= button_to t('bookings.show.complete_booking'), complete_with_offered_price_booking_path(@booking), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed text-center', disabled: true %>
+          <button id="negotiate-modal-open-btn" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded opacity-50 cursor-not-allowed text-center" disabled>
+            <%= t('bookings.show.negotiate_price') %>
+          </button>
+          <p class="text-red-500 text-sm mt-2 text-center">
+            <%= t('bookings.show.confirm_price_message') %>
+          </p>
         <% else %>
-          <%= button_to 'Zakończ zlecenie', complete_with_offered_price_booking_path(@booking), method: :post, class: 'bg-worxyYellow hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-center' %>
-                 <!-- BUTTON FOR PRICE NEGOTIATING IS DISABLEd 
+          <%= button_to t('bookings.show.complete_booking'), complete_with_offered_price_booking_path(@booking), method: :post, class: 'bg-worxyYellow hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-center' %>
+          <!-- BUTTON FOR PRICE NEGOTIATING IS DISABLED 
             <button id="negotiate-modal-open-btn" 
                     class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded text-center" 
                     disabled 
                     style="visibility: hidden; pointer-events: none; opacity: 0;">
-                Negocjuj budżet
+                Negotiate Price
             </button> -->
         <% end %>
       <% end %>

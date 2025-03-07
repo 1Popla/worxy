@@ -1,11 +1,15 @@
 <div class="flex-1 overflow-auto">
   <div class="flex flex-col h-full">
     <div class="flex-none bg-gray-100 p-4">
-      <h1 class="text-3xl font-bold text-gray-800 text-center">Kalendarz</h1>
+      <h1 class="text-3xl font-bold text-gray-800 text-center">
+        <%= t('bookings.calendar.title') %>
+      </h1>
       <div class="flex justify-between items-center mt-4">
-        <%= link_to 'Poprzedni miesiąc', calendar_bookings_path(month: @month.prev_month), class: 'text-blue-500 hover:underline' %>
-        <span class="text-xl font-semibold"><%= month_name_in_polish(@month) %> <%= @month.year %></span>
-        <%= link_to 'Następny miesiąc', calendar_bookings_path(month: @month.next_month), class: 'text-blue-500 hover:underline' %>
+        <%= link_to t('bookings.calendar.previous_month'), calendar_bookings_path(month: @month.prev_month), class: 'text-blue-500 hover:underline' %>
+        <span class="text-xl font-semibold">
+          <%= t('bookings.calendar.month_year', month: month_name_in_polish(@month), year: @month.year) %>
+        </span>
+        <%= link_to t('bookings.calendar.next_month'), calendar_bookings_path(month: @month.next_month), class: 'text-blue-500 hover:underline' %>
       </div>
     </div>
     <div class="flex-grow flex items-center justify-center bg-white p-4">
@@ -18,7 +22,7 @@
 
 <div id="bookingModal" class="fixed inset-0 flex items-center justify-center z-50 hidden bg-black bg-opacity-50 p-4">
   <div class="bg-white rounded-lg shadow-lg w-full max-w-lg relative p-6">
-    <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+    <button id="closeModal" aria-label="<%= t('bookings.calendar.close') %>" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
               d="M6 18L18 6M6 6l12 12" />
