@@ -1,12 +1,14 @@
 <div class="container mx-auto px-4 py-8">
   <div class="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
-    <h2 class="text-2xl font-bold mb-4">Mapa twoich zleceń:</h2>
+    <h2 class="text-2xl font-bold mb-4">
+      <%= t('dashboard.map.title') %>
+    </h2>
     <div class="bg-gray-100 rounded-lg overflow-hidden border border-gray-300 p-4">
       <div id="detailedMap" data-posts="<%= @posts.to_json(only: [:id, :latitude, :longitude, :title, :description]) %>" data-bookings="<%= @bookings.to_json(include: { post: { only: [:title, :latitude, :longitude] }, user: { only: [:email] } }, only: [:start_date, :end_date]) %>" style="height: 500px;"></div>
     </div>
     <% if current_user.worker? %>
       <div class="mt-4">
-        <%= link_to 'Otwórz nawigację', bookings_navigation_path, class: 'bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded' %>
+        <%= link_to t('dashboard.map.open_navigation'), bookings_navigation_path, class: 'bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded' %>
       </div>
     <% end %>
   </div>

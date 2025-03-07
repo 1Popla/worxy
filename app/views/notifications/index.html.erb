@@ -2,7 +2,7 @@
   <div id="flash-messages" class="fixed top-4 right-4 z-50">
     <% if flash[:notification_destroy] %>
       <div class="bg-red-500 text-white p-4 rounded-lg shadow-lg mb-2">
-        <%= flash[:notification_destroy] %>
+        <%= t('notifications.index.flash.notification_destroy') %>
       </div>
     <% end %>
   </div>
@@ -12,7 +12,7 @@
       <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
         <span class="bg-yellow-200 px-3 py-1 rounded-full flex items-center">
           <i class="fas fa-bell mr-2"></i>
-          Powiadomienia
+          <%= t('notifications.index.title') %>
         </span>
       </h2>
       <% if @notifications.present? %>
@@ -20,29 +20,31 @@
           <div id="notification_<%= notification.id %>" class="mb-4 p-4 bg-white shadow rounded-lg flex justify-between items-center">
             <div>
               <p class="text-gray-700 mb-2">
-                <% if notification.action == 'sent you a request for' %>
-                  <%= link_to "#{notification.actor.first_name} wysłał Ci ofertę", notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
-                <% elsif notification.action == 'request accepted' %>
-                  <%= link_to "#{notification.actor.first_name} zaakceptował twoją ofertę", notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
-                <% elsif notification.action == 'request rejected' %>
-                  <%= link_to "#{notification.actor.first_name} odrzucił twoją ofertę", notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
-                <% elsif notification.action == 'sent you a negotiation request' %>
-                  <%= link_to "#{notification.actor.first_name} wysłał Ci propozycję negocjacji", notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
+                <% case notification.action %>
+                <% when 'sent you a request for' %>
+                  <%= link_to t('notifications.index.actions.sent_request', actor: notification.actor.first_name), notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
+                <% when 'request accepted' %>
+                  <%= link_to t('notifications.index.actions.request_accepted', actor: notification.actor.first_name), notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
+                <% when 'request rejected' %>
+                  <%= link_to t('notifications.index.actions.request_rejected', actor: notification.actor.first_name), notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
+                <% when 'sent you a negotiation request' %>
+                  <%= link_to t('notifications.index.actions.sent_negotiation', actor: notification.actor.first_name), notification_path(notification), class: 'text-blue-700 hover:text-blue-900' %>
                 <% end %>
               </p>
               <p class="text-gray-500 text-sm"><%= I18n.l(notification.created_at, format: :long) %></p>
             </div>
-            <%= button_to notification_path(notification), method: :delete, data: { turbo_confirm: "Czy na pewno chcesz usunąć to powiadomienie?" }, class: 'text-red-600 hover:text-red-800 ml-4' do %>
+            <%= button_to notification_path(notification), method: :delete, data: { turbo_confirm: t('notifications.index.delete_confirmation') }, class: 'text-red-600 hover:text-red-800 ml-4' do %>
               <i class="fas fa-times"></i>
             <% end %>
           </div>
         <% end %>
       <% else %>
-        <p class="text-gray-500 text-center">Brak powiadomień.</p>
+        <p class="text-gray-500 text-center"><%= t('notifications.index.no_notifications') %></p>
       <% end %>
     </div>
   </div>
 </div>
+
 <script>
 document.addEventListener('turbo:load', function() {
   const flashMessages = document.getElementById('flash-messages');
@@ -57,5 +59,4 @@ document.addEventListener('turbo:load', function() {
     }, 5000);
   }
 });
-
 </script>
