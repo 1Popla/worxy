@@ -4,11 +4,11 @@
       <%= t('opinions.new.title', first_name: @user.first_name, last_name: @user.last_name) %>
     </h1>
 
-    <% if flash[:opinion_alert] %>
-      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-        <span class="block sm:inline"><%= flash[:opinion_alert] %></span>
-      </div>
-    <% end %>
+      <% if flash[:opinion_alert] %>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+          <span class="block sm:inline"><%= flash[:opinion_alert] %></span>
+        </div>
+      <% end %>
 
     <%= form_with model: [@user, @opinion], local: true do |form| %>
       <div class="mb-6">
